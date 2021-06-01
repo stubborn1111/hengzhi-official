@@ -37,13 +37,9 @@ public class UserController {
     @ResponseBody
     @Security(false)
     public Map<String, String> login(@RequestBody User user, HttpServletResponse response) {
-<<<<<<< Updated upstream
-        System.out.println("进来了lisa");
-=======
 
         System.out.println("进来了lisa");
 
->>>>>>> Stashed changes
         Map<String, String> map = new HashMap();
         map.put("status", "false");
         User userDB = userService.login(user);
