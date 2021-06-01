@@ -1,7 +1,6 @@
 package com.hengzhi.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.hengzhi.entity.User;
 import com.hengzhi.secutity.Security;
 import com.hengzhi.service.JWTService;
 import com.hengzhi.service.UserService;
@@ -10,7 +9,7 @@ import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
+import com.hengzhi.entity.User;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
@@ -37,8 +36,7 @@ public class UserController {
     @ResponseBody
     @Security(false)
     public Map<String, String> login(@RequestBody User user, HttpServletResponse response) {
-
-        System.out.println("进来了嘿嘿");
+        System.out.println("进来了bbbbbb");
 
         Map<String, String> map = new HashMap();
         map.put("status", "false");
