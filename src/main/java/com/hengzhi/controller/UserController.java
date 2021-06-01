@@ -38,7 +38,8 @@ public class UserController {
     @Security(false)
     public Map<String, String> login(@RequestBody User user, HttpServletResponse response) {
 
-        System.out.println("进来了lisa");
+        System.out.println("进来了lisaaaaa");
+
         Map<String, String> map = new HashMap();
         map.put("status", "false");
         User userDB = userService.login(user);
