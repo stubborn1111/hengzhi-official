@@ -1,4 +1,0 @@
-mybatis:
-  type-aliases-package: com.hengzhi.entity
-  mapper-locations: classpath:mapper/*.xml
-
