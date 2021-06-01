@@ -1,0 +1,146 @@
+11:14:42.380 [main] INFO  com.hengzhi.StudenTestTests - Starting StudenTestTests using Java 1.8.0_241 on LAPTOP-7TC5A5HO with PID 19704 (started by 33896 in E:\Code\java_code\Hengzhi-offcial)
+11:14:42.458 [main] INFO  com.hengzhi.StudenTestTests - No active profile set, falling back to default profiles: default
+11:14:48.478 [main] INFO  org.apache.shiro.cache.ehcache.EhCacheManager - Using existing EHCache named [authenticationCache]
+11:14:48.478 [main] INFO  org.apache.shiro.cache.ehcache.EhCacheManager - Using existing EHCache named [authorizationCache]
+11:14:53.300 [main] INFO  com.hengzhi.StudenTestTests - Started StudenTestTests in 11.676 seconds (JVM running for 17.038)
+11:14:54.066 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+11:14:55.759 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+11:14:55.841 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+15:38:47.382 [main] INFO  com.hengzhi.StudenTestTests - Starting StudenTestTests using Java 1.8.0_241 on LAPTOP-7TC5A5HO with PID 8956 (started by 33896 in E:\Code\java_code\Hengzhi-offcial)
+15:38:47.417 [main] INFO  com.hengzhi.StudenTestTests - No active profile set, falling back to default profiles: default
+15:38:52.264 [main] INFO  org.apache.shiro.cache.ehcache.EhCacheManager - Using existing EHCache named [authenticationCache]
+15:38:52.264 [main] INFO  org.apache.shiro.cache.ehcache.EhCacheManager - Using existing EHCache named [authorizationCache]
+15:38:56.304 [main] INFO  com.hengzhi.StudenTestTests - Started StudenTestTests in 10.057 seconds (JVM running for 14.492)
+15:38:56.945 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+15:38:58.190 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+15:38:58.198 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+15:39:53.441 [main] INFO  com.hengzhi.StudenTestTests - Starting StudenTestTests using Java 1.8.0_241 on LAPTOP-7TC5A5HO with PID 21488 (started by 33896 in E:\Code\java_code\Hengzhi-offcial)
+15:39:53.488 [main] INFO  com.hengzhi.StudenTestTests - No active profile set, falling back to default profiles: default
+15:39:58.565 [main] INFO  org.apache.shiro.cache.ehcache.EhCacheManager - Using existing EHCache named [authenticationCache]
+15:39:58.565 [main] INFO  org.apache.shiro.cache.ehcache.EhCacheManager - Using existing EHCache named [authorizationCache]
+15:40:02.331 [main] INFO  com.hengzhi.StudenTestTests - Started StudenTestTests in 9.68 seconds (JVM running for 14.024)
+15:40:02.831 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+15:40:04.065 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+15:40:04.082 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+15:43:32.539 [main] INFO  com.hengzhi.HengzhiOffcialApplication - Starting HengzhiOffcialApplication using Java 1.8.0_241 on LAPTOP-7TC5A5HO with PID 12648 (E:\Code\java_code\Hengzhi-offcial\target\classes started by 33896 in E:\Code\java_code\Hengzhi-offcial)
+15:43:32.562 [main] INFO  com.hengzhi.HengzhiOffcialApplication - No active profile set, falling back to default profiles: default
+15:43:35.727 [main] INFO  org.apache.shiro.cache.ehcache.EhCacheManager - Using existing EHCache named [authenticationCache]
+15:43:35.727 [main] INFO  org.apache.shiro.cache.ehcache.EhCacheManager - Using existing EHCache named [authorizationCache]
+15:43:36.444 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+15:43:36.444 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+15:43:36.444 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.45]
+15:43:36.459 [main] INFO  org.apache.catalina.core.AprLifecycleListener - Loaded Apache Tomcat Native library [1.2.25] using APR version [1.7.0].
+15:43:36.459 [main] INFO  org.apache.catalina.core.AprLifecycleListener - APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+15:43:36.459 [main] INFO  org.apache.catalina.core.AprLifecycleListener - APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+15:43:36.459 [main] INFO  org.apache.catalina.core.AprLifecycleListener - OpenSSL successfully initialized [OpenSSL 1.1.1g  21 Apr 2020]
+15:43:36.891 [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/hengzhi-official] - Initializing Spring embedded WebApplicationContext
+15:43:39.350 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+15:43:39.433 [main] INFO  com.hengzhi.HengzhiOffcialApplication - Started HengzhiOffcialApplication in 8.223 seconds (JVM running for 11.632)
+15:44:30.655 [http-nio-8080-exec-3] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/hengzhi-official] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+15:57:59.068 [main] INFO  com.hengzhi.HengzhiOffcialApplication - Starting HengzhiOffcialApplication using Java 1.8.0_241 on LAPTOP-7TC5A5HO with PID 9848 (E:\Code\java_code\Hengzhi-offcial\target\classes started by 33896 in E:\Code\java_code\Hengzhi-offcial)
+15:57:59.193 [main] INFO  com.hengzhi.HengzhiOffcialApplication - No active profile set, falling back to default profiles: default
+15:58:02.385 [main] INFO  org.apache.shiro.cache.ehcache.EhCacheManager - Using existing EHCache named [authenticationCache]
+15:58:02.385 [main] INFO  org.apache.shiro.cache.ehcache.EhCacheManager - Using existing EHCache named [authorizationCache]
+15:58:03.094 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+15:58:03.094 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+15:58:03.094 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.45]
+15:58:03.094 [main] INFO  org.apache.catalina.core.AprLifecycleListener - Loaded Apache Tomcat Native library [1.2.25] using APR version [1.7.0].
+15:58:03.094 [main] INFO  org.apache.catalina.core.AprLifecycleListener - APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+15:58:03.094 [main] INFO  org.apache.catalina.core.AprLifecycleListener - APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+15:58:03.110 [main] INFO  org.apache.catalina.core.AprLifecycleListener - OpenSSL successfully initialized [OpenSSL 1.1.1g  21 Apr 2020]
+15:58:03.579 [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/hengzhi-official] - Initializing Spring embedded WebApplicationContext
+15:58:06.051 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+15:58:06.114 [main] INFO  com.hengzhi.HengzhiOffcialApplication - Started HengzhiOffcialApplication in 8.384 seconds (JVM running for 11.665)
+15:58:11.507 [http-nio-8080-exec-1] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/hengzhi-official] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+15:59:10.430 [main] INFO  com.hengzhi.HengzhiOffcialApplication - Starting HengzhiOffcialApplication using Java 1.8.0_241 on LAPTOP-7TC5A5HO with PID 15200 (E:\Code\java_code\Hengzhi-offcial\target\classes started by 33896 in E:\Code\java_code\Hengzhi-offcial)
+15:59:10.575 [main] INFO  com.hengzhi.HengzhiOffcialApplication - No active profile set, falling back to default profiles: default
+15:59:13.762 [main] INFO  org.apache.shiro.cache.ehcache.EhCacheManager - Using existing EHCache named [authenticationCache]
+15:59:13.765 [main] INFO  org.apache.shiro.cache.ehcache.EhCacheManager - Using existing EHCache named [authorizationCache]
+15:59:14.657 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+15:59:14.659 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+15:59:14.659 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.45]
+15:59:14.664 [main] INFO  org.apache.catalina.core.AprLifecycleListener - Loaded Apache Tomcat Native library [1.2.25] using APR version [1.7.0].
+15:59:14.664 [main] INFO  org.apache.catalina.core.AprLifecycleListener - APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+15:59:14.665 [main] INFO  org.apache.catalina.core.AprLifecycleListener - APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+15:59:14.674 [main] INFO  org.apache.catalina.core.AprLifecycleListener - OpenSSL successfully initialized [OpenSSL 1.1.1g  21 Apr 2020]
+15:59:15.194 [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/hengzhi-official] - Initializing Spring embedded WebApplicationContext
+15:59:17.894 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+15:59:17.963 [main] INFO  com.hengzhi.HengzhiOffcialApplication - Started HengzhiOffcialApplication in 8.907 seconds (JVM running for 12.052)
+15:59:28.247 [http-nio-8080-exec-2] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/hengzhi-official] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+15:59:28.915 [http-nio-8080-exec-2] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+16:02:32.096 [main] INFO  com.hengzhi.HengzhiOffcialApplication - Starting HengzhiOffcialApplication using Java 1.8.0_241 on LAPTOP-7TC5A5HO with PID 6656 (E:\Code\java_code\Hengzhi-offcial\target\classes started by 33896 in E:\Code\java_code\Hengzhi-offcial)
+16:02:32.111 [main] INFO  com.hengzhi.HengzhiOffcialApplication - No active profile set, falling back to default profiles: default
+16:02:34.872 [main] INFO  org.apache.shiro.cache.ehcache.EhCacheManager - Using existing EHCache named [authenticationCache]
+16:02:34.875 [main] INFO  org.apache.shiro.cache.ehcache.EhCacheManager - Using existing EHCache named [authorizationCache]
+16:02:35.788 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+16:02:35.790 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+16:02:35.790 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.45]
+16:02:35.794 [main] INFO  org.apache.catalina.core.AprLifecycleListener - Loaded Apache Tomcat Native library [1.2.25] using APR version [1.7.0].
+16:02:35.795 [main] INFO  org.apache.catalina.core.AprLifecycleListener - APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+16:02:35.796 [main] INFO  org.apache.catalina.core.AprLifecycleListener - APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+16:02:35.806 [main] INFO  org.apache.catalina.core.AprLifecycleListener - OpenSSL successfully initialized [OpenSSL 1.1.1g  21 Apr 2020]
+16:02:36.305 [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/hengzhi-official] - Initializing Spring embedded WebApplicationContext
+16:02:39.074 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+16:02:39.168 [main] INFO  com.hengzhi.HengzhiOffcialApplication - Started HengzhiOffcialApplication in 8.138 seconds (JVM running for 10.978)
+16:02:48.027 [http-nio-8080-exec-1] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/hengzhi-official] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+16:04:01.408 [main] INFO  com.hengzhi.HengzhiOffcialApplication - Starting HengzhiOffcialApplication using Java 1.8.0_241 on LAPTOP-7TC5A5HO with PID 22032 (E:\Code\java_code\Hengzhi-offcial\target\classes started by 33896 in E:\Code\java_code\Hengzhi-offcial)
+16:04:01.541 [main] INFO  com.hengzhi.HengzhiOffcialApplication - No active profile set, falling back to default profiles: default
+16:04:04.470 [main] INFO  org.apache.shiro.cache.ehcache.EhCacheManager - Using existing EHCache named [authenticationCache]
+16:04:04.470 [main] INFO  org.apache.shiro.cache.ehcache.EhCacheManager - Using existing EHCache named [authorizationCache]
+16:04:05.182 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+16:04:05.198 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+16:04:05.198 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.45]
+16:04:05.198 [main] INFO  org.apache.catalina.core.AprLifecycleListener - Loaded Apache Tomcat Native library [1.2.25] using APR version [1.7.0].
+16:04:05.198 [main] INFO  org.apache.catalina.core.AprLifecycleListener - APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+16:04:05.198 [main] INFO  org.apache.catalina.core.AprLifecycleListener - APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+16:04:05.198 [main] INFO  org.apache.catalina.core.AprLifecycleListener - OpenSSL successfully initialized [OpenSSL 1.1.1g  21 Apr 2020]
+16:04:05.673 [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/hengzhi-official] - Initializing Spring embedded WebApplicationContext
+16:04:08.201 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+16:04:08.264 [main] INFO  com.hengzhi.HengzhiOffcialApplication - Started HengzhiOffcialApplication in 8.119 seconds (JVM running for 11.385)
+16:04:17.713 [http-nio-8080-exec-2] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/hengzhi-official] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+16:05:41.938 [main] INFO  com.hengzhi.HengzhiOffcialApplication - Starting HengzhiOffcialApplication using Java 1.8.0_241 on LAPTOP-7TC5A5HO with PID 8444 (E:\Code\java_code\Hengzhi-offcial\target\classes started by 33896 in E:\Code\java_code\Hengzhi-offcial)
+16:05:42.032 [main] INFO  com.hengzhi.HengzhiOffcialApplication - No active profile set, falling back to default profiles: default
+16:05:44.969 [main] INFO  org.apache.shiro.cache.ehcache.EhCacheManager - Using existing EHCache named [authenticationCache]
+16:05:44.969 [main] INFO  org.apache.shiro.cache.ehcache.EhCacheManager - Using existing EHCache named [authorizationCache]
+16:05:45.705 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+16:05:45.705 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+16:05:45.705 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.45]
+16:05:45.721 [main] INFO  org.apache.catalina.core.AprLifecycleListener - Loaded Apache Tomcat Native library [1.2.25] using APR version [1.7.0].
+16:05:45.721 [main] INFO  org.apache.catalina.core.AprLifecycleListener - APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+16:05:45.721 [main] INFO  org.apache.catalina.core.AprLifecycleListener - APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+16:05:45.721 [main] INFO  org.apache.catalina.core.AprLifecycleListener - OpenSSL successfully initialized [OpenSSL 1.1.1g  21 Apr 2020]
+16:05:46.205 [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/hengzhi-official] - Initializing Spring embedded WebApplicationContext
+16:05:48.678 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+16:05:48.740 [main] INFO  com.hengzhi.HengzhiOffcialApplication - Started HengzhiOffcialApplication in 8.069 seconds (JVM running for 11.303)
+16:06:11.730 [http-nio-8080-exec-1] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/hengzhi-official] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+16:07:32.557 [main] INFO  com.hengzhi.HengzhiOffcialApplication - Starting HengzhiOffcialApplication using Java 1.8.0_241 on LAPTOP-7TC5A5HO with PID 11776 (E:\Code\java_code\Hengzhi-offcial\target\classes started by 33896 in E:\Code\java_code\Hengzhi-offcial)
+16:07:32.578 [main] INFO  com.hengzhi.HengzhiOffcialApplication - No active profile set, falling back to default profiles: default
+16:07:35.878 [main] INFO  org.apache.shiro.cache.ehcache.EhCacheManager - Using existing EHCache named [authenticationCache]
+16:07:35.878 [main] INFO  org.apache.shiro.cache.ehcache.EhCacheManager - Using existing EHCache named [authorizationCache]
+16:07:36.645 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+16:07:36.645 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+16:07:36.645 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.45]
+16:07:36.645 [main] INFO  org.apache.catalina.core.AprLifecycleListener - Loaded Apache Tomcat Native library [1.2.25] using APR version [1.7.0].
+16:07:36.645 [main] INFO  org.apache.catalina.core.AprLifecycleListener - APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+16:07:36.645 [main] INFO  org.apache.catalina.core.AprLifecycleListener - APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+16:07:36.661 [main] INFO  org.apache.catalina.core.AprLifecycleListener - OpenSSL successfully initialized [OpenSSL 1.1.1g  21 Apr 2020]
+16:07:37.110 [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/hengzhi-official] - Initializing Spring embedded WebApplicationContext
+16:07:39.958 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+16:07:40.020 [main] INFO  com.hengzhi.HengzhiOffcialApplication - Started HengzhiOffcialApplication in 8.666 seconds (JVM running for 12.133)
+16:08:04.225 [http-nio-8080-exec-2] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/hengzhi-official] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+16:08:58.254 [main] INFO  com.hengzhi.HengzhiOffcialApplication - Starting HengzhiOffcialApplication using Java 1.8.0_241 on LAPTOP-7TC5A5HO with PID 7060 (E:\Code\java_code\Hengzhi-offcial\target\classes started by 33896 in E:\Code\java_code\Hengzhi-offcial)
+16:08:58.353 [main] INFO  com.hengzhi.HengzhiOffcialApplication - No active profile set, falling back to default profiles: default
+16:09:01.284 [main] INFO  org.apache.shiro.cache.ehcache.EhCacheManager - Using existing EHCache named [authenticationCache]
+16:09:01.299 [main] INFO  org.apache.shiro.cache.ehcache.EhCacheManager - Using existing EHCache named [authorizationCache]
+16:09:02.067 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+16:09:02.067 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+16:09:02.067 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.45]
+16:09:02.067 [main] INFO  org.apache.catalina.core.AprLifecycleListener - Loaded Apache Tomcat Native library [1.2.25] using APR version [1.7.0].
+16:09:02.067 [main] INFO  org.apache.catalina.core.AprLifecycleListener - APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+16:09:02.067 [main] INFO  org.apache.catalina.core.AprLifecycleListener - APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+16:09:02.083 [main] INFO  org.apache.catalina.core.AprLifecycleListener - OpenSSL successfully initialized [OpenSSL 1.1.1g  21 Apr 2020]
+16:09:02.552 [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/hengzhi-official] - Initializing Spring embedded WebApplicationContext
+16:09:05.015 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+16:09:05.093 [main] INFO  com.hengzhi.HengzhiOffcialApplication - Started HengzhiOffcialApplication in 8.083 seconds (JVM running for 11.391)
+16:09:47.810 [http-nio-8080-exec-1] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/hengzhi-official] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+16:09:48.180 [http-nio-8080-exec-1] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
