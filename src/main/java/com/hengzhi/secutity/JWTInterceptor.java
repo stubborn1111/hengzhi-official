@@ -26,7 +26,6 @@ public class JWTInterceptor implements HandlerInterceptor {
                 String token = request.getHeader("Authorization");
                 if(token==null)return false;
                 else{
-                    System.out.println("========"+token);
                     return JWTUtils.verify(token);
                 }
             }
@@ -36,7 +35,6 @@ public class JWTInterceptor implements HandlerInterceptor {
                 String token = request.getHeader("Authorization");
                 if(token==null)return false;
                 else{
-                    System.out.println("========"+token);
                     return JWTUtils.verify(token);
                 }
             }

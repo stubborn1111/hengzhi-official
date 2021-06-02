@@ -53,4 +53,9 @@ public class UserServiceImpl implements UserService {
         }
         return 1;
     }
+
+    @Override
+    public int submitForgetPassword(Integer studentId, Integer newPassword) {
+        return 0;
+    }
 }
