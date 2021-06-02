@@ -931,3 +931,17 @@ java.io.IOException: The server sockets created using the LocalRMIServerSocketFa
 16:09:05.093 [main] INFO  com.hengzhi.HengzhiOffcialApplication - Started HengzhiOffcialApplication in 8.083 seconds (JVM running for 11.391)
 16:09:47.810 [http-nio-8080-exec-1] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/hengzhi-official] - Initializing Spring DispatcherServlet 'dispatcherServlet'
 16:09:48.180 [http-nio-8080-exec-1] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+15:25:56.727 [main] INFO  com.hengzhi.HengzhiOffcialApplication - Starting HengzhiOffcialApplication using Java 1.8.0_241 on LAPTOP-7TC5A5HO with PID 4984 (E:\document\git_repository\hengzhi-official\target\classes started by 33896 in E:\document\git_repository\hengzhi-official)
+15:25:56.896 [main] INFO  com.hengzhi.HengzhiOffcialApplication - No active profile set, falling back to default profiles: default
+15:26:00.874 [main] INFO  org.apache.shiro.cache.ehcache.EhCacheManager - Using existing EHCache named [authenticationCache]
+15:26:00.891 [main] INFO  org.apache.shiro.cache.ehcache.EhCacheManager - Using existing EHCache named [authorizationCache]
+15:26:01.724 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+15:26:01.724 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+15:26:01.724 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.45]
+15:26:01.724 [main] INFO  org.apache.catalina.core.AprLifecycleListener - Loaded Apache Tomcat Native library [1.2.25] using APR version [1.7.0].
+15:26:01.724 [main] INFO  org.apache.catalina.core.AprLifecycleListener - APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+15:26:01.724 [main] INFO  org.apache.catalina.core.AprLifecycleListener - APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+15:26:01.739 [main] INFO  org.apache.catalina.core.AprLifecycleListener - OpenSSL successfully initialized [OpenSSL 1.1.1g  21 Apr 2020]
+15:26:02.379 [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/hengzhi-official] - Initializing Spring embedded WebApplicationContext
+15:26:05.328 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+15:26:05.390 [main] INFO  com.hengzhi.HengzhiOffcialApplication - Started HengzhiOffcialApplication in 9.724 seconds (JVM running for 13.735)
