@@ -16,7 +16,7 @@ import java.util.Map;
  * @author Jane
  * @version 1.0
  * @description
- * @Date 2021/4/30
+ * @Date 2021/6/2
  */
 @Service
 public class UserServiceImpl implements UserService {
@@ -25,7 +25,6 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 登陆
-     *
      * @param user
      * @return
      */
@@ -55,7 +54,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int submitForgetPassword(Integer studentId, Integer newPassword) {
-        return 0;
+    public int submitForgetPassword(Integer studentId, String newPassword) {
+        int i = userDao.submitRequiredPassword(studentId, newPassword);
+        return i;
     }
 }

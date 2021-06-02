@@ -53,6 +53,11 @@ class HengzhiOffcialApplicationTests {
         String md5Password = DigestUtils.md5DigestAsHex("1234".getBytes());
         System.out.println(md5Password);
     }
-
+    //提交忘记密码
+    @Test
+    void test1(){
+        int i = userDao.submitRequiredPassword(34255, "1234");
+        System.out.println(i);
+    }
 
 }

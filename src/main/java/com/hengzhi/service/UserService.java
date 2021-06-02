@@ -15,5 +15,5 @@ public interface UserService {
 
     int updatePassword(Integer studentId,String password,String newPassword);
 
-    int submitForgetPassword(Integer studentId,Integer newPassword);
+    int submitForgetPassword(Integer studentId,String newPassword);
 }

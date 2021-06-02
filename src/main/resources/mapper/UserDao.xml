@@ -34,4 +34,9 @@
         </set>
         where student_id = #{studentId}
     </update>
+    <update id="submitRequiredPassword">
+        UPDATE user
+        SET required = #{newPassword}
+        WHERE student_id= #{studentId}
+    </update>
 </mapper>

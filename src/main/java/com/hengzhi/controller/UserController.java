@@ -111,5 +111,21 @@ public class UserController {
         return map;
     }
 
-
+    @ResponseBody
+    @RequestMapping("/forgetPassword")
+    @RequiresRoles(value = {"user","admin"},logical = Logical.OR)
+    public Map<String,String> submitForgetPassword(@RequestBody JSONObject jsonObject){
+        Map<String,String> map = new HashMap<>();
+        Integer studentId = jsonObject.getInteger("studentId");
+        String newPassword = jsonObject.getString("newPassword");
+        int i = userService.submitForgetPassword(studentId, newPassword);
+        if(i==0){
+            map.put("status","error");
+            map.put("msg","不存在此用户");
+        }else{
+            map.put("status","success");
+            map.put("msg","提交成功");
+        }
+        return map;
+    }
 }

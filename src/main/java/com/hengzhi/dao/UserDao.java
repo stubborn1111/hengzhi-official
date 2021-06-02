@@ -32,5 +32,11 @@ public interface UserDao {
 
     String selectUserByStudentId(Integer studentId);
 
-
+    /**
+     * 提交忘记密码，审核
+     * @param studentId
+     * @param newPassword
+     * @return
+     */
+    int submitRequiredPassword(Integer studentId,String newPassword);
 }

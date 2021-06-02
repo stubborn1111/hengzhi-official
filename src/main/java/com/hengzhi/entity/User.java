@@ -27,6 +27,6 @@ public class User {
     private String role;
     //头像url
     private String headImg;
-    //是否需要审核，需要审核则通过审核才可以登陆,默认0，需要审核1
+    //是否需要审核，需要审核则通过审核才可以登陆,默认0，提交审核是则设为新密码
     private String required;
 }
