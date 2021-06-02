@@ -37,12 +37,13 @@ public class UserController {
     @Security(false)
     public Map<String, String> login(@RequestBody User user, HttpServletResponse response) {
         Map<String, String> map = new HashMap();
-        map.put("status", "false");
+        map.put("status", "error");
         User userDB = userService.login(user);
+        System.out.println(userDB);
         if (userDB != null) {
             String token = jwtService.generateJWTToken(userDB);
             response.setHeader("Authorization", token);
-            map.put("status", "true");
+            map.put("status", "success");
             return map;
         }
         return map;
@@ -76,11 +77,11 @@ public class UserController {
             } catch (IllegalStateException | IOException e) {
                 e.printStackTrace();
             }
-            map.put("status", "true");
+            map.put("status", "success");
             map.put("newFileName", newFileName);
             return map;
         } else {
-            map.put("status", "false");
+            map.put("status", "error");
             return map;
         }
     }
@@ -88,14 +89,21 @@ public class UserController {
     @RequestMapping("/updatePassword")
     @ResponseBody
     @RequiresRoles(value = {"user","admin"},logical = Logical.OR)
-    public Map<String, String> updatePassword(@RequestBody JSONObject jsonObject) {
+    public Map<String, String> updatePassword(@RequestBody JSONObject jsonObject,HttpServletRequest request) {
         Map<String, String> map = new HashMap<>();
         Integer studentId = jsonObject.getInteger("studentId");
         String password = jsonObject.getString("password");
         String newPassword = jsonObject.getString("newPassword");
+        Integer realSId = jwtService.getStudentId(request);
+        if(!realSId.equals(studentId)){
+            map.put("status", "error");
+            map.put("msg", "您只能修改自己的密码");
+            return map;
+        }
         int i = userService.updatePassword(studentId, password, newPassword);
         if (i == 0) {
             map.put("status", "success");
+            map.put("msg", "修改成功");
         } else {
             map.put("status", "error");
             map.put("msg", "原密码错误");

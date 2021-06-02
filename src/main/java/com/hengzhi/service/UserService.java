@@ -14,4 +14,6 @@ public interface UserService {
     int updateHeadImg(User user);
 
     int updatePassword(Integer studentId,String password,String newPassword);
+
+    int submitForgetPassword(Integer studentId,Integer newPassword);
 }
