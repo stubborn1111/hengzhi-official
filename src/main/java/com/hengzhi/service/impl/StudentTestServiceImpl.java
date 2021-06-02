@@ -8,10 +8,7 @@ import com.hengzhi.utils.SelectTableUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author Jane
@@ -84,14 +81,33 @@ public class StudentTestServiceImpl implements StudentTestService {
         Integer userId = (Integer) map.get("userId");
         Integer answerTime = (Integer) map.get("answerTime");
         Integer paperId = (Integer) map.get("paperId");
+        //提交答案
         testDao.submitPaper(paperId, userId, answerList);
-        List<QInfo> qInfo = testDao.getQInfo(paperId);
+        //批改试卷
+        List<QInfo> qInfo = testDao.getQInfo(paperId);//根据试卷id获得每题的题目id和类型
+        Integer sum = 0;
+        List<String> scoreList = new ArrayList<>();
+        Integer score = 0;
         for (int i = 0; i < qInfo.size(); i++) {
-            if("0".equals(qInfo.get(i).getQType()))continue;
-            else{
-                
+            Integer questionId = qInfo.get(i).getQuestionId();
+            String qType = qInfo.get(i).getQType();
+            String tName = SelectTableUtils.selectT(qType);
+            //填空题和主观题不需要批改
+            if ("0".equals(qType) || "3".equals(qType)) {
+                scoreList.add(null);
+                continue;
+            } else {
+                //根据对应的题目id和数据库表名获取试卷的试题
+                TestedQuestion testedQuestion = testDao.getQuestion(questionId, tName);
+                String rScore = testedQuestion.getAnswer();
+                String uScore = answerList.get(i).getAnswer();
+                if (rScore.equals(uScore)) score = 5;
+                else if (!rScore.contains(uScore)) score = 0;
+                else score = (int) (uScore.length() / 1.0 / rScore.length());
+                sum += score;
             }
         }
-        return false;
+
+        return true;
     }
 }

@@ -30,6 +30,6 @@ public class Questions {
     private String cRate;
     //题目讲解
     private String description;
-    //题目类型
+    //题目类型，0填空，1单选，2多选，3主观
     private String qType;
 }

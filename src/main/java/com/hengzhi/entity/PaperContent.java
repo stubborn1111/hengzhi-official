@@ -19,7 +19,7 @@ public class PaperContent {
     private Integer paperContentId;
     //试卷id
     private Integer paperId;
-    //题目类型，0填空，1单选，2多选，3判断
+    //题目类型，0填空，1单选，2多选，3主观
     private Integer qType;
     //题目id
     private Integer questionId;
