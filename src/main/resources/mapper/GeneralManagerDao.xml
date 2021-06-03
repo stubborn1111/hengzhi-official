@@ -22,4 +22,17 @@
         from message
         where whether_review = 0
     </select>
+
+<!--   通过审核-->
+    <update id="approved">
+        update message
+        set whether_review = 1,whether_through = 1
+        where message_id = #{messageId}
+    </update>
+<!--    驳回审核-->
+    <update id="rejectReview">
+        update message
+        set whether_review = 1,whether_through = 0
+        where message_id = #{messageId}
+    </update>
 </mapper>

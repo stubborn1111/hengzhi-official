@@ -30,4 +30,14 @@ public class GeneralManagerServiceImpl implements GeneralManagerService {
         return number;
     }
 
+    @Override
+    public void approved(Integer messageId) {
+        generalManagerDao.approved(messageId);
+    }
+
+    @Override
+    public void rejectReview(Integer messageId) {
+        generalManagerDao.rejectReview(messageId);
+    }
+
 }
