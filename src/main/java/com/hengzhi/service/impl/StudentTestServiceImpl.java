@@ -75,6 +75,11 @@ public class StudentTestServiceImpl implements StudentTestService {
         return map;
     }
 
+    /**
+     * 交卷
+     * @param map
+     * @return
+     */
     @Override
     public boolean submitPaper(Map map) {
         List<QuestionAnswer> answerList = (List<QuestionAnswer>) map.get("answerList");
@@ -86,7 +91,6 @@ public class StudentTestServiceImpl implements StudentTestService {
         //批改试卷
         List<QInfo> qInfo = testDao.getQInfo(paperId);//根据试卷id获得每题的题目id和类型
         Integer sum = 0;
-        List<String> scoreList = new ArrayList<>();
         Integer score = 0;
         for (int i = 0; i < qInfo.size(); i++) {
             Integer questionId = qInfo.get(i).getQuestionId();
@@ -94,7 +98,6 @@ public class StudentTestServiceImpl implements StudentTestService {
             String tName = SelectTableUtils.selectT(qType);
             //填空题和主观题不需要批改
             if ("0".equals(qType) || "3".equals(qType)) {
-                scoreList.add(null);
                 continue;
             } else {
                 //根据对应的题目id和数据库表名获取试卷的试题
@@ -104,10 +107,11 @@ public class StudentTestServiceImpl implements StudentTestService {
                 if (rScore.equals(uScore)) score = 5;
                 else if (!rScore.contains(uScore)) score = 0;
                 else score = (int) (uScore.length() / 1.0 / rScore.length());
+                testDao.setScore(score,paperId,userId,i+1);
                 sum += score;
             }
         }
-
+        testDao.setSum(sum,paperId,userId);
         return true;
     }
 }

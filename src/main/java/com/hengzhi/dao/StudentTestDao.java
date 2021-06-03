@@ -3,6 +3,7 @@ package com.hengzhi.dao;
 import com.hengzhi.dto.paperAndTest.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
 /**
@@ -16,6 +17,7 @@ import java.util.List;
 public interface StudentTestDao {
     /**
      * 获取试卷id
+     *
      * @param code
      * @return
      */
@@ -23,6 +25,7 @@ public interface StudentTestDao {
 
     /**
      * 用户获得试卷
+     *
      * @param paperId
      * @return
      */
@@ -79,13 +82,15 @@ public interface StudentTestDao {
 
     /**
      * 获得考试的试题
+     *
      * @param questionId
      * @return
      */
-    String getTestQuestions(Integer questionId,String tName);
+    String getTestQuestions(Integer questionId, String tName);
 
     /**
      * 获得考试的试卷信息
+     *
      * @param paperId
      * @return
      */
@@ -93,24 +98,36 @@ public interface StudentTestDao {
 
     /**
      * 提交试卷答案
+     *
      * @param answerList
      */
-    Integer submitPaper(Integer paperId,Integer userId,List<QuestionAnswer> answerList);
+    Integer submitPaper(Integer paperId, Integer userId, List<QuestionAnswer> answerList);
 
-    /**
-     * 计算分数
-     */
-    Integer  setScore(Integer score,Integer paperId,Integer userId,Integer qNumber);
 
     /**
      * 提交试卷得分和答题时间
+     *
      * @param paperId
      * @param userId
      * @param answerTime
      * @param score
      * @return
      */
-    Integer submitPaperInfo(Integer paperId,Integer userId,Integer answerTime,Integer score);
+    Integer submitPaperInfo(Integer paperId, Integer userId, Integer answerTime, Integer score);
 
+    /**
+     * 提交每题的分数
+     */
+    Integer setScore(Integer score, Integer paperId, Integer userId, Integer qNumber);
+
+    /**
+     * 提交用户试卷的总分，不包括填空题和主观题
+     *
+     * @param sum
+     * @param paperId
+     * @param userId
+     * @return
+     */
+    Integer setSum(Integer sum, Integer paperId, Integer userId);
 
 }
