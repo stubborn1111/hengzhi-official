@@ -1,5 +1,7 @@
 package com.hengzhi.service;
 
+import com.alibaba.fastjson.JSONObject;
+
 import java.util.List;
 import java.util.Map;
 
@@ -20,5 +22,5 @@ public interface StudentTestService {
 
     Map test(Integer paperId);
 
-    boolean submitPaper(Map map);
+    boolean submitPaper(JSONObject jsonObject);
 }
