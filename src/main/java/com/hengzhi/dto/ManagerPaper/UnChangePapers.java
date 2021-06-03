@@ -22,7 +22,6 @@ public class UnChangePapers {
     private String paperName;
     //试卷总分
     private Integer score;
-    //试卷总份数
-    private Integer totalNumber;
+
     private List<UnChangeUser> unChangeUserList;
 }

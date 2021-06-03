@@ -19,4 +19,10 @@ public class ManagerPaperServiceImpl implements ManagerPaperService {
         List<UnChangePapers> list = managerPaperDao.selectUnChange();
         return list;
     }
+
+    @Override
+    public int selectUnChangeNumber() {
+        Integer number = managerPaperDao.selectUnChangeNumber();
+        return number;
+    }
 }

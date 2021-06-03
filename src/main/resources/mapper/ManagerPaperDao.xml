@@ -7,13 +7,15 @@
     <result property="deadLine" column="end_time"/>
     <result property="paperName" column="name"/>
     <result property="score" column="score"/>
-    <result property="totalNumber" column="number"/>
     <collection property="unChangeUserList" ofType="com.hengzhi.dto.ManagerPaper.UnChangeUser">
         <id property="paperId" column="paper_id"/>
         <result property="whetherCorrect" column="whether_correct"/>
     </collection>
 </resultMap>
-
+    <resultMap id="UnChangeUser" type="com.hengzhi.dto.ManagerPaper.UnChangeUser">
+        <id property="paperId" column="paper_id"/>
+        <result property="whetherCorrect" column="whether_correct"/>
+    </resultMap>
 <!--    待改试卷数据-->
     <select id="selectUnChange" resultMap="UnChangePapers">
         select *
@@ -22,4 +24,12 @@
         where p.paper_id = up.paper_id
         and up.whether_correct = 0
     </select>
+    <select id="selectUnChangeNumber" resultType="int">
+        select count(*)
+        from user_paper
+        where whether_correct = 0
+    </select>
+
+<!--    已改试卷数据-->
+<!--    <select id="selectChange" resultMap=""-->
 </mapper>

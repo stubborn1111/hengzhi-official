@@ -29,6 +29,8 @@ public class ManagerPaperController {
         Map map = new HashMap();
         List<UnChangePapers> list = managerPaperService.selectUnChange();
         map.put("list",list);
+        Integer totalNumber = managerPaperService.selectUnChangeNumber();
+        map.put("totalNumber",totalNumber);
         return  map;
     }
 
