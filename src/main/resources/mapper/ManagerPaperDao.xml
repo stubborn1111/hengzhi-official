@@ -4,15 +4,22 @@
 <resultMap id="UnChangePapers" type="com.hengzhi.dto.ManagerPaper.UnChangePapers">
     <id property="paperId" column="paper_id"/>
     <result property="beginTime" column="begin_time"/>
-    <result property="deadLine" column="dead_line"/>
-    <result property="paperName" column="paper_name"/>
-    <result property="score" column="paperName"/>
+    <result property="deadLine" column="end_time"/>
+    <result property="paperName" column="name"/>
+    <result property="score" column="score"/>
     <result property="totalNumber" column="number"/>
+    <collection property="unChangeUserList" ofType="com.hengzhi.dto.ManagerPaper.UnChangeUser">
+        <id property="paperId" column="paper_id"/>
+        <result property="whetherCorrect" column="whether_correct"/>
+    </collection>
 </resultMap>
 
 <!--    待改试卷数据-->
     <select id="selectUnChange" resultMap="UnChangePapers">
         select *
-        from papers
+        from papers as p
+        join user_paper as up
+        where p.paper_id = up.paper_id
+        and up.whether_correct = 0
     </select>
 </mapper>
