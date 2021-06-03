@@ -1,6 +1,7 @@
 package com.hengzhi.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.dialect.helper.HsqldbDialect;
 import com.hengzhi.entity.Message;
 import com.hengzhi.service.GeneralManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,4 +42,26 @@ public class GeneralManagerController {
         }
         return map;
     }
+
+    @ResponseBody
+    @RequestMapping("/approved")
+    public Map approved(@RequestBody JSONObject jsonObject ){
+        Integer messageId = jsonObject.getInteger("messageId");
+        Map  map = new HashMap();
+        generalManagerService.approved(messageId);
+        map.put("message","通过审核");
+        return map;
+    }
+
+    @ResponseBody
+    @RequestMapping("/rejectReview")
+    public Map rejectReview(@RequestBody JSONObject jsonObject){
+        Integer messageId = jsonObject.getInteger("messageId");
+        Map map = new HashMap();
+        generalManagerService.rejectReview(messageId);
+        map.put("message","审核不通过");
+        return  map;
+    }
+
+
 }
