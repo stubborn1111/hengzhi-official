@@ -1,5 +1,6 @@
 package com.hengzhi.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.hengzhi.dao.StudentTestDao;
 import com.hengzhi.dto.paperAndTest.*;
 import com.hengzhi.entity.Questions;
@@ -77,15 +78,15 @@ public class StudentTestServiceImpl implements StudentTestService {
 
     /**
      * 交卷
-     * @param map
+     * @param jsonObject
      * @return
      */
     @Override
-    public boolean submitPaper(Map map) {
-        List<QuestionAnswer> answerList = (List<QuestionAnswer>) map.get("answerList");
-        Integer userId = (Integer) map.get("userId");
-        Integer answerTime = (Integer) map.get("answerTime");
-        Integer paperId = (Integer) map.get("paperId");
+    public boolean submitPaper(JSONObject jsonObject) {
+        List<QuestionAnswer> answerList = (List<QuestionAnswer>) jsonObject.get("answerList");
+        Integer userId = (Integer) jsonObject.get("userId");
+        Integer answerTime = (Integer) jsonObject.get("answerTime");
+        Integer paperId = (Integer) jsonObject.get("paperId");
         //提交答案
         testDao.submitPaper(paperId, userId, answerList);
         //批改试卷

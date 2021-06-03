@@ -1,9 +1,12 @@
 package com.hengzhi.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.hengzhi.dto.paperAndTest.QuestionAnswer;
 import com.hengzhi.dto.paperAndTest.TestedPaper;
 import com.hengzhi.dto.paperAndTest.UntestedPaper;
 import com.hengzhi.service.StudentTestService;
+import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,6 +30,7 @@ public class StudentTestController {
 
     @ResponseBody
     @RequestMapping("/getPaper")
+    @RequiresRoles(value = {"user","admin"},logical = Logical.OR)
     public Integer getPaper(@RequestBody JSONObject jsonObject) {
         String code = jsonObject.getString("code");
         return testService.getPaper(code);
@@ -34,6 +38,7 @@ public class StudentTestController {
 
     @ResponseBody
     @RequestMapping("getUnTestedPapers")
+    @RequiresRoles(value = {"user","admin"},logical = Logical.OR)
     public List<UntestedPaper> getUnTestedPapers(@RequestBody JSONObject jsonObject) {
         Integer userId = jsonObject.getInteger("userId");
         List<UntestedPaper> untestedPapers = testService.getUntestedPapers(userId);
@@ -42,6 +47,7 @@ public class StudentTestController {
 
     @ResponseBody
     @RequestMapping("getTestedPapers")
+    @RequiresRoles(value = {"user","admin"},logical = Logical.OR)
     public List<TestedPaper> getTestedPapers(@RequestBody JSONObject jsonObject) {
         Integer userId = jsonObject.getInteger("userId");
         List<TestedPaper> testedPapers = testService.getTestedPapers(userId);
@@ -50,6 +56,7 @@ public class StudentTestController {
 
     @ResponseBody
     @RequestMapping("viewTestedPaper")
+    @RequiresRoles(value = {"user","admin"},logical = Logical.OR)
     public Map viewTestedPaper(@RequestBody JSONObject jsonObject) {
         Integer paperId = jsonObject.getInteger("paperId");
         Integer userId = jsonObject.getInteger("userId");
@@ -59,10 +66,18 @@ public class StudentTestController {
 
     @ResponseBody
     @RequestMapping("test")
+    @RequiresRoles(value = {"user","admin"},logical = Logical.OR)
     public Map test(@RequestBody JSONObject jsonObject) {
         Integer paperId = jsonObject.getInteger("paperId");
         Map test = testService.test(paperId);
         return test;
+    }
+
+    @ResponseBody
+    @RequestMapping("/submitPaper")
+    @RequiresRoles(value = {"user","admin"},logical = Logical.OR)
+    public void submitPaper(@RequestBody JSONObject jsonObject){
+       testService.submitPaper(jsonObject);
     }
 
 }
