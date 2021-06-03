@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.dialect.helper.HsqldbDialect;
 import com.hengzhi.entity.Message;
 import com.hengzhi.service.GeneralManagerService;
+import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,6 +26,7 @@ public class GeneralManagerController {
 
     @ResponseBody
     @RequestMapping("/unExam")
+    @RequiresRoles(value = {"admin"})
     public Map unExam(@RequestBody JSONObject jsonObject){
         System.out.println("进来了");
         Integer page = jsonObject.getInteger("page");
@@ -45,6 +48,7 @@ public class GeneralManagerController {
 
     @ResponseBody
     @RequestMapping("/approved")
+    @RequiresRoles(value = {"admin"})
     public Map approved(@RequestBody JSONObject jsonObject ){
         Integer messageId = jsonObject.getInteger("messageId");
         Map  map = new HashMap();
@@ -55,6 +59,7 @@ public class GeneralManagerController {
 
     @ResponseBody
     @RequestMapping("/rejectReview")
+    @RequiresRoles(value = {"admin"})
     public Map rejectReview(@RequestBody JSONObject jsonObject){
         Integer messageId = jsonObject.getInteger("messageId");
         Map map = new HashMap();
