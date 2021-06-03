@@ -2,6 +2,7 @@ package com.hengzhi.controller;
 
 import com.hengzhi.dto.ManagerPaper.ChangePapers;
 import com.hengzhi.dto.ManagerPaper.UnChangePapers;
+import com.hengzhi.dto.ManagerPaper.UnFinishPapers;
 import com.hengzhi.service.ManagerPaperService;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresRoles;
@@ -23,6 +24,9 @@ public class ManagerPaperController {
     ManagerPaperService managerPaperService;
 
 
+    /*
+    待改试卷
+     */
     @ResponseBody
     @RequestMapping("/unChange")
     @RequiresRoles(value = {"admin"})
@@ -35,12 +39,28 @@ public class ManagerPaperController {
         return  map;
     }
 
+    /*
+    已改试卷信息
+     */
     @ResponseBody
     @RequestMapping("/selectChange")
     @RequiresRoles(value = {"admin"})
     public Map selectChange(){
         Map map = new HashMap();
         List<ChangePapers> list = managerPaperService.selectChange();
+        map.put("list",list);
+        return map;
+    }
+
+    /*
+   未考试卷数据
+    */
+    @ResponseBody
+    @RequestMapping("/selectUnFinish")
+    @RequiresRoles(value = {"admin"})
+    public Map selectUnFinish(){
+        Map map = new HashMap();
+        List<UnFinishPapers> list = managerPaperService.selectUnFinish();
         map.put("list",list);
         return map;
     }
