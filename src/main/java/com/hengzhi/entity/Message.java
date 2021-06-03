@@ -23,4 +23,6 @@ public class Message {
     private String time;
     //是否审核（0/1)
     private Integer whetherReview;
+    //是否通过（0/1）
+    private Integer whetherThrough;
 }

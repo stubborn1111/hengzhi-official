@@ -931,6 +931,7 @@ java.io.IOException: The server sockets created using the LocalRMIServerSocketFa
 16:09:05.093 [main] INFO  com.hengzhi.HengzhiOffcialApplication - Started HengzhiOffcialApplication in 8.083 seconds (JVM running for 11.391)
 16:09:47.810 [http-nio-8080-exec-1] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/hengzhi-official] - Initializing Spring DispatcherServlet 'dispatcherServlet'
 16:09:48.180 [http-nio-8080-exec-1] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+
 15:25:56.727 [main] INFO  com.hengzhi.HengzhiOffcialApplication - Starting HengzhiOffcialApplication using Java 1.8.0_241 on LAPTOP-7TC5A5HO with PID 4984 (E:\document\git_repository\hengzhi-official\target\classes started by 33896 in E:\document\git_repository\hengzhi-official)
 15:25:56.896 [main] INFO  com.hengzhi.HengzhiOffcialApplication - No active profile set, falling back to default profiles: default
 15:26:00.874 [main] INFO  org.apache.shiro.cache.ehcache.EhCacheManager - Using existing EHCache named [authenticationCache]
@@ -1089,3 +1090,63 @@ java.io.IOException: The server sockets created using the LocalRMIServerSocketFa
 11:16:44.006 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
 11:16:46.061 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
 11:16:46.074 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+
+09:12:06.073 [main] INFO  com.hengzhi.HengzhiOffcialApplication - Starting HengzhiOffcialApplication using Java 11.0.5 on DESKTOP-9D0T9G8 with PID 5612 (D:\大二\github\hengzhi-official\target\classes started by admin in D:\大二\github\hengzhi-official)
+09:12:06.088 [main] INFO  com.hengzhi.HengzhiOffcialApplication - No active profile set, falling back to default profiles: default
+09:12:07.301 [main] INFO  org.apache.shiro.cache.ehcache.EhCacheManager - Using existing EHCache named [authenticationCache]
+09:12:07.302 [main] INFO  org.apache.shiro.cache.ehcache.EhCacheManager - Using existing EHCache named [authorizationCache]
+09:12:07.619 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+09:12:07.619 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+09:12:07.620 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.45]
+09:12:07.708 [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/hengzhi-official] - Initializing Spring embedded WebApplicationContext
+09:12:08.732 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+09:12:08.765 [main] INFO  com.hengzhi.HengzhiOffcialApplication - Started HengzhiOffcialApplication in 3.274 seconds (JVM running for 5.379)
+09:12:27.058 [main] INFO  com.hengzhi.HengzhiOffcialApplication - Starting HengzhiOffcialApplication using Java 11.0.5 on DESKTOP-9D0T9G8 with PID 17880 (D:\大二\github\hengzhi-official\target\classes started by admin in D:\大二\github\hengzhi-official)
+09:12:27.069 [main] INFO  com.hengzhi.HengzhiOffcialApplication - No active profile set, falling back to default profiles: default
+09:12:28.097 [main] INFO  org.apache.shiro.cache.ehcache.EhCacheManager - Using existing EHCache named [authenticationCache]
+09:12:28.099 [main] INFO  org.apache.shiro.cache.ehcache.EhCacheManager - Using existing EHCache named [authorizationCache]
+09:12:28.439 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+09:12:28.440 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+09:12:28.440 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.45]
+09:12:28.531 [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/hengzhi-official] - Initializing Spring embedded WebApplicationContext
+09:12:29.684 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+09:12:29.720 [main] INFO  com.hengzhi.HengzhiOffcialApplication - Started HengzhiOffcialApplication in 3.31 seconds (JVM running for 4.788)
+09:13:21.693 [http-nio-8080-exec-2] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/hengzhi-official] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+09:13:21.959 [http-nio-8080-exec-2] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+09:14:44.637 [main] INFO  com.hengzhi.HengzhiOffcialApplication - Starting HengzhiOffcialApplication using Java 11.0.5 on DESKTOP-9D0T9G8 with PID 12184 (D:\大二\github\hengzhi-official\target\classes started by admin in D:\大二\github\hengzhi-official)
+09:14:44.644 [main] INFO  com.hengzhi.HengzhiOffcialApplication - No active profile set, falling back to default profiles: default
+09:14:45.519 [main] INFO  org.apache.shiro.cache.ehcache.EhCacheManager - Using existing EHCache named [authenticationCache]
+09:14:45.519 [main] INFO  org.apache.shiro.cache.ehcache.EhCacheManager - Using existing EHCache named [authorizationCache]
+09:14:45.819 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+09:14:45.820 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+09:14:45.820 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.45]
+09:14:45.914 [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/hengzhi-official] - Initializing Spring embedded WebApplicationContext
+09:14:46.880 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+09:14:46.908 [main] INFO  com.hengzhi.HengzhiOffcialApplication - Started HengzhiOffcialApplication in 2.842 seconds (JVM running for 4.099)
+09:14:52.353 [http-nio-8080-exec-2] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/hengzhi-official] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+09:14:52.531 [http-nio-8080-exec-2] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+09:17:01.874 [main] INFO  com.hengzhi.HengzhiOffcialApplication - Starting HengzhiOffcialApplication using Java 11.0.5 on DESKTOP-9D0T9G8 with PID 4648 (D:\大二\github\hengzhi-official\target\classes started by admin in D:\大二\github\hengzhi-official)
+09:17:01.884 [main] INFO  com.hengzhi.HengzhiOffcialApplication - No active profile set, falling back to default profiles: default
+09:17:02.764 [main] INFO  org.apache.shiro.cache.ehcache.EhCacheManager - Using existing EHCache named [authenticationCache]
+09:17:02.765 [main] INFO  org.apache.shiro.cache.ehcache.EhCacheManager - Using existing EHCache named [authorizationCache]
+09:17:03.027 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+09:17:03.027 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+09:17:03.028 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.45]
+09:17:03.104 [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/hengzhi-official] - Initializing Spring embedded WebApplicationContext
+09:17:03.985 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+09:17:04.013 [main] INFO  com.hengzhi.HengzhiOffcialApplication - Started HengzhiOffcialApplication in 2.686 seconds (JVM running for 3.923)
+09:17:09.665 [http-nio-8080-exec-2] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/hengzhi-official] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+09:17:09.843 [http-nio-8080-exec-2] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+09:17:59.860 [main] INFO  com.hengzhi.HengzhiOffcialApplication - Starting HengzhiOffcialApplication using Java 11.0.5 on DESKTOP-9D0T9G8 with PID 1428 (D:\大二\github\hengzhi-official\target\classes started by admin in D:\大二\github\hengzhi-official)
+09:17:59.869 [main] INFO  com.hengzhi.HengzhiOffcialApplication - No active profile set, falling back to default profiles: default
+09:18:00.872 [main] INFO  org.apache.shiro.cache.ehcache.EhCacheManager - Using existing EHCache named [authenticationCache]
+09:18:00.874 [main] INFO  org.apache.shiro.cache.ehcache.EhCacheManager - Using existing EHCache named [authorizationCache]
+09:18:01.126 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+09:18:01.127 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+09:18:01.127 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.45]
+09:18:01.202 [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/hengzhi-official] - Initializing Spring embedded WebApplicationContext
+09:18:02.139 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+09:18:02.167 [main] INFO  com.hengzhi.HengzhiOffcialApplication - Started HengzhiOffcialApplication in 2.895 seconds (JVM running for 4.073)
+09:18:11.588 [http-nio-8080-exec-2] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/hengzhi-official] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+09:18:11.765 [http-nio-8080-exec-2] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+
