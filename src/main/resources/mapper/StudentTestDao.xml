@@ -130,4 +130,9 @@
         SET score = #{score}
         WHERE paper_id = #{paperId} AND user_id =#{userId} AND q_number=#{qNumber}
     </update>
+    <update id="setSum">
+        UPDATE user_paper
+        SET score = #{sum}
+        WHERE paper_id = #{paperId} AND user_id = #{userId}
+    </update>
 </mapper>

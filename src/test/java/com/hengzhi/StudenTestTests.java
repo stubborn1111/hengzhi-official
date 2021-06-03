@@ -77,22 +77,28 @@ public class StudenTestTests {
 
     //提交试卷
     @Test
-    void test9(){
+    void test9() {
         ArrayList<QuestionAnswer> answerList = new ArrayList<>();
-        answerList.add(new QuestionAnswer("abs",1));
-        answerList.add(new QuestionAnswer("dsdsfd",2));
-        studentTestDao.submitPaper(1,1,answerList);
+        answerList.add(new QuestionAnswer("abs", 1));
+        answerList.add(new QuestionAnswer("dsdsfd", 2));
+        studentTestDao.submitPaper(1, 1, answerList);
     }
 
     //提交试卷得分和答题时间
     @Test
-    void test10(){
-        studentTestDao.submitPaperInfo(1,1,23,45);
+    void test10() {
+        studentTestDao.submitPaperInfo(1, 1, 23, 45);
     }
 
     //修改题目得分
     @Test
-    void test11(){
-        studentTestDao.setScore(5,1,1,1);
+    void test11() {
+        studentTestDao.setScore(5, 1, 1, 1);
+    }
+
+    //提交总分
+    @Test
+    void test12() {
+        studentTestDao.setSum(50, 1, 1);
     }
 }

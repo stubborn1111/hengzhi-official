@@ -1081,3 +1081,11 @@ java.io.IOException: The server sockets created using the LocalRMIServerSocketFa
 20:30:50.143 [main] INFO  com.hengzhi.HengzhiOffcialApplication - Started HengzhiOffcialApplication in 8.785 seconds (JVM running for 11.565)
 20:31:40.831 [http-nio-8080-exec-2] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/hengzhi-official] - Initializing Spring DispatcherServlet 'dispatcherServlet'
 20:31:41.506 [http-nio-8080-exec-2] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+11:16:30.526 [main] INFO  com.hengzhi.StudenTestTests - Starting StudenTestTests using Java 1.8.0_241 on LAPTOP-7TC5A5HO with PID 1304 (started by 33896 in E:\document\git_repository\hengzhi-official)
+11:16:30.648 [main] INFO  com.hengzhi.StudenTestTests - No active profile set, falling back to default profiles: default
+11:16:37.132 [main] INFO  org.apache.shiro.cache.ehcache.EhCacheManager - Using existing EHCache named [authenticationCache]
+11:16:37.135 [main] INFO  org.apache.shiro.cache.ehcache.EhCacheManager - Using existing EHCache named [authorizationCache]
+11:16:42.835 [main] INFO  com.hengzhi.StudenTestTests - Started StudenTestTests in 13.718 seconds (JVM running for 20.154)
+11:16:44.006 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+11:16:46.061 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+11:16:46.074 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
