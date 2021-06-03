@@ -12,9 +12,17 @@
         <result property="whetherCorrect" column="whether_correct"/>
     </collection>
 </resultMap>
-    <resultMap id="UnChangeUser" type="com.hengzhi.dto.ManagerPaper.UnChangeUser">
+
+    <resultMap id="ChangePapers" type="com.hengzhi.dto.ManagerPaper.ChangePapers">
         <id property="paperId" column="paper_id"/>
-        <result property="whetherCorrect" column="whether_correct"/>
+        <result property="beginTime" column="begin_time"/>
+        <result property="deadLine" column="end_time"/>
+        <result property="paperName" column="name"/>
+        <result property="totalNumber" column="number"/>
+        <collection property="unChangeUserList" ofType="com.hengzhi.dto.ManagerPaper.UnChangeUser">
+            <id property="paperId" column="paper_id"/>
+            <result property="whetherCorrect" column="whether_correct"/>
+        </collection>
     </resultMap>
 <!--    待改试卷数据-->
     <select id="selectUnChange" resultMap="UnChangePapers">
@@ -31,5 +39,12 @@
     </select>
 
 <!--    已改试卷数据-->
-<!--    <select id="selectChange" resultMap=""-->
+    <select id="selectChange" resultMap="ChangePapers">
+        select *
+        from papers as p
+        join user_paper as up
+        where p.paper_id = up.paper_id
+        and up.whether_correct = 1
+    </select>
+
 </mapper>

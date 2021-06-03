@@ -1,5 +1,6 @@
 package com.hengzhi.controller;
 
+import com.hengzhi.dto.ManagerPaper.ChangePapers;
 import com.hengzhi.dto.ManagerPaper.UnChangePapers;
 import com.hengzhi.service.ManagerPaperService;
 import org.apache.shiro.authz.annotation.Logical;
@@ -34,4 +35,13 @@ public class ManagerPaperController {
         return  map;
     }
 
+    @ResponseBody
+    @RequestMapping("/selectChange")
+    @RequiresRoles(value = {"admin"})
+    public Map selectChange(){
+        Map map = new HashMap();
+        List<ChangePapers> list = managerPaperService.selectChange();
+        map.put("list",list);
+        return map;
+    }
 }
