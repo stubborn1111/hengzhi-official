@@ -18,8 +18,8 @@ import java.sql.Timestamp;
 public class TestPaperInfo {
     private String paperName;
     private String description;
-    private Timestamp beginTime;
-    private Timestamp deadline;
+    private String beginTime;
+    private String deadline;
     private String name;
     private Integer score;
 }

@@ -63,10 +63,18 @@
         <result property="answer" column="answer"/>
         <result property="qNumber" column="q_number"/>
     </resultMap>
+    <resultMap id="getPaper" type="com.hengzhi.dto.paperAndTest.GetPaper">
+        <result property="paperId" column="paper_id"/>
+        <result property="paperName" column="paper_name"/>
+        <result property="beginTime" column="begin_time"/>
+        <result property="deadline" column="finish_time"/>
+        <result property="name" column="username"/>
+    </resultMap>
     <!--    获取试卷id-->
-    <select id="selectPaperIdByCode" resultType="java.lang.Integer">
-        select paper_id from papers
-        where code = #{code}
+    <select id="selectPaperIdByCode" resultMap="getPaper">
+        SELECT paper_id,papers.name AS paper_name,begin_time,finish_time,`user`.`name` AS username
+        FROM papers,`user`
+        WHERE papers.code = #{code} AND `user`.user_id=papers.`user_id`
     </select>
     <insert id="addUserPaper">
         INSERT INTO user_paper(user_id,paper_id) VALUES(#{userId},#{paperId})
@@ -79,7 +87,7 @@
     </select>
     <!--获得考试了的试卷信息-->
     <select id="getTestedPapers" resultMap="testedPaper">
-        SELECT papers.paper_id,papers.name AS paper_name,begin_time,end_time AS deadline,user.`name`,answer_time AS finish_time,score
+        SELECT papers.paper_id,papers.name AS paper_name,begin_time,end_time AS deadline,user.`name`,answer_time AS finish_time,user_paper.score
         FROM `user`,papers,user_paper
         WHERE user.`user_id` = papers.`user_id` AND user_paper.`user_id`=#{userId} AND papers.paper_id = user_paper.`paper_id` AND whether_answer = 1
     </select>

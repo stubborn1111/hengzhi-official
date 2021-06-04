@@ -23,9 +23,9 @@ public class Papers {
     //试卷id
     private Integer paperId;
     //试卷开始时间
-    private Timestamp beginTime;
+    private String beginTime;
     //截止时间
-    private Timestamp endTime;
+    private String endTime;
     //完成时间（单位为分钟）
     private String finishTime;
     //试卷名
