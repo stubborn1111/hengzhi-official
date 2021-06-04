@@ -21,7 +21,7 @@ public interface StudentTestDao {
      * @param code
      * @return
      */
-    Integer selectPaperIdByCode(String code);
+    GetPaper selectPaperIdByCode(String code);
 
     /**
      * 用户获得试卷
@@ -29,7 +29,7 @@ public interface StudentTestDao {
      * @param paperId
      * @return
      */
-    void addUserPaper(Integer paperId);
+    void addUserPaper(Integer paperId,Integer userId);
 
     /**
      * 获得用户未考试卷信息

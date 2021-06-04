@@ -1,5 +1,6 @@
 package com.hengzhi.service;
 
+import com.hengzhi.dto.userBasic.UserInfo;
 import com.hengzhi.entity.User;
 
 /**
@@ -16,4 +17,6 @@ public interface UserService {
     int updatePassword(Integer studentId,String password,String newPassword);
 
     int submitForgetPassword(Integer studentId,String newPassword);
+
+    UserInfo getUserInfo(Integer userId);
 }

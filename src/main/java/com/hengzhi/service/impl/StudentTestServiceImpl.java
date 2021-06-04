@@ -23,11 +23,11 @@ public class StudentTestServiceImpl implements StudentTestService {
     StudentTestDao testDao;
 
     @Override
-    public Integer getPaper(String code) {
-        Integer paperId = testDao.selectPaperIdByCode(code);
-        if (paperId == null) return 0;
-        testDao.addUserPaper(paperId);
-        return 1;
+    public GetPaper getPaper(String code,Integer userId) {
+        GetPaper getPaper = testDao.selectPaperIdByCode(code);
+        if (getPaper == null) return null;
+        testDao.addUserPaper(getPaper.getPaperId(),userId);
+        return getPaper;
     }
 
     @Override

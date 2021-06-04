@@ -1,10 +1,12 @@
 package com.hengzhi.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.hengzhi.dto.paperAndTest.GetPaper;
 import com.hengzhi.dto.paperAndTest.QuestionAnswer;
 import com.hengzhi.dto.paperAndTest.TestedPaper;
 import com.hengzhi.dto.paperAndTest.UntestedPaper;
 import com.hengzhi.service.StudentTestService;
+import com.hengzhi.service.impl.JWTServiceImpl;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -27,13 +30,16 @@ import java.util.Map;
 public class StudentTestController {
     @Autowired
     StudentTestService testService;
+    @Autowired
+    JWTServiceImpl jwtService;
 
     @ResponseBody
     @RequestMapping("/getPaper")
-    @RequiresRoles(value = {"user","admin"},logical = Logical.OR)
-    public Integer getPaper(@RequestBody JSONObject jsonObject) {
+    @RequiresRoles(value = {"user"})
+    public GetPaper getPaper(@RequestBody JSONObject jsonObject, HttpServletRequest request) {
         String code = jsonObject.getString("code");
-        return testService.getPaper(code);
+        Integer userId = jwtService.getUserId(request);
+        return testService.getPaper(code,userId);
     }
 
     @ResponseBody

@@ -1,6 +1,7 @@
 package com.hengzhi.service.impl;
 
 import com.hengzhi.dao.UserDao;
+import com.hengzhi.dto.userBasic.UserInfo;
 import com.hengzhi.entity.User;
 import com.hengzhi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,5 +58,11 @@ public class UserServiceImpl implements UserService {
     public int submitForgetPassword(Integer studentId, String newPassword) {
         int i = userDao.submitRequiredPassword(studentId, newPassword);
         return i;
+    }
+
+    @Override
+    public UserInfo getUserInfo(Integer userId) {
+        UserInfo userInfo = userDao.getUserInfo(userId);
+        return userInfo;
     }
 }

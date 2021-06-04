@@ -1,5 +1,6 @@
 package com.hengzhi.dao;
 
+import com.hengzhi.dto.userBasic.UserInfo;
 import com.hengzhi.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
@@ -39,4 +40,6 @@ public interface UserDao {
      * @return
      */
     int submitRequiredPassword(Integer studentId,String newPassword);
+
+    UserInfo getUserInfo(Integer userId);
 }

@@ -1,6 +1,7 @@
 package com.hengzhi.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.hengzhi.dto.userBasic.UserInfo;
 import com.hengzhi.secutity.Security;
 import com.hengzhi.service.JWTService;
 import com.hengzhi.service.UserService;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import com.hengzhi.entity.User;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
@@ -52,7 +54,7 @@ public class UserController {
     @RequestMapping("/updateHeadImg")
     @ResponseBody
     @Security
-    @RequiresRoles(value = {"user","admin"},logical = Logical.OR)
+    @RequiresRoles(value = {"user", "admin"}, logical = Logical.OR)
     public Map<String, String> updateHeadImg(@RequestParam Integer studentId, @RequestParam(value = "headImage", required = false) MultipartFile headImage, HttpServletRequest request) {
         Map<String, String> map = new HashMap<>();
         if (!headImage.isEmpty()) {
@@ -88,14 +90,14 @@ public class UserController {
 
     @RequestMapping("/updatePassword")
     @ResponseBody
-    @RequiresRoles(value = {"user","admin"},logical = Logical.OR)
-    public Map<String, String> updatePassword(@RequestBody JSONObject jsonObject,HttpServletRequest request) {
+    @RequiresRoles(value = {"user", "admin"}, logical = Logical.OR)
+    public Map<String, String> updatePassword(@RequestBody JSONObject jsonObject, HttpServletRequest request) {
         Map<String, String> map = new HashMap<>();
         Integer studentId = jsonObject.getInteger("studentId");
         String password = jsonObject.getString("password");
         String newPassword = jsonObject.getString("newPassword");
         Integer realSId = jwtService.getStudentId(request);
-        if(!realSId.equals(studentId)){
+        if (!realSId.equals(studentId)) {
             map.put("status", "error");
             map.put("msg", "您只能修改自己的密码");
             return map;
@@ -113,19 +115,28 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping("/forgetPassword")
-    @RequiresRoles(value = {"user","admin"},logical = Logical.OR)
-    public Map<String,String> submitForgetPassword(@RequestBody JSONObject jsonObject){
-        Map<String,String> map = new HashMap<>();
+    @RequiresRoles(value = {"user", "admin"}, logical = Logical.OR)
+    public Map<String, String> submitForgetPassword(@RequestBody JSONObject jsonObject) {
+        Map<String, String> map = new HashMap<>();
         Integer studentId = jsonObject.getInteger("studentId");
         String newPassword = jsonObject.getString("newPassword");
         int i = userService.submitForgetPassword(studentId, newPassword);
-        if(i==0){
-            map.put("status","error");
-            map.put("msg","不存在此用户");
-        }else{
-            map.put("status","success");
-            map.put("msg","提交成功");
+        if (i == 0) {
+            map.put("status", "error");
+            map.put("msg", "不存在此用户");
+        } else {
+            map.put("status", "success");
+            map.put("msg", "提交成功");
         }
         return map;
+    }
+
+    @ResponseBody
+    @RequestMapping("/getUserInfo")
+    @RequiresRoles(value = {"user", "admin"}, logical = Logical.OR)
+    public UserInfo getUserInfo(HttpServletRequest request) {
+        Integer userId = jwtService.getUserId(request);
+        UserInfo userInfo = userService.getUserInfo(userId);
+        return userInfo;
     }
 }

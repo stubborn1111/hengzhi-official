@@ -1,6 +1,7 @@
 package com.hengzhi.service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.hengzhi.dto.paperAndTest.GetPaper;
 
 import java.util.List;
 import java.util.Map;
@@ -12,7 +13,7 @@ import java.util.Map;
  * @Date 2021/5/23
  */
 public interface StudentTestService {
-    Integer getPaper(String code);
+    GetPaper getPaper(String code, Integer userId);
 
     List getUntestedPapers(Integer studentId);
 
@@ -23,4 +24,6 @@ public interface StudentTestService {
     Map test(Integer paperId);
 
     boolean submitPaper(JSONObject jsonObject);
+
+
 }
