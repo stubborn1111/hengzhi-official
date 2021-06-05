@@ -33,8 +33,6 @@
         <result property="qType" column="q_type"/>
     </resultMap>
     <resultMap id="testedQuestion" type="com.hengzhi.dto.paperAndTest.TestedQuestion">
-        <result property="questionId" column="question_id"/>
-        <result property="userId" column="user_id"/>
         <result property="kind" column="kind"/>
         <result property="content" column="content"/>
         <result property="answer" column="answer"/>
@@ -94,11 +92,11 @@
     <select id="getPaperInformation" resultMap="PaperInformation">
         SELECT `name`,answer_time,user_paper.score
         FROM user_paper,papers
-        WHERE user_paper.`paper_id`=#{paperId} AND papers.`paper_id`=#{paperId}
+        WHERE user_paper.`paper_id`=#{paperId} AND papers.`paper_id`=#{paperId} AND user_paper.user_id=#{userId}
     </select>
     <!--        根据试卷id和题号获取题目信息-->
     <select id="getQuestion" resultMap="testedQuestion">
-         SELECT content,answer,description,kind,c_rate
+         SELECT content,answer,description,kind,c_rate,'1' AS q_type
          FROM ${tName}
          WHERE question_id =#{questionId}
     </select>
@@ -143,4 +141,5 @@
         SET score = #{sum}
         WHERE paper_id = #{paperId} AND user_id = #{userId}
     </update>
+
 </mapper>

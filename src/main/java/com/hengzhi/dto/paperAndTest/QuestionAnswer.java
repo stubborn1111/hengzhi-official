@@ -1,6 +1,7 @@
 package com.hengzhi.dto.paperAndTest;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,5 +19,6 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 public class QuestionAnswer {
     private String answer;
+    @JsonProperty("qNumber")
     private Integer qNumber;
 }

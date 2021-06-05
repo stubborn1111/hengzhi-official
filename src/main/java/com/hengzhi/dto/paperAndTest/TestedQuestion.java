@@ -1,5 +1,6 @@
 package com.hengzhi.dto.paperAndTest;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,9 +18,11 @@ public class TestedQuestion {
     //答案内容
     private String answer;
     //正确率
+    @JsonProperty("cRate")
     private String cRate;
     //题目讲解
     private String description;
     //题目类型
+    @JsonProperty("qType")
     private String qType;
 }

@@ -1,5 +1,6 @@
 package com.hengzhi.dto.paperAndTest;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
@@ -15,5 +16,6 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 public class QInfo {
     private Integer questionId;//题目id
+    @JsonProperty("qType")
     private String qType;//题目类型
 }

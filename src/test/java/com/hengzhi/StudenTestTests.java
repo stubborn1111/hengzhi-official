@@ -42,7 +42,7 @@ public class StudenTestTests {
     //获取试卷信息
     @Test
     void test3() {
-        System.out.println(studentTestDao.getPaperInformation(1));
+        System.out.println(studentTestDao.getPaperInformation(1,1));
     }
 
     //获取试卷的试题信息

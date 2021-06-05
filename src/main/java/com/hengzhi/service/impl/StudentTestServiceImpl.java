@@ -23,10 +23,10 @@ public class StudentTestServiceImpl implements StudentTestService {
     StudentTestDao testDao;
 
     @Override
-    public GetPaper getPaper(String code,Integer userId) {
+    public GetPaper getPaper(String code, Integer userId) {
         GetPaper getPaper = testDao.selectPaperIdByCode(code);
         if (getPaper == null) return null;
-        testDao.addUserPaper(getPaper.getPaperId(),userId);
+        testDao.addUserPaper(getPaper.getPaperId(), userId);
         return getPaper;
     }
 
@@ -45,27 +45,41 @@ public class StudentTestServiceImpl implements StudentTestService {
     @Override
     public Map viewTestedPaper(Integer paperId, Integer userId) {
         Map map = new HashMap();
+        //根据试卷id获得试题信息：题号和类型
         List<QInfo> qInfo = testDao.getQInfo(paperId);
-        List<TestedQuestion> qList = new LinkedList<>();
+        List<TestedQuestion> qList = new ArrayList<>();
         String tName;
         for (int i = 0; i < qInfo.size(); i++) {
+            //根据题目类型获得表名
             tName = SelectTableUtils.selectT(qInfo.get(i).getQType());
-            qList.add(testDao.getQuestion(qInfo.get(i).getQuestionId(), tName));
+            TestedQuestion question = testDao.getQuestion(qInfo.get(i).getQuestionId(), tName);
+            question.setQType(qInfo.get(i).getQType());
+            qList.add(question);
+            //qList.add(testDao.getQuestion(qInfo.get(i).getQuestionId(),tName));
         }
+        //获得答题情况
         List<AnswerSituation> answerSituation = testDao.getAnswerSituation(paperId, userId);
-        PaperInformation paperInformation = testDao.getPaperInformation(paperId);
+        //获得试卷信息
+        PaperInformation paperInformation = testDao.getPaperInformation(paperId, userId);
         map.put("questionList", qList);
         map.put("answerList", answerSituation);
         map.put("PaperInformation", paperInformation);
         return map;
     }
 
+    /**
+     * 考试
+     *
+     * @param paperId
+     * @return
+     */
     @Override
     public Map test(Integer paperId) {
         Map map = new HashMap();
         List<QInfo> qInfo = testDao.getQInfo(paperId);
+        System.out.println(qInfo);
         List<TestQuestion> qList = new LinkedList<>();
-        String tName = new String();
+        String tName;
         for (int i = 0; i < qInfo.size(); i++) {
             tName = SelectTableUtils.selectT(qInfo.get(i).getQType());
             qList.add(new TestQuestion(qInfo.get(i).getQuestionId(), qInfo.get(i).getQType(), testDao.getTestQuestions(qInfo.get(i).getQuestionId(), tName)));
@@ -108,11 +122,11 @@ public class StudentTestServiceImpl implements StudentTestService {
                 if (rScore.equals(uScore)) score = 5;
                 else if (!rScore.contains(uScore)) score = 0;
                 else score = (int) (uScore.length() / 1.0 / rScore.length());
-                testDao.setScore(score,paperId,userId,i+1);
+                testDao.setScore(score, paperId, userId, i + 1);
                 sum += score;
             }
         }
-        testDao.setSum(sum,paperId,userId);
+        testDao.setSum(sum, paperId, userId);
         return true;
     }
 }

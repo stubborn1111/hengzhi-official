@@ -26,6 +26,7 @@ import java.util.UUID;
  * @description 用户相关控制器
  * @Date 2021/5/22
  */
+@CrossOrigin
 @RequestMapping("/user")
 @RestController
 public class UserController {

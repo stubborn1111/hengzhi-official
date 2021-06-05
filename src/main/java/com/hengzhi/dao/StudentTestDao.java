@@ -53,7 +53,7 @@ public interface StudentTestDao {
      * @param paperId
      * @return
      */
-    PaperInformation getPaperInformation(Integer paperId);
+    PaperInformation getPaperInformation(Integer paperId,Integer userId);
 
     /**
      * 根据对应的题目id和数据库表名获取试卷的试题
