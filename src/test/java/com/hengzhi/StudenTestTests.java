@@ -101,4 +101,9 @@ public class StudenTestTests {
     void test12() {
         studentTestDao.setSum(50, 1, 1);
     }
+    //测试算分
+    @Test
+    void test13(){
+
+    }
 }

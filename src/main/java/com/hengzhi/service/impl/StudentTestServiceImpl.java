@@ -97,17 +97,20 @@ public class StudentTestServiceImpl implements StudentTestService {
      */
     @Override
     public boolean submitPaper(JSONObject jsonObject) {
+        //答案列表
         List<QuestionAnswer> answerList = (List<QuestionAnswer>) jsonObject.get("answerList");
         Integer userId = (Integer) jsonObject.get("userId");
-        Integer answerTime = (Integer) jsonObject.get("answerTime");
+        Integer answerTime = (Integer) jsonObject.get("answerTime");//答题所用时间
         Integer paperId = (Integer) jsonObject.get("paperId");
         //提交答案
         testDao.submitPaper(paperId, userId, answerList);
         //批改试卷
         List<QInfo> qInfo = testDao.getQInfo(paperId);//根据试卷id获得每题的题目id和类型
-        Integer sum = 0;
-        Integer score = 0;
+        Integer sum = 0;//总分
+        Integer score = 0;//每题得分
+        //开始循环批改
         for (int i = 0; i < qInfo.size(); i++) {
+            //题目信息
             Integer questionId = qInfo.get(i).getQuestionId();
             String qType = qInfo.get(i).getQType();
             String tName = SelectTableUtils.selectT(qType);
@@ -115,13 +118,18 @@ public class StudentTestServiceImpl implements StudentTestService {
             if ("0".equals(qType) || "3".equals(qType)) {
                 continue;
             } else {
-                //根据对应的题目id和数据库表名获取试卷的试题
+                //适用于单选和多选
+                //根据对应的题目id和数据库表名获取试题内容
                 TestedQuestion testedQuestion = testDao.getQuestion(questionId, tName);
-                String rScore = testedQuestion.getAnswer();
-                String uScore = answerList.get(i).getAnswer();
-                if (rScore.equals(uScore)) score = 5;
-                else if (!rScore.contains(uScore)) score = 0;
-                else score = (int) (uScore.length() / 1.0 / rScore.length());
+                String rAnswer = testedQuestion.getAnswer();//正确答案
+                String uAnswer = answerList.get(i).getAnswer();//用户答案
+                if (rAnswer.equals(uAnswer)) {
+                    score = 5;//完全正确
+                    //修改题目正确率，在试题表中修改并放到paper_content表中
+
+                }
+                else if (!rAnswer.contains(uAnswer)) score = 0;//不包含，分数为0
+                else score = (int) ((uAnswer.length() / 1.0 / rAnswer.length())*5);//按比例计算分数，取整
                 testDao.setScore(score, paperId, userId, i + 1);
                 sum += score;
             }
