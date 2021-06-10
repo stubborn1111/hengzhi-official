@@ -99,7 +99,7 @@ public class StudenTestTests {
     //提交总分
     @Test
     void test12() {
-        studentTestDao.setSum(50, 1, 1);
+        studentTestDao.setSum(50, 1, 1,33);
     }
     //测试算分
     @Test

@@ -128,7 +128,7 @@ public interface StudentTestDao {
      * @param userId
      * @return
      */
-    Integer setSum(Integer sum, Integer paperId, Integer userId);
+    Integer setSum(Integer sum, Integer paperId, Integer userId,Integer answerTime);
 
     /**
      * 题目正确，修改人数
