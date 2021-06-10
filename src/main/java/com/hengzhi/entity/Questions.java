@@ -26,8 +26,8 @@ public class Questions {
     private String content;
     //答案内容
     private String answer;
-    //正确率
-    private String cRate;
+    //总人数
+    private Integer totalNumber;
     //正确人数
     private Integer correctNumber;
     //题目讲解

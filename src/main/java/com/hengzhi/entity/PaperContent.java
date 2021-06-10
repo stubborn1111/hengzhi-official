@@ -25,6 +25,4 @@ public class PaperContent {
     private Integer questionId;
     //题号
     private Integer qNumber;
-    //正确率
-    private String cRate;
 }

@@ -42,19 +42,26 @@ public class StudentTestServiceImpl implements StudentTestService {
         return testedPapers;
     }
 
+    /**
+     *查看已考试卷的内容
+     * @param paperId
+     * @param userId
+     * @return
+     */
     @Override
     public Map viewTestedPaper(Integer paperId, Integer userId) {
         Map map = new HashMap();
         //根据试卷id获得试题信息：题号和类型
         List<QInfo> qInfo = testDao.getQInfo(paperId);
-        List<TestedQuestion> qList = new ArrayList<>();
+        List<TestedQuestion2> qList = new ArrayList<>();
         String tName;
         for (int i = 0; i < qInfo.size(); i++) {
             //根据题目类型获得表名
             tName = SelectTableUtils.selectT(qInfo.get(i).getQType());
             TestedQuestion question = testDao.getQuestion(qInfo.get(i).getQuestionId(), tName);
             question.setQType(qInfo.get(i).getQType());
-            qList.add(question);
+            TestedQuestion2 question2 = question.transfer();
+            qList.add(question2);
             //qList.add(testDao.getQuestion(qInfo.get(i).getQuestionId(),tName));
         }
         //获得答题情况

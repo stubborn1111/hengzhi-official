@@ -28,7 +28,8 @@
         <result property="kind" column="kind"/>
         <result property="content" column="content"/>
         <result property="answer" column="answer"/>
-        <result property="cRate" column="c_rate"/>
+        <result property="correctNumber" column="correct_number"/>
+        <result property="totalNumber" column="total_number"/>
         <result property="description" column="description"/>
         <result property="qType" column="q_type"/>
     </resultMap>
@@ -36,7 +37,8 @@
         <result property="kind" column="kind"/>
         <result property="content" column="content"/>
         <result property="answer" column="answer"/>
-        <result property="cRate" column="c_rate"/>
+        <result property="correctNumber" column="correct_number"/>
+        <result property="totalNumber" column="total_number"/>
         <result property="description" column="description"/>
         <result property="qType" column="q_type"/>
     </resultMap>
@@ -96,7 +98,7 @@
     </select>
     <!--        根据试卷id和题号获取题目信息-->
     <select id="getQuestion" resultMap="testedQuestion">
-         SELECT content,answer,description,kind,c_rate,'1' AS q_type
+         SELECT content,answer,description,kind,correct_number,total_number,'1' AS q_type
          FROM ${tName}
          WHERE question_id =#{questionId}
     </select>
