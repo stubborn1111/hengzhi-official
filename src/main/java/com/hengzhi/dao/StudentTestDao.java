@@ -130,6 +130,20 @@ public interface StudentTestDao {
      */
     Integer setSum(Integer sum, Integer paperId, Integer userId);
 
+    /**
+     * 题目正确，修改人数
+     * @param questionId
+     * @param tName
+     * @return
+     */
+    Integer updateNumber(Integer questionId,String tName);
 
+    /**
+     * 题目错误，修改人数
+     * @param questionId
+     * @param tName
+     * @return
+     */
+    Integer updateNumberFalse(Integer questionId,String tName);
 
 }

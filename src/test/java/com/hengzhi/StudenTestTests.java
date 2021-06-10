@@ -104,6 +104,10 @@ public class StudenTestTests {
     //测试算分
     @Test
     void test13(){
-
+        studentTestDao.updateNumber(1,"questions_single");
+    }
+    @Test
+    void test14(){
+        studentTestDao.updateNumberFalse(1,"questions_single");
     }
 }

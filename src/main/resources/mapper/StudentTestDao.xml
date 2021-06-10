@@ -143,5 +143,15 @@
         SET score = #{sum}
         WHERE paper_id = #{paperId} AND user_id = #{userId}
     </update>
-
+    <update id="updateNumber">
+        UPDATE ${tName}
+        SET correct_number = correct_number+1,
+        total_number = total_number+1
+        WHERE question_id = #{questionId}
+    </update>
+    <update id="updateNumberFalse">
+        UPDATE ${tName}
+        SET total_number = total_number+1
+        WHERE question_id = #{questionId}
+    </update>
 </mapper>

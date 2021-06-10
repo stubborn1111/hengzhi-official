@@ -6,6 +6,7 @@ import com.hengzhi.dto.paperAndTest.*;
 import com.hengzhi.entity.Questions;
 import com.hengzhi.service.StudentTestService;
 import com.hengzhi.utils.SelectTableUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,7 @@ import java.util.*;
  * @description
  * @Date 2021/5/23
  */
+@Slf4j
 @Service
 public class StudentTestServiceImpl implements StudentTestService {
     @Autowired
@@ -43,7 +45,8 @@ public class StudentTestServiceImpl implements StudentTestService {
     }
 
     /**
-     *查看已考试卷的内容
+     * 查看已考试卷的内容
+     *
      * @param paperId
      * @param userId
      * @return
@@ -99,6 +102,7 @@ public class StudentTestServiceImpl implements StudentTestService {
 
     /**
      * 交卷
+     *
      * @param jsonObject
      * @return
      */
@@ -133,10 +137,16 @@ public class StudentTestServiceImpl implements StudentTestService {
                 if (rAnswer.equals(uAnswer)) {
                     score = 5;//完全正确
                     //修改题目正确率，在试题表中修改并放到paper_content表中
-
+                    Integer updateNumber = testDao.updateNumber(questionId, tName);
+                    if (updateNumber == 0) log.info("修改正确率成功");
+                    else log.error("修改正确率失败");
+                } else {
+                    Integer updateNumberFalse = testDao.updateNumberFalse(questionId, tName);
+                    if (updateNumberFalse == 0) log.info("修改错误正确率成功");
+                    else log.error("修改错误正确率失败");
+                    if (!rAnswer.contains(uAnswer)) score = 0;//不包含，分数为0
+                    else score = (int) ((uAnswer.length() / 1.0 / rAnswer.length()) * 5);//按比例计算分数，取整
                 }
-                else if (!rAnswer.contains(uAnswer)) score = 0;//不包含，分数为0
-                else score = (int) ((uAnswer.length() / 1.0 / rAnswer.length())*5);//按比例计算分数，取整
                 testDao.setScore(score, paperId, userId, i + 1);
                 sum += score;
             }
