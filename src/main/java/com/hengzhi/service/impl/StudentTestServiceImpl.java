@@ -30,7 +30,9 @@ public class StudentTestServiceImpl implements StudentTestService {
     @Override
     public GetPaper getPaper(String code, Integer userId) {
         GetPaper getPaper = testDao.selectPaperIdByCode(code);
-        if (getPaper == null) return null;
+        if (getPaper == null) {
+            return new GetPaper();
+        }
         testDao.addUserPaper(getPaper.getPaperId(), userId);
         return getPaper;
     }

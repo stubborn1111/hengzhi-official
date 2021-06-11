@@ -5,6 +5,7 @@ import com.hengzhi.dto.userBasic.UserInfo;
 import com.hengzhi.secutity.Security;
 import com.hengzhi.service.JWTService;
 import com.hengzhi.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ import java.util.UUID;
  * @description 用户相关控制器
  * @Date 2021/5/22
  */
+@Slf4j
 @CrossOrigin
 @RequestMapping("/user")
 @RestController
@@ -35,6 +37,12 @@ public class UserController {
     @Autowired
     private JWTService jwtService;
 
+    /**
+     * 登陆
+     * @param user
+     * @param response
+     * @return
+     */
     @RequestMapping("/login")
     @ResponseBody
     @Security(false)
@@ -49,15 +57,24 @@ public class UserController {
             map.put("status", "success");
             return map;
         }
+        log.info("/user/login"+map.toString());
         return map;
     }
 
+    /**
+     * 修改头像
+     * @param studentId
+     * @param headImage
+     * @param request
+     * @return
+     */
     @RequestMapping("/updateHeadImg")
     @ResponseBody
     @Security
     @RequiresRoles(value = {"user", "admin"}, logical = Logical.OR)
     public Map<String, String> updateHeadImg(@RequestParam Integer studentId, @RequestParam(value = "headImage", required = false) MultipartFile headImage, HttpServletRequest request) {
         Map<String, String> map = new HashMap<>();
+        //如果文件不为空
         if (!headImage.isEmpty()) {
             String filePath = request.getServletContext().getRealPath("/headImage");
             String originalFilename = headImage.getOriginalFilename();
@@ -82,13 +99,22 @@ public class UserController {
             }
             map.put("status", "success");
             map.put("newFileName", newFileName);
+            log.info("/user/updateHeadImg"+map.toString());
             return map;
         } else {
+            log.info("/user/updateHeadImg"+map.toString());
             map.put("status", "error");
+            map.put("newFileName","");
             return map;
         }
     }
 
+    /**
+     * 修改密码
+     * @param jsonObject
+     * @param request
+     * @return
+     */
     @RequestMapping("/updatePassword")
     @ResponseBody
     @RequiresRoles(value = {"user", "admin"}, logical = Logical.OR)
@@ -101,6 +127,7 @@ public class UserController {
         if (!realSId.equals(studentId)) {
             map.put("status", "error");
             map.put("msg", "您只能修改自己的密码");
+            log.info("/user/updatePassword"+map.toString());
             return map;
         }
         int i = userService.updatePassword(studentId, password, newPassword);
@@ -111,9 +138,15 @@ public class UserController {
             map.put("status", "error");
             map.put("msg", "原密码错误");
         }
+        log.info("/user/updatePassword"+map.toString());
         return map;
     }
 
+    /**
+     * 提交忘记密码
+     * @param jsonObject
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/forgetPassword")
     @RequiresRoles(value = {"user", "admin"}, logical = Logical.OR)
@@ -129,15 +162,32 @@ public class UserController {
             map.put("status", "success");
             map.put("msg", "提交成功");
         }
+        log.info("/user/forgetPassword"+map.toString());
         return map;
     }
 
+    /**
+     *获取用户信息
+     * @param request
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/getUserInfo")
-    @RequiresRoles(value = {"user", "admin"}, logical = Logical.OR)
+    @Security(false)
     public UserInfo getUserInfo(HttpServletRequest request) {
-        Integer userId = jwtService.getUserId(request);
-        UserInfo userInfo = userService.getUserInfo(userId);
-        return userInfo;
+        //可能发生两种情况的异常，jwt失效或没有
+        try{
+            Integer userId = jwtService.getUserId(request);
+             UserInfo userInfo = new UserInfo();
+            if (userId!=null){
+                userInfo = userService.getUserInfo(userId);
+                return userInfo;
+            }
+            log.debug("jwt失效");
+            return userInfo;
+        } catch (Exception e){
+            log.debug("无jwt");
+            return new UserInfo();
+        }
     }
 }
