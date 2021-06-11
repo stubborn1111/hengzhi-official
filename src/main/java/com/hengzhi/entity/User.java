@@ -29,4 +29,16 @@ public class User {
     private String headImg;
     //是否需要审核，需要审核则通过审核才可以登陆,默认0，提交审核是则设为新密码
     private String required;
+
+    public void setStudentId(Integer studentId) {
+        this.studentId = studentId;
+    }
+
+    public void setHeadImg(String headImg) {
+        this.headImg = headImg;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

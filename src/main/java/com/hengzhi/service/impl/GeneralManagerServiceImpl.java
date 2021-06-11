@@ -31,6 +31,21 @@ public class GeneralManagerServiceImpl implements GeneralManagerService {
     }
 
     @Override
+    public List<Message> selectThroughMes(int page, int size) {
+        PageHelper.startPage(page, size);//使用分页插件，最核心的一句，即开启分页
+        System.out.println("list");
+        List<Message> list = generalManagerDao.selectThroughMessages();
+        System.out.println(list);
+        return list;
+    }
+
+    @Override
+    public Integer selectCountThroughMes() {
+        Integer number =  generalManagerDao.selectCountThroughMessages();
+        return number;
+    }
+
+    @Override
     public void approved(Integer messageId) {
         generalManagerDao.approved(messageId);
     }

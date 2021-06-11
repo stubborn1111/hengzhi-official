@@ -17,7 +17,14 @@ public interface GeneralManagerDao {
     返回未审核的留言数目
      */
     public Integer SelectCountUnExam();
-
+    /*
+    返回通过的留言列表
+   */
+    List<Message> selectThroughMessages();
+    /*
+    返回通过的留言数目
+     */
+    int selectCountThroughMessages();
     /*
     审核通过
      */

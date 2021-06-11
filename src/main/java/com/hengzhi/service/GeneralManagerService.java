@@ -9,11 +9,18 @@ public interface GeneralManagerService {
    返回未审核的留言列表
     */
     public List<Message> selectUnExamMeg(int page,int size);
-
     /*
     返回未审核的留言数目
      */
     public Integer SelectCountUnExam();
+    /*
+    返回通过的留言列表
+    */
+    public List<Message> selectThroughMes(int page,int size);
+    /*
+    返回通过的留言数目
+     */
+    public Integer selectCountThroughMes();
     /*
     审核通过
      */

@@ -22,6 +22,19 @@
         from message
         where whether_review = 0
     </select>
+<!--    返回已经通过审核的留言-->
+    <select id="selectThroughMessages" resultMap="massages">
+        select *
+        from message
+        where whether_review = 1 and whether_through=1
+    </select>
+
+    <!--    返回已经通过审核的留言数-->
+    <select id="selectCountThroughMessages" resultType="int">
+        select count(*)
+        from message
+        where whether_review = 1 and whether_through=1
+    </select>
 
 <!--   通过审核-->
     <update id="approved">
