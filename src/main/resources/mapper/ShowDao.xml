@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hengzhi.dao.ShowDao">
+    <resultMap id="massages" type="com.hengzhi.entity.Message">
+        <id property="messageId" column="message_id"/>
+        <result property="time" column="time"/>
+        <result property="content" column="content"/>
+        <result property="whetherReview" column="whether_review"/>
+        <result property="whetherThrough" column="whether_through"/>
+    </resultMap>
+
+
+<!--    返回已经通过审核的留言-->
+    <select id="selectThroughMessages" resultMap="massages">
+        select *
+        from message
+        where whether_review = 1 and whether_through=1
+    </select>
+
+    <!--    返回已经通过审核的留言数-->
+    <select id="selectCountThroughMessages" resultType="int">
+        select count(*)
+        from message
+        where whether_review = 1 and whether_through=1
+    </select>
+<!--     发布留言-->
+    <insert id="insertMessages" >
+        insert into message(content, whether_through,whether_review) values (#{content},0,0)
+    </insert>
+</mapper>

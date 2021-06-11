@@ -5,6 +5,7 @@ import com.hengzhi.entity.Message;
 import com.hengzhi.secutity.Security;
 import com.hengzhi.service.GeneralManagerService;
 import com.hengzhi.service.ManagerPaperService;
+import com.hengzhi.service.ShowService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,9 +18,9 @@ import java.util.Map;
 
 @RequestMapping("/show")
 @Controller
-public class showController {
+public class ShowController {
     @Autowired
-    GeneralManagerService generalManagerService;
+    ShowService showService;
     @RequestMapping("/showMessages")
     @ResponseBody
     @Security(false)
@@ -27,9 +28,9 @@ public class showController {
         Integer page = jsonObject.getInteger("page");
         Integer size = jsonObject.getInteger("size");
         Map map = new HashMap();
-        List<Message> list = generalManagerService.selectThroughMes(page,size);
+        List<Message> list = showService.selectThroughMes(page,size);
         map.put("listMessage",list);
-        Integer TotalNumber = generalManagerService.selectCountThroughMes();
+        Integer TotalNumber = showService.selectCountThroughMes();
         map.put("TotalNumber",TotalNumber);
         if(TotalNumber<size){
             map.put("pagesSize",1);
@@ -40,5 +41,14 @@ public class showController {
         }
         return map;
     }
+    @RequestMapping("/addMessages")
+    @ResponseBody
+    @Security(false)
+    public void addMessages(@RequestBody JSONObject jsonObject) {
+        String content=jsonObject.getString("content");
 
-}
+    }
+    
+    }
+
+
