@@ -1,11 +1,14 @@
 package com.hengzhi.service.impl;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.hengzhi.dao.StudentTestDao;
 import com.hengzhi.dto.paperAndTest.*;
 import com.hengzhi.entity.Questions;
 import com.hengzhi.service.StudentTestService;
 import com.hengzhi.utils.SelectTableUtils;
+import com.mysql.cj.xdevapi.JsonArray;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,7 +30,9 @@ public class StudentTestServiceImpl implements StudentTestService {
     @Override
     public GetPaper getPaper(String code, Integer userId) {
         GetPaper getPaper = testDao.selectPaperIdByCode(code);
-        if (getPaper == null) return null;
+        if (getPaper == null) {
+            return new GetPaper();
+        }
         testDao.addUserPaper(getPaper.getPaperId(), userId);
         return getPaper;
     }
@@ -79,7 +84,6 @@ public class StudentTestServiceImpl implements StudentTestService {
 
     /**
      * 考试
-     *
      * @param paperId
      * @return
      */
@@ -102,14 +106,14 @@ public class StudentTestServiceImpl implements StudentTestService {
 
     /**
      * 交卷
-     *
      * @param jsonObject
      * @return
      */
     @Override
     public boolean submitPaper(JSONObject jsonObject) {
         //答案列表
-        List<QuestionAnswer> answerList = (List<QuestionAnswer>) jsonObject.get("answerList");
+        String text = JSONArray.toJSONString(jsonObject.get("answerList"));
+        List<QuestionAnswer> answerList = JSONArray.parseArray(text, QuestionAnswer.class);
         Integer userId = (Integer) jsonObject.get("userId");
         Integer answerTime = (Integer) jsonObject.get("answerTime");//答题所用时间
         Integer paperId = (Integer) jsonObject.get("paperId");
@@ -138,12 +142,12 @@ public class StudentTestServiceImpl implements StudentTestService {
                     score = 5;//完全正确
                     //修改题目正确率，在试题表中修改并放到paper_content表中
                     Integer updateNumber = testDao.updateNumber(questionId, tName);
-                    if (updateNumber == 0) log.info("修改正确率成功");
-                    else log.error("修改正确率失败");
+                    if (updateNumber == 0) log.info("修改正确率失败");
+                    else log.error("修改正确率成功");
                 } else {
                     Integer updateNumberFalse = testDao.updateNumberFalse(questionId, tName);
-                    if (updateNumberFalse == 0) log.info("修改错误正确率成功");
-                    else log.error("修改错误正确率失败");
+                    if (updateNumberFalse == 0) log.info("修改错误正确率失败");
+                    else log.error("修改错误正确率成功");
                     if (!rAnswer.contains(uAnswer)) score = 0;//不包含，分数为0
                     else score = (int) ((uAnswer.length() / 1.0 / rAnswer.length()) * 5);//按比例计算分数，取整
                 }
@@ -151,7 +155,9 @@ public class StudentTestServiceImpl implements StudentTestService {
                 sum += score;
             }
         }
-        testDao.setSum(sum, paperId, userId);
+        //提交总分和时间
+        System.out.println("sum:"+sum);
+        testDao.setSum(sum, paperId, userId,answerTime);
         return true;
     }
 }

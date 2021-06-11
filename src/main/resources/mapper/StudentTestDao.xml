@@ -140,7 +140,7 @@
     </update>
     <update id="setSum">
         UPDATE user_paper
-        SET score = #{sum}
+        SET score = #{sum},answer_time = #{answerTime}
         WHERE paper_id = #{paperId} AND user_id = #{userId}
     </update>
     <update id="updateNumber">

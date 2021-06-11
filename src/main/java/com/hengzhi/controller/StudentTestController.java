@@ -36,6 +36,12 @@ public class StudentTestController {
     @Autowired
     JWTServiceImpl jwtService;
 
+    /**
+     * 根据邀请码获取试卷
+     * @param jsonObject
+     * @param request
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/getPaper")
     @RequiresRoles(value = {"user"})
@@ -45,12 +51,18 @@ public class StudentTestController {
         return testService.getPaper(code, userId);
     }
 
+    /**
+     * 获取未考试卷列表
+     * @param jsonObject
+     * @return
+     */
     @ResponseBody
     @RequestMapping("getUnTestedPapers")
     @RequiresRoles(value = {"user", "admin"}, logical = Logical.OR)
     public PageInfo<UntestedPaper> getUnTestedPapers(@RequestBody JSONObject jsonObject) {
         Integer pageNo = jsonObject.getInteger("pageNo");//第n页
-        Integer pageSize = jsonObject.getInteger("pageSize");//n跳数据
+        Integer pageSize = jsonObject.getInteger("pageSize");//n条数据
+        //开始分页
         PageHelper.startPage(pageNo, pageSize);
         Integer userId = jsonObject.getInteger("userId");
         //List<UntestedPaper> untestedPapers = testService.getUntestedPapers(userId);
@@ -58,18 +70,28 @@ public class StudentTestController {
         return pageInfo;
     }
 
+    /**
+     * 获取已考试卷列表
+     * @param jsonObject
+     * @return
+     */
     @ResponseBody
     @RequestMapping("getTestedPapers")
     @RequiresRoles(value = {"user", "admin"}, logical = Logical.OR)
     public PageInfo<TestedPaper> getTestedPapers(@RequestBody JSONObject jsonObject) {
         Integer pageNo = jsonObject.getInteger("pageNo");//第n页
-        Integer pageSize = jsonObject.getInteger("pageSize");//n跳数据
+        Integer pageSize = jsonObject.getInteger("pageSize");//n条数据
         PageHelper.startPage(pageNo, pageSize);
         Integer userId = jsonObject.getInteger("userId");
         PageInfo<TestedPaper> testedPapers = new PageInfo<>(testService.getTestedPapers(userId));
         return testedPapers;
     }
 
+    /**
+     * 查看考试了的试卷
+     * @param jsonObject
+     * @return
+     */
     @ResponseBody
     @RequestMapping("viewTestedPaper")
     @RequiresRoles(value = {"user", "admin"}, logical = Logical.OR)
@@ -81,6 +103,11 @@ public class StudentTestController {
         return map;
     }
 
+    /**
+     * 考试
+     * @param jsonObject
+     * @return
+     */
     @ResponseBody
     @RequestMapping("test")
     @RequiresRoles(value = {"user", "admin"}, logical = Logical.OR)
@@ -90,6 +117,10 @@ public class StudentTestController {
         return test;
     }
 
+    /**
+     * 交卷
+     * @param jsonObject
+     */
     @ResponseBody
     @RequestMapping("/submitPaper")
     @RequiresRoles(value = {"user", "admin"}, logical = Logical.OR)

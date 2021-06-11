@@ -29,6 +29,7 @@ public class MyExceptionHandler {
         if (e instanceof org.apache.shiro.authz.UnauthorizedException) {
             map.put("exception", e.toString());
             map.put("msg", "没有通过权限验证！暂无该权限");
+            logger.info(map.toString());
             return map;
         }
         if (e instanceof org.apache.shiro.authz.UnauthenticatedException) {
@@ -39,6 +40,7 @@ public class MyExceptionHandler {
             map.put("msg", "其他错误");
             return map;
         }
+        logger.info(map.toString());
         return map;
     }
 }

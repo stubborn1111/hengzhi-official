@@ -94,6 +94,9 @@
         <Logger name="com.hengzhi.controller" level="debug" additivity="false">
             <AppenderRef ref="Console"/>
         </Logger>
+        <Logger name="com.hengzhi.service.impl" level="info" additivity="false">
+            <AppenderRef ref="Console"/>
+        </Logger>
 
         <root level="info">
             <appender-ref ref="Console"/>
