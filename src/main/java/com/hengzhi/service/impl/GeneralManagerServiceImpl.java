@@ -29,7 +29,7 @@ public class GeneralManagerServiceImpl implements GeneralManagerService {
         Integer number =  generalManagerDao.SelectCountUnExam();
         return number;
     }
-
+    
     @Override
     public void approved(Integer messageId) {
         generalManagerDao.approved(messageId);
