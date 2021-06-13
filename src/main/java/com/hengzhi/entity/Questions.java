@@ -26,8 +26,10 @@ public class Questions {
     private String content;
     //答案内容
     private String answer;
-    //正确率
-    private String cRate;
+    //总人数
+    private Integer totalNumber;
+    //正确人数
+    private Integer correctNumber;
     //题目讲解
     private String description;
     //题目类型，0填空，1单选，2多选，3主观

@@ -1,11 +1,15 @@
 package com.hengzhi.service.impl;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.hengzhi.dao.StudentTestDao;
 import com.hengzhi.dto.paperAndTest.*;
 import com.hengzhi.entity.Questions;
 import com.hengzhi.service.StudentTestService;
 import com.hengzhi.utils.SelectTableUtils;
+import com.mysql.cj.xdevapi.JsonArray;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,17 +21,20 @@ import java.util.*;
  * @description
  * @Date 2021/5/23
  */
+@Slf4j
 @Service
 public class StudentTestServiceImpl implements StudentTestService {
     @Autowired
     StudentTestDao testDao;
 
     @Override
-    public Integer getPaper(String code) {
-        Integer paperId = testDao.selectPaperIdByCode(code);
-        if (paperId == null) return 0;
-        testDao.addUserPaper(paperId);
-        return 1;
+    public GetPaper getPaper(String code, Integer userId) {
+        GetPaper getPaper = testDao.selectPaperIdByCode(code);
+        if (getPaper == null) {
+            return new GetPaper();
+        }
+        testDao.addUserPaper(getPaper.getPaperId(), userId);
+        return getPaper;
     }
 
     @Override
@@ -42,30 +49,51 @@ public class StudentTestServiceImpl implements StudentTestService {
         return testedPapers;
     }
 
+    /**
+     * 查看已考试卷的内容
+     *
+     * @param paperId
+     * @param userId
+     * @return
+     */
     @Override
     public Map viewTestedPaper(Integer paperId, Integer userId) {
         Map map = new HashMap();
+        //根据试卷id获得试题信息：题号和类型
         List<QInfo> qInfo = testDao.getQInfo(paperId);
-        List<TestedQuestion> qList = new LinkedList<>();
+        List<TestedQuestion2> qList = new ArrayList<>();
         String tName;
         for (int i = 0; i < qInfo.size(); i++) {
+            //根据题目类型获得表名
             tName = SelectTableUtils.selectT(qInfo.get(i).getQType());
-            qList.add(testDao.getQuestion(qInfo.get(i).getQuestionId(), tName));
+            TestedQuestion question = testDao.getQuestion(qInfo.get(i).getQuestionId(), tName);
+            question.setQType(qInfo.get(i).getQType());
+            TestedQuestion2 question2 = question.transfer();
+            qList.add(question2);
+            //qList.add(testDao.getQuestion(qInfo.get(i).getQuestionId(),tName));
         }
+        //获得答题情况
         List<AnswerSituation> answerSituation = testDao.getAnswerSituation(paperId, userId);
-        PaperInformation paperInformation = testDao.getPaperInformation(paperId);
+        //获得试卷信息
+        PaperInformation paperInformation = testDao.getPaperInformation(paperId, userId);
         map.put("questionList", qList);
         map.put("answerList", answerSituation);
         map.put("PaperInformation", paperInformation);
         return map;
     }
 
+    /**
+     * 考试
+     * @param paperId
+     * @return
+     */
     @Override
     public Map test(Integer paperId) {
         Map map = new HashMap();
         List<QInfo> qInfo = testDao.getQInfo(paperId);
+        System.out.println(qInfo);
         List<TestQuestion> qList = new LinkedList<>();
-        String tName = new String();
+        String tName;
         for (int i = 0; i < qInfo.size(); i++) {
             tName = SelectTableUtils.selectT(qInfo.get(i).getQType());
             qList.add(new TestQuestion(qInfo.get(i).getQuestionId(), qInfo.get(i).getQType(), testDao.getTestQuestions(qInfo.get(i).getQuestionId(), tName)));
@@ -83,17 +111,21 @@ public class StudentTestServiceImpl implements StudentTestService {
      */
     @Override
     public boolean submitPaper(JSONObject jsonObject) {
-        List<QuestionAnswer> answerList = (List<QuestionAnswer>) jsonObject.get("answerList");
+        //答案列表
+        String text = JSONArray.toJSONString(jsonObject.get("answerList"));
+        List<QuestionAnswer> answerList = JSONArray.parseArray(text, QuestionAnswer.class);
         Integer userId = (Integer) jsonObject.get("userId");
-        Integer answerTime = (Integer) jsonObject.get("answerTime");
+        Integer answerTime = (Integer) jsonObject.get("answerTime");//答题所用时间
         Integer paperId = (Integer) jsonObject.get("paperId");
         //提交答案
         testDao.submitPaper(paperId, userId, answerList);
         //批改试卷
         List<QInfo> qInfo = testDao.getQInfo(paperId);//根据试卷id获得每题的题目id和类型
-        Integer sum = 0;
-        Integer score = 0;
+        Integer sum = 0;//总分
+        Integer score = 0;//每题得分
+        //开始循环批改
         for (int i = 0; i < qInfo.size(); i++) {
+            //题目信息
             Integer questionId = qInfo.get(i).getQuestionId();
             String qType = qInfo.get(i).getQType();
             String tName = SelectTableUtils.selectT(qType);
@@ -101,18 +133,31 @@ public class StudentTestServiceImpl implements StudentTestService {
             if ("0".equals(qType) || "3".equals(qType)) {
                 continue;
             } else {
-                //根据对应的题目id和数据库表名获取试卷的试题
+                //适用于单选和多选
+                //根据对应的题目id和数据库表名获取试题内容
                 TestedQuestion testedQuestion = testDao.getQuestion(questionId, tName);
-                String rScore = testedQuestion.getAnswer();
-                String uScore = answerList.get(i).getAnswer();
-                if (rScore.equals(uScore)) score = 5;
-                else if (!rScore.contains(uScore)) score = 0;
-                else score = (int) (uScore.length() / 1.0 / rScore.length());
-                testDao.setScore(score,paperId,userId,i+1);
+                String rAnswer = testedQuestion.getAnswer();//正确答案
+                String uAnswer = answerList.get(i).getAnswer();//用户答案
+                if (rAnswer.equals(uAnswer)) {
+                    score = 5;//完全正确
+                    //修改题目正确率，在试题表中修改并放到paper_content表中
+                    Integer updateNumber = testDao.updateNumber(questionId, tName);
+                    if (updateNumber == 0) log.info("修改正确率失败");
+                    else log.error("修改正确率成功");
+                } else {
+                    Integer updateNumberFalse = testDao.updateNumberFalse(questionId, tName);
+                    if (updateNumberFalse == 0) log.info("修改错误正确率失败");
+                    else log.error("修改错误正确率成功");
+                    if (!rAnswer.contains(uAnswer)) score = 0;//不包含，分数为0
+                    else score = (int) ((uAnswer.length() / 1.0 / rAnswer.length()) * 5);//按比例计算分数，取整
+                }
+                testDao.setScore(score, paperId, userId, i + 1);
                 sum += score;
             }
         }
-        testDao.setSum(sum,paperId,userId);
+        //提交总分和时间
+        System.out.println("sum:"+sum);
+        testDao.setSum(sum, paperId, userId,answerTime);
         return true;
     }
 }

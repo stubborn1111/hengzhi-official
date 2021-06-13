@@ -1,8 +1,10 @@
 package com.hengzhi.service.impl;
 
 import com.hengzhi.dao.UserDao;
+import com.hengzhi.dto.userBasic.UserInfo;
 import com.hengzhi.entity.User;
 import com.hengzhi.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
@@ -18,6 +20,7 @@ import java.util.Map;
  * @description
  * @Date 2021/6/2
  */
+@Slf4j
 @Service
 public class UserServiceImpl implements UserService {
     @Resource
@@ -57,5 +60,11 @@ public class UserServiceImpl implements UserService {
     public int submitForgetPassword(Integer studentId, String newPassword) {
         int i = userDao.submitRequiredPassword(studentId, newPassword);
         return i;
+    }
+
+    @Override
+    public UserInfo getUserInfo(Integer userId) {
+        UserInfo userInfo = userDao.getUserInfo(userId);
+        return userInfo;
     }
 }

@@ -10,6 +10,13 @@
         <result property="headImg" column="head_img"></result>
         <result property="required" column="required"></result>
     </resultMap>
+    <resultMap id="userInfo" type="com.hengzhi.dto.userBasic.UserInfo">
+        <result property="headImg" column="head_img"/>
+        <result property="name"  column="name"/>
+        <result property="userId" column="user_id"/>
+        <result property="studentId" column="student_id"/>
+        <result property="power" column="role"/>
+    </resultMap>
     <!--    根据学号和密码查询用户信息-->
     <select id="selectUserByStudentIdAndPassword" resultMap="user">
         select * from user
@@ -39,4 +46,8 @@
         SET required = #{newPassword}
         WHERE student_id= #{studentId}
     </update>
+    <select id="getUserInfo" resultMap="userInfo">
+        SELECT head_img,`name`,user_id,student_id,role FROM `user`
+        WHERE user_id =#{userId}
+    </select>
 </mapper>

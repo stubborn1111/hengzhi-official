@@ -21,7 +21,7 @@ public interface StudentTestDao {
      * @param code
      * @return
      */
-    Integer selectPaperIdByCode(String code);
+    GetPaper selectPaperIdByCode(String code);
 
     /**
      * 用户获得试卷
@@ -29,7 +29,7 @@ public interface StudentTestDao {
      * @param paperId
      * @return
      */
-    void addUserPaper(Integer paperId);
+    void addUserPaper(Integer paperId,Integer userId);
 
     /**
      * 获得用户未考试卷信息
@@ -53,7 +53,7 @@ public interface StudentTestDao {
      * @param paperId
      * @return
      */
-    PaperInformation getPaperInformation(Integer paperId);
+    PaperInformation getPaperInformation(Integer paperId,Integer userId);
 
     /**
      * 根据对应的题目id和数据库表名获取试卷的试题
@@ -128,6 +128,22 @@ public interface StudentTestDao {
      * @param userId
      * @return
      */
-    Integer setSum(Integer sum, Integer paperId, Integer userId);
+    Integer setSum(Integer sum, Integer paperId, Integer userId,Integer answerTime);
+
+    /**
+     * 题目正确，修改人数
+     * @param questionId
+     * @param tName
+     * @return
+     */
+    Integer updateNumber(Integer questionId,String tName);
+
+    /**
+     * 题目错误，修改人数
+     * @param questionId
+     * @param tName
+     * @return
+     */
+    Integer updateNumberFalse(Integer questionId,String tName);
 
 }
