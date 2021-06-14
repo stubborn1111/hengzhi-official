@@ -54,6 +54,7 @@ public class UserController {
         if (userDB != null) {
             String token = jwtService.generateJWTToken(userDB);
             response.setHeader("Authorization", token);
+            response.addHeader("Access-Control-Expose-Headers","Authorization");
             map.put("status", "success");
             return map;
         }
