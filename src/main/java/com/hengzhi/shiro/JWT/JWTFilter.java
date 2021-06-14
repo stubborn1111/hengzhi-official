@@ -104,8 +104,10 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
 
 
     public static void fillCorsHeader(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
-        httpServletResponse.setHeader("Access-control-Allow-Origin", httpServletRequest.getHeader("Origin"));
+        httpServletResponse.setHeader("Access-control-Allow-Origin","*");
+        httpServletResponse.setHeader("Access-Control-Max-Age", "3600");
         httpServletResponse.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS,PUT,DELETE");
         httpServletResponse.setHeader("Access-Control-Expose-Headers", "Authorization");
+        httpServletResponse.setHeader("Access-Control-Allow-Headers","Authorization,Content-Type,Access-Control-Expose-Headers");
     }
 }

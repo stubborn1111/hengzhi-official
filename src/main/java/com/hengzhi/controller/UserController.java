@@ -56,6 +56,7 @@ public class UserController {
             response.setHeader("Authorization", token);
             response.addHeader("Access-Control-Expose-Headers","Authorization");
             map.put("status", "success");
+            map.put("power",userDB.getRole());
             return map;
         }
         log.info("/user/login"+map.toString());
@@ -73,7 +74,7 @@ public class UserController {
     @ResponseBody
     @Security
     @RequiresRoles(value = {"user", "admin"}, logical = Logical.OR)
-    public Map<String, String> updateHeadImg(@RequestParam Integer studentId, @RequestParam(value = "headImage", required = false) MultipartFile headImage, HttpServletRequest request) {
+    public Map<String, String> updateHeadImg(@RequestParam(value = "headImage", required = false) MultipartFile headImage, HttpServletRequest request) {
         Map<String, String> map = new HashMap<>();
         //如果文件不为空
         if (!headImage.isEmpty()) {
@@ -92,7 +93,7 @@ public class UserController {
                 headImage.transferTo(file);
                 // 将图片名字写入数据库
                 User user = new User();
-                user.setStudentId(studentId);
+                user.setStudentId(jwtService.getStudentId(request));
                 user.setHeadImg(newFileName);
                 userService.updateHeadImg(user);
             } catch (IllegalStateException | IOException e) {
@@ -121,7 +122,7 @@ public class UserController {
     @RequiresRoles(value = {"user", "admin"}, logical = Logical.OR)
     public Map<String, String> updatePassword(@RequestBody JSONObject jsonObject, HttpServletRequest request) {
         Map<String, String> map = new HashMap<>();
-        Integer studentId = jsonObject.getInteger("studentId");
+        Integer studentId = jwtService.getStudentId(request);
         String password = jsonObject.getString("password");
         String newPassword = jsonObject.getString("newPassword");
         Integer realSId = jwtService.getStudentId(request);
@@ -150,7 +151,7 @@ public class UserController {
      */
     @ResponseBody
     @RequestMapping("/forgetPassword")
-    @RequiresRoles(value = {"user", "admin"}, logical = Logical.OR)
+    @Security(false)
     public Map<String, String> submitForgetPassword(@RequestBody JSONObject jsonObject) {
         Map<String, String> map = new HashMap<>();
         Integer studentId = jsonObject.getInteger("studentId");
@@ -179,7 +180,7 @@ public class UserController {
         //可能发生两种情况的异常，jwt失效或没有
         try{
             Integer userId = jwtService.getUserId(request);
-             UserInfo userInfo = new UserInfo();
+            UserInfo userInfo = new UserInfo();
             if (userId!=null){
                 userInfo = userService.getUserInfo(userId);
                 return userInfo;

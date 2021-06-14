@@ -13,4 +13,3 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @SpringBootApplication
 public class HengzhiOffcialApplication extends SpringBootServletInitializer {
 
-}

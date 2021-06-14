@@ -110,11 +110,10 @@ public class StudentTestServiceImpl implements StudentTestService {
      * @return
      */
     @Override
-    public boolean submitPaper(JSONObject jsonObject) {
+    public boolean submitPaper(JSONObject jsonObject,Integer userId) {
         //答案列表
         String text = JSONArray.toJSONString(jsonObject.get("answerList"));
         List<QuestionAnswer> answerList = JSONArray.parseArray(text, QuestionAnswer.class);
-        Integer userId = (Integer) jsonObject.get("userId");
         Integer answerTime = (Integer) jsonObject.get("answerTime");//答题所用时间
         Integer paperId = (Integer) jsonObject.get("paperId");
         //提交答案
