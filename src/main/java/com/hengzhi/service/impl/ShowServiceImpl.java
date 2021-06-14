@@ -3,6 +3,7 @@ package com.hengzhi.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.hengzhi.dao.GeneralManagerDao;
 import com.hengzhi.dao.ShowDao;
+import com.hengzhi.entity.Data;
 import com.hengzhi.entity.Introduction;
 import com.hengzhi.entity.Message;
 import com.hengzhi.entity.Notice;
@@ -58,6 +59,9 @@ public class ShowServiceImpl implements ShowService {
     public void addFile(int userId,String description,String url){
         showDao.addFile(userId,description,url);
     }
-
+    @Override
+    public List<Data> showFile(){
+        return showDao.showFile();
+    }
 
 }
