@@ -150,7 +150,7 @@ public class UserController {
      */
     @ResponseBody
     @RequestMapping("/forgetPassword")
-    @RequiresRoles(value = {"user", "admin"}, logical = Logical.OR)
+    @Security(false)
     public Map<String, String> submitForgetPassword(@RequestBody JSONObject jsonObject) {
         Map<String, String> map = new HashMap<>();
         Integer studentId = jsonObject.getInteger("studentId");

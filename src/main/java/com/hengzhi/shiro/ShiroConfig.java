@@ -45,7 +45,7 @@ public class ShiroConfig {
         map.put("/show/addMessages","anon");
         map.put("/show/showNotice","anon");
         map.put("/show/showIntroduction","anon");
-
+        map.put("/user/forgetPassword","anon");
         map.put("/user/getUserInfo", "anon");
         map.put("/headImage/**", "anon");
         map.put("/**", "jwt");
