@@ -22,8 +22,5 @@ public class Introduction {
     private String front;
     //后端简介
     private String behind;
-    //图1路径
-    private String img1;
-    //图2路径
-    private String img2;
+
 }

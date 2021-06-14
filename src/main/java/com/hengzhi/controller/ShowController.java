@@ -1,20 +1,33 @@
 package com.hengzhi.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.hengzhi.entity.Introduction;
 import com.hengzhi.entity.Message;
+import com.hengzhi.entity.Notice;
+import com.hengzhi.entity.User;
 import com.hengzhi.secutity.Security;
 import com.hengzhi.service.GeneralManagerService;
 import com.hengzhi.service.ManagerPaperService;
 import com.hengzhi.service.ShowService;
+import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 @RequestMapping("/show")
 @Controller
@@ -49,7 +62,117 @@ public class ShowController {
         String content=jsonObject.getString("content");
         showService.InsertMessages(content);
     }
-    
+//    发布公告
+    @ResponseBody
+    @RequestMapping("/addNotice")
+    @RequiresRoles(value = {"super"})
+    public void addNotice(@RequestBody JSONObject jsonObject){
+        int userId=jsonObject.getInteger("userId");
+        String content=jsonObject.getString("content");
+        showService.insertNotice(content,userId);
     }
+//    显示公告
+    @RequestMapping("/showNotice")
+    @ResponseBody
+    @Security(false)
+    public List<Notice> showNotice(){
+        return showService.showNotice();
+    }
+    //    修改简介
+    @ResponseBody
+    @RequestMapping("/updateIntroduction")
+    @RequiresRoles(value = {"super"})
+    public void updateIntroduction(@RequestParam(value = "teamIntroduction")String teamIntroduction,@RequestParam(value = "front")String front,@RequestParam(value = "behind")String behind, HttpServletRequest request){
+            showService.updateIntroduction(teamIntroduction,behind,front);
+    }
+
+//    显示简介
+    @RequestMapping("/showIntroduction")
+    @ResponseBody
+    @Security(false)
+    public Introduction showIntroduction(){
+        return showService.showIntroduction();
+    }
+//    上传资料
+    @ResponseBody
+    @RequestMapping("/uploadFile")
+    @RequiresRoles(value = {"admin"})
+    public void uploadFile(@RequestParam(value = "userId")int userId,@RequestParam(value = "description")String description, @RequestParam(value = "file",required = false)MultipartFile file,HttpServletRequest request){
+        if (!file.isEmpty()) {
+            String filePath = request.getServletContext().getRealPath("/file");
+            System.out.println(request.getContextPath());
+            String originalFilename = file.getOriginalFilename();
+            // UUID随机重命名
+           String url = (UUID.randomUUID() + originalFilename
+                    .substring(originalFilename.indexOf("."))).replace("-", "");
+            // 新文件
+            File file1 = new File(filePath, url);
+            // 将文件写入磁盘
+            try {
+                if (!file1.exists()) {
+                    file1.mkdirs();
+                }
+                file.transferTo(file1);
+
+            } catch (IllegalStateException | IOException e) {
+                e.printStackTrace();
+            }
+            showService.addFile(userId,description,url);
+    }
+    }
+    @RequestMapping("/downloadFile")
+    @ResponseBody
+
+    @RequiresRoles(value = {"admin","user","super"}, logical = Logical.OR)
+    public String downloadFile(@RequestParam(value = "fileName")String fileName, HttpServletResponse response,HttpServletRequest request) throws IOException {
+        String filePath = request.getServletContext().getRealPath("/file");
+            File file = new File(filePath+"/"+fileName);
+            System.out.println(file);
+            if (file.exists()) {
+                response.reset();
+                response.setCharacterEncoding("UTF-8");
+                response.setContentType("application/force-download");// 设置强制下载不打开
+                response.addHeader("Content-Disposition", "attachment;fileName=" + fileName);// 设置文件名
+                byte[] buffer = new byte[2048];
+                FileInputStream fis = null;
+                BufferedInputStream bis = null;
+                try {
+                    fis = new FileInputStream(file);
+                    bis = new BufferedInputStream(fis);
+                    OutputStream os = response.getOutputStream();
+                    int i = bis.read(buffer);
+                    while (i>0) {
+                        os.write(buffer, 0, i);
+                        i = bis.read(buffer);
+                    }
+                    return "下载成功";
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                finally { // 做关闭操作
+                    if (bis != null) {
+                        try {
+                            bis.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    if (fis != null) {
+                        try {
+                            fis.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+
+        return "下载失败";
+
+
+    }
+
+    }
+
 
 
