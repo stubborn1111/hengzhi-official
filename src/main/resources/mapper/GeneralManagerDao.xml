@@ -37,4 +37,5 @@
         set whether_review = 1,whether_through = 0
         where message_id = #{messageId}
     </update>
+
 </mapper>
