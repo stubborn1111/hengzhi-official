@@ -14,6 +14,7 @@ import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -28,6 +29,7 @@ import java.util.Map;
  * @description 试卷和考试控制类
  * @Date 2021/5/29
  */
+@CrossOrigin(origins = "*",maxAge = 3600)
 @RequestMapping("/studentTest")
 @Controller
 public class StudentTestController {
@@ -48,7 +50,7 @@ public class StudentTestController {
     public GetPaper getPaper(@RequestBody JSONObject jsonObject, HttpServletRequest request) {
         String code = jsonObject.getString("code");
         Integer userId = jwtService.getUserId(request);
-        return testService.getPaper(code, userId);
+        return  testService.getPaper(code, userId);
     }
 
     /**
@@ -59,12 +61,12 @@ public class StudentTestController {
     @ResponseBody
     @RequestMapping("getUnTestedPapers")
     @RequiresRoles(value = {"user", "admin"}, logical = Logical.OR)
-    public PageInfo<UntestedPaper> getUnTestedPapers(@RequestBody JSONObject jsonObject) {
+    public PageInfo<UntestedPaper> getUnTestedPapers(@RequestBody JSONObject jsonObject,HttpServletRequest request) {
         Integer pageNo = jsonObject.getInteger("pageNo");//第n页
         Integer pageSize = jsonObject.getInteger("pageSize");//n条数据
         //开始分页
         PageHelper.startPage(pageNo, pageSize);
-        Integer userId = jsonObject.getInteger("userId");
+        Integer userId = jwtService.getUserId(request);
         //List<UntestedPaper> untestedPapers = testService.getUntestedPapers(userId);
         PageInfo<UntestedPaper> pageInfo = new PageInfo<>(testService.getUntestedPapers(userId));
         return pageInfo;
@@ -78,11 +80,11 @@ public class StudentTestController {
     @ResponseBody
     @RequestMapping("getTestedPapers")
     @RequiresRoles(value = {"user", "admin"}, logical = Logical.OR)
-    public PageInfo<TestedPaper> getTestedPapers(@RequestBody JSONObject jsonObject) {
+    public PageInfo<TestedPaper> getTestedPapers(@RequestBody JSONObject jsonObject,HttpServletRequest request) {
         Integer pageNo = jsonObject.getInteger("pageNo");//第n页
         Integer pageSize = jsonObject.getInteger("pageSize");//n条数据
         PageHelper.startPage(pageNo, pageSize);
-        Integer userId = jsonObject.getInteger("userId");
+        Integer userId = jwtService.getUserId(request);
         PageInfo<TestedPaper> testedPapers = new PageInfo<>(testService.getTestedPapers(userId));
         return testedPapers;
     }
@@ -95,9 +97,9 @@ public class StudentTestController {
     @ResponseBody
     @RequestMapping("viewTestedPaper")
     @RequiresRoles(value = {"user", "admin"}, logical = Logical.OR)
-    public Map viewTestedPaper(@RequestBody JSONObject jsonObject) {
+    public Map viewTestedPaper(@RequestBody JSONObject jsonObject,HttpServletRequest request) {
         Integer paperId = jsonObject.getInteger("paperId");
-        Integer userId = jsonObject.getInteger("userId");
+        Integer userId = jwtService.getUserId(request);
         Map map = testService.viewTestedPaper(paperId, userId);
         System.out.println(map);
         return map;
@@ -124,8 +126,9 @@ public class StudentTestController {
     @ResponseBody
     @RequestMapping("/submitPaper")
     @RequiresRoles(value = {"user", "admin"}, logical = Logical.OR)
-    public void submitPaper(@RequestBody JSONObject jsonObject) {
-        testService.submitPaper(jsonObject);
+    public void submitPaper(@RequestBody JSONObject jsonObject,HttpServletRequest request) {
+        Integer userId = jwtService.getUserId(request);
+        testService.submitPaper(jsonObject,userId);
     }
 
 }

@@ -24,7 +24,7 @@ public interface StudentTestService {
 
     Map test(Integer paperId);
 
-    boolean submitPaper(JSONObject jsonObject);
+    boolean submitPaper(JSONObject jsonObject,Integer userId);
 
 
 }
