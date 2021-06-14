@@ -3,7 +3,9 @@ package com.hengzhi.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.hengzhi.dao.GeneralManagerDao;
 import com.hengzhi.dao.ShowDao;
+import com.hengzhi.entity.Introduction;
 import com.hengzhi.entity.Message;
+import com.hengzhi.entity.Notice;
 import com.hengzhi.service.GeneralManagerService;
 import com.hengzhi.service.ShowService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +37,26 @@ public class ShowServiceImpl implements ShowService {
     @Override
     public void InsertMessages(String content){
         showDao.insertMessages(content);
+    }
+    @Override
+    public void insertNotice(String notice,int userId){
+        showDao.insertNotice(userId,notice);
+    }
+    @Override
+    public List<Notice> showNotice(){
+        return showDao.showNotice();
+    }
+    @Override
+    public void updateIntroduction(String teamIntroduction,String behind,String front){
+        showDao.updateIntroduction(teamIntroduction,behind,front);
+    }
+    @Override
+    public Introduction showIntroduction(){
+        return showDao.showIntroduction();
+    }
+    @Override
+    public void addFile(int userId,String description,String url){
+        showDao.addFile(userId,description,url);
     }
 
 

@@ -8,6 +8,12 @@
         <result property="whetherReview" column="whether_review"/>
         <result property="whetherThrough" column="whether_through"/>
     </resultMap>
+    <resultMap id="notice" type="com.hengzhi.entity.Notice">
+        <id property="noticeId" column="notice_id"/>
+        <result property="time" column="time"/>
+        <result property="content" column="content"/>
+        <result property="userId" column="user_id"/>
+    </resultMap>
 
 
 <!--    返回已经通过审核的留言-->
@@ -26,5 +32,22 @@
 <!--     发布留言-->
     <insert id="insertMessages" >
         insert into message(content, whether_through,whether_review) values (#{content},0,0)
+    </insert>
+<!--    发布公告-->
+    <insert id="insertNotice">
+        insert into notice(user_id, content) values (#{userId},#{content})
+    </insert>
+<!--    显示公告-->
+    <select id="showNotice" resultType="notice" >
+        SELECT * FROM notice ORDER BY time DESC
+    </select>
+    <update id="updateIntroduction">
+        update introduction set team_introduction=#{teamIntroduction},front=#{front},behind=#{behind}
+    </update>
+    <select id="showIntroduction" resultType="com.hengzhi.entity.Introduction" >
+        SELECT * FROM introduction
+    </select>
+    <insert id="addFile">
+        insert into data(user_id, description, url) values (#{userId},#{description},#{url})
     </insert>
 </mapper>
