@@ -67,6 +67,7 @@ public class GeneralManagerController {
         map.put("message","审核不通过");
         return  map;
     }
+    
 
 
 }
