@@ -14,6 +14,7 @@
         select *
         from message
         where whether_review = 0
+        and whether_through = 0
     </select>
 
 <!--    返回未审核的留言列表数-->
@@ -21,6 +22,7 @@
         select count(*)
         from message
         where whether_review = 0
+        and whether_through = 0
     </select>
 
 <!--   通过审核-->
