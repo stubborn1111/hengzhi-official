@@ -1,5 +1,6 @@
 package com.hengzhi.dao;
 
+import com.hengzhi.entity.Data;
 import com.hengzhi.entity.Introduction;
 import com.hengzhi.entity.Message;
 import com.hengzhi.entity.Notice;
@@ -35,4 +36,5 @@ public interface ShowDao {
      void updateIntroduction(String teamIntroduction,String behind,String front);
      Introduction showIntroduction();
      void addFile(int userId,String description,String url);
+     List<Data> showFile();
 }
