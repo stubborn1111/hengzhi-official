@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -65,7 +66,6 @@ public class UserController {
 
     /**
      * 修改头像
-     * @param studentId
      * @param headImage
      * @param request
      * @return
@@ -192,4 +192,20 @@ public class UserController {
             return new UserInfo();
         }
     }
+
+    /**
+     * 自动登录
+     * @param request
+     * @return
+     * @throws UnsupportedEncodingException
+     */
+    @ResponseBody
+    @RequestMapping("/verify")
+    @Security(false)
+    public boolean autoLogin(HttpServletRequest request) throws UnsupportedEncodingException {
+        //可能发生两种情况的异常，jwt失效或没有
+        boolean msg = jwtService.verifyJWTToken(request.getHeader("token"));
+        return msg;
+    }
+
 }

@@ -31,7 +31,7 @@ public class JWTUtils {
     public static String sign(User user) {
         try {
             Calendar c = Calendar.getInstance();
-            c.add(Calendar.DATE, 7);//默认7天过期
+            c.add(Calendar.DATE, 1);//默认7天过期
             Algorithm algorithm = Algorithm.HMAC256(SECRET);
             // 附带username信息
             return JWT.create()
