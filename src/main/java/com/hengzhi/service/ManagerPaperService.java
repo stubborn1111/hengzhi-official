@@ -1,9 +1,6 @@
 package com.hengzhi.service;
 
-import com.hengzhi.dto.ManagerPaper.ChangePapers;
-import com.hengzhi.dto.ManagerPaper.ScoreInformation;
-import com.hengzhi.dto.ManagerPaper.UnChangePapers;
-import com.hengzhi.dto.ManagerPaper.UnFinishPapers;
+import com.hengzhi.dto.ManagerPaper.*;
 
 import java.util.List;
 
@@ -36,4 +33,8 @@ public interface ManagerPaperService {
     计算考试人数
      */
     int selectSumPeople(Integer paperId);
+    /*
+    修改未考试卷信息
+     */
+    void unTestPaper(UnTestPaper unTestPaper);
 }

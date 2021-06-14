@@ -1,9 +1,6 @@
 package com.hengzhi.dao;
 
-import com.hengzhi.dto.ManagerPaper.ChangePapers;
-import com.hengzhi.dto.ManagerPaper.ScoreInformation;
-import com.hengzhi.dto.ManagerPaper.UnChangePapers;
-import com.hengzhi.dto.ManagerPaper.UnFinishPapers;
+import com.hengzhi.dto.ManagerPaper.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -32,13 +29,17 @@ public interface ManagerPaperDao {
      /*
      考试试卷信息
       */
-     List<ScoreInformation> selectScoreInformation(Integer paperId);
-     /*
-     计算每一张试卷的总分
-      */
-     int selectSumScore(Integer paperId);
-     /*
-     计算考试人数
-      */
-     int selectSumPeople(Integer paperId);
+    List<ScoreInformation> selectScoreInformation(Integer paperId);
+    /*
+    计算每一张试卷的总分
+     */
+    int selectSumScore(Integer paperId);
+    /*
+    计算考试人数
+     */
+    int selectSumPeople(Integer paperId);
+    /*
+    修改未考试卷信息
+     */
+    void unTestPaper(UnTestPaper unTestPaper);
 }

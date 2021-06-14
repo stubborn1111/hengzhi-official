@@ -42,6 +42,7 @@
             <result property="name" column="name"/>
         </collection>
     </resultMap>
+
 <!--    待改试卷数据-->
     <select id="selectUnChange" resultMap="UnChangePapers">
         select *
@@ -94,4 +95,11 @@
         where paper_id = #{paperId}
         and whether_correct = 1
     </select>
+
+<!--   修改未考试试卷信息 -->
+    <update id="unTestPaper" parameterType="com.hengzhi.dto.ManagerPaper.UnTestPaper">
+        update papers
+        set `name`=#{paperName},`begin_time`=#{beginTime},`end_time`=#{deadLine},`description`=#{description}
+        where paper_id=#{paperId}
+    </update>
 </mapper>

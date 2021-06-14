@@ -2,10 +2,7 @@ package com.hengzhi.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.hengzhi.dto.ManagerPaper.ChangePapers;
-import com.hengzhi.dto.ManagerPaper.ScoreInformation;
-import com.hengzhi.dto.ManagerPaper.UnChangePapers;
-import com.hengzhi.dto.ManagerPaper.UnFinishPapers;
+import com.hengzhi.dto.ManagerPaper.*;
 import com.hengzhi.service.ManagerPaperService;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresRoles;
@@ -84,6 +81,18 @@ public class ManagerPaperController {
         Integer count = managerPaperService.selectSumPeople(paperId);
         double average = (sum*1.0)/count;
         map.put("average",average);
+        return map;
+    }
+    /*
+    修改未考试卷信息
+     */
+    @ResponseBody
+    @RequestMapping("/updateUnTestPaper")
+    @RequiresRoles(value = {"admin"})
+    public Map updateUnTestPaper(@RequestBody UnTestPaper unTestPaper){
+        managerPaperService.unTestPaper(unTestPaper);
+        Map map = new HashMap();
+        map.put("message","成功修改");
         return map;
     }
 }
