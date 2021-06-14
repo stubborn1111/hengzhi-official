@@ -41,12 +41,13 @@ public class ShowController {
         }
         return map;
     }
+//    增加留言
     @RequestMapping("/addMessages")
     @ResponseBody
     @Security(false)
     public void addMessages(@RequestBody JSONObject jsonObject) {
         String content=jsonObject.getString("content");
-
+        showService.InsertMessages(content);
     }
     
     }
