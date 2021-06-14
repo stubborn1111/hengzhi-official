@@ -120,56 +120,40 @@ public class ShowController {
             showService.addFile(userId,description,url);
     }
     }
+//    文件下载
     @RequestMapping("/downloadFile")
     @ResponseBody
-
     @RequiresRoles(value = {"admin","user","super"}, logical = Logical.OR)
     public String downloadFile(@RequestParam(value = "fileName")String fileName, HttpServletResponse response,HttpServletRequest request) throws IOException {
         String filePath = request.getServletContext().getRealPath("/file");
             File file = new File(filePath+"/"+fileName);
-            System.out.println(file);
-            if (file.exists()) {
-                response.reset();
-                response.setCharacterEncoding("UTF-8");
-                response.setContentType("application/force-download");// 设置强制下载不打开
-                response.addHeader("Content-Disposition", "attachment;fileName=" + fileName);// 设置文件名
-                byte[] buffer = new byte[2048];
-                FileInputStream fis = null;
-                BufferedInputStream bis = null;
-                try {
-                    fis = new FileInputStream(file);
-                    bis = new BufferedInputStream(fis);
-                    OutputStream os = response.getOutputStream();
-                    int i = bis.read(buffer);
-                    while (i>0) {
-                        os.write(buffer, 0, i);
-                        i = bis.read(buffer);
-                    }
-                    return "下载成功";
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                finally { // 做关闭操作
-                    if (bis != null) {
-                        try {
-                            bis.close();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    if (fis != null) {
-                        try {
-                            fis.close();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            }
 
-        return "下载失败";
+        if (!file.exists()) {
+            response.sendError(404, "File not found!");
+            return "error";
+        }
+        BufferedInputStream br = new BufferedInputStream(new FileInputStream(file));
+        byte[] buf = new byte[1024];
+        int len = 0;
 
+        response.reset(); // 非常重要
+         // 纯下载方式
+            response.setContentType("application/x-msdownload");
+            response.setHeader("Content-Disposition", "attachment; filename=" + file.getName());
 
+        OutputStream out = response.getOutputStream();
+        while ((len = br.read(buf)) > 0)
+            out.write(buf, 0, len);
+        br.close();
+        out.close();
+       return "success";
+    }
+//    资料列表
+    @RequestMapping("/showFile")
+    @ResponseBody
+    @RequiresRoles(value = {"admin","user","super"}, logical = Logical.OR)
+    public List showFile(){
+        return showService.showFile();
     }
 
     }

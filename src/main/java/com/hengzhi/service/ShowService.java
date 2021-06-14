@@ -1,5 +1,6 @@
 package com.hengzhi.service;
 
+import com.hengzhi.entity.Data;
 import com.hengzhi.entity.Introduction;
 import com.hengzhi.entity.Message;
 import com.hengzhi.entity.Notice;
@@ -22,4 +23,5 @@ public interface ShowService {
     public void updateIntroduction(String teamIntroduction,String behind,String front);
     public Introduction showIntroduction();
     public void addFile(int userId,String description,String url);
+    public List<Data> showFile();
 }
