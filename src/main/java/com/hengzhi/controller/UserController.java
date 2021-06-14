@@ -28,7 +28,7 @@ import java.util.UUID;
  * @Date 2021/5/22
  */
 @Slf4j
-@CrossOrigin
+@CrossOrigin(origins = "*",maxAge = 3600)
 @RequestMapping("/user")
 @RestController
 public class UserController {
