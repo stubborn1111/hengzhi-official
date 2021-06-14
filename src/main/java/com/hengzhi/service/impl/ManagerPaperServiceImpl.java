@@ -2,6 +2,7 @@ package com.hengzhi.service.impl;
 
 import com.hengzhi.dao.ManagerPaperDao;
 import com.hengzhi.dto.ManagerPaper.ChangePapers;
+import com.hengzhi.dto.ManagerPaper.ScoreInformation;
 import com.hengzhi.dto.ManagerPaper.UnChangePapers;
 import com.hengzhi.dto.ManagerPaper.UnFinishPapers;
 import com.hengzhi.service.ManagerPaperService;
@@ -38,5 +39,23 @@ public class ManagerPaperServiceImpl implements ManagerPaperService {
     public List<UnFinishPapers> selectUnFinish() {
         List<UnFinishPapers> list = managerPaperDao.selectUnFinish();
         return list;
+    }
+
+    @Override
+    public List<ScoreInformation> selectScoreInformation(Integer paperId) {
+        List<ScoreInformation> scoreInformations = managerPaperDao.selectScoreInformation(paperId);
+        return scoreInformations;
+    }
+
+    @Override
+    public int selectSumScore(Integer paperId) {
+        Integer sum = managerPaperDao.selectSumScore(paperId);
+        return sum;
+    }
+
+    @Override
+    public int selectSumPeople(Integer paperId) {
+        Integer count = managerPaperDao.selectSumPeople(paperId);
+        return count;
     }
 }

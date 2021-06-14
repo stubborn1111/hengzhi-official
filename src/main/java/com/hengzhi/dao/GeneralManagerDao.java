@@ -26,12 +26,5 @@ public interface GeneralManagerDao {
     审核不通过
      */
     void rejectReview(Integer messageId);
-//    /*
-//    返回通过的留言列表
-//   */
-//    List<Message> selectThroughMessages();
-//    /*
-//    返回通过的留言数目
-//     */
-//    int selectCountThroughMessages();
+
 }
