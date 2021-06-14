@@ -32,6 +32,16 @@
         <result property="code" column="code"/>
         <result property="description" column="description"/>
     </resultMap>
+    <resultMap id="ScoreInformation" type="com.hengzhi.dto.ManagerPaper.ScoreInformation">
+        <result property="userId" column="user_id"/>
+        <result property="score" column="score"/>
+        <result property="paperId" column="paper_id"/>
+        <result property="whetherCorrect" column="whether_correct"/>
+        <collection property="userScoreInformationList" ofType="com.hengzhi.dto.ManagerPaper.UserScoreInformation">
+            <id property="userId" column="user_id"/>
+            <result property="name" column="name"/>
+        </collection>
+    </resultMap>
 <!--    待改试卷数据-->
     <select id="selectUnChange" resultMap="UnChangePapers">
         select *
@@ -59,5 +69,29 @@
         select *
         from papers
         where begin_time &lt;&gt; NOW();
+    </select>
+
+<!--试卷成绩信息-->
+    <select id="selectScoreInformation" resultMap="ScoreInformation">
+        select *
+        from user_paper as u
+        join user
+        where paper_id = #{paperId}
+        and u.user_id = user.user_id
+        and whether_correct = 1
+    </select>
+    <!--计算每一张试卷的总分-->
+    <select id="selectSumScore" resultType="int">
+        select sum(score)
+        from user_paper
+        where paper_id = #{paperId}
+        and whether_correct = 1
+    </select>
+    <!--计算考试人数-->
+    <select id="selectSumPeople" resultType="int">
+        select count(score)
+        from user_paper
+        where paper_id = #{paperId}
+        and whether_correct = 1
     </select>
 </mapper>
