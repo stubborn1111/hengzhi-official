@@ -42,8 +42,12 @@ public class ShowController {
         Integer size = jsonObject.getInteger("size");
         Map map = new HashMap();
         List<Message> list = showService.selectThroughMes(page,size);
-        map.put("listMessage",list);
         Integer TotalNumber = showService.selectCountThroughMes();
+        Double all= Math.ceil((float)TotalNumber/size);
+        int allP=all.intValue();
+        if(page<=allP)
+        map.put("listMessage",list);
+        else map.put("listMessage",null);
         map.put("TotalNumber",TotalNumber);
         if(TotalNumber<size){
             map.put("pagesSize",1);

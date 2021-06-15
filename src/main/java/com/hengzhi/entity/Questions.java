@@ -34,4 +34,5 @@ public class Questions {
     private String description;
     //题目类型，0填空，1单选，2多选，3主观
     private String qType;
+    private double cRate;
 }
