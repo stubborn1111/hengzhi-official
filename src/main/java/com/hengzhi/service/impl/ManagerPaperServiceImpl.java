@@ -123,4 +123,15 @@ public class ManagerPaperServiceImpl implements ManagerPaperService {
     public void updateAnswerPaper(Integer score, Integer paperId, Integer userId, Integer qNumber) {
         managerPaperDao.updateAnswerPaper(score,paperId,userId,qNumber);
     }
+
+    @Override
+    public Integer selectSum1(Integer userId, Integer paperId) {
+        Integer sum = managerPaperDao.selectSum1(userId,paperId);
+        return sum;
+    }
+
+    @Override
+    public void updateSum(Integer score, Integer userId, Integer paperId) {
+        managerPaperDao.updateSum(score,userId,paperId);
+    }
 }

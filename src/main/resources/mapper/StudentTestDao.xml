@@ -159,4 +159,9 @@
         WHERE paper_id=#{paperId}
         AND user_id = #{userId}
     </select>
+    <update id="updateCRate">
+        update ${tName}
+        set c_rate=#{cRate}
+        where question_id =#{questionId}
+    </update>
 </mapper>

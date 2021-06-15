@@ -25,6 +25,7 @@ import java.util.List;
 @RunWith(SpringRunner.class)
 
 @SpringBootTest
+@RunWith(SpringRunner.class)
 @WebAppConfiguration
 public class StudenTestTests {
     @Resource
@@ -209,6 +210,11 @@ public class StudenTestTests {
 //        list.add("123");
         mybatisData.setList(list);
         System.out.println(makePaperDao.findQuestionByTag1(list));
+    }
+
+    @Test
+    public void test15(){
+      studentTestDao.updateCRate(2.33,"questions_fill",1);
     }
 
 }

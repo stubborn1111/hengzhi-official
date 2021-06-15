@@ -152,4 +152,6 @@ public interface StudentTestDao {
      */
     Integer updateNumberFalse(Integer questionId,String tName);
 
+    Integer updateCRate(Double cRate,String tName,Integer questionId);
+
 }
