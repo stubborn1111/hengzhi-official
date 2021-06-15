@@ -9,19 +9,19 @@ public interface ManagerPaperService {
     /*
     待改试卷数据
      */
-    List<UnChangePapers> selectUnChange(Integer page,Integer size);
+    List<UnChangePapers> selectUnChange(Integer page,Integer size,Integer userId);
     /*
     待改试卷的份数
      */
-    int selectUnChangeNumber();
+    int selectUnChangeNumber(Integer userId);
     /*
      已改试卷数据
       */
-    List<ChangePapers> selectChange(Integer page,Integer size);
+    List<ChangePapers> selectChange(Integer page,Integer size,Integer userId);
     /*
     已改数据份数
      */
-    Integer selectChangeNumber();
+    Integer selectChangeNumber(Integer userId);
     /*
       未考试卷信息
        */
