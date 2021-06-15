@@ -1,7 +1,11 @@
 package com.hengzhi.service.impl;
 
 import com.hengzhi.dao.MakePaperDao;
+import com.hengzhi.dao.UserDao;
+import com.hengzhi.dto.paperAndTest.QInfo;
+import com.hengzhi.dto.paperAndTest.ShowQuestions;
 import com.hengzhi.dto.paperAndTest.Tag;
+import com.hengzhi.dto.userBasic.UserInfo;
 import com.hengzhi.entity.*;
 import com.hengzhi.service.MakePaperService;
 import com.hengzhi.utils.SelectTableUtils;
@@ -16,13 +20,15 @@ public class MakePaperServiceImpl implements MakePaperService {
 
     @Autowired
     MakePaperDao makePaperDao;
+    @Autowired
+    UserDao userDao;
     @Override
     public void addQuestions(String type,String kind,int userId,String content,String answer,String description){
        String qType= SelectTableUtils.selectT(type);
        makePaperDao.addQuestions(qType,kind, userId, content, answer, description);
     }
     @Override
-    public List<Questions> showQuestions() {
+    public List<ShowQuestions> showQuestions() {
         List<Questions> list = makePaperDao.showQuestions1();
         for(int i=0;i<list.size();i++){
             list.get(i).setQType("0");
@@ -45,8 +51,26 @@ public class MakePaperServiceImpl implements MakePaperService {
             Questions questions= (Questions) list3.get(m);
             list.add(questions);
         }
+        List<ShowQuestions> list4=new ArrayList<>();
+        for(int n=0;n<list.size();n++){
+            Questions questions=list.get(n);
+            int userId=questions.getUserId();
+            UserInfo user=userDao.getUserInfo(userId);
+            ShowQuestions showQuestions=new ShowQuestions();
+            showQuestions.setUserName(user.getName());
+            showQuestions.setAnswer(questions.getAnswer());
+            showQuestions.setContent(questions.getContent());
+            showQuestions.setCorrectNumber(questions.getCorrectNumber());
+            showQuestions.setCRate(questions.getCRate());
+            showQuestions.setDescription(questions.getDescription());
+            showQuestions.setKind(questions.getKind());
+            showQuestions.setQType(questions.getQType());
+            showQuestions.setQuestionId(questions.getQuestionId());
+            showQuestions.setTotalNumber(questions.getTotalNumber());
+            list4.add(showQuestions);
+        }
         System.out.println(list);
-        return list;
+        return list4;
     }
     @Override
     public Integer showQNumber(){
@@ -207,5 +231,17 @@ public class MakePaperServiceImpl implements MakePaperService {
         }
         return map;
     }
-
+     @Override
+    public void makePaperSuccess(Date beginTime, Date endTime, String finishTime, String paperName, int userId, String description, String code, List<QInfo> list){
+        int score=0;
+        for(int i=0;i<list.size();i++){
+            QInfo qInfo=list.get(i);
+            String type=qInfo.getQType();
+            if(type.equals("0")) score+=5;
+            if(type.equals("1")) score+=5;
+            if(type.equals("2")) score+=5;
+            if(type.equals("3")) score+=10;
+        }
+        makePaperDao.addPaper(beginTime,endTime,finishTime,paperName,userId,description,code,score);
+     }
     }
