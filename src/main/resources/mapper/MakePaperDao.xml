@@ -50,6 +50,9 @@
     <select id="findTag" resultType="com.hengzhi.dto.paperAndTest.Tag">
         select * from tag where tag_name=#{tagName}
     </select>
+    <select id="findAllTag" resultType="String">
+        select tag_name from tag
+    </select>
     <select id="findTagFuzzy" resultMap="tag">
         select * from tag where tag_name like  concat('%',#{tagName},'%')
     </select>
@@ -97,4 +100,7 @@
     <select id="makePaperFind" resultMap="question">
         SELECT * FROM ${qType} WHERE kind REGEXP #{type}
     </select>
+    <insert id="addPaper">
+        insert into papers(begin_time, end_time, finish_time, name, user_id, description, code, number, score) values (#{beginTime},#{endTime},#{finishTime},#{paperName},#{userId},#{description},#{code},#{number},#{score})
+    </insert>
 </mapper>

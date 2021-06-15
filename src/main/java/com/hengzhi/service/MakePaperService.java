@@ -11,6 +11,7 @@ public interface MakePaperService {
     public List<Questions> showQuestions();
     public Integer showQNumber();
     public String addTag(String tagName);
+    public List findAllTag();
     public List findTagFuzzy(String tagName);
     public List findQuestions(List<String> tList, List<String> sList);
     public Questions findQuestionsById(String qType,int questionId);
