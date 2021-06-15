@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.hengzhi.dto.ManagerPaper.QuestionAnswer1;
 import com.hengzhi.dto.paperAndTest.QInfo;
+import com.hengzhi.dto.paperAndTest.ShowQuestions;
 import com.hengzhi.entity.Introduction;
 import com.hengzhi.entity.Message;
 import com.hengzhi.entity.Notice;
@@ -13,6 +14,7 @@ import com.hengzhi.service.MakePaperService;
 import com.hengzhi.service.ShowService;
 import com.hengzhi.utils.Paging;
 import com.hengzhi.utils.RandomCode;
+import com.hengzhi.utils.StringToDate;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.text.ParseException;
 import java.util.*;
 
 @RequestMapping("/makePaper")
@@ -54,10 +57,8 @@ public class MakePaperController {
         Integer page = jsonObject.getInteger("page");
         Integer size = jsonObject.getInteger("size");
         Integer TotalNumber = makePaperService.showQNumber();
-        List<Questions> list = makePaperService.showQuestions();
+        List<ShowQuestions> list = makePaperService.showQuestions();
         return Paging.getPage(list,TotalNumber,size,page);
-
-
     }
     @RequestMapping("/addTag")
     @ResponseBody
@@ -124,16 +125,21 @@ public class MakePaperController {
     @RequestMapping("/makePaperSuccess")
     @ResponseBody
     @RequiresRoles(value = {"admin"})
-    public Map makePaperSuccess(@RequestBody JSONObject jsonObject) {
+    public Map makePaperSuccess(@RequestBody JSONObject jsonObject) throws ParseException {
         String qlist = JSONArray.toJSONString(jsonObject.get("list"));
         List<QInfo> list = JSONArray.parseArray(qlist, QInfo.class);
         String paperName=jsonObject.getString("paperName");
         int userId=jsonObject.getInteger("userId");
         String description=jsonObject.getString("description");
+        String finishTime=jsonObject.getString("finishTime");
         String beginTime=jsonObject.getString("beginTime");
+        Date beginTime1= StringToDate.turnToDate(beginTime);
         String deadline=jsonObject.getString("deadline");
+        Date deadline1= StringToDate.turnToDate(deadline);
         String code= RandomCode.genRandomNum();
+        makePaperService.makePaperSuccess(beginTime1,deadline1,finishTime,paperName,userId,description,code,list);
         Map map=new HashMap();
+        map.put("code",code);
         return map;
 
     }
