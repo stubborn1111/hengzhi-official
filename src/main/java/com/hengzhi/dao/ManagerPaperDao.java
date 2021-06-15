@@ -15,19 +15,19 @@ public interface ManagerPaperDao {
     /*
     待改试卷数据
      */
-    List<UnChangePapers> selectUnChange();
+    List<UnChangePapers> selectUnChange(Integer userId);
     /*
     待改试卷的份数
      */
-     int selectUnChangeNumber();
+     int selectUnChangeNumber(Integer userId);
      /*
      已改试卷数据
       */
-     List<ChangePapers> selectChange();
+     List<ChangePapers> selectChange(Integer userId);
      /*
      已改数据份数
       */
-     Integer selectChangeNumber();
+     Integer selectChangeNumber(Integer userId);
 ;     /*
      未考试卷信息
       */

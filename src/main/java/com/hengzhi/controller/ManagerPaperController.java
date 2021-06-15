@@ -6,11 +6,13 @@ import com.alibaba.fastjson.JSONObject;
 import com.hengzhi.dto.ManagerPaper.*;
 import com.hengzhi.dto.paperAndTest.QuestionAnswer;
 import com.hengzhi.entity.Message;
+import com.hengzhi.service.JWTService;
 import com.hengzhi.service.ManagerPaperService;
 
 import jdk.nashorn.internal.scripts.JO;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import sun.rmi.server.InactiveGroupException;
 
 import javax.crypto.spec.PSource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
 @RequestMapping("/managerPaper")
@@ -28,7 +31,8 @@ public class ManagerPaperController {
 
     @Autowired
     ManagerPaperService managerPaperService;
-
+    @Autowired
+    JWTService jwtService;
 
     /*
     待改试卷
@@ -36,11 +40,13 @@ public class ManagerPaperController {
     @ResponseBody
     @RequestMapping("/unChange")
     @RequiresRoles(value = {"admin"})
-    public Map unChange(@RequestBody JSONObject jsonObject){
+    public Map unChange(@RequestBody JSONObject jsonObject,HttpServletRequest request){
         Integer page = jsonObject.getInteger("page");
         Integer size = jsonObject.getInteger("size");
+        Integer userId = jwtService.getUserId(request);
+        System.out.println(userId+" userId");
         Map map = new HashMap();
-        Integer TotalNumber = managerPaperService.selectUnChangeNumber();
+        Integer TotalNumber = managerPaperService.selectUnChangeNumber(userId);
         map.put("TotalNumber",TotalNumber);
         Integer pagesSize;
         if(TotalNumber<size){
@@ -56,7 +62,7 @@ public class ManagerPaperController {
         if(page>pagesSize){
             return null;
         }else {
-            List<UnChangePapers> list = managerPaperService.selectUnChange( page, size);
+            List<UnChangePapers> list = managerPaperService.selectUnChange(page, size,userId);
             map.put("list",list);
             map.put("page",page);
             return map;
@@ -69,11 +75,12 @@ public class ManagerPaperController {
     @ResponseBody
     @RequestMapping("/selectChange")
     @RequiresRoles(value = {"admin"})
-    public Map selectChange(@RequestBody JSONObject jsonObject){
+    public Map selectChange(@RequestBody JSONObject jsonObject,HttpServletRequest request){
         Integer page = jsonObject.getInteger("page");
         Integer size = jsonObject.getInteger("size");
+        Integer userId = jwtService.getUserId(request);
         Map map = new HashMap();
-        Integer TotalNumber = managerPaperService.selectChangeNumber();
+        Integer TotalNumber = managerPaperService.selectChangeNumber(userId);
         map.put("TotalNumber",TotalNumber);
         Integer pagesSize;
         if(TotalNumber<size){
@@ -89,7 +96,7 @@ public class ManagerPaperController {
         if(page>pagesSize){
             return null;
         }else {
-            List<ChangePapers> list = managerPaperService.selectChange(page,size);
+            List<ChangePapers> list = managerPaperService.selectChange(page,size,userId);
             map.put("list",list);
             map.put("page",page);
             return map;
