@@ -10,9 +10,48 @@
         <result property="correctNumber" column="correct_number"/>
         <result property="totalNumber" column="total_number"/>
         <result property="description" column="description"/>
+        <result property="cRate" column="c_rate"/>
+    </resultMap>
+    <resultMap id="tag" type="com.hengzhi.dto.paperAndTest.Tag">
+        <result property="tagId" column="tag_id"/>
+        <result property="tagName" column="tag_name"/>
+
     </resultMap>
     <insert id="addQuestions">
         insert into ${qType}(kind,user_id,content,answer,description) values (#{kind},#{userId},#{content},#{answer},#{description})
     </insert>
-
+    <select id="showQuestions1" resultMap="question">
+        select * from questions_fill
+    </select>
+    <select id="showQNumber1" resultType="int">
+        select count(*) from questions_fill
+    </select>
+    <select id="showQuestions2" resultMap="question">
+        select * from questions_multiple
+    </select>
+    <select id="showQNumber2" resultType="int">
+        select count(*) from questions_multiple
+    </select>
+    <select id="showQuestions3" resultMap="question">
+        select * from questions_single
+    </select>
+    <select id="showQNumber3" resultType="int">
+        select count(*) from questions_single
+    </select>
+    <select id="showQuestions4" resultMap="question">
+        select * from questions_subjective
+    </select>
+    <select id="showQNumber4" resultType="int">
+        select count(*) from questions_subjective
+    </select>
+    <insert id="addTag">
+        insert into tag(tag_name) VALUES (#{tagName})
+    </insert>
+    <select id="findTag" resultType="com.hengzhi.dto.paperAndTest.Tag">
+        select * from tag where tag_name=#{tagName}
+    </select>
+    <select id="findTagFuzzy" resultMap="tag">
+        select * from tag where tag_name like  concat('%',#{tagName},'%')
+    </select>
+    <select id=""
 </mapper>
