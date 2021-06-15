@@ -43,6 +43,30 @@
         </collection>
     </resultMap>
 
+    <resultMap id="unCorrectStudentList" type="com.hengzhi.dto.ManagerPaper.UnCorrectStudentList">
+        <result property="userId" column="user_id"/>
+        <result property="paperId" column="paper_id"/>
+        <result property="qNumber" column="q_number"/>
+        <result property="answer" column="answer"/>
+        <collection property="unCorrectStudentList1List" ofType="com.hengzhi.dto.ManagerPaper.UnCorrectStudentList1">
+            <result property="paperId" column="paper_id"/>
+            <result property="userId" column="user_id"/>
+            <result property="whetherAnswer" column="whether_answer"/>
+            <result property="whetherEnd" column="whether_end"/>
+            <result property="whetherCorrect" column="whether_correct"/>
+        </collection>
+    </resultMap>
+    <resultMap id="subjectContent" type="com.hengzhi.dto.ManagerPaper.SubjectContent">
+        <result property="qType" column="q_type"/>
+        <result property="questionId" column="question_id"/>
+        <result property="qNumber" column="q_number"/>
+        <result property="paperId" column="paper_id"/>
+        <collection property="correctSubjectList" ofType="com.hengzhi.dto.ManagerPaper.CorrectSubject">
+            <result property="questionId" column="question_id"/>
+            <result property="content" column="content"/>
+            <result property="answer" column="answer"/>
+        </collection>
+    </resultMap>
 <!--    待改试卷数据-->
     <select id="selectUnChange" resultMap="UnChangePapers">
         select *
@@ -102,4 +126,86 @@
         set `name`=#{paperName},`begin_time`=#{beginTime},`end_time`=#{deadLine},`description`=#{description}
         where paper_id=#{paperId}
     </update>
+
+<!--    改卷（给前端）-->
+    <!--返回给前端学生作答的列表包含答案-->
+    <select id="unCorrectStudent" resultMap="unCorrectStudentList">
+        select *
+        from answer_paper as ap
+        join user_paper as up
+        where ap.user_id = up.user_id
+        and ap.paper_id = #{paper_id}
+        and up.paper_id = #{paper_id}
+        and up.whether_answer=1
+        and up.whether_end=1
+        and up.whether_correct=0
+    </select>
+    <!--返回答题人数-->
+    <select id="selectAllPeople" resultType="Integer">
+        select number
+        from papers
+        where paper_id=#{paperId}
+    </select>
+    <!--返回已经批改数目-->
+    <select id="selectCorrect" resultType="Integer">
+        select count(whether_correct)
+        from user_paper
+        where paper_id = #{paper_id}
+        and whether_correct=1
+    </select>
+    <!--返回给题目列表及正确答案-->
+    <!--返回给题目类型-->
+    <select id="selectType" parameterType="Integer" resultType="Integer">
+        select q_type
+        from paper_content
+        where paper_id=#{paperId}
+        order by q_number
+    </select>
+    <!--返回题目questionId-->
+    <select id="selectQuestionId" parameterType="Integer" resultType="Integer">
+        select question_id
+        from paper_content
+        where paper_id=#{paperId}
+        order by q_number
+    </select>
+    <!--填空题-->
+    <select id="selectSubjectContentFill" resultMap="subjectContent">
+        select *
+        from paper_content as pc
+        join questions_fill as pf
+        where pc.question_id=#{questionId}
+        and pf.question_id=#{questionId}
+        and pc.question_id = pf.question_id
+        and pc.q_type = 0
+    </select>
+    <!--单选-->
+    <select id="selectSubjectContentSingle" resultMap="subjectContent">
+        select *
+        from paper_content as pc
+        join questions_single as ps
+        where pc.question_id=#{questionId}
+        and ps.question_id=#{questionId}
+        and pc.question_id = ps.question_id
+        and pc.q_type = 1
+    </select>
+    <!--多选-->
+    <select id="selectSubjectContentMultiple" resultMap="subjectContent">
+        select *
+        from paper_content as pc
+        join questions_multiple as pm
+        where pc.question_id=#{questionId}
+        and pm.question_id=#{questionId}
+        and pc.question_id = pm.question_id
+        and pc.q_type = 2
+    </select>
+    <!--主观题-->
+    <select id="selectSubjectContentSubjective" resultMap="subjectContent">
+        select *
+        from paper_content as pc
+        join questions_subjective as psu
+        where pc.question_id=#{questionId}
+        and psu.question_id=#{questionId}
+        and pc.question_id = psu.question_id
+        and pc.q_type = 3
+    </select>
 </mapper>
