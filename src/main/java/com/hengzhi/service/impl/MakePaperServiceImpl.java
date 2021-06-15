@@ -1,14 +1,11 @@
 package com.hengzhi.service.impl;
 
-import com.github.pagehelper.PageHelper;
 import com.hengzhi.dao.MakePaperDao;
-import com.hengzhi.dao.ShowDao;
 import com.hengzhi.dto.paperAndTest.Tag;
 import com.hengzhi.entity.*;
 import com.hengzhi.service.MakePaperService;
-import com.hengzhi.service.ShowService;
 import com.hengzhi.utils.SelectTableUtils;
-import com.hengzhi.utils.randomNumber;
+import com.hengzhi.utils.RandomNumber;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -54,6 +51,10 @@ public class MakePaperServiceImpl implements MakePaperService {
     @Override
     public Integer showQNumber(){
         return makePaperDao.showQNumber1()+makePaperDao.showQNumber2()+makePaperDao.showQNumber3()+makePaperDao.showQNumber4();
+    }
+    @Override
+    public List findAllTag(){
+        return makePaperDao.findAllTag();
     }
     @Override
     public String addTag(String tagName){
@@ -139,6 +140,7 @@ public class MakePaperServiceImpl implements MakePaperService {
     @Override
     public Map makePaper(String type, int num0,int num1,int num2,int num3) {
         Map map=new HashMap();
+        System.out.println(type);
         List<Questions> list0 = new ArrayList<>();
         List<Questions> list1 = new ArrayList<>();
         List<Questions> list2 = new ArrayList<>();
@@ -152,7 +154,7 @@ public class MakePaperServiceImpl implements MakePaperService {
         }
         else {
             List<Questions> list=new ArrayList<>();
-            int[] arr = randomNumber.genNum(num0,list0.size());
+            int[] arr = RandomNumber.genNum(num0,list0.size());
             System.out.println(arr);
             for(int i=0;i<arr.length;i++){
                 Questions questions=list0.get(i);
@@ -166,7 +168,7 @@ public class MakePaperServiceImpl implements MakePaperService {
         }
         else {
             List<Questions> list=new ArrayList<>();
-            int[] arr = randomNumber.genNum(num1,list1.size());
+            int[] arr = RandomNumber.genNum(num1,list1.size());
             System.out.println(arr);
             for(int i=0;i<arr.length;i++){
                 Questions questions=list1.get(i);
@@ -180,7 +182,7 @@ public class MakePaperServiceImpl implements MakePaperService {
         }
         else {
             List<Questions> list=new ArrayList<>();
-            int[] arr = randomNumber.genNum(num2,list2.size());
+            int[] arr = RandomNumber.genNum(num2,list2.size());
             System.out.println(arr);
             for(int i=0;i<arr.length;i++){
                 Questions questions=list2.get(i);
@@ -194,7 +196,7 @@ public class MakePaperServiceImpl implements MakePaperService {
         }
         else {
             List<Questions> list=new ArrayList<>();
-            int[] arr = randomNumber.genNum(num3,list3.size());
+            int[] arr = RandomNumber.genNum(num3,list3.size());
             System.out.println(arr);
             for(int i=0;i<arr.length;i++){
                 Questions questions=list3.get(i);

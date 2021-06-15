@@ -6,6 +6,7 @@ import com.hengzhi.entity.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 @Mapper
@@ -22,6 +23,7 @@ public interface MakePaperDao {
     int showQNumber4();
     void addTag(String tagName);
     Tag findTag(String tagName);
+    List<String> findAllTag();
     List<Tag> findTagFuzzy(String tagName);
     List<Questions> findQuestionByTag1(List list);
     List<Questions> findQuestionByTag2(List list);
@@ -29,5 +31,6 @@ public interface MakePaperDao {
     List<Questions> findQuestionByTag4(List list);
     Questions findQuestionsById(String qType,int questionId);
     List<Questions> makePaperFind(String type,String qType);
+    void addPaper(Date beginTime, Date endTime,String finishTime,String paperName,int userId,String description,String code,int score);
 
 }

@@ -2,7 +2,7 @@ package com.hengzhi.utils;
 
 import java.util.Random;
 
-public class randomNumber {
+public class RandomNumber {
 
     public static int[] genNum(int num, int value)  {
         int[] arr = new int[num];// 保存最终生成结果
@@ -11,7 +11,7 @@ public class randomNumber {
         boolean result = true;
         while (result) {// 控制是否继续生成随机数
             Random rd = new Random();
-            int tempRandomNum = rd.nextInt(value) + 1;
+            int tempRandomNum = rd.nextInt(value+1) + 1;
             if (arr[arr.length - 1] == 0) {// 决定是否继续生成随机数进行赋值
                 if (isHas(tempRandomNum, arr, index)) {// 判断已生成随机数是否与数组中已有数值重复
                     continue;

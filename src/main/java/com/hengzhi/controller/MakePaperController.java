@@ -3,6 +3,7 @@ package com.hengzhi.controller;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.hengzhi.dto.ManagerPaper.QuestionAnswer1;
+import com.hengzhi.dto.paperAndTest.QInfo;
 import com.hengzhi.entity.Introduction;
 import com.hengzhi.entity.Message;
 import com.hengzhi.entity.Notice;
@@ -11,6 +12,7 @@ import com.hengzhi.secutity.Security;
 import com.hengzhi.service.MakePaperService;
 import com.hengzhi.service.ShowService;
 import com.hengzhi.utils.Paging;
+import com.hengzhi.utils.RandomCode;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +35,7 @@ public class MakePaperController {
     @RequestMapping("/addQuestions")
     @ResponseBody
     @RequiresRoles(value = {"admin"})
-    public void addQuestions(@RequestBody JSONObject jsonObject){
+    public Map addQuestions(@RequestBody JSONObject jsonObject){
         String type=jsonObject.getString("type");
         int userId=jsonObject.getInteger("userId");
         String content=jsonObject.getString("content");
@@ -41,6 +43,9 @@ public class MakePaperController {
         String description=jsonObject.getString("description");
         String kind=jsonObject.getString("kind");
         makePaperService.addQuestions(type,kind,userId,content,answer,description);
+        Map map=new HashMap();
+        map.put("msg","success");
+        return map;
     }
     @RequestMapping("/showQuestions")
     @ResponseBody
@@ -57,9 +62,18 @@ public class MakePaperController {
     @RequestMapping("/addTag")
     @ResponseBody
     @RequiresRoles(value = {"admin"})
-    public String addTag(@RequestBody JSONObject jsonObject){
+    public Map addTag(@RequestBody JSONObject jsonObject){
         String tag=jsonObject.getString("kind");
-        return makePaperService.addTag(tag);
+        Map map=new HashMap();
+        map.put("msg",makePaperService.addTag(tag));
+        return map;
+
+    }
+    @RequestMapping("/findAllTag")
+    @ResponseBody
+    @RequiresRoles(value = {"admin"})
+    public List findAllTag(){
+         return makePaperService.findAllTag();
     }
     @RequestMapping("/findTag")
     @ResponseBody
@@ -96,7 +110,33 @@ public class MakePaperController {
             questions.setQType(qType);
         return  questions;
     }
+    @RequestMapping("/makePaper")
+    @ResponseBody
+    @RequiresRoles(value = {"admin"})
+    public Map makePaper(@RequestBody JSONObject jsonObject) {
+        String type=jsonObject.getString("type");
+        int num0=jsonObject.getInteger("num0");
+        int num1=jsonObject.getInteger("num1");
+        int num2=jsonObject.getInteger("num2");
+        int num3=jsonObject.getInteger("num3");
+        return makePaperService.makePaper(type,num0,num1,num2,num3);
+    }
+    @RequestMapping("/makePaperSuccess")
+    @ResponseBody
+    @RequiresRoles(value = {"admin"})
+    public Map makePaperSuccess(@RequestBody JSONObject jsonObject) {
+        String qlist = JSONArray.toJSONString(jsonObject.get("list"));
+        List<QInfo> list = JSONArray.parseArray(qlist, QInfo.class);
+        String paperName=jsonObject.getString("paperName");
+        int userId=jsonObject.getInteger("userId");
+        String description=jsonObject.getString("description");
+        String beginTime=jsonObject.getString("beginTime");
+        String deadline=jsonObject.getString("deadline");
+        String code= RandomCode.genRandomNum();
+        Map map=new HashMap();
+        return map;
 
+    }
     }
 
 
