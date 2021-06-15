@@ -177,6 +177,7 @@
         and pf.question_id=#{questionId}
         and pc.question_id = pf.question_id
         and pc.q_type = 0
+        and paper_id = #{paperId}
     </select>
     <!--单选-->
     <select id="selectSubjectContentSingle" resultMap="subjectContent">
@@ -187,6 +188,7 @@
         and ps.question_id=#{questionId}
         and pc.question_id = ps.question_id
         and pc.q_type = 1
+        and paper_id = #{paperId}
     </select>
     <!--多选-->
     <select id="selectSubjectContentMultiple" resultMap="subjectContent">
@@ -197,6 +199,7 @@
         and pm.question_id=#{questionId}
         and pc.question_id = pm.question_id
         and pc.q_type = 2
+        and paper_id = #{paperId}
     </select>
     <!--主观题-->
     <select id="selectSubjectContentSubjective" resultMap="subjectContent">
@@ -207,8 +210,9 @@
         and psu.question_id=#{questionId}
         and pc.question_id = psu.question_id
         and pc.q_type = 3
+        and paper_id = #{paperId}
     </select>
-<!--    改卷（给前端）-->
+<!--    改卷（给后端）-->
     <update id="updateAnswerPaper" parameterType="com.hengzhi.entity.AnswerPaper">
         update answer_paper
         set score = #{score}

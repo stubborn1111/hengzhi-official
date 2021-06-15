@@ -121,13 +121,13 @@ public class ManagerPaperController {
             //填空题
             System.out.println("number"+numberList.get(i));
             if(numberList.get(i).equals(0)){
-                List<SubjectContent> list = managerPaperService.selectSubjectContentFill(questionIdList.get(i));
+                List<SubjectContent> list = managerPaperService.selectSubjectContentFill(questionIdList.get(i),paperId);
                 subjectContentList.add(list);
                 System.out.println(0);
             }
             //单选题
            else if(numberList.get(i).equals(1)){
-                List<SubjectContent> list = managerPaperService.selectSubjectContentSingle(questionIdList.get(i));
+                List<SubjectContent> list = managerPaperService.selectSubjectContentSingle(questionIdList.get(i),paperId);
                 subjectContentList.add(list);
                 System.out.println("question +"+questionIdList.get(i));
                 System.out.println("list  "+list);
@@ -135,15 +135,16 @@ public class ManagerPaperController {
             }
             //多选题
            else if(numberList.get(i).equals(2)){
-                List<SubjectContent> list = managerPaperService.selectSubjectContentMultiple(questionIdList.get(i));
+                List<SubjectContent> list = managerPaperService.selectSubjectContentMultiple(questionIdList.get(i),paperId);
                 subjectContentList.add(list);
                 System.out.println(2);
             }else {
-                List<SubjectContent> list = managerPaperService.selectSubjectContentSubjective(questionIdList.get(i));
+                List<SubjectContent> list = managerPaperService.selectSubjectContentSubjective(questionIdList.get(i),paperId);
                 subjectContentList.add(list);
                 System.out.println(3);
             }
         }
+       // System.out.println("subjectContentList+  "+subjectContentList);
         map.put("subjectContentList",subjectContentList);
 
         //返回给前端学生答题列表
