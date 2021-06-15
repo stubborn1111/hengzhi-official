@@ -17,4 +17,9 @@ public class HengzhiOffcialApplication extends SpringBootServletInitializer {
         SpringApplication.run(HengzhiOffcialApplication.class, args);
     }
 
+//    @Override
+//    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+//        return builder.sources(HengzhiOffcialApplication.class);
+//    }
+
 }

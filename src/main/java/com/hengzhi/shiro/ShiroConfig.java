@@ -48,7 +48,7 @@ public class ShiroConfig {
         map.put("/user/forgetPassword","anon");
         map.put("/user/getUserInfo", "anon");
         map.put("/headImage/**", "anon");
-        map.put("/user/autoLogin","anon");
+        map.put("/user/verify","anon");
         map.put("/**", "jwt");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(map);
         shiroFilterFactoryBean.setLoginUrl("/login.html");
