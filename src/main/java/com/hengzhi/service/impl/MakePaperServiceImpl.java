@@ -152,14 +152,44 @@ public class MakePaperServiceImpl implements MakePaperService {
                 list.add(questions);
             }
         }
-        return list;
+        List<ShowQuestions> list4=new ArrayList<>();
+        for(int n=0;n<list.size();n++){
+            Questions questions= (Questions) list.get(n);
+            int userId=questions.getUserId();
+            UserInfo user=userDao.getUserInfo(userId);
+            ShowQuestions showQuestions=new ShowQuestions();
+            showQuestions.setUserName(user.getName());
+            showQuestions.setAnswer(questions.getAnswer());
+            showQuestions.setContent(questions.getContent());
+            showQuestions.setCorrectNumber(questions.getCorrectNumber());
+            showQuestions.setCRate(questions.getCRate());
+            showQuestions.setDescription(questions.getDescription());
+            showQuestions.setKind(questions.getKind());
+            showQuestions.setQType(questions.getQType());
+            showQuestions.setQuestionId(questions.getQuestionId());
+            showQuestions.setTotalNumber(questions.getTotalNumber());
+            list4.add(showQuestions);
+        }
+        return list4;
     }
     @Override
-    public Questions findQuestionsById(String qType,int questionId){
+    public ShowQuestions findQuestionsById(String qType,int questionId){
         String type=SelectTableUtils.selectT(qType);
-        System.out.println("type"+type);
-        System.out.println("qtype"+qType);
-        return makePaperDao.findQuestionsById(type,questionId);
+            Questions questions=makePaperDao.findQuestionsById(type,questionId);
+            int userId=questions.getUserId();
+            UserInfo user=userDao.getUserInfo(userId);
+            ShowQuestions showQuestions=new ShowQuestions();
+            showQuestions.setUserName(user.getName());
+            showQuestions.setAnswer(questions.getAnswer());
+            showQuestions.setContent(questions.getContent());
+            showQuestions.setCorrectNumber(questions.getCorrectNumber());
+            showQuestions.setCRate(questions.getCRate());
+            showQuestions.setDescription(questions.getDescription());
+            showQuestions.setKind(questions.getKind());
+            showQuestions.setQType(questions.getQType());
+            showQuestions.setQuestionId(questions.getQuestionId());
+            showQuestions.setTotalNumber(questions.getTotalNumber());
+            return showQuestions;
     }
     @Override
     public Map makePaper(String type, int num0,int num1,int num2,int num3) {
@@ -169,6 +199,10 @@ public class MakePaperServiceImpl implements MakePaperService {
         List<Questions> list1 = new ArrayList<>();
         List<Questions> list2 = new ArrayList<>();
         List<Questions> list3 = new ArrayList<>();
+        List<ShowQuestions> list00=new ArrayList<>();
+        List<ShowQuestions> list11=new ArrayList<>();
+        List<ShowQuestions> list22=new ArrayList<>();
+        List<ShowQuestions> list33=new ArrayList<>();
         list0=makePaperDao.makePaperFind(type,"questions_fill");
         list1=makePaperDao.makePaperFind(type,"questions_single");
         list2=makePaperDao.makePaperFind(type,"questions_multiple");
@@ -184,8 +218,22 @@ public class MakePaperServiceImpl implements MakePaperService {
                 Questions questions=list0.get(i);
                 questions.setQType("0");
                 list.add(questions);
+                    int userId=questions.getUserId();
+                    UserInfo user=userDao.getUserInfo(userId);
+                    ShowQuestions showQuestions=new ShowQuestions();
+                    showQuestions.setUserName(user.getName());
+                    showQuestions.setAnswer(questions.getAnswer());
+                    showQuestions.setContent(questions.getContent());
+                    showQuestions.setCorrectNumber(questions.getCorrectNumber());
+                    showQuestions.setCRate(questions.getCRate());
+                    showQuestions.setDescription(questions.getDescription());
+                    showQuestions.setKind(questions.getKind());
+                    showQuestions.setQType(questions.getQType());
+                    showQuestions.setQuestionId(questions.getQuestionId());
+                    showQuestions.setTotalNumber(questions.getTotalNumber());
+                    list00.add(showQuestions);
             }
-            map.put("questions_fill",list);
+            map.put("questions_fill",list00);
         }
         if(num1>list1.size()){
             map.put("questions_single","not enough");
@@ -198,8 +246,22 @@ public class MakePaperServiceImpl implements MakePaperService {
                 Questions questions=list1.get(i);
                 questions.setQType("1");
                 list.add(questions);
+                int userId=questions.getUserId();
+                UserInfo user=userDao.getUserInfo(userId);
+                ShowQuestions showQuestions=new ShowQuestions();
+                showQuestions.setUserName(user.getName());
+                showQuestions.setAnswer(questions.getAnswer());
+                showQuestions.setContent(questions.getContent());
+                showQuestions.setCorrectNumber(questions.getCorrectNumber());
+                showQuestions.setCRate(questions.getCRate());
+                showQuestions.setDescription(questions.getDescription());
+                showQuestions.setKind(questions.getKind());
+                showQuestions.setQType(questions.getQType());
+                showQuestions.setQuestionId(questions.getQuestionId());
+                showQuestions.setTotalNumber(questions.getTotalNumber());
+                list11.add(showQuestions);
             }
-            map.put("questions_single",list);
+            map.put("questions_single",list11);
         }
         if(num2>list2.size()){
             map.put("questions_multiple","not enough");
@@ -212,8 +274,22 @@ public class MakePaperServiceImpl implements MakePaperService {
                 Questions questions=list2.get(i);
                 questions.setQType("2");
                 list.add(questions);
+                int userId=questions.getUserId();
+                UserInfo user=userDao.getUserInfo(userId);
+                ShowQuestions showQuestions=new ShowQuestions();
+                showQuestions.setUserName(user.getName());
+                showQuestions.setAnswer(questions.getAnswer());
+                showQuestions.setContent(questions.getContent());
+                showQuestions.setCorrectNumber(questions.getCorrectNumber());
+                showQuestions.setCRate(questions.getCRate());
+                showQuestions.setDescription(questions.getDescription());
+                showQuestions.setKind(questions.getKind());
+                showQuestions.setQType(questions.getQType());
+                showQuestions.setQuestionId(questions.getQuestionId());
+                showQuestions.setTotalNumber(questions.getTotalNumber());
+                list22.add(showQuestions);
             }
-            map.put("questions_multiple",list);
+            map.put("questions_multiple",list22);
         }
         if(num3>list3.size()){
             map.put("questions_subjective","not enough");
@@ -226,8 +302,22 @@ public class MakePaperServiceImpl implements MakePaperService {
                 Questions questions=list3.get(i);
                 questions.setQType("3");
                 list.add(questions);
+                int userId=questions.getUserId();
+                UserInfo user=userDao.getUserInfo(userId);
+                ShowQuestions showQuestions=new ShowQuestions();
+                showQuestions.setUserName(user.getName());
+                showQuestions.setAnswer(questions.getAnswer());
+                showQuestions.setContent(questions.getContent());
+                showQuestions.setCorrectNumber(questions.getCorrectNumber());
+                showQuestions.setCRate(questions.getCRate());
+                showQuestions.setDescription(questions.getDescription());
+                showQuestions.setKind(questions.getKind());
+                showQuestions.setQType(questions.getQType());
+                showQuestions.setQuestionId(questions.getQuestionId());
+                showQuestions.setTotalNumber(questions.getTotalNumber());
+                list33.add(showQuestions);
             }
-            map.put("questions_subjective",list);
+            map.put("questions_subjective",list33);
         }
         return map;
     }

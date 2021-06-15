@@ -91,10 +91,8 @@ public class MakePaperController {
         Integer size = jsonObject.getInteger("size");
         String tag = JSONArray.toJSONString(jsonObject.get("kind"));
         List<String> tagList = JSONArray.parseArray(tag, String.class);
-        System.out.println("tagList"+tagList);
         String type = JSONArray.toJSONString(jsonObject.get("type"));
         List<String> typeList = JSONArray.parseArray(type, String.class);
-        System.out.println("typeList"+typeList);
         List list=makePaperService.findQuestions(tagList,typeList);
         Map map=Paging.getPage(list,list.size(),size,page);
         return map;
@@ -102,11 +100,11 @@ public class MakePaperController {
     @RequestMapping("/findQuestionsById")
     @ResponseBody
     @RequiresRoles(value = {"admin"})
-    public Questions findQuestionsById(@RequestBody JSONObject jsonObject) {
+    public ShowQuestions findQuestionsById(@RequestBody JSONObject jsonObject) {
         int questionId = jsonObject.getInteger("questionId");
         String qType = jsonObject.getString("type");
         System.out.println(qType);
-        Questions questions=makePaperService.findQuestionsById(qType, questionId);
+        ShowQuestions questions=makePaperService.findQuestionsById(qType, questionId);
         if(questions!=null)
             questions.setQType(qType);
         return  questions;
