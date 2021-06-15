@@ -89,13 +89,22 @@
         where p.paper_id = up.paper_id
         and up.whether_correct = 1
     </select>
+    <select id="selectChangeNumber" resultType="int">
+        select count(*)
+        from user_paper
+        where whether_correct = 1
+    </select>
 <!--未考试试卷信息-->
     <select id="selectUnFinish" resultMap="UnFinishPapers">
         select *
         from papers
-        where begin_time &lt;&gt; NOW();
+        where begin_time &lt;&gt; NOW()
     </select>
-
+    <select id="selectUnFinishNumber" resultType="int">
+        select count(*)
+        from papers
+        where begin_time &lt;&gt; NOW()
+    </select>
 <!--试卷成绩信息-->
     <select id="selectScoreInformation" resultMap="ScoreInformation">
         select *

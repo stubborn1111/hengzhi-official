@@ -9,7 +9,7 @@ public interface ManagerPaperService {
     /*
     待改试卷数据
      */
-    List<UnChangePapers> selectUnChange();
+    List<UnChangePapers> selectUnChange(Integer page,Integer size);
     /*
     待改试卷的份数
      */
@@ -17,11 +17,19 @@ public interface ManagerPaperService {
     /*
      已改试卷数据
       */
-    List<ChangePapers> selectChange();
+    List<ChangePapers> selectChange(Integer page,Integer size);
+    /*
+    已改数据份数
+     */
+    Integer selectChangeNumber();
     /*
       未考试卷信息
        */
-    List<UnFinishPapers> selectUnFinish();
+    List<UnFinishPapers> selectUnFinish(Integer page,Integer size);
+    /*
+     未考试卷份数
+      */
+    Integer selectUnFinishNumber();
     /*
      考试试卷信息
       */

@@ -18,7 +18,8 @@ public class ManagerPaperServiceImpl implements ManagerPaperService {
     ManagerPaperDao managerPaperDao;
 
     @Override
-    public List<UnChangePapers> selectUnChange() {
+    public List<UnChangePapers> selectUnChange(Integer page,Integer size) {
+        PageHelper.startPage(page, size);
         List<UnChangePapers> list = managerPaperDao.selectUnChange();
         return list;
     }
@@ -30,15 +31,29 @@ public class ManagerPaperServiceImpl implements ManagerPaperService {
     }
 
     @Override
-    public List<ChangePapers> selectChange() {
+    public List<ChangePapers> selectChange(Integer page,Integer size) {
+        PageHelper.startPage(page, size);
         List<ChangePapers> list = managerPaperDao.selectChange();
         return list;
     }
 
     @Override
-    public List<UnFinishPapers> selectUnFinish() {
+    public Integer selectChangeNumber() {
+        Integer num = managerPaperDao.selectChangeNumber();
+        return num;
+    }
+
+    @Override
+    public List<UnFinishPapers> selectUnFinish(Integer page,Integer size) {
+        PageHelper.startPage(page, size);
         List<UnFinishPapers> list = managerPaperDao.selectUnFinish();
         return list;
+    }
+
+    @Override
+    public Integer selectUnFinishNumber() {
+        Integer num = managerPaperDao.selectUnFinishNumber();
+        return num;
     }
 
     @Override
