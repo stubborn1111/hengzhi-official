@@ -11,4 +11,5 @@ public class CorrectSubject {
     private Integer questionId;
     private String content;
     private String answer;
+    private String description;
 }
