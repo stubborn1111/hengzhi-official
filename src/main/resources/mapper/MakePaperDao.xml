@@ -53,5 +53,18 @@
     <select id="findTagFuzzy" resultMap="tag">
         select * from tag where tag_name like  concat('%',#{tagName},'%')
     </select>
-    <select id=""
+    <select id="findQuestionByType" resultMap="question">
+        select * from ${qType}
+    </select>
+    <select id="findQuestionByTypeNumber" resultType="int">
+        select count(*) from ${qType}
+    </select>
+    <select id="findQuestionByTypeAndTag" resultMap="question" parameterType="com.hengzhi.dto.paperAndTest.MybatisData">
+        select * from ${data.type}
+        <where>
+            <foreach collection="list" item="tag" open="(" close=")" separator="and" >
+                find_in_set(${tag},kind)
+            </foreach>
+        </where>
+    </select>
 </mapper>
