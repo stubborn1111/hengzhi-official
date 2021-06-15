@@ -216,4 +216,18 @@
         and paper_id = #{paperId}
         and q_number = #{qNumber}
     </update>
+<!--    取出单选和多选的总分-->
+    <select id="selectSum1" resultType="Integer">
+        select score
+        from user_paper
+        where user_id = #{userId}
+        and paper_id = #{paperId}
+    </select>
+<!--    将总分存到user_paper-->
+    <update id="updateSum" parameterType="Integer">
+        update user_paper
+        set score=#{score}
+        where user_id = #{userId}
+        and paper_id = #{paperId}
+    </update>
 </mapper>

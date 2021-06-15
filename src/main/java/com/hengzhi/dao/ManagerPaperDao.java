@@ -84,4 +84,13 @@ public interface ManagerPaperDao {
     接收前端的试卷批改数据
      */
     void updateAnswerPaper(Integer score,Integer paperId,Integer userId,Integer qNumber);
+
+    /*
+    取出单选和多选的总分
+     */
+    Integer selectSum1(Integer userId,Integer paperId);
+    /*
+    将总分存到user_paper
+     */
+    void updateSum(Integer score,Integer userId,Integer paperId);
 }
