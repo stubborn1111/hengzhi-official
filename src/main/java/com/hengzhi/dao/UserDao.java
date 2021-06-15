@@ -32,7 +32,7 @@ public interface UserDao {
     int updateByStudentId(User user);
 
     String selectUserByStudentId(Integer studentId);
-
+    User selectUserByUserId(int userId);
     /**
      * 提交忘记密码，审核
      * @param studentId

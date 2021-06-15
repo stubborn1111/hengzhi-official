@@ -28,6 +28,10 @@
         select password from user
         where student_id = #{studentId}
     </select>
+    <select id="selectUserByUserId" resultMap="user">
+        select * from user
+        where user_id = #{userId}
+    </select>
     <!--修改个人信息-->
     <update id="updateByStudentId" parameterType="com.hengzhi.entity.User">
         update user
