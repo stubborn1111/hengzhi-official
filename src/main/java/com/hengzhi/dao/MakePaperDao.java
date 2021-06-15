@@ -23,5 +23,5 @@ public interface MakePaperDao {
     void addTag(String tagName);
     Tag findTag(String tagName);
     List<Tag> findTagFuzzy(String tagName);
-    List<Questions> findQuestionByTypeAndTag(MybatisData data);
+    List<Questions> findQuestionByTag1(List list);
 }
