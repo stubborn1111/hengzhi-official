@@ -54,6 +54,7 @@ public class ShowController {
         }else {
             map.put("pagesSize",TotalNumber/size+1);
         }
+        map.put("page",page);
         return map;
     }
 //    增加留言
