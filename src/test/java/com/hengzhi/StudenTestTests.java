@@ -22,7 +22,6 @@ import java.util.List;
  * @description 学生考试相关测试类
  * @Date 2021/5/24
  */
-@RunWith(SpringRunner.class)
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
