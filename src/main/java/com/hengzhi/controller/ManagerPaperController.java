@@ -1,10 +1,13 @@
 package com.hengzhi.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.hengzhi.dto.ManagerPaper.*;
+import com.hengzhi.dto.paperAndTest.QuestionAnswer;
 import com.hengzhi.service.ManagerPaperService;
 
+import jdk.nashorn.internal.scripts.JO;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -154,5 +157,30 @@ public class ManagerPaperController {
         map.put("surplus",num);
         return map;
 
+    }
+
+    /*
+    改卷（给后端存取数据）
+     */
+    @ResponseBody
+    @RequestMapping("/updateAnswerPaper")
+    @RequiresRoles(value = {"admin"})
+    public Map updateAnswerPaper(@RequestBody JSONObject jsonObject){
+
+        Integer paperId = jsonObject.getInteger("paperId");
+        Integer userId = jsonObject.getInteger("userId");
+        String text = JSONArray.toJSONString(jsonObject.get("list"));
+        List<QuestionAnswer1> answerList = JSONArray.parseArray(text, QuestionAnswer1.class);
+        for (int i = 0;i<answerList.size();i++){
+            Integer score = answerList.get(i).getScore();
+            Integer qNumber = answerList.get(i).getQNumber();
+            System.out.println("score"+score);
+            System.out.println("qNumber"+qNumber);
+            managerPaperService.updateAnswerPaper(score,paperId,userId,qNumber);
+        }
+
+        Map map = new HashMap();
+        map.put("message","success");
+        return map;
     }
 }
