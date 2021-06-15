@@ -8,11 +8,11 @@ import com.hengzhi.entity.*;
 import com.hengzhi.service.MakePaperService;
 import com.hengzhi.service.ShowService;
 import com.hengzhi.utils.SelectTableUtils;
+import com.hengzhi.utils.randomNumber;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class MakePaperServiceImpl implements MakePaperService {
@@ -76,14 +76,12 @@ public class MakePaperServiceImpl implements MakePaperService {
         List list = new ArrayList();
         List type=new ArrayList();
         if (sList.isEmpty()) {
-            System.out.println("begin++++++");
             type.add("0");
             type.add("1");
             type.add("2");
             type.add("3");
         }
         else type=sList;
-        System.out.println(type);
         List<Questions> list0 = new ArrayList<>();
         List<Questions> list1 = new ArrayList<>();
         List<Questions> list2 = new ArrayList<>();
@@ -99,10 +97,7 @@ public class MakePaperServiceImpl implements MakePaperService {
             if (type1.equals("3"))
                 list3 = makePaperDao.findQuestionByTag4(tList);
         }
-        System.out.println("list0"+list0);
-        System.out.println("list1"+list1);
-        System.out.println("list2"+list2);
-        System.out.println("list3"+list3);
+
 
         if (list0 != null) {
             for (int i = 0; i < list0.size(); i++) {
@@ -134,4 +129,81 @@ public class MakePaperServiceImpl implements MakePaperService {
         }
         return list;
     }
-}
+    @Override
+    public Questions findQuestionsById(String qType,int questionId){
+        String type=SelectTableUtils.selectT(qType);
+        System.out.println("type"+type);
+        System.out.println("qtype"+qType);
+        return makePaperDao.findQuestionsById(type,questionId);
+    }
+    @Override
+    public Map makePaper(String type, int num0,int num1,int num2,int num3) {
+        Map map=new HashMap();
+        List<Questions> list0 = new ArrayList<>();
+        List<Questions> list1 = new ArrayList<>();
+        List<Questions> list2 = new ArrayList<>();
+        List<Questions> list3 = new ArrayList<>();
+        list0=makePaperDao.makePaperFind(type,"questions_fill");
+        list1=makePaperDao.makePaperFind(type,"questions_single");
+        list2=makePaperDao.makePaperFind(type,"questions_multiple");
+        list3=makePaperDao.makePaperFind(type,"questions_subjective");
+        if(num0>list0.size()){
+            map.put("questions_fill","not enough");
+        }
+        else {
+            List<Questions> list=new ArrayList<>();
+            int[] arr = randomNumber.genNum(num0,list0.size());
+            System.out.println(arr);
+            for(int i=0;i<arr.length;i++){
+                Questions questions=list0.get(i);
+                questions.setQType("0");
+                list.add(questions);
+            }
+            map.put("questions_fill",list);
+        }
+        if(num1>list1.size()){
+            map.put("questions_single","not enough");
+        }
+        else {
+            List<Questions> list=new ArrayList<>();
+            int[] arr = randomNumber.genNum(num1,list1.size());
+            System.out.println(arr);
+            for(int i=0;i<arr.length;i++){
+                Questions questions=list1.get(i);
+                questions.setQType("1");
+                list.add(questions);
+            }
+            map.put("questions_single",list);
+        }
+        if(num2>list2.size()){
+            map.put("questions_multiple","not enough");
+        }
+        else {
+            List<Questions> list=new ArrayList<>();
+            int[] arr = randomNumber.genNum(num2,list2.size());
+            System.out.println(arr);
+            for(int i=0;i<arr.length;i++){
+                Questions questions=list2.get(i);
+                questions.setQType("2");
+                list.add(questions);
+            }
+            map.put("questions_multiple",list);
+        }
+        if(num3>list3.size()){
+            map.put("questions_subjective","not enough");
+        }
+        else {
+            List<Questions> list=new ArrayList<>();
+            int[] arr = randomNumber.genNum(num3,list3.size());
+            System.out.println(arr);
+            for(int i=0;i<arr.length;i++){
+                Questions questions=list3.get(i);
+                questions.setQType("3");
+                list.add(questions);
+            }
+            map.put("questions_subjective",list);
+        }
+        return map;
+    }
+
+    }

@@ -91,4 +91,10 @@
             </foreach>
         </where>
     </select>
+    <select id="findQuestionsById" resultMap="question">
+        select * from ${qType} where question_id=#{questionId}
+    </select>
+    <select id="makePaperFind" resultMap="question">
+        SELECT * FROM ${qType} WHERE kind REGEXP #{type}
+    </select>
 </mapper>

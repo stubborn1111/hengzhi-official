@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.hengzhi.dto.ManagerPaper.*;
 import com.hengzhi.dto.paperAndTest.QuestionAnswer;
+import com.hengzhi.entity.Message;
 import com.hengzhi.service.ManagerPaperService;
 
 import jdk.nashorn.internal.scripts.JO;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import sun.rmi.server.InactiveGroupException;
 
 import javax.crypto.spec.PSource;
 import java.util.*;
@@ -34,13 +36,31 @@ public class ManagerPaperController {
     @ResponseBody
     @RequestMapping("/unChange")
     @RequiresRoles(value = {"admin"})
-    public Map unChange(){
+    public Map unChange(@RequestBody JSONObject jsonObject){
+        Integer page = jsonObject.getInteger("page");
+        Integer size = jsonObject.getInteger("size");
         Map map = new HashMap();
-        List<UnChangePapers> list = managerPaperService.selectUnChange();
-        map.put("list",list);
-        Integer totalNumber = managerPaperService.selectUnChangeNumber();
-        map.put("totalNumber",totalNumber);
-        return  map;
+        Integer TotalNumber = managerPaperService.selectUnChangeNumber();
+        map.put("TotalNumber",TotalNumber);
+        Integer pagesSize;
+        if(TotalNumber<size){
+            map.put("pagesSize",1);
+            pagesSize = 1;
+        } else if(TotalNumber%size==0){
+            map.put("pagesSize",TotalNumber/size);
+            pagesSize =  TotalNumber/size;
+        }else {
+            map.put("pagesSize",TotalNumber/size+1);
+            pagesSize =  TotalNumber/size+1;
+        }
+        if(page>pagesSize){
+            return null;
+        }else {
+            List<UnChangePapers> list = managerPaperService.selectUnChange( page, size);
+            map.put("list",list);
+            map.put("page",page);
+            return map;
+        }
     }
 
     /*
@@ -49,11 +69,32 @@ public class ManagerPaperController {
     @ResponseBody
     @RequestMapping("/selectChange")
     @RequiresRoles(value = {"admin"})
-    public Map selectChange(){
+    public Map selectChange(@RequestBody JSONObject jsonObject){
+        Integer page = jsonObject.getInteger("page");
+        Integer size = jsonObject.getInteger("size");
         Map map = new HashMap();
-        List<ChangePapers> list = managerPaperService.selectChange();
-        map.put("list",list);
-        return map;
+        Integer TotalNumber = managerPaperService.selectChangeNumber();
+        map.put("TotalNumber",TotalNumber);
+        Integer pagesSize;
+        if(TotalNumber<size){
+            map.put("pagesSize",1);
+            pagesSize = 1;
+        } else if(TotalNumber%size==0){
+            map.put("pagesSize",TotalNumber/size);
+            pagesSize =  TotalNumber/size;
+        }else {
+            map.put("pagesSize",TotalNumber/size+1);
+            pagesSize =  TotalNumber/size+1;
+        }
+        if(page>pagesSize){
+            return null;
+        }else {
+            List<ChangePapers> list = managerPaperService.selectChange(page,size);
+            map.put("list",list);
+            map.put("page",page);
+            return map;
+        }
+
     }
 
     /*
@@ -62,11 +103,31 @@ public class ManagerPaperController {
     @ResponseBody
     @RequestMapping("/selectUnFinish")
     @RequiresRoles(value = {"admin"})
-    public Map selectUnFinish(){
+    public Map selectUnFinish(@RequestBody JSONObject jsonObject){
+        Integer page = jsonObject.getInteger("page");
+        Integer size = jsonObject.getInteger("size");
         Map map = new HashMap();
-        List<UnFinishPapers> list = managerPaperService.selectUnFinish();
-        map.put("list",list);
-        return map;
+        Integer TotalNumber = managerPaperService.selectUnFinishNumber();
+        map.put("TotalNumber",TotalNumber);
+        Integer pagesSize;
+        if(TotalNumber<size){
+            map.put("pagesSize",1);
+            pagesSize = 1;
+        } else if(TotalNumber%size==0){
+            map.put("pagesSize",TotalNumber/size);
+            pagesSize =  TotalNumber/size;
+        }else {
+            map.put("pagesSize",TotalNumber/size+1);
+            pagesSize =  TotalNumber/size+1;
+        }
+        if(page>pagesSize){
+            return null;
+        }else {
+            List<UnFinishPapers> list = managerPaperService.selectUnFinish(page,size);
+            map.put("list",list);
+            map.put("page",page);
+            return map;
+        }
     }
     /*
     试卷成绩信息
