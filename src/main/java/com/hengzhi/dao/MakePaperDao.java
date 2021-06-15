@@ -1,5 +1,6 @@
 package com.hengzhi.dao;
 
+import com.hengzhi.dto.paperAndTest.MybatisData;
 import com.hengzhi.dto.paperAndTest.Tag;
 import com.hengzhi.entity.*;
 import org.apache.ibatis.annotations.Mapper;
@@ -22,4 +23,5 @@ public interface MakePaperDao {
     void addTag(String tagName);
     Tag findTag(String tagName);
     List<Tag> findTagFuzzy(String tagName);
+    List<Questions> findQuestionByTypeAndTag(MybatisData data);
 }

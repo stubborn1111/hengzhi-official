@@ -1,6 +1,8 @@
 package com.hengzhi.controller;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.hengzhi.dto.ManagerPaper.QuestionAnswer1;
 import com.hengzhi.entity.Introduction;
 import com.hengzhi.entity.Message;
 import com.hengzhi.entity.Notice;
@@ -8,6 +10,7 @@ import com.hengzhi.entity.Questions;
 import com.hengzhi.secutity.Security;
 import com.hengzhi.service.MakePaperService;
 import com.hengzhi.service.ShowService;
+import com.hengzhi.utils.Paging;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,35 +49,36 @@ public class MakePaperController {
         Integer page = jsonObject.getInteger("page");
         Integer size = jsonObject.getInteger("size");
         Integer TotalNumber = makePaperService.showQNumber();
-        System.out.println(TotalNumber/size);
-        Double all= Math.ceil((float)TotalNumber/size);
-        int allP=all.intValue();
-        Map map = new HashMap();
-        if(page<=allP){
         List<Questions> list = makePaperService.showQuestions();
-        List<Questions> qlist=new ArrayList<>();
-        int start=size*(page-1);
-        int end=size*page-1;
-        if(end>=list.size()){
-            end=list.size()-1;
-        }
-        for(int i=start;i<=end;i++){
-            Questions questions=list.get(i);
-            qlist.add(questions);
-        }
+        return Paging.getPage(list,TotalNumber,size,page);
+//        Double all= Math.ceil((float)TotalNumber/size);
+//        int allP=all.intValue();
+//        Map map = new HashMap();
+//        if(page<=allP){
+//        List<Questions> list = makePaperService.showQuestions();
+//        List<Questions> qlist=new ArrayList<>();
+//        int start=size*(page-1);
+//        int end=size*page-1;
+//        if(end>=list.size()){
+//            end=list.size()-1;
+//        }
+//        for(int i=start;i<=end;i++){
+//            Questions questions=list.get(i);
+//            qlist.add(questions);
+//        }
+//
+//        map.put("listQuestions",qlist);}
+//
+//       else map.put("listQuestions",null);
+//        map.put("TotalNumber",TotalNumber);
+//        if(TotalNumber<size){
+//            map.put("pagesSize",1);
+//        } else if(TotalNumber%size==0){
+//            map.put("pagesSize",TotalNumber/size);
+//        }else {
+//            map.put("pagesSize",TotalNumber/size+1);
+//        }
 
-        map.put("listQuestions",qlist);}
-
-       else map.put("listQuestions",null);
-        map.put("TotalNumber",TotalNumber);
-        if(TotalNumber<size){
-            map.put("pagesSize",1);
-        } else if(TotalNumber%size==0){
-            map.put("pagesSize",TotalNumber/size);
-        }else {
-            map.put("pagesSize",TotalNumber/size+1);
-        }
-        return map;
 
     }
     @RequestMapping("/addTag")
@@ -91,6 +95,17 @@ public class MakePaperController {
         String tag=jsonObject.getString("kind");
         return makePaperService.findTagFuzzy(tag);
     }
+    @RequestMapping("/findQuestions")
+    @ResponseBody
+    @RequiresRoles(value = {"admin"})
+    public List findQuestions(@RequestBody JSONObject jsonObject){
+        String tag = JSONArray.toJSONString(jsonObject.get("kind"));
+        List<String> tagList = JSONArray.parseArray(tag, String.class);
+        String type = JSONArray.toJSONString(jsonObject.get("type"));
+        List<String> typeList = JSONArray.parseArray(type, String.class);
+        return tagList;
+    }
+
     
     }
 
