@@ -204,7 +204,7 @@ public class StudenTestTests {
         list.add("11");
         list.add("123");
         mybatisData.setList(list);
-        System.out.println(makePaperDao.findQuestionByTypeAndTag(mybatisData));
+        System.out.println(makePaperDao.findQuestionByTag1(list));
     }
 
 }
