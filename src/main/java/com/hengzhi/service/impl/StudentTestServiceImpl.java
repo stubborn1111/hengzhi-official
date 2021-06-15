@@ -33,6 +33,12 @@ public class StudentTestServiceImpl implements StudentTestService {
         if (getPaper == null) {
             return new GetPaper();
         }
+        Integer integer = testDao.selectPaper(getPaper.getPaperId(), userId);
+        if(integer==null){
+            GetPaper getPaper1 = new GetPaper();
+            getPaper1.setPaperId(0);
+            return getPaper1;
+        }
         testDao.addUserPaper(getPaper.getPaperId(), userId);
         return getPaper;
     }

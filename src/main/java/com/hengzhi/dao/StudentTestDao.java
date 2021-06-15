@@ -16,6 +16,12 @@ import java.util.List;
 @Repository
 public interface StudentTestDao {
     /**
+     * @param paperId
+     * @param userId
+     * @return
+     */
+    Integer selectPaper(Integer paperId,Integer userId);
+    /**
      * 获取试卷id
      *
      * @param code

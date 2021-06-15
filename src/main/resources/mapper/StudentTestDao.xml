@@ -154,4 +154,9 @@
         SET total_number = total_number+1
         WHERE question_id = #{questionId}
     </update>
+    <select id="selectPaper" resultType="java.lang.Integer">
+        SELECT user_paper_id FROM user_paper
+        WHERE paper_id=#{paperId}
+        AND user_id = #{userId}
+    </select>
 </mapper>
