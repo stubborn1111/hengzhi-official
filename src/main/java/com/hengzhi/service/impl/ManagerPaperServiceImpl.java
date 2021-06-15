@@ -118,4 +118,9 @@ public class ManagerPaperServiceImpl implements ManagerPaperService {
         List<SubjectContent> list = managerPaperDao.selectSubjectContentSubjective(questionId);
         return list;
     }
+
+    @Override
+    public void updateAnswerPaper(Integer score, Integer paperId, Integer userId, Integer qNumber) {
+        managerPaperDao.updateAnswerPaper(score,paperId,userId,qNumber);
+    }
 }

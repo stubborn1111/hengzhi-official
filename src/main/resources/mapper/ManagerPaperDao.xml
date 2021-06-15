@@ -208,4 +208,12 @@
         and pc.question_id = psu.question_id
         and pc.q_type = 3
     </select>
+<!--    改卷（给前端）-->
+    <update id="updateAnswerPaper" parameterType="com.hengzhi.entity.AnswerPaper">
+        update answer_paper
+        set score = #{score}
+        where user_id = #{userId}
+        and paper_id = #{paperId}
+        and q_number = #{qNumber}
+    </update>
 </mapper>

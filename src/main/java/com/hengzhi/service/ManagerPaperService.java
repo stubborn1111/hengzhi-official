@@ -74,4 +74,8 @@ public interface ManagerPaperService {
     主观题
      */
     List<SubjectContent> selectSubjectContentSubjective(Integer questionId);
+    /*
+    接收前端的试卷批改数据
+     */
+    void updateAnswerPaper(Integer score,Integer paperId,Integer userId,Integer qNumber);
 }
