@@ -96,26 +96,26 @@ public class ManagerPaperServiceImpl implements ManagerPaperService {
     }
 
     @Override
-    public List<SubjectContent> selectSubjectContentFill(Integer questionId) {
-        List<SubjectContent> list = managerPaperDao.selectSubjectContentFill(questionId);
+    public List<SubjectContent> selectSubjectContentFill(Integer questionId,Integer paperId) {
+        List<SubjectContent> list = managerPaperDao.selectSubjectContentFill(questionId,paperId);
         return list;
     }
 
     @Override
-    public List<SubjectContent> selectSubjectContentSingle(Integer questionId) {
-        List<SubjectContent> list = managerPaperDao.selectSubjectContentSingle(questionId);
+    public List<SubjectContent> selectSubjectContentSingle(Integer questionId,Integer paperId) {
+        List<SubjectContent> list = managerPaperDao.selectSubjectContentSingle(questionId,paperId);
         return list;
     }
 
     @Override
-    public List<SubjectContent> selectSubjectContentMultiple(Integer questionId) {
-        List<SubjectContent> list = managerPaperDao.selectSubjectContentMultiple(questionId);
+    public List<SubjectContent> selectSubjectContentMultiple(Integer questionId,Integer paperId) {
+        List<SubjectContent> list = managerPaperDao.selectSubjectContentMultiple(questionId,paperId);
         return list;
     }
 
     @Override
-    public List<SubjectContent> selectSubjectContentSubjective(Integer questionId) {
-        List<SubjectContent> list = managerPaperDao.selectSubjectContentSubjective(questionId);
+    public List<SubjectContent> selectSubjectContentSubjective(Integer questionId,Integer paperId) {
+        List<SubjectContent> list = managerPaperDao.selectSubjectContentSubjective(questionId,paperId);
         return list;
     }
 

@@ -61,19 +61,19 @@ public interface ManagerPaperService {
     /*
     填空题
      */
-    List<SubjectContent> selectSubjectContentFill(Integer questionId);
+    List<SubjectContent> selectSubjectContentFill(Integer questionId,Integer paperId);
     /*
     单选
      */
-    List<SubjectContent> selectSubjectContentSingle(Integer questionId);
+    List<SubjectContent> selectSubjectContentSingle(Integer questionId,Integer paperId);
     /*
     多选
      */
-    List<SubjectContent> selectSubjectContentMultiple(Integer questionId);
+    List<SubjectContent> selectSubjectContentMultiple(Integer questionId,Integer paperId);
     /*
     主观题
      */
-    List<SubjectContent> selectSubjectContentSubjective(Integer questionId);
+    List<SubjectContent> selectSubjectContentSubjective(Integer questionId,Integer paperId);
     /*
     接收前端的试卷批改数据
      */
