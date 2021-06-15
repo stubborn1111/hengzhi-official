@@ -134,4 +134,12 @@ public class MakePaperServiceImpl implements MakePaperService {
         }
         return list;
     }
-}
+    @Override
+    public Questions findQuestionsById(String qType,int questionId){
+        String type=SelectTableUtils.selectT(qType);
+        System.out.println("type"+type);
+        System.out.println("qtype"+qType);
+        return makePaperDao.findQuestionsById(type,questionId);
+    }
+
+    }

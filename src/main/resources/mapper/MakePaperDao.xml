@@ -91,4 +91,7 @@
             </foreach>
         </where>
     </select>
+    <select id="findQuestionsById" resultMap="question">
+        select * from ${qType} where question_id=#{questionId}
+    </select>
 </mapper>

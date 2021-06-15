@@ -23,8 +23,9 @@ import java.util.List;
  * @Date 2021/5/24
  */
 
-@SpringBootTest
 @RunWith(SpringRunner.class)
+
+@SpringBootTest
 @WebAppConfiguration
 public class StudenTestTests {
     @Resource
