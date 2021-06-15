@@ -51,33 +51,6 @@ public class MakePaperController {
         Integer TotalNumber = makePaperService.showQNumber();
         List<Questions> list = makePaperService.showQuestions();
         return Paging.getPage(list,TotalNumber,size,page);
-//        Double all= Math.ceil((float)TotalNumber/size);
-//        int allP=all.intValue();
-//        Map map = new HashMap();
-//        if(page<=allP){
-//        List<Questions> list = makePaperService.showQuestions();
-//        List<Questions> qlist=new ArrayList<>();
-//        int start=size*(page-1);
-//        int end=size*page-1;
-//        if(end>=list.size()){
-//            end=list.size()-1;
-//        }
-//        for(int i=start;i<=end;i++){
-//            Questions questions=list.get(i);
-//            qlist.add(questions);
-//        }
-//
-//        map.put("listQuestions",qlist);}
-//
-//       else map.put("listQuestions",null);
-//        map.put("TotalNumber",TotalNumber);
-//        if(TotalNumber<size){
-//            map.put("pagesSize",1);
-//        } else if(TotalNumber%size==0){
-//            map.put("pagesSize",TotalNumber/size);
-//        }else {
-//            map.put("pagesSize",TotalNumber/size+1);
-//        }
 
 
     }
@@ -98,12 +71,18 @@ public class MakePaperController {
     @RequestMapping("/findQuestions")
     @ResponseBody
     @RequiresRoles(value = {"admin"})
-    public List findQuestions(@RequestBody JSONObject jsonObject){
+    public Map findQuestions(@RequestBody JSONObject jsonObject){
+        Integer page = jsonObject.getInteger("page");
+        Integer size = jsonObject.getInteger("size");
         String tag = JSONArray.toJSONString(jsonObject.get("kind"));
         List<String> tagList = JSONArray.parseArray(tag, String.class);
+        System.out.println("tagList"+tagList);
         String type = JSONArray.toJSONString(jsonObject.get("type"));
         List<String> typeList = JSONArray.parseArray(type, String.class);
-        return tagList;
+        System.out.println("typeList"+typeList);
+        List list=makePaperService.findQuestions(tagList,typeList);
+        Map map=Paging.getPage(list,list.size(),size,page);
+        return map;
     }
 
     

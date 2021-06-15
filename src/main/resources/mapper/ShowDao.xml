@@ -12,7 +12,7 @@
         <id property="noticeId" column="notice_id"/>
         <result property="time" column="time"/>
         <result property="content" column="content"/>
-        <result property="userId" column="user_id"/>
+        <result property="userName" column="user_name"/>
     </resultMap>
     <resultMap id="data" type="com.hengzhi.entity.Data">
         <id property="description" column="description"/>
@@ -40,7 +40,7 @@
     </insert>
 <!--    发布公告-->
     <insert id="insertNotice">
-        insert into notice(user_id, content) values (#{userId},#{content})
+        insert into notice(user_name, content) values (#{userName},#{content})
     </insert>
 <!--    显示公告-->
     <select id="showNotice" resultMap="notice" >

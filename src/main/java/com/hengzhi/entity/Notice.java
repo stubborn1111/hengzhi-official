@@ -18,7 +18,7 @@ import lombok.experimental.Accessors;
 public class Notice {
     private Integer noticeId;
     //发布人
-    private Integer userId;
+    private String userName;
     //公告内容
     private String content;
     //发布时间

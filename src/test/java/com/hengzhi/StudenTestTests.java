@@ -7,7 +7,9 @@ import com.hengzhi.dto.paperAndTest.MybatisData;
 import com.hengzhi.dto.paperAndTest.QuestionAnswer;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import javax.annotation.Resource;
@@ -20,6 +22,8 @@ import java.util.List;
  * @description 学生考试相关测试类
  * @Date 2021/5/24
  */
+@RunWith(SpringRunner.class)
+
 @SpringBootTest
 @WebAppConfiguration
 public class StudenTestTests {
@@ -201,8 +205,8 @@ public class StudenTestTests {
         MybatisData mybatisData=new MybatisData();
         mybatisData.setType("questions_fill");
         List list=new ArrayList();
-        list.add("11");
-        list.add("123");
+//        list.add("11");
+//        list.add("123");
         mybatisData.setList(list);
         System.out.println(makePaperDao.findQuestionByTag1(list));
     }

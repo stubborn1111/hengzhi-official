@@ -1,5 +1,6 @@
 package com.hengzhi.service;
 
+import com.hengzhi.dto.paperAndTest.Tag;
 import com.hengzhi.entity.*;
 
 import java.util.List;
@@ -10,6 +11,7 @@ public interface MakePaperService {
     public Integer showQNumber();
     public String addTag(String tagName);
     public List findTagFuzzy(String tagName);
+    public List findQuestions(List<String> tList, List<String> sList);
 
 
 }

@@ -11,6 +11,7 @@ import com.hengzhi.utils.SelectTableUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -69,5 +70,68 @@ public class MakePaperServiceImpl implements MakePaperService {
     public List findTagFuzzy(String tagName){
         return makePaperDao.findTagFuzzy(tagName);
     }
+    @Override
+    public List findQuestions(List<String> tList,List<String> sList) {
+        System.out.println(tList+"----"+sList);
+        List list = new ArrayList();
+        List type=new ArrayList();
+        if (sList.isEmpty()) {
+            System.out.println("begin++++++");
+            type.add("0");
+            type.add("1");
+            type.add("2");
+            type.add("3");
+        }
+        else type=sList;
+        System.out.println(type);
+        List<Questions> list0 = new ArrayList<>();
+        List<Questions> list1 = new ArrayList<>();
+        List<Questions> list2 = new ArrayList<>();
+        List<Questions> list3 = new ArrayList<>();
+        for (int i = 0; i < type.size(); i++) {
+            String type1 = (String) type.get(i);
+            if (type1.equals("0"))
+                list0 = makePaperDao.findQuestionByTag1(tList);
+            if (type1.equals("1"))
+                list1 = makePaperDao.findQuestionByTag2(tList);
+            if (type1.equals("2"))
+                list2 = makePaperDao.findQuestionByTag3(tList);
+            if (type1.equals("3"))
+                list3 = makePaperDao.findQuestionByTag4(tList);
+        }
+        System.out.println("list0"+list0);
+        System.out.println("list1"+list1);
+        System.out.println("list2"+list2);
+        System.out.println("list3"+list3);
 
+        if (list0 != null) {
+            for (int i = 0; i < list0.size(); i++) {
+                Questions questions = list0.get(i);
+                questions.setQType("0");
+                list.add(questions);
+            }
+        }
+        if (list1 != null) {
+            for (int i = 0; i < list1.size(); i++) {
+                Questions questions = list1.get(i);
+                questions.setQType("1");
+                list.add(questions);
+            }
+        }
+        if (list2 != null) {
+            for (int i = 0; i < list2.size(); i++) {
+                Questions questions = list2.get(i);
+                questions.setQType("2");
+                list.add(questions);
+            }
+        }
+        if (list3 != null) {
+            for (int i = 0; i < list3.size(); i++) {
+                Questions questions = list3.get(i);
+                questions.setQType("3");
+                list.add(questions);
+            }
+        }
+        return list;
+    }
 }

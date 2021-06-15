@@ -61,18 +61,24 @@ public class ShowController {
     @RequestMapping("/addMessages")
     @ResponseBody
     @Security(false)
-    public void addMessages(@RequestBody JSONObject jsonObject) {
+    public HashMap addMessages(@RequestBody JSONObject jsonObject) {
         String content=jsonObject.getString("content");
         showService.InsertMessages(content);
+        HashMap map=new HashMap();
+        map.put("msg","success");
+        return map;
     }
 //    发布公告
     @ResponseBody
     @RequestMapping("/addNotice")
-    @RequiresRoles(value = {"super"})
-    public void addNotice(@RequestBody JSONObject jsonObject){
+    @RequiresRoles(value = {"admin"})
+    public HashMap addNotice(@RequestBody JSONObject jsonObject){
         int userId=jsonObject.getInteger("userId");
         String content=jsonObject.getString("content");
         showService.insertNotice(content,userId);
+        HashMap map=new HashMap();
+        map.put("msg","success");
+        return map;
     }
 //    显示公告
     @RequestMapping("/showNotice")
@@ -85,8 +91,11 @@ public class ShowController {
     @ResponseBody
     @RequestMapping("/updateIntroduction")
     @RequiresRoles(value = {"super"})
-    public void updateIntroduction(@RequestParam(value = "teamIntroduction")String teamIntroduction,@RequestParam(value = "front")String front,@RequestParam(value = "behind")String behind, HttpServletRequest request){
+    public HashMap updateIntroduction(@RequestParam(value = "teamIntroduction")String teamIntroduction,@RequestParam(value = "front")String front,@RequestParam(value = "behind")String behind, HttpServletRequest request){
             showService.updateIntroduction(teamIntroduction,behind,front);
+            HashMap map=new HashMap();
+            map.put("msg","success");
+            return map;
     }
 
 //    显示简介
@@ -100,7 +109,8 @@ public class ShowController {
     @ResponseBody
     @RequestMapping("/uploadFile")
     @RequiresRoles(value = {"admin"})
-    public void uploadFile(@RequestParam(value = "userId")int userId,@RequestParam(value = "description")String description, @RequestParam(value = "file",required = false)MultipartFile file,HttpServletRequest request){
+    public HashMap uploadFile(@RequestParam(value = "userId")int userId,@RequestParam(value = "description")String description, @RequestParam(value = "file",required = false)MultipartFile file,HttpServletRequest request){
+        HashMap map=new HashMap();
         if (!file.isEmpty()) {
             String filePath = request.getServletContext().getRealPath("/file");
             System.out.println(request.getContextPath());
@@ -121,19 +131,23 @@ public class ShowController {
                 e.printStackTrace();
             }
             showService.addFile(userId,description,url);
+
+            map.put("msg","success");
     }
+        else map.put("msg","error");
+        return map;
     }
 //    文件下载
     @RequestMapping("/downloadFile")
     @ResponseBody
     @RequiresRoles(value = {"admin","user","super"}, logical = Logical.OR)
-    public String downloadFile(@RequestParam(value = "fileName")String fileName, HttpServletResponse response,HttpServletRequest request) throws IOException {
+    public HashMap downloadFile(@RequestParam(value = "fileName")String fileName, HttpServletResponse response,HttpServletRequest request) throws IOException {
         String filePath = request.getServletContext().getRealPath("/file");
             File file = new File(filePath+"/"+fileName);
-
+            HashMap map=new HashMap();
         if (!file.exists()) {
             response.sendError(404, "File not found!");
-            return "error";
+            map.put("msg","error");
         }
         BufferedInputStream br = new BufferedInputStream(new FileInputStream(file));
         byte[] buf = new byte[1024];
@@ -149,7 +163,8 @@ public class ShowController {
             out.write(buf, 0, len);
         br.close();
         out.close();
-       return "success";
+        map.put("msg","success");
+        return map;
     }
 //    资料列表
     @RequestMapping("/showFile")

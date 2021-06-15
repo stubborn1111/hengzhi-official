@@ -3,10 +3,9 @@ package com.hengzhi.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.hengzhi.dao.GeneralManagerDao;
 import com.hengzhi.dao.ShowDao;
-import com.hengzhi.entity.Data;
-import com.hengzhi.entity.Introduction;
-import com.hengzhi.entity.Message;
-import com.hengzhi.entity.Notice;
+import com.hengzhi.dao.UserDao;
+import com.hengzhi.dto.userBasic.UserInfo;
+import com.hengzhi.entity.*;
 import com.hengzhi.service.GeneralManagerService;
 import com.hengzhi.service.ShowService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,8 @@ public class ShowServiceImpl implements ShowService {
 
     @Autowired
     ShowDao showDao;
-
+    @Autowired
+    UserDao userDao;
 
     @Override
     public List<Message> selectThroughMes(int page, int size) {
@@ -41,7 +41,8 @@ public class ShowServiceImpl implements ShowService {
     }
     @Override
     public void insertNotice(String notice,int userId){
-        showDao.insertNotice(userId,notice);
+        UserInfo user=userDao.getUserInfo(userId);
+        showDao.insertNotice(user.getName(),notice);
     }
     @Override
     public List<Notice> showNotice(){

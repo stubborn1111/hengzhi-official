@@ -28,7 +28,7 @@ public interface ShowDao {
     /*
     发布公告
     */
-    void insertNotice(int userId,String content);
+    void insertNotice(String userName,String content);
      /*
     显示公告
      */

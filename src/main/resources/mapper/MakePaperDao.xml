@@ -27,16 +27,16 @@
         select count(*) from questions_fill
     </select>
     <select id="showQuestions2" resultMap="question">
-        select * from questions_multiple
-    </select>
-    <select id="showQNumber2" resultType="int">
-        select count(*) from questions_multiple
-    </select>
-    <select id="showQuestions3" resultMap="question">
         select * from questions_single
     </select>
-    <select id="showQNumber3" resultType="int">
+    <select id="showQNumber2" resultType="int">
         select count(*) from questions_single
+    </select>
+    <select id="showQuestions3" resultMap="question">
+        select * from questions_multiple
+    </select>
+    <select id="showQNumber3" resultType="int">
+        select count(*) from questions_multiple
     </select>
     <select id="showQuestions4" resultMap="question">
         select * from questions_subjective
@@ -61,6 +61,30 @@
     </select>
     <select id="findQuestionByTag1" resultMap="question" parameterType="List">
         select * from questions_fill
+        <where>
+            <foreach collection="list" item="tag" open="(" close=")" separator="and" >
+                find_in_set(#{tag},kind)
+            </foreach>
+        </where>
+    </select>
+    <select id="findQuestionByTag2" resultMap="question" parameterType="List">
+        select * from questions_single
+        <where>
+            <foreach collection="list" item="tag" open="(" close=")" separator="and" >
+                find_in_set(#{tag},kind)
+            </foreach>
+        </where>
+    </select>
+    <select id="findQuestionByTag3" resultMap="question" parameterType="List">
+        select * from questions_multiple
+        <where>
+            <foreach collection="list" item="tag" open="(" close=")" separator="and" >
+                find_in_set(#{tag},kind)
+            </foreach>
+        </where>
+    </select>
+    <select id="findQuestionByTag4" resultMap="question" parameterType="List">
+        select * from questions_subjective
         <where>
             <foreach collection="list" item="tag" open="(" close=")" separator="and" >
                 find_in_set(#{tag},kind)
