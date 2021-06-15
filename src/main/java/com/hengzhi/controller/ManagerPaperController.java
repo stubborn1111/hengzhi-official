@@ -4,19 +4,16 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.hengzhi.dto.ManagerPaper.*;
 import com.hengzhi.service.ManagerPaperService;
-import org.apache.shiro.authz.annotation.Logical;
+
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.w3c.dom.ls.LSInput;
 
-import java.rmi.MarshalledObject;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import javax.crypto.spec.PSource;
+import java.util.*;
 
 @RequestMapping("/managerPaper")
 @Controller
@@ -94,5 +91,68 @@ public class ManagerPaperController {
         Map map = new HashMap();
         map.put("message","成功修改");
         return map;
+    }
+    /*
+    改卷（给前端显示）
+     */
+    @ResponseBody
+    @RequestMapping("/selectNewsFront")
+    @RequiresRoles(value = {"admin"})
+    public Map selectNewsFront(@RequestBody JSONObject jsonObject){
+        Map map = new HashMap();
+        Integer paperId = jsonObject.getInteger("paperId");
+        Integer page = jsonObject.getInteger("page");
+        //Integer size = jsonObject.getInteger("size");
+        //返回给前端题目列表
+            //题号按顺序返回
+        ArrayList<Integer> numberList = managerPaperService.selectType(paperId);
+        System.out.println(numberList);
+        ArrayList<Integer> questionIdList = managerPaperService.selectQuestionId(paperId);
+        System.out.println(questionIdList);
+        List subjectContentList = new LinkedList();
+        int length = numberList.size();
+        Integer size = length;
+        for(int i = 0;i<length;i++){
+            //填空题
+            System.out.println("number"+numberList.get(i));
+            if(numberList.get(i).equals(0)){
+                List<SubjectContent> list = managerPaperService.selectSubjectContentFill(questionIdList.get(i));
+                subjectContentList.add(list);
+                System.out.println(0);
+            }
+            //单选题
+           else if(numberList.get(i).equals(1)){
+                List<SubjectContent> list = managerPaperService.selectSubjectContentSingle(questionIdList.get(i));
+                subjectContentList.add(list);
+                System.out.println("question +"+questionIdList.get(i));
+                System.out.println("list  "+list);
+                System.out.println(1);
+            }
+            //多选题
+           else if(numberList.get(i).equals(2)){
+                List<SubjectContent> list = managerPaperService.selectSubjectContentMultiple(questionIdList.get(i));
+                subjectContentList.add(list);
+                System.out.println(2);
+            }else {
+                List<SubjectContent> list = managerPaperService.selectSubjectContentSubjective(questionIdList.get(i));
+                subjectContentList.add(list);
+                System.out.println(3);
+            }
+        }
+        map.put("subjectContentList",subjectContentList);
+
+        //返回给前端学生答题列表
+        List<UnCorrectStudentList> list1 = managerPaperService.unCorrectStudent1(paperId,page,size);
+        map.put("studentList",list1);
+
+        //还剩下多少张试卷
+            //返回答题人数
+        Integer num1 = managerPaperService.selectAllPeople(paperId);
+            //返回已经批改的数目
+        Integer num2 = managerPaperService.selectCorrect(paperId);
+        Integer num = num1-num2;
+        map.put("surplus",num);
+        return map;
+
     }
 }

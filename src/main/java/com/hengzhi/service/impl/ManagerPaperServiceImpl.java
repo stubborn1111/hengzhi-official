@@ -1,11 +1,14 @@
 package com.hengzhi.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.hengzhi.dao.ManagerPaperDao;
 import com.hengzhi.dto.ManagerPaper.*;
 import com.hengzhi.service.ManagerPaperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -59,5 +62,60 @@ public class ManagerPaperServiceImpl implements ManagerPaperService {
     @Override
     public void unTestPaper(UnTestPaper unTestPaper) {
         managerPaperDao.unTestPaper(unTestPaper);
+    }
+
+    @Override
+    public List<UnCorrectStudentList> unCorrectStudent1(Integer paperId,Integer page, Integer size) {
+        PageHelper.startPage(page, size);
+        List<UnCorrectStudentList> lists = managerPaperDao.unCorrectStudent(paperId);
+        return lists;
+    }
+
+    @Override
+    public Integer selectAllPeople(Integer paperId) {
+        Integer Sum = managerPaperDao.selectAllPeople(paperId);
+        return Sum;
+    }
+
+    @Override
+    public Integer selectCorrect(Integer paperId) {
+        Integer number = managerPaperDao.selectCorrect(paperId);
+        return number;
+    }
+
+    @Override
+    public ArrayList selectType(Integer paperId) {
+        ArrayList list = managerPaperDao.selectType(paperId);
+        return list;
+    }
+
+    @Override
+    public ArrayList selectQuestionId(Integer paperId) {
+        ArrayList list = managerPaperDao.selectQuestionId(paperId);
+        return list;
+    }
+
+    @Override
+    public List<SubjectContent> selectSubjectContentFill(Integer questionId) {
+        List<SubjectContent> list = managerPaperDao.selectSubjectContentFill(questionId);
+        return list;
+    }
+
+    @Override
+    public List<SubjectContent> selectSubjectContentSingle(Integer questionId) {
+        List<SubjectContent> list = managerPaperDao.selectSubjectContentSingle(questionId);
+        return list;
+    }
+
+    @Override
+    public List<SubjectContent> selectSubjectContentMultiple(Integer questionId) {
+        List<SubjectContent> list = managerPaperDao.selectSubjectContentMultiple(questionId);
+        return list;
+    }
+
+    @Override
+    public List<SubjectContent> selectSubjectContentSubjective(Integer questionId) {
+        List<SubjectContent> list = managerPaperDao.selectSubjectContentSubjective(questionId);
+        return list;
     }
 }
