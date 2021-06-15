@@ -156,7 +156,9 @@ public class ManagerPaperController {
             //返回已经批改的数目
         Integer num2 = managerPaperService.selectCorrect(paperId);
         Integer num = num1-num2;
-        map.put("surplus",num);
+        map.put("pageSize",num);
+        map.put("TotalNumber",num);
+        map.put("page",page);
         return map;
 
     }
