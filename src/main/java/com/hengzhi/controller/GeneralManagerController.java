@@ -53,6 +53,7 @@ public class GeneralManagerController {
         }else {
             List<Message> list = generalManagerService.selectUnExamMeg(page,size);
             map.put("listMessage",list);
+            map.put("page",page);
             return map;
         }
 
