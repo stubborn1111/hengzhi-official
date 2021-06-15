@@ -27,5 +27,6 @@ public interface MakePaperDao {
     List<Questions> findQuestionByTag2(List list);
     List<Questions> findQuestionByTag3(List list);
     List<Questions> findQuestionByTag4(List list);
+    Questions findQuestionsById(String qType,int questionId);
 
 }

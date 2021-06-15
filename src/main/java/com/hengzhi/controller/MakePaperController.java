@@ -84,8 +84,18 @@ public class MakePaperController {
         Map map=Paging.getPage(list,list.size(),size,page);
         return map;
     }
-
-    
+    @RequestMapping("/findQuestionsById")
+    @ResponseBody
+    @RequiresRoles(value = {"admin"})
+    public Questions findQuestionsById(@RequestBody JSONObject jsonObject) {
+        int questionId = jsonObject.getInteger("questionId");
+        String qType = jsonObject.getString("type");
+        System.out.println(qType);
+        Questions questions=makePaperService.findQuestionsById(qType, questionId);
+        if(questions!=null)
+            questions.setQType(qType);
+        return  questions;
+    }
     }
 
 
