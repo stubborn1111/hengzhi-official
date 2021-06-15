@@ -143,6 +143,7 @@ public class StudentTestServiceImpl implements StudentTestService {
                 TestedQuestion testedQuestion = testDao.getQuestion(questionId, tName);
                 String rAnswer = testedQuestion.getAnswer();//正确答案
                 String uAnswer = answerList.get(i).getAnswer();//用户答案
+                double cRate;
                 if (rAnswer.equals(uAnswer)) {
                     score = 5;//完全正确
                     //修改题目正确率，在试题表中修改并放到paper_content表中

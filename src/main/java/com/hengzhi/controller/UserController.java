@@ -202,14 +202,16 @@ public class UserController {
     @ResponseBody
     @RequestMapping("/verify")
     @Security(false)
-    public String autoLogin(HttpServletRequest request) throws UnsupportedEncodingException {
+    public Map<String,String> autoLogin(HttpServletRequest request) throws UnsupportedEncodingException {
+        Map map = new HashMap<String,String>();
         //可能发生两种情况的异常，jwt失效或没有
         boolean msg = jwtService.verifyJWTToken(request.getHeader("Authorization"));
         if(msg){
-            return jwtService.getUserRole(request).toString();
+            map.put("power",jwtService.getUserRole(request).toString());
+            return map;
         }
-        String s = ""+msg;
-        return s;
+        map.put("power","false");
+        return map;
     }
 
 }
