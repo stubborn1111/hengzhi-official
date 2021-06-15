@@ -333,5 +333,11 @@ public class MakePaperServiceImpl implements MakePaperService {
             if(type.equals("3")) score+=10;
         }
         makePaperDao.addPaper(beginTime,endTime,finishTime,paperName,userId,description,code,score);
+        Papers papers=makePaperDao.findPaperByName(paperName);
+        int paperId=papers.getPaperId();
+        for(int i=0;i<list.size();i++){
+            QInfo qInfo=list.get(i);
+            makePaperDao.addQuestionsInPaper(paperId,i+1,qInfo.getQuestionId(),qInfo.getQType());
+        }
      }
     }

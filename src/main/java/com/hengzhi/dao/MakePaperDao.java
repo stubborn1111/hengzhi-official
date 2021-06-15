@@ -32,5 +32,6 @@ public interface MakePaperDao {
     Questions findQuestionsById(String qType,int questionId);
     List<Questions> makePaperFind(String type,String qType);
     void addPaper(Date beginTime, Date endTime,String finishTime,String paperName,int userId,String description,String code,int score);
-
+    Papers findPaperByName(String paperName);
+    void addQuestionsInPaper(int paperId,int qNumber,int questionId,String qType);
 }

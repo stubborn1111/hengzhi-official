@@ -103,4 +103,10 @@
     <insert id="addPaper">
         insert into papers(begin_time, end_time, finish_time, name, user_id, description, code,  score) values (#{beginTime},#{endTime},#{finishTime},#{paperName},#{userId},#{description},#{code},#{score})
     </insert>
+    <select id="findPaperByName" resultType="com.hengzhi.entity.Papers">
+        select * from papers where name=#{paperName}
+    </select>
+    <insert id="addQuestionsInPaper">
+        insert into paper_content(paper_id, q_number, question_id, q_type) values(#{paperId},#{qNumber},#{questionId},#{qType})
+    </insert>
 </mapper>
