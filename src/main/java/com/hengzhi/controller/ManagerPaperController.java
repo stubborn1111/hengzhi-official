@@ -174,15 +174,21 @@ public class ManagerPaperController {
         Integer paperId = jsonObject.getInteger("paperId");
         Integer userId = jsonObject.getInteger("userId");
         String text = JSONArray.toJSONString(jsonObject.get("list"));
+        Integer sum=0;
         List<QuestionAnswer1> answerList = JSONArray.parseArray(text, QuestionAnswer1.class);
         for (int i = 0;i<answerList.size();i++){
             Integer score = answerList.get(i).getScore();
             Integer qNumber = answerList.get(i).getQNumber();
             System.out.println("score"+score);
+            sum = sum+score;
             System.out.println("qNumber"+qNumber);
             managerPaperService.updateAnswerPaper(score,paperId,userId,qNumber);
         }
-
+        //取出单选和双选的总分
+        Integer sum1 = managerPaperService.selectSum1(userId,paperId);
+        Integer score = sum1 + sum;
+        //将总分存到user_paper
+        managerPaperService.updateSum(score,userId,paperId);
         Map map = new HashMap();
         map.put("message","success");
         return map;
