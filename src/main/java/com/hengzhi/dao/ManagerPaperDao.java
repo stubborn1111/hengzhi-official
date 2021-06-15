@@ -25,9 +25,17 @@ public interface ManagerPaperDao {
       */
      List<ChangePapers> selectChange();
      /*
+     已改数据份数
+      */
+     Integer selectChangeNumber();
+;     /*
      未考试卷信息
       */
      List<UnFinishPapers> selectUnFinish();
+     /*
+     未考试卷份数
+      */
+     Integer selectUnFinishNumber();
      /*
      考试试卷信息
       */
