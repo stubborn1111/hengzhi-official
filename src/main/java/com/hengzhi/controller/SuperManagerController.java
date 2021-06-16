@@ -81,7 +81,7 @@ public class SuperManagerController {
 
     @RequestMapping("/addUser")
     @ResponseBody
-    @RequiresRoles(value = {"super"})
+    @Security(false)
     public Map addUser(@RequestBody JSONObject jsonObject){
         int studentId=jsonObject.getInteger("studentId");
         String name=jsonObject.getString("name");

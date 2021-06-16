@@ -4,8 +4,10 @@ import com.hengzhi.dao.SuperManagerDao;
 import com.hengzhi.dao.UserDao;
 import com.hengzhi.dto.userBasic.UserInfo;
 import com.hengzhi.entity.User;
+import com.hengzhi.secutity.BCryptPasswordEncoder;
 import com.hengzhi.service.SuperManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +19,8 @@ public class SuperManagerServiceImpl implements SuperManagerService {
     SuperManagerDao superManagerDao;
     @Autowired
     UserDao userDao;
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
     @Override
     public String addAdmin(int userId){
       UserInfo user=userDao.getUserInfo(userId);
@@ -65,17 +69,36 @@ public class SuperManagerServiceImpl implements SuperManagerService {
             return "success";
         }
     }
-    @Override
-    public String addUser(String name,int studentId){
-        User user=superManagerDao.findUserByStudentId(studentId);
-        if(user!=null) return "exist";
-        else {
-            String password1=String.valueOf(studentId);
-            String password=password1.substring(4);
-            superManagerDao.addUser(password,name,studentId);
-            return "success";
-        }
+//    @Override
+//    public String addUser(String name,int studentId){
+//        User user=superManagerDao.findUserByStudentId(studentId);
+//        if(user!=null) return "exist";
+//        else {
+//            String password1=String.valueOf(studentId);
+//            String password=password1.substring(4);
+//            superManagerDao.addUser(password,name,studentId);
+//            return "success";
+//        }
+//    }
+@Override
+public String addUser(String name,int studentId){
+    User user=superManagerDao.findUserByStudentId(studentId);
+    System.out.println(user);
+    if(user!=null) return "exist";
+    else {
+        String password1=String.valueOf(studentId);
+        String password=password1.substring(4);
+        String encodePas= bCryptPasswordEncoder.encode(password);
+        System.out.println("begin++++");
+        System.out.println(encodePas);
+        superManagerDao.addUser(encodePas,name,studentId);
+        System.out.println("successAdd");
+        String userPas=userDao.selectUserByStudentId(studentId);
+        if(bCryptPasswordEncoder.matches(password,userPas)) return "yes";
+        else return "no";
+//        return "success";
     }
+}
     @Override
     public String deleteUser(int userId){
         UserInfo user=userDao.getUserInfo(userId);
