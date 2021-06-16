@@ -17,30 +17,39 @@ import java.util.List;
 @Mapper
 @Repository
 public interface UserDao {
-    /**根据学号和密码查询
+    /**
+     * 根据学号和密码查询
+     *
      * @param studentId
      * @param password
      * @return 查到的用户信息
      */
-    User selectUserByStudentIdAndPassword(Integer studentId,String password);
+    User selectUserByStudentIdAndPassword(Integer studentId, String password);
 
     /**
      * 修改用户信息
+     *
      * @param user
      * @return 受影响的行数
      */
     int updateByStudentId(User user);
 
     String selectUserByStudentId(Integer studentId);
+
     User selectUserByUserId(int userId);
+
+    User selectUserByStudentId1(int userId);
+
     /**
      * 提交忘记密码，审核
+     *
      * @param studentId
      * @param newPassword
      * @return
      */
-    int submitRequiredPassword(Integer studentId,String newPassword);
+    int submitRequiredPassword(Integer studentId, String newPassword);
 
     UserInfo getUserInfo(Integer userId);
+
     List<UserInfo> findAllUser();
 }

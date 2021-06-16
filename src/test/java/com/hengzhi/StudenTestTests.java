@@ -6,8 +6,10 @@ import com.hengzhi.dao.StudentTestDao;
 import com.hengzhi.dto.paperAndTest.MybatisData;
 import com.hengzhi.dto.paperAndTest.QuestionAnswer;
 
+import com.hengzhi.secutity.BCryptPasswordEncoder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -217,4 +219,11 @@ public class StudenTestTests {
       studentTestDao.updateCRate(2.33,"questions_fill",1);
     }
 
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Test
+    public void test16(){
+        String s = bCryptPasswordEncoder.encode("1234");
+        System.out.println(bCryptPasswordEncoder.matches("1234",s));
+    }
 }

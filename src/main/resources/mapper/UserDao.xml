@@ -32,6 +32,10 @@
         select * from user
         where user_id = #{userId}
     </select>
+    <select id="selectUserByStudentId1" resultMap="user">
+        select * from user
+        where student_id = #{studentId}
+    </select>
     <!--修改个人信息-->
     <update id="updateByStudentId" parameterType="com.hengzhi.entity.User">
         update user

@@ -2,6 +2,7 @@ package com.hengzhi.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.hengzhi.dto.userBasic.UserInfo;
+import com.hengzhi.secutity.BCryptPasswordEncoder;
 import com.hengzhi.secutity.Security;
 import com.hengzhi.service.JWTService;
 import com.hengzhi.service.UserService;
@@ -37,6 +38,8 @@ public class UserController {
     private UserService userService;
     @Autowired
     private JWTService jwtService;
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
     /**
@@ -52,8 +55,11 @@ public class UserController {
         Map<String, String> map = new HashMap();
         map.put("status", "error");
         User userDB = userService.login(user);
-        System.out.println(userDB);
         if (userDB != null) {
+            if(!bCryptPasswordEncoder.matches(user.getPassword(),userDB.getPassword())){
+                map.put("msg","密码错误");
+                return map;
+            }
             String token = jwtService.generateJWTToken(userDB);
             response.setHeader("Authorization", token);
             response.addHeader("Access-Control-Expose-Headers","Authorization");
@@ -61,6 +67,7 @@ public class UserController {
             map.put("power",userDB.getRole());
             return map;
         }
+        map.put("msg","此用户不存在");
         log.info("/user/login"+map.toString());
         return map;
     }
