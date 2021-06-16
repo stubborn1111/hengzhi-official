@@ -1,11 +1,14 @@
 package com.hengzhi.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.hengzhi.dao.ManagerPaperDao;
 import com.hengzhi.dto.ManagerPaper.*;
 import com.hengzhi.service.ManagerPaperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -15,27 +18,42 @@ public class ManagerPaperServiceImpl implements ManagerPaperService {
     ManagerPaperDao managerPaperDao;
 
     @Override
-    public List<UnChangePapers> selectUnChange() {
-        List<UnChangePapers> list = managerPaperDao.selectUnChange();
+    public List<UnChangePapers> selectUnChange(Integer page,Integer size,Integer id) {
+        PageHelper.startPage(page, size);
+        List<UnChangePapers> list = managerPaperDao.selectUnChange(id);
         return list;
     }
 
     @Override
-    public int selectUnChangeNumber() {
-        Integer number = managerPaperDao.selectUnChangeNumber();
+    public int selectUnChangeNumber(Integer userId) {
+        Integer number = managerPaperDao.selectUnChangeNumber(userId);
         return number;
     }
 
     @Override
-    public List<ChangePapers> selectChange() {
-        List<ChangePapers> list = managerPaperDao.selectChange();
+    public List<ChangePapers> selectChange(Integer page,Integer size,Integer userId) {
+        PageHelper.startPage(page, size);
+        List<ChangePapers> list = managerPaperDao.selectChange(userId);
         return list;
     }
 
     @Override
-    public List<UnFinishPapers> selectUnFinish() {
+    public Integer selectChangeNumber(Integer userId) {
+        Integer num = managerPaperDao.selectChangeNumber(userId);
+        return num;
+    }
+
+    @Override
+    public List<UnFinishPapers> selectUnFinish(Integer page,Integer size) {
+        PageHelper.startPage(page, size);
         List<UnFinishPapers> list = managerPaperDao.selectUnFinish();
         return list;
+    }
+
+    @Override
+    public Integer selectUnFinishNumber() {
+        Integer num = managerPaperDao.selectUnFinishNumber();
+        return num;
     }
 
     @Override
@@ -59,5 +77,76 @@ public class ManagerPaperServiceImpl implements ManagerPaperService {
     @Override
     public void unTestPaper(UnTestPaper unTestPaper) {
         managerPaperDao.unTestPaper(unTestPaper);
+    }
+
+    @Override
+    public List<UnCorrectStudentList> unCorrectStudent1(Integer paperId,Integer page, Integer size) {
+        PageHelper.startPage(page, size);
+        List<UnCorrectStudentList> lists = managerPaperDao.unCorrectStudent(paperId);
+        return lists;
+    }
+
+    @Override
+    public Integer selectAllPeople(Integer paperId) {
+        Integer Sum = managerPaperDao.selectAllPeople(paperId);
+        return Sum;
+    }
+
+    @Override
+    public Integer selectCorrect(Integer paperId) {
+        Integer number = managerPaperDao.selectCorrect(paperId);
+        return number;
+    }
+
+    @Override
+    public ArrayList selectType(Integer paperId) {
+        ArrayList list = managerPaperDao.selectType(paperId);
+        return list;
+    }
+
+    @Override
+    public ArrayList selectQuestionId(Integer paperId) {
+        ArrayList list = managerPaperDao.selectQuestionId(paperId);
+        return list;
+    }
+
+    @Override
+    public List<SubjectContent> selectSubjectContentFill(Integer questionId,Integer paperId) {
+        List<SubjectContent> list = managerPaperDao.selectSubjectContentFill(questionId,paperId);
+        return list;
+    }
+
+    @Override
+    public List<SubjectContent> selectSubjectContentSingle(Integer questionId,Integer paperId) {
+        List<SubjectContent> list = managerPaperDao.selectSubjectContentSingle(questionId,paperId);
+        return list;
+    }
+
+    @Override
+    public List<SubjectContent> selectSubjectContentMultiple(Integer questionId,Integer paperId) {
+        List<SubjectContent> list = managerPaperDao.selectSubjectContentMultiple(questionId,paperId);
+        return list;
+    }
+
+    @Override
+    public List<SubjectContent> selectSubjectContentSubjective(Integer questionId,Integer paperId) {
+        List<SubjectContent> list = managerPaperDao.selectSubjectContentSubjective(questionId,paperId);
+        return list;
+    }
+
+    @Override
+    public void updateAnswerPaper(Integer score, Integer paperId, Integer userId, Integer qNumber) {
+        managerPaperDao.updateAnswerPaper(score,paperId,userId,qNumber);
+    }
+
+    @Override
+    public Integer selectSum1(Integer userId, Integer paperId) {
+        Integer sum = managerPaperDao.selectSum1(userId,paperId);
+        return sum;
+    }
+
+    @Override
+    public void updateSum(Integer score, Integer userId, Integer paperId) {
+        managerPaperDao.updateSum(score,userId,paperId);
     }
 }

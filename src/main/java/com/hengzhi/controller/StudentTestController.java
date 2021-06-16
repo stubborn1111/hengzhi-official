@@ -99,7 +99,7 @@ public class StudentTestController {
     @RequiresRoles(value = {"user", "admin"}, logical = Logical.OR)
     public Map viewTestedPaper(@RequestBody JSONObject jsonObject,HttpServletRequest request) {
         Integer paperId = jsonObject.getInteger("paperId");
-        Integer userId = jwtService.getUserId(request);
+        Integer userId = jsonObject.getInteger("userId");
         Map map = testService.viewTestedPaper(paperId, userId);
         System.out.println(map);
         return map;

@@ -10,9 +10,104 @@
         <result property="correctNumber" column="correct_number"/>
         <result property="totalNumber" column="total_number"/>
         <result property="description" column="description"/>
+        <result property="cRate" column="c_rate"/>
+    </resultMap>
+    <resultMap id="tag" type="com.hengzhi.dto.paperAndTest.Tag">
+        <result property="tagId" column="tag_id"/>
+        <result property="tagName" column="tag_name"/>
+
     </resultMap>
     <insert id="addQuestions">
         insert into ${qType}(kind,user_id,content,answer,description) values (#{kind},#{userId},#{content},#{answer},#{description})
+    </insert>
+    <select id="showQuestions1" resultMap="question">
+        select * from questions_fill
+    </select>
+    <select id="showQNumber1" resultType="int">
+        select count(*) from questions_fill
+    </select>
+    <select id="showQuestions2" resultMap="question">
+        select * from questions_single
+    </select>
+    <select id="showQNumber2" resultType="int">
+        select count(*) from questions_single
+    </select>
+    <select id="showQuestions3" resultMap="question">
+        select * from questions_multiple
+    </select>
+    <select id="showQNumber3" resultType="int">
+        select count(*) from questions_multiple
+    </select>
+    <select id="showQuestions4" resultMap="question">
+        select * from questions_subjective
+    </select>
+    <select id="showQNumber4" resultType="int">
+        select count(*) from questions_subjective
+    </select>
+    <insert id="addTag">
+        insert into tag(tag_name) VALUES (#{tagName})
+    </insert>
+    <select id="findTag" resultType="com.hengzhi.dto.paperAndTest.Tag">
+        select * from tag where tag_name=#{tagName}
+    </select>
+    <select id="findAllTag" resultType="String">
+        select tag_name from tag
+    </select>
+    <select id="findTagFuzzy" resultMap="tag">
+        select * from tag where tag_name like  concat('%',#{tagName},'%')
+    </select>
+    <select id="findQuestionByType" resultMap="question">
+        select * from ${qType}
+    </select>
+    <select id="findQuestionByTypeNumber" resultType="int">
+        select count(*) from ${qType}
+    </select>
+    <select id="findQuestionByTag1" resultMap="question" parameterType="List">
+        select * from questions_fill
+        <where>
+            <foreach collection="list" item="tag" open="(" close=")" separator="and" >
+                find_in_set(#{tag},kind)
+            </foreach>
+        </where>
+    </select>
+    <select id="findQuestionByTag2" resultMap="question" parameterType="List">
+        select * from questions_single
+        <where>
+            <foreach collection="list" item="tag" open="(" close=")" separator="and" >
+                find_in_set(#{tag},kind)
+            </foreach>
+        </where>
+    </select>
+    <select id="findQuestionByTag3" resultMap="question" parameterType="List">
+        select * from questions_multiple
+        <where>
+            <foreach collection="list" item="tag" open="(" close=")" separator="and" >
+                find_in_set(#{tag},kind)
+            </foreach>
+        </where>
+    </select>
+    <select id="findQuestionByTag4" resultMap="question" parameterType="List">
+        select * from questions_subjective
+        <where>
+            <foreach collection="list" item="tag" open="(" close=")" separator="and" >
+                find_in_set(#{tag},kind)
+            </foreach>
+        </where>
+    </select>
+    <select id="findQuestionsById" resultMap="question">
+        select * from ${qType} where question_id=#{questionId}
+    </select>
+    <select id="makePaperFind" resultMap="question">
+        SELECT * FROM ${qType} WHERE kind REGEXP #{type}
+    </select>
+    <insert id="addPaper">
+        insert into papers(begin_time, end_time, finish_time, name, user_id, description, code,  score) values (#{beginTime},#{endTime},#{finishTime},#{paperName},#{userId},#{description},#{code},#{score})
+    </insert>
+    <select id="findPaperByName" resultType="com.hengzhi.entity.Papers">
+        select * from papers where name=#{paperName}
+    </select>
+    <insert id="addQuestionsInPaper">
+        insert into paper_content(paper_id, q_number, question_id, q_type) values(#{paperId},#{qNumber},#{questionId},#{qType})
     </insert>
 
 </mapper>

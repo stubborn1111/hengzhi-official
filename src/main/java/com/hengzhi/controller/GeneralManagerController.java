@@ -6,8 +6,10 @@ import com.hengzhi.entity.Message;
 import com.hengzhi.service.GeneralManagerService;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresRoles;
+import org.omg.PortableInterceptor.INACTIVE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 @RequestMapping("/generalManager")
+@CrossOrigin(origins = "*",maxAge = 3600)
 @Controller
 public class GeneralManagerController {
 
@@ -31,19 +34,29 @@ public class GeneralManagerController {
         System.out.println("进来了");
         Integer page = jsonObject.getInteger("page");
         Integer size = jsonObject.getInteger("size");
+        Integer pagesSize;
         Map map = new HashMap();
-        List<Message> list = generalManagerService.selectUnExamMeg(page,size);
-        map.put("listMessage",list);
         Integer TotalNumber = generalManagerService.SelectCountUnExam();
         map.put("TotalNumber",TotalNumber);
         if(TotalNumber<size){
             map.put("pagesSize",1);
+            pagesSize = 1;
         } else if(TotalNumber%size==0){
             map.put("pagesSize",TotalNumber/size);
+            pagesSize =  TotalNumber/size;
         }else {
             map.put("pagesSize",TotalNumber/size+1);
+            pagesSize =  TotalNumber/size+1;
         }
-        return map;
+        if(page>pagesSize){
+            return null;
+        }else {
+            List<Message> list = generalManagerService.selectUnExamMeg(page,size);
+            map.put("listMessage",list);
+            map.put("page",page);
+            return map;
+        }
+
     }
 
     @ResponseBody

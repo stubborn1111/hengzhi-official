@@ -140,7 +140,7 @@
     </update>
     <update id="setSum">
         UPDATE user_paper
-        SET score = #{sum},answer_time = #{answerTime}
+        SET score = #{sum},answer_time = #{answerTime},whether_answer=1
         WHERE paper_id = #{paperId} AND user_id = #{userId}
     </update>
     <update id="updateNumber">
@@ -153,5 +153,15 @@
         UPDATE ${tName}
         SET total_number = total_number+1
         WHERE question_id = #{questionId}
+    </update>
+    <select id="selectPaper" resultType="java.lang.Integer">
+        SELECT user_paper_id FROM user_paper
+        WHERE paper_id=#{paperId}
+        AND user_id = #{userId}
+    </select>
+    <update id="updateCRate">
+        update ${tName}
+        set c_rate=#{cRate}
+        where question_id =#{questionId}
     </update>
 </mapper>

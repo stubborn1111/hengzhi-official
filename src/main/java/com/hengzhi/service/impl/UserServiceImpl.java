@@ -3,6 +3,7 @@ package com.hengzhi.service.impl;
 import com.hengzhi.dao.UserDao;
 import com.hengzhi.dto.userBasic.UserInfo;
 import com.hengzhi.entity.User;
+import com.hengzhi.secutity.BCryptPasswordEncoder;
 import com.hengzhi.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,8 @@ import java.util.Map;
 public class UserServiceImpl implements UserService {
     @Resource
     UserDao userDao;
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
 
     /**
      * 登陆
@@ -33,7 +36,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public User login(User user) {
-        User userDB = userDao.selectUserByStudentIdAndPassword(user.getStudentId(), user.getPassword());
+        User userDB = userDao.selectUserByStudentId1(user.getStudentId());
         return userDB;
     }
 
@@ -45,11 +48,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public int updatePassword(Integer studentId, String password, String newPassword) {
         String realPassword = userDao.selectUserByStudentId(studentId);
-        //newPassword = DigestUtils.md5DigestAsHex(newPassword.getBytes());
-        if (realPassword.equals(password)) {
+        if (bCryptPasswordEncoder.matches(password,newPassword)) {
             User user = new User();
             user.setStudentId(studentId);
-            user.setPassword(newPassword);
+            user.setPassword(bCryptPasswordEncoder.encode(newPassword));
             userDao.updateByStudentId(user);
             return 0;
         }

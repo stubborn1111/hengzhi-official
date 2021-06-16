@@ -1,9 +1,12 @@
 package com.hengzhi.config;
 
+import com.hengzhi.secutity.BCryptPasswordEncoder;
 import com.hengzhi.secutity.JWTInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.system.ApplicationHome;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -28,5 +31,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
         InterceptorRegistration registration = registry.addInterceptor(interceptor);
         registration.addPathPatterns("/**");
     }
+
 
 }

@@ -2,6 +2,7 @@ package com.hengzhi.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.hengzhi.dto.userBasic.UserInfo;
+import com.hengzhi.secutity.BCryptPasswordEncoder;
 import com.hengzhi.secutity.Security;
 import com.hengzhi.service.JWTService;
 import com.hengzhi.service.UserService;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -36,6 +38,9 @@ public class UserController {
     private UserService userService;
     @Autowired
     private JWTService jwtService;
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
 
     /**
      * 登陆
@@ -50,8 +55,11 @@ public class UserController {
         Map<String, String> map = new HashMap();
         map.put("status", "error");
         User userDB = userService.login(user);
-        System.out.println(userDB);
         if (userDB != null) {
+            if(!bCryptPasswordEncoder.matches(user.getPassword(),userDB.getPassword())){
+                map.put("msg","密码错误");
+                return map;
+            }
             String token = jwtService.generateJWTToken(userDB);
             response.setHeader("Authorization", token);
             response.addHeader("Access-Control-Expose-Headers","Authorization");
@@ -59,13 +67,13 @@ public class UserController {
             map.put("power",userDB.getRole());
             return map;
         }
+        map.put("msg","此用户不存在");
         log.info("/user/login"+map.toString());
         return map;
     }
 
     /**
      * 修改头像
-     * @param studentId
      * @param headImage
      * @param request
      * @return
@@ -192,4 +200,26 @@ public class UserController {
             return new UserInfo();
         }
     }
+
+    /**
+     * 自动登录
+     * @param request
+     * @return
+     * @throws UnsupportedEncodingException
+     */
+    @ResponseBody
+    @RequestMapping("/verify")
+    @Security(false)
+    public Map<String,String> autoLogin(HttpServletRequest request) throws UnsupportedEncodingException {
+        Map map = new HashMap<String,String>();
+        //可能发生两种情况的异常，jwt失效或没有
+        boolean msg = jwtService.verifyJWTToken(request.getHeader("Authorization"));
+        if(msg){
+            map.put("power",jwtService.getUserRole(request).toString());
+            return map;
+        }
+        map.put("power","false");
+        return map;
+    }
+
 }

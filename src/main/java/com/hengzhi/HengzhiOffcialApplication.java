@@ -12,4 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @SpringBootApplication
 public class HengzhiOffcialApplication extends SpringBootServletInitializer {
+    public static void main(String[] args) {
+        SpringApplication.run(HengzhiOffcialApplication.class, args);
+    }
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+        return builder.sources(HengzhiOffcialApplication.class);
+    }
+
+}
 

@@ -23,5 +23,8 @@ public class UnChangePapers {
     //试卷总分
     private Integer score;
 
+    //出卷人id
+    private Integer userId;
+
     private List<UnChangeUser> unChangeUserList;
 }

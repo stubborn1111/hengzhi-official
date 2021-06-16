@@ -1,25 +1,17 @@
-package com.hengzhi.entity;
+package com.hengzhi.dto.paperAndTest;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-/**
- * @author Jane
- * @version 1.0
- * @description 题目实体类
- * @Date 2021/5/17
- */
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
-@AllArgsConstructor
-public class Questions {
+public class ShowQuestions {
     //问题id
     private Integer questionId;
     //出题人id
-    private Integer userId;
+    private String userName;
     //标签内容
     private String kind;
     //题目内容

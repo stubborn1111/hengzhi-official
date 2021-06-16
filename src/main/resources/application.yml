@@ -12,5 +12,8 @@ mybatis:
           max-file-size: 100MB
           #      最大支持请求大小
           max-request-size: 100MB
+      jackson:
+          date-format: yyyy-MM-dd HH:mm:ss     #和前端沟通好
+          time-zone: Asia/Shanghai
 
 

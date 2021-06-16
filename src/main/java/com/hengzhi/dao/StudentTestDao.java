@@ -16,6 +16,12 @@ import java.util.List;
 @Repository
 public interface StudentTestDao {
     /**
+     * @param paperId
+     * @param userId
+     * @return
+     */
+    Integer selectPaper(Integer paperId,Integer userId);
+    /**
      * 获取试卷id
      *
      * @param code
@@ -145,5 +151,7 @@ public interface StudentTestDao {
      * @return
      */
     Integer updateNumberFalse(Integer questionId,String tName);
+
+    Integer updateCRate(Double cRate,String tName,Integer questionId);
 
 }

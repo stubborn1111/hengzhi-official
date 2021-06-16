@@ -33,6 +33,12 @@ public class StudentTestServiceImpl implements StudentTestService {
         if (getPaper == null) {
             return new GetPaper();
         }
+        Integer integer = testDao.selectPaper(getPaper.getPaperId(), userId);
+        if(integer==null){
+            GetPaper getPaper1 = new GetPaper();
+            getPaper1.setPaperId(0);
+            return getPaper1;
+        }
         testDao.addUserPaper(getPaper.getPaperId(), userId);
         return getPaper;
     }
@@ -137,6 +143,8 @@ public class StudentTestServiceImpl implements StudentTestService {
                 TestedQuestion testedQuestion = testDao.getQuestion(questionId, tName);
                 String rAnswer = testedQuestion.getAnswer();//正确答案
                 String uAnswer = answerList.get(i).getAnswer();//用户答案
+                Double cRate = ((double)((int)((testedQuestion.getCorrectNumber()/1.0/testedQuestion.getTotalNumber())*100)))/100;
+                testDao.updateCRate(cRate,tName,questionId);
                 if (rAnswer.equals(uAnswer)) {
                     score = 5;//完全正确
                     //修改题目正确率，在试题表中修改并放到paper_content表中

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hengzhi.dao.SuperManagerDao">
+    <resultMap id="user" type="com.hengzhi.entity.User">
+        <result property="userId" column="user_id"></result>
+        <result property="studentId" column="student_id"></result>
+        <result property="name" column="name"></result>
+        <result property="password" column="password"></result>
+        <result property="role" column="role"></result>
+        <result property="headImg" column="head_img"></result>
+        <result property="required" column="required"></result>
+    </resultMap>
+    <resultMap id="userInfo" type="com.hengzhi.dto.userBasic.UserInfo">
+        <result property="headImg" column="head_img"/>
+        <result property="name"  column="name"/>
+        <result property="userId" column="user_id"/>
+        <result property="studentId" column="student_id"/>
+        <result property="power" column="role"/>
+    </resultMap>
+    <update id="addAdmin">
+        update user set role='admin' where user_id=#{userId}
+    </update>
+    <update id="deleteAdmin">
+        update user set role='user' where user_id=#{userId}
+    </update>
+    <select id="findList" resultMap="user">
+        select * from user where required!='0'
+    </select>
+    <select id="findListNum" resultType="Integer">
+        select count(*) from user where required!='0'
+    </select>
+    <update id="updatePassword">
+        update user set password=#{password} ,required='0' where user_id=#{userId}
+    </update>
+    <update id="rejectUpdate">
+        update user set required='0' where user_id=#{userId}
+    </update>
+    <insert id="addUser">
+        insert into user(student_id, password, name) values (#{studentId},#{password},#{name})
+    </insert>
+    <select id="findUserByStudentId" resultMap="user">
+        select * from user where student_id=#{studentId}
+    </select>
+    <delete id="deleteUser">
+        delete from user where user_id=#{userId}
+    </delete>
+</mapper>
