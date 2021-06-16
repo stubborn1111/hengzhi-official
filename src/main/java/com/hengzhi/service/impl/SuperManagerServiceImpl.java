@@ -55,7 +55,9 @@ public class SuperManagerServiceImpl implements SuperManagerService {
        User user=userDao.selectUserByUserId(userId);
        if(user.getRequired().equals("0")) return "error";
        else {
-           superManagerDao.updatePassword(userId,user.getRequired());
+           String pass=user.getRequired();
+           String password=bCryptPasswordEncoder.encode(pass);
+           superManagerDao.updatePassword(userId,password);
            return "success";
        }
 
@@ -69,34 +71,18 @@ public class SuperManagerServiceImpl implements SuperManagerService {
             return "success";
         }
     }
-//    @Override
-//    public String addUser(String name,int studentId){
-//        User user=superManagerDao.findUserByStudentId(studentId);
-//        if(user!=null) return "exist";
-//        else {
-//            String password1=String.valueOf(studentId);
-//            String password=password1.substring(4);
-//            superManagerDao.addUser(password,name,studentId);
-//            return "success";
-//        }
-//    }
+
 @Override
 public String addUser(String name,int studentId){
     User user=superManagerDao.findUserByStudentId(studentId);
-    System.out.println(user);
     if(user!=null) return "exist";
     else {
         String password1=String.valueOf(studentId);
         String password=password1.substring(4);
         String encodePas= bCryptPasswordEncoder.encode(password);
-        System.out.println("begin++++");
-        System.out.println(encodePas);
         superManagerDao.addUser(encodePas,name,studentId);
-        System.out.println("successAdd");
         String userPas=userDao.selectUserByStudentId(studentId);
-        if(bCryptPasswordEncoder.matches(password,userPas)) return "yes";
-        else return "no";
-//        return "success";
+        return "success";
     }
 }
     @Override

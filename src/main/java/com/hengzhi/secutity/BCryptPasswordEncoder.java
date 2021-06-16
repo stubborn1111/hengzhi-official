@@ -8,7 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-@Component
+    @Component
 public class BCryptPasswordEncoder implements PasswordEncoder {
     private Pattern BCRYPT_PATTERN;
     private final Log logger;
