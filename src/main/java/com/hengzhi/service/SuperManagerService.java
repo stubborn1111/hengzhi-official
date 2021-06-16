@@ -17,4 +17,8 @@ public interface SuperManagerService {
     public List findList();
     public int findListNum();
     public String updatePassword(int userId);
+    public String rejectUpdate(int userId);
+    public String addUser(String name,int studentId);
+    public String deleteUser(int userId);
+    public List findAllUser();
 }
