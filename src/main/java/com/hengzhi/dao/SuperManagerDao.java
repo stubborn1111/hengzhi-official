@@ -21,4 +21,8 @@ public interface SuperManagerDao {
     List<User> findList();
     int findListNum();
     void updatePassword(int userId,String password);
+    void rejectUpdate(int userId);
+    void addUser(String password ,String name,int studentId);
+    User findUserByStudentId(int studentId);
+    void deleteUser(int userId);
 }

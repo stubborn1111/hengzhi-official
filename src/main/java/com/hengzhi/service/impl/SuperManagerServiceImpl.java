@@ -56,4 +56,37 @@ public class SuperManagerServiceImpl implements SuperManagerService {
        }
 
     }
+    @Override
+    public String rejectUpdate(int userId){
+        User user=userDao.selectUserByUserId(userId);
+        if(user.getRequired().equals("0")) return "error";
+        else {
+            superManagerDao.rejectUpdate(userId);
+            return "success";
+        }
+    }
+    @Override
+    public String addUser(String name,int studentId){
+        User user=superManagerDao.findUserByStudentId(studentId);
+        if(user!=null) return "exist";
+        else {
+            String password1=String.valueOf(studentId);
+            String password=password1.substring(4);
+            superManagerDao.addUser(password,name,studentId);
+            return "success";
+        }
+    }
+    @Override
+    public String deleteUser(int userId){
+        UserInfo user=userDao.getUserInfo(userId);
+        if(user==null) return "error";
+        else {
+           superManagerDao.deleteUser(userId);
+            return "success";
+        }
+    }
+    @Override
+    public List findAllUser(){
+        return userDao.findAllUser();
+    }
 }

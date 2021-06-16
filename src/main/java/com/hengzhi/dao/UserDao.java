@@ -42,4 +42,5 @@ public interface UserDao {
     int submitRequiredPassword(Integer studentId,String newPassword);
 
     UserInfo getUserInfo(Integer userId);
+    List<UserInfo> findAllUser();
 }

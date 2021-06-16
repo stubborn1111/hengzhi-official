@@ -109,4 +109,5 @@
     <insert id="addQuestionsInPaper">
         insert into paper_content(paper_id, q_number, question_id, q_type) values(#{paperId},#{qNumber},#{questionId},#{qType})
     </insert>
+
 </mapper>

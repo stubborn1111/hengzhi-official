@@ -32,4 +32,16 @@
     <update id="updatePassword">
         update user set password=#{password} ,required='0' where user_id=#{userId}
     </update>
+    <update id="rejectUpdate">
+        update user set required='0' where user_id=#{userId}
+    </update>
+    <insert id="addUser">
+        insert into user(student_id, password, name) values (#{studentId},#{password},#{name})
+    </insert>
+    <select id="findUserByStudentId" resultMap="user">
+        select * from user where student_id=#{studentId}
+    </select>
+    <delete id="deleteUser">
+        delete from user where user_id=#{userId}
+    </delete>
 </mapper>
