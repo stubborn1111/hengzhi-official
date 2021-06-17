@@ -104,7 +104,7 @@ public class StudentTestServiceImpl implements StudentTestService {
         String tName;
         for (int i = 0; i < qInfo.size(); i++) {
             tName = SelectTableUtils.selectT(qInfo.get(i).getQType());
-            qList.add(new TestQuestion(qInfo.get(i).getQuestionId(), qInfo.get(i).getQType(), testDao.getTestQuestions(qInfo.get(i).getQuestionId(), tName)));
+            qList.add(new TestQuestion(i+1, qInfo.get(i).getQType(), testDao.getTestQuestions(qInfo.get(i).getQuestionId(), tName)));
         }
         TestPaperInfo paperInfo = testDao.getTestPaperInfo(paperId);
         map.put("qList", qList);

@@ -17,7 +17,8 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TestQuestion {
-    private Integer questionId;//题目id
+    @JsonProperty("qNumber")
+    private Integer qNumber;//题目id
     @JsonProperty("qType")
     private String qType;//题目类型
     private String content;//题目内容
