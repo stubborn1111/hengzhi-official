@@ -10,6 +10,7 @@ import com.hengzhi.entity.Message;
 import com.hengzhi.entity.Notice;
 import com.hengzhi.entity.Questions;
 import com.hengzhi.secutity.Security;
+import com.hengzhi.service.JWTService;
 import com.hengzhi.service.MakePaperService;
 import com.hengzhi.service.ShowService;
 import com.hengzhi.utils.Paging;
@@ -34,13 +35,15 @@ import java.util.*;
 public class MakePaperController {
     @Autowired
     MakePaperService makePaperService;
+    @Autowired
+    JWTService jwtService;
 //    增加题目
     @RequestMapping("/addQuestions")
     @ResponseBody
     @RequiresRoles(value = {"admin"})
-    public Map addQuestions(@RequestBody JSONObject jsonObject){
+    public Map addQuestions(@RequestBody JSONObject jsonObject,HttpServletRequest request){
         String type=jsonObject.getString("type");
-        int userId=jsonObject.getInteger("userId");
+        int userId=jwtService.getUserId(request);
         String content=jsonObject.getString("content");
         String answer=jsonObject.getString("answer");
         String description=jsonObject.getString("description");
@@ -123,11 +126,11 @@ public class MakePaperController {
     @RequestMapping("/makePaperSuccess")
     @ResponseBody
     @RequiresRoles(value = {"admin"})
-    public Map makePaperSuccess(@RequestBody JSONObject jsonObject) throws ParseException {
+    public Map makePaperSuccess(@RequestBody JSONObject jsonObject,HttpServletRequest request) throws ParseException {
         String qlist = JSONArray.toJSONString(jsonObject.get("list"));
         List<QInfo> list = JSONArray.parseArray(qlist, QInfo.class);
         String paperName=jsonObject.getString("paperName");
-        int userId=jsonObject.getInteger("userId");
+        int userId=jwtService.getUserId(request);
         String description=jsonObject.getString("description");
         String beginTime=jsonObject.getString("beginTime");
         Date beginTime1= StringToDate.turnToDate(beginTime);
