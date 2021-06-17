@@ -101,7 +101,7 @@
         SELECT * FROM ${qType} WHERE kind REGEXP #{type}
     </select>
     <insert id="addPaper">
-        insert into papers(begin_time, end_time, finish_time, name, user_id, description, code,  score) values (#{beginTime},#{endTime},#{finishTime},#{paperName},#{userId},#{description},#{code},#{score})
+        insert into papers(begin_time, end_time, name, user_id, description, code,  score) values (#{beginTime},#{endTime},#{paperName},#{userId},#{description},#{code},#{score})
     </insert>
     <select id="findPaperByName" resultType="com.hengzhi.entity.Papers">
         select * from papers where name=#{paperName}
