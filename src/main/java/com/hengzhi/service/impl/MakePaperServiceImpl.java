@@ -352,7 +352,7 @@ public class MakePaperServiceImpl implements MakePaperService {
         return map;
     }
      @Override
-    public void makePaperSuccess(Date beginTime, Date endTime, String finishTime, String paperName, int userId, String description, String code, List<QInfo> list){
+    public void makePaperSuccess(Date beginTime, Date endTime, String paperName, int userId, String description, String code, List<QInfo> list){
         int score=0;
         for(int i=0;i<list.size();i++){
             QInfo qInfo=list.get(i);
@@ -362,7 +362,7 @@ public class MakePaperServiceImpl implements MakePaperService {
             if(type.equals("2")) score+=5;
             if(type.equals("3")) score+=10;
         }
-        makePaperDao.addPaper(beginTime,endTime,finishTime,paperName,userId,description,code,score);
+        makePaperDao.addPaper(beginTime,endTime,paperName,userId,description,code,score);
         Papers papers=makePaperDao.findPaperByName(paperName);
         int paperId=papers.getPaperId();
         for(int i=0;i<list.size();i++){

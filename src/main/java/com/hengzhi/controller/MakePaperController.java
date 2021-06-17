@@ -129,7 +129,6 @@ public class MakePaperController {
         String paperName=jsonObject.getString("paperName");
         int userId=jsonObject.getInteger("userId");
         String description=jsonObject.getString("description");
-        String finishTime=jsonObject.getString("finishTime");
         String beginTime=jsonObject.getString("beginTime");
         Date beginTime1= StringToDate.turnToDate(beginTime);
         System.out.println(beginTime1);
@@ -137,7 +136,7 @@ public class MakePaperController {
         Date deadline1= StringToDate.turnToDate(deadline);
         System.out.println(deadline1);
         String code= RandomCode.genRandomNum();
-        makePaperService.makePaperSuccess(beginTime1,deadline1,finishTime,paperName,userId,description,code,list);
+        makePaperService.makePaperSuccess(beginTime1,deadline1,paperName,userId,description,code,list);
         Map map=new HashMap();
         map.put("code",code);
         return map;
