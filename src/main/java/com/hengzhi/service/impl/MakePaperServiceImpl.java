@@ -111,6 +111,12 @@ public class MakePaperServiceImpl implements MakePaperService {
         List<Questions> list1 = new ArrayList<>();
         List<Questions> list2 = new ArrayList<>();
         List<Questions> list3 = new ArrayList<>();
+        if(tList.isEmpty()){
+            list0=makePaperDao.showQuestions1();
+            list1=makePaperDao.showQuestions2();
+            list2=makePaperDao.showQuestions3();
+            list3=makePaperDao.showQuestions4();
+        }
         for (int i = 0; i < type.size(); i++) {
             String type1 = (String) type.get(i);
             if (type1.equals("0"))
@@ -207,13 +213,12 @@ public class MakePaperServiceImpl implements MakePaperService {
         list1=makePaperDao.makePaperFind(type,"questions_single");
         list2=makePaperDao.makePaperFind(type,"questions_multiple");
         list3=makePaperDao.makePaperFind(type,"questions_subjective");
-
-        if(num0>list0.size()){
-            map.put("questions_fill","not enough");
+        if(num0==0){
+            map.put("questions_fill",null);
         }
-        else {
-            if(num0==0){
-                map.put("questions_fill",null);
+        else{
+            if(num0>list0.size()){
+                map.put("questions_fill","not enough");
             }
             else {
                 List<Questions> list=new ArrayList<>();
@@ -240,14 +245,13 @@ public class MakePaperServiceImpl implements MakePaperService {
                 }
                 map.put("questions_fill",list00);
             }
-
         }
-        if(num1>list1.size()){
-            map.put("questions_single","not enough");
+        if(num1==0){
+            map.put("questions_single",null);
         }
         else {
-            if(num1==0){
-                map.put("questions_single",null);
+            if(num1>list1.size()){
+                map.put("questions_single","not enough");
             }
             else {
                 List<Questions> list=new ArrayList<>();
@@ -274,14 +278,13 @@ public class MakePaperServiceImpl implements MakePaperService {
                 }
                 map.put("questions_single",list11);
             }
-
         }
-        if(num2>list2.size()){
-            map.put("questions_multiple","not enough");
+        if(num2==0){
+            map.put("questions_multiple",null);
         }
         else {
-            if(num2==0){
-                map.put("questions_multiple",null);
+            if(num2>list2.size()){
+                map.put("questions_multiple","not enough");
             }
             else {
                 List<Questions> list=new ArrayList<>();
@@ -307,17 +310,18 @@ public class MakePaperServiceImpl implements MakePaperService {
                     list22.add(showQuestions);
                 }
                 map.put("questions_multiple",list22);
-            }
 
+            }
         }
-        if(num3>list3.size()){
-            map.put("questions_subjective","not enough");
+        if(num3==0){
+            map.put("questions_subjective",null);
         }
         else {
-            if(num3==0){
-                map.put("questions_subjective",null);
+            if(num3>list3.size()){
+                map.put("questions_subjective","not enough");
             }
             else {
+
                 List<Questions> list=new ArrayList<>();
                 int[] arr = RandomNumber.genNum(num3,list3.size());
                 System.out.println(arr);
@@ -341,9 +345,10 @@ public class MakePaperServiceImpl implements MakePaperService {
                     list33.add(showQuestions);
                 }
                 map.put("questions_subjective",list33);
-            }
 
+            }
         }
+
         return map;
     }
      @Override
