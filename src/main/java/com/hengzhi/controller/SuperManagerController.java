@@ -101,7 +101,7 @@ public class SuperManagerController {
     }
     @RequestMapping("/showAllUser")
     @ResponseBody
-    @RequiresRoles(value = {"super"})
+    @RequiresRoles(value = {"super","admin"},logical = Logical.OR)
     public Map showAllUser(@RequestBody JSONObject jsonObject){
         int page=jsonObject.getInteger("page");
         int size=jsonObject.getInteger("size");
