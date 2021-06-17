@@ -30,7 +30,7 @@ import java.text.ParseException;
 import java.util.*;
 
 @RequestMapping("/makePaper")
-@Controller
+@RestController
 @CrossOrigin(origins = "*",maxAge = 3600)
 public class MakePaperController {
     @Autowired
