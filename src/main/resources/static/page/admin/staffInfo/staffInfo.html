@@ -5,33 +5,61 @@
 		<title>人员信息</title>
 		<link rel="stylesheet" type="text/css" href="../../../layui/layui/css/layui.css" />
 		<link rel="stylesheet" type="text/css" href="../../font-awesome-4.7.0/css/font-awesome.css" />
-		<link rel="stylesheet" href="staffInfo.css">
 		<link rel="stylesheet" type="text/css" href="../../common/common.css"/>
+		<link rel="stylesheet" href="../../admin/staffInfo/staffInfo.css">
+		<link rel="stylesheet" href="staffInfo.css">
 		<script src="../../../layui/layui/layui.js"></script>
-		<script src="staffInfo.js"></script>
+		<script src="../../common/jquery-3.4.1.min.js"></script>
 		<style>
-			.info {
-				position: absolute;
-				top: 50px;
-				left: 120px;
-				width: calc(100% - 240px);
-				height: calc(100% - 100px);
-			}
-			.addUser{
-				position: absolute;
-				top: 400px;
-				right: 0px;
-				z-index: 920;
-			}
-			.fenye{
+
+			/* 分页 */
+			.fenye {
 				position: absolute;
 				top: calc(100% - 100px);
 				left: 440px;
+			}
+			.layui-table{
+				width: 700px;
+				margin: 0 auto;
+			}
+			.infobox{
+			/* 	position: absolute;
+				top: 90px;
+				left: 180px;
+				width: calc(100% - 240px);
+				height: calc(100% - 100px); */
+				width: 700px;
+				position: absolute;
+				top: 100px;
+				left: 350px;
+			}
+			.headimgs{
+				width: 20px;
+				height: 20px;
 			}
 		</style>
 
 	</head>
 	<body>
+		<!-- 重设密码 -->
+		<div id="test1" style="display: none;">
+			<form class="layui-form layui-form-pane" action="">
+				<div class="layui-form-item" pane style="width: 90%; margin: 20px auto;">
+					<label class="layui-form-label">原密码</label>
+					<div class="layui-input-block">
+						<input type="password" name="password" required lay-verify="required" placeholder="请输入原密码"
+							autocomplete="off" class="layui-input" id="password">
+					</div>
+				</div>
+				<div class="layui-form-item" pane style="width: 90%; margin: 20px auto;">
+					<label class="layui-form-label">新密码</label>
+					<div class="layui-input-block">
+						<input type="password" name="password" required lay-verify="required" placeholder="请输入新密码"
+							autocomplete="off" class="layui-input" id="newPassword">
+					</div>
+				</div>
+			</form>
+		</div>
 		<!-- 水平导航-->
 		<ul class="layui-nav level" lay-filter="">
 			<li class="layui-nav-item"><a href="">首页</a></li>
@@ -39,101 +67,94 @@
 				<a href="javascript:;">个人中心</a>
 				<dl class="layui-nav-child">
 					<!-- 二级菜单 -->
-					<dd><a href="">修改头像</a></dd>
-					<dd><a href="">修改密码</a></dd>
-					<dd><a href="">退出登录</a></dd>
+					<!-- <dd><a href="">修改头像</a></dd> -->
+					<dd onclick="change()">修改密码</dd>
+					<dd onclick="logout()">退出登录</dd>
 				</dl>
 			</li>
 		</ul>
 
 		<!-- 侧边导航-->
 		<ul class="layui-nav layui-nav-tree vertical" lay-filter="test">
-			<li class="layui-nav-item layui-this"><a href="">人员信息</a></li>
-			<li class="layui-nav-item"><a href="">修改简介</a></li>
-			<li class="layui-nav-item"><a href="">审核密码</a></li>
-
+			<li class="layui-nav-item layui-this"><a href="../staffInfo/staffInfo.html">人员信息</a></li>
+			<li class="layui-nav-item"><a href="../auditMsg/auditMsg.html">留言审核</a></li>
+			<li class="layui-nav-item"><a href="../filesUpload/filesUpload.html">公告与资料上传</a></li>
+			<li class="layui-nav-item">
+				<a href="javascript:;">考试管理</a>
+				<dl class="layui-nav-child">
+					<dd><a href="../examDep/corPaper/corPaper.html">组卷</a></dd>
+					<dd><a href="../examDep/preList/preList.html">未考试卷</a></dd>
+					<dd><a href="../examDep/preCorList/preCorList.html">已考未改试卷</a></dd>
+					<dd><a href="../examDep/corPaper/corPaper.html">改卷</a></dd>
+					<dd><a href="../examDep/reCorList/reCorList.html">已改试卷</a></dd>
+				</dl>
+			</li>
+			<li class="layui-nav-item">
+				<a href="javascript:;">题库</a>
+				<dl class="layui-nav-child">
+					<dd><a href="../testDatabase/questionList/questionList.html">题目</a></dd>
+					<dd><a href="../testDatabase/tagList/tagList.html">标签</a></dd>
+				</dl>
+			</li>
 		</ul>
-
-		人员信息表格
-		<div class="info">
-			<div class="addUser">
-				<button type="button" class="layui-btn">添加用户</button>
-			</div>
-			<div class="layui-layout layui-layout-admin">
-				<div class="layui-body">
-					<!-- 人员信息-表格 -->
-					<table class="layui-table">
-						<colgroup>
-							<col width="80">
-							<col width="100">
-							<col width="150">
-							<col width="150">
-							<col width="100">
-							<col width="100">
-							<col width="200">
-						</colgroup>
-						<thead>
-							<tr>
-								<th>ID</th>
-								<th>头像</th>
-								<th>姓名</th>
-								<th>学号</th>
-								<th>权限</th>
-								<th>修改权限</th>
-								<th>操作</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>1</td>
-								<td><i class="layui-icon layui-icon-face-smile"></i></td>
-								<td>陈陈</td>
-								<td>2019010000</td>
-								<td>admin</td>
-								<td><a class="layui-btn layui-btn-xs" lay-event="edit">更改为用户</a></td>
-								<td><a class="layui-btn layui-btn-xs" lay-event="edit">删除</a></td>
-							</tr>
-							<tr>
-								<td>1</td>
-								<td><i class="layui-icon layui-icon-face-smile"></i></td>
-								<td>陈陈</td>
-								<td>2019010000</td>
-								<td>admin</td>
-								<td><a class="layui-btn layui-btn-xs" lay-event="edit">更改为用户</a></td>
-								<td><a class="layui-btn layui-btn-xs" lay-event="edit">删除</a></td>
-							</tr>
-							<tr>
-								<td>1</td>
-								<td><i class="layui-icon layui-icon-face-smile"></i></td>
-								<td>陈陈</td>
-								<td>2019010000</td>
-								<td>admin</td>
-								<td><a class="layui-btn layui-btn-xs" lay-event="edit">更改为用户</a></td>
-								<td><a class="layui-btn layui-btn-xs" lay-event="edit">删除</a></td>
-							</tr>
-							<tr>
-								<td>1</td>
-								<td><i class="layui-icon layui-icon-face-smile"></i></td>
-								<td>陈陈</td>
-								<td>2019010000</td>
-								<td>admin</td>
-								<td><a class="layui-btn layui-btn-xs" lay-event="edit">更改为用户</a></td>
-								<td><a class="layui-btn layui-btn-xs" lay-event="edit">删除</a></td>
-							</tr>
-							<tr>
-								<td>1</td>
-								<td><i class="layui-icon layui-icon-face-smile"></i></td>
-								<td>陈陈</td>
-								<td>2019010000</td>
-								<td>admin</td>
-								<td><a class="layui-btn layui-btn-xs" lay-event="edit">更改为用户</a></td>
-								<td><a class="layui-btn layui-btn-xs" lay-event="edit">删除</a></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
-			
+		<!-- 人员信息-表格 -->
+		<div class="infobox">
+			<table class="layui-table">
+				<colgroup>
+					<col width="50">
+					<col width="50">
+					<col width="50">
+					<col width="50">
+					<col width="50">
+				</colgroup>
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>头像</th>
+						<th>姓名</th>
+						<th>学号</th>
+						<th>权限</th>
+					</tr>
+				</thead>
+				<tbody id="boxinfo">
+					<!-- <tr>
+						<td>1</td>
+						<td><i class="layui-icon layui-icon-face-smile"></i></td>
+						<td>陈陈</td>
+						<td>2019010000</td>
+						<td>admin</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td><i class="layui-icon layui-icon-face-smile"></i></td>
+						<td>陈陈</td>
+						<td>2019010000</td>
+						<td>admin</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td><i class="layui-icon layui-icon-face-smile"></i></td>
+						<td>陈陈</td>
+						<td>2019010000</td>
+						<td>admin</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td><i class="layui-icon layui-icon-face-smile"></i></td>
+						<td>陈陈</td>
+						<td>2019010000</td>
+						<td>admin</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td><i class="layui-icon layui-icon-face-smile"></i></td>
+						<td>陈陈</td>
+						<td>2019010000</td>
+						<td>admin</td>
+					</tr> -->
+		
+				</tbody>
+			</table>
 		</div>
 		<!-- 分页 -->
 		<div class="fenye">
@@ -167,81 +188,18 @@
 				</div>
 			</div>
 		</div>
+
 		
-		<!-- <script>
-			layui.use('table', function() {
-				var table = layui.table;
-				//第一个实例
-				table.render({
-					elem: '#demo',
-					height: 312,
-					url: '/demo/table/user/' //数据接口
-						,
-					page: false //开启分页
-						,
-					cols: [
-						[ //表头
-							{
-								field: 'id',
-								title: 'ID',
-								width: 80,
-								fixed: 'left'
-							}, {
-								field: 'headImg',
-								title: '头像',
-								width: 100
-							}, {
-								field: 'name',
-								title: '姓名',
-								width: 150
-							}, {
-								field: 'studentId',
-								title: '学号',
-								width: 150
-							}, {
-								field: 'role',
-								title: '权限',
-								width: 100
-							}, {
-								field: 'coRole',
-								title: '修改权限',
-								width: 	100,
-								templet: Onloadrole
-							}, {
-								field: 'Copo',
-								title: '操作',
-								width: 200,
-								templet: OnloadTool
-							}
-						]
-					]
-				});
+		<script src="staffInfo.js"></script>
+
+
+		<script>
+			//注意：导航 依赖 element 模块，否则无法进行功能性操作
+			layui.use('element', function() {
+				var element = layui.element;
+
 			});
-		</script> -->
-
-		<!-- 利用函数转义来实现动态加载按钮 -->
-		<!-- <script>
-			// 修改权限
-			function Onloadrole(data) {
-				// if (data.EnclosureUrl != '') {
-				// 		htmls += '<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="download">驳回</a>';
-				// }
-				let htmls = '<a class="layui-btn layui-btn-xs" lay-event="edit">更改为用户</a>';
-				if (cols[4, 1].innerHtml = "用户") {
-					let htmls = '<a class="layui-btn layui-btn-xs" lay-event="edit">更改为管理员</a>';
-				}
-				return htmls;
-			}
-			// 用户操作
-			function OnloadTool(data) {
-				let htmls = '<a class="layui-btn layui-btn-xs" lay-event="edit">删除</a>';
-				// if (data.EnclosureUrl != '') {
-				// 		htmls += '<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="download">驳回</a>';
-				// }
-				return htmls;
-			}
-		</script> -->
-
+		</script>
 
 		<script>
 			//注意：导航 依赖 element 模块，否则无法进行功能性操作

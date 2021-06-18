@@ -1,37 +1,37 @@
 // 自动登录
-// $(document).ready(function() {
-// 	var au = localStorage.getItem("authorization")
-// 	if (au == undefined || au == null || au == '') {} else {
-// 		$.ajax({
-// 			type: 'post',
-// 			url: 'http://123.56.29.67/hengzhi-official/user/verify',
-// 			dataType: 'json',
-// 			contentType: 'application/json;charset=utf-8',
-// 			headers: {
-// 				'Authorization': au
-// 			},
-// 			success: function(data) {
-// 				console.log(data)
-// 				if (data.verify == "false") {} else {
-// 					if (data.power == "user") {
-// 						window.location.href = "../user/notice/notice.html";
-// 					}
-// 					if (data.power == "super") {
-// 						window.location.href = "../superAdmin/staffInfo/staffInfo.html";
-// 					}
-// 					if (data.power == "admin") {
-// 						window.location.href = "../admin/staffInfo/staffInfo.html";
-// 					}
-// 				}
-// 			},
-// 			error: function() {
+$(document).ready(function() {
+	var au = localStorage.getItem("authorization")
+	if (au == undefined || au == null || au == '') {} else {
+		$.ajax({
+			type: 'post',
+			url: 'http://123.56.29.67/hengzhi-official/user/verify',
+			dataType: 'json',
+			contentType: 'application/json;charset=utf-8',
+			headers: {
+				'Authorization': au
+			},
+			success: function(data) {
+				console.log(data)
+				if (data.verify == "false") {} else {
+					if (data.power == "user") {
+						window.location.href = "../user/notice/notice.html";
+					}
+					if (data.power == "super") {
+						window.location.href = "../superAdmin/staffInfo/staffInfo.html";
+					}
+					if (data.power == "admin") {
+						window.location.href = "../admin/staffInfo/staffInfo.html";
+					}
+				}
+			},
+			error: function() {
 
-// 			}
-// 		});
-// 	}
+			}
+		});
+	}
 
 
-// })
+})
 
 function forget() {
 	layui.use('layer', function() {

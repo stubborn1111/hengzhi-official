@@ -27,6 +27,25 @@
 			<textarea name="desc" placeholder="请输入公告内容" class="layui-textarea" id="mess"></textarea>
 		</div>
 
+		<!-- 重设密码 -->
+		<div id="test1" style="display: none;">
+			<form class="layui-form layui-form-pane" action="">
+				<div class="layui-form-item" pane style="width: 90%; margin: 20px auto;">
+					<label class="layui-form-label">原密码</label>
+					<div class="layui-input-block">
+						<input type="password" name="password" required lay-verify="required" placeholder="请输入原密码"
+							autocomplete="off" class="layui-input" id="password">
+					</div>
+				</div>
+				<div class="layui-form-item" pane style="width: 90%; margin: 20px auto;">
+					<label class="layui-form-label">新密码</label>
+					<div class="layui-input-block">
+						<input type="password" name="password" required lay-verify="required" placeholder="请输入新密码"
+							autocomplete="off" class="layui-input" id="newPassword">
+					</div>
+				</div>
+			</form>
+		</div>
 		<!-- 水平导航-->
 		<ul class="layui-nav level" lay-filter="">
 			<li class="layui-nav-item"><a href="">首页</a></li>
@@ -34,32 +53,33 @@
 				<a href="javascript:;" id="head"></a>
 				<dl class="layui-nav-child">
 					<!-- 二级菜单 -->
-					<dd><a href="">修改头像</a></dd>
-					<dd><a href="">修改密码</a></dd>
-					<dd><a href="">退出登录</a></dd>
+					<!-- <dd><a href="">修改头像</a></dd> -->
+					<dd onclick="change()">修改密码</dd>
+					<dd onclick="logout()">退出登录</dd>
 				</dl>
 			</li>
 		</ul>
 
 		<!-- 侧边导航-->
 		<ul class="layui-nav layui-nav-tree vertical" lay-filter="test">
-			<li class="layui-nav-item"><a href="">人员信息</a></li>
-			<li class="layui-nav-item"><a href="">留言审核</a></li>
+			<li class="layui-nav-item"><a href="../staffInfo/staffInfo.html">人员信息</a></li>
+			<li class="layui-nav-item"><a href="../auditMsg/auditMsg.html">留言审核</a></li>
 			<li class="layui-nav-item layui-this"><a href="">公告与资料上传</a></li>
 			<li class="layui-nav-item">
 				<a href="javascript:;">考试管理</a>
 				<dl class="layui-nav-child">
-					<dd><a href="">组卷</a></dd>
-					<dd><a href="">未考试卷</a></dd>
-					<dd><a href="">改卷</a></dd>
-					<dd><a href="">已改试卷</a></dd>
+					<dd><a href="../examDep/generPaper/generPaper.html">组卷</a></dd>
+					<dd><a href="../examDep/preList/preList.html">未考试卷</a></dd>
+					<dd><a href="../examDep/preCorList/preCorList.html">已考未改试卷</a></dd>
+					<dd><a href="../examDep/corPaper/corPaper.html">改卷</a></dd>
+					<dd><a href="../examDep/reCorList/reCorList.html">已改试卷</a></dd>
 				</dl>
 			</li>
 			<li class="layui-nav-item">
 				<a href="javascript:;">题库</a>
 				<dl class="layui-nav-child">
-					<dd><a href="">题目</a></dd>
-					<dd><a href="">标签</a></dd>
+					<dd><a href="../testDatabase/questionList/questionList.html">题目</a></dd>
+					<dd><a href="../testDatabase/tagList/tagList.html">标签</a></dd>
 				</dl>
 			</li>
 		</ul>

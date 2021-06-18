@@ -49,7 +49,7 @@
 				<a href="javascript:;" id="head"><img class="headImgg" data-id="" src="../../../images/headImg.jpg"></a>
 				<dl class="layui-nav-child">
 					<!-- 二级菜单 -->
-					<dd onclick="change1()">修改头像</dd>
+					<!-- <dd onclick="change1()">修改头像</dd> -->
 					<dd onclick="change()">修改密码</dd>
 					<dd onclick="logout()">退出登录</dd>
 				</dl>
@@ -62,8 +62,8 @@
 			<li class="layui-nav-item">
 				<a href="javascript:;">考试中心</a>
 				<dl class="layui-nav-child">
-					<dd><a href="">待考试卷</a></dd>
-					<dd><a href="">已考试卷</a></dd>
+					<dd><a href="../exam/preList/preList.html">待考试卷</a></dd>
+					<dd><a href="../exam/reList/reList.html">已考试卷</a></dd>
 				</dl>
 			</li>
 		</ul>
@@ -77,120 +77,7 @@
 			<div id="demo">
 				<div class="demoo">
 					<ul class="layui-timeline box" id="notice">
-<!-- 						<li class="layui-timeline-item">
-							<i class="layui-icon layui-timeline-axis">&#xe63f;</i>
-							<div class="layui-timeline-content layui-text">
-								<h3 class="layui-timeline-title">8月18日</h3>
-								<p>
-									layui 2.0 的一切准备工作似乎都已到位。发布之弦，一触即发。
-									<br>不枉近百个日日夜夜与之为伴。因小而大，因弱而强。
-									<br>无论它能走多远，抑或如何支撑？至少我曾倾注全心，无怨无悔 <i class="layui-icon"></i>
-								</p>
-							</div>
-						</li>
-						<li class="layui-timeline-item">
-							<i class="layui-icon layui-timeline-axis">&#xe63f;</i>
-							<div class="layui-timeline-content layui-text">
-								<h3 class="layui-timeline-title">8月18日</h3>
-								<p>
-								</p>
-							</div>
-						</li>
-						<li class="layui-timeline-item">
-							<i class="layui-icon layui-timeline-axis">&#xe63f;</i>
-							<div class="layui-timeline-content layui-text">
-								<h3 class="layui-timeline-title">8月18日</h3>
-								<p>
-									layui 2.0 的一切准备工作似乎都已到位。发布之弦，一触即发。
-									<br>不枉近百个日日夜夜与之为伴。因小而大，因弱而强。
-									<br>无论它能走多远，抑或如何支撑？至少我曾倾注全心，无怨无悔 <i class="layui-icon"></i>
-								</p>
-							</div>
-						</li>
-						<li class="layui-timeline-item">
-							<i class="layui-icon layui-timeline-axis">&#xe63f;</i>
-							<div class="layui-timeline-content layui-text">
-								<h3 class="layui-timeline-title">8月18日</h3>
-								<p>
-									layui 2.0 的一切准备工作似乎都已到位。发布之弦，一触即发。
-									<br>不枉近百个日日夜夜与之为伴。因小而大，因弱而强。
-									<br>无论它能走多远，抑或如何支撑？至少我曾倾注全心，无怨无悔 <i class="layui-icon"></i>
-								</p>
-							</div>
-						</li>
-						<li class="layui-timeline-item">
-							<i class="layui-icon layui-timeline-axis">&#xe63f;</i>
-							<div class="layui-timeline-content layui-text">
-								<h3 class="layui-timeline-title">8月18日</h3>
-								<p>
-									layui 2.0 的一切准备工作似乎都已到位。发布之弦，一触即发。
-									<br>不枉近百个日日夜夜与之为伴。因小而大，因弱而强。
-									<br>无论它能走多远，抑或如何支撑？至少我曾倾注全心，无怨无悔 <i class="layui-icon"></i>
-								</p>
-							</div>
-						</li>
-						<li class="layui-timeline-item">
-							<i class="layui-icon layui-timeline-axis">&#xe63f;</i>
-							<div class="layui-timeline-content layui-text">
-								<h3 class="layui-timeline-title">8月18日</h3>
-								<p>
-									layui 2.0 的一切准备工作似乎都已到位。发布之弦，一触即发。
-									<br>不枉近百个日日夜夜与之为伴。因小而大，因弱而强。
-									<br>无论它能走多远，抑或如何支撑？至少我曾倾注全心，无怨无悔 <i class="layui-icon"></i>
-								</p>
-							</div>
-						</li>
-						<li class="layui-timeline-item">
-							<i class="layui-icon layui-timeline-axis">&#xe63f;</i>
-							<div class="layui-timeline-content layui-text">
-								<h3 class="layui-timeline-title">8月18日</h3>
-								<p>
-									layui 2.0 的一切准备工作似乎都已到位。发布之弦，一触即发。
-									<br>不枉近百个日日夜夜与之为伴。因小而大，因弱而强。
-									<br>无论它能走多远，抑或如何支撑？至少我曾倾注全心，无怨无悔 <i class="layui-icon"></i>
-								</p>
-							</div>
-						</li>
-						<li class="layui-timeline-item">
-							<i class="layui-icon layui-timeline-axis">&#xe63f;</i>
-							<div class="layui-timeline-content layui-text">
-								<h3 class="layui-timeline-title">8月18日</h3>
-								<p>
-									layui 2.0 的一切准备工作似乎都已到位。发布之弦，一触即发。
-									<br>不枉近百个日日夜夜与之为伴。因小而大，因弱而强。
-									<br>无论它能走多远，抑或如何支撑？至少我曾倾注全心，无怨无悔 <i class="layui-icon"></i>
-								</p>
-							</div>
-						</li>
-						<li class="layui-timeline-item">
-							<i class="layui-icon layui-timeline-axis">&#xe63f;</i>
-							<div class="layui-timeline-content layui-text">
-								<h3 class="layui-timeline-title">8月18日</h3>
-								<p>
-									layui 2.0 的一切准备工作似乎都已到位。发布之弦，一触即发。
-									<br>不枉近百个日日夜夜与之为伴。因小而大，因弱而强。
-									<br>无论它能走多远，抑或如何支撑？至少我曾倾注全心，无怨无悔 <i class="layui-icon"></i>
-								</p>
-							</div>
-						</li>
-						<li class="layui-timeline-item">
-							<i class="layui-icon layui-timeline-axis">&#xe63f;</i>
-							<div class="layui-timeline-content layui-text">
-								<h3 class="layui-timeline-title">8月26日</h3>
-								<p>
-									layui 2.0 的一切准备工作似乎都已到位。发布之弦，一触即发。
-									<br>不枉近百个日日夜夜与之为伴。因小而大，因弱而强。
-									<br>无论它能走多远，抑或如何支撑？至少我曾倾注全心，无怨无悔 <i class="layui-icon"></i>
-								</p>
-							</div>
-						</li>
-						<li class="layui-timeline-item">
-							<i class="layui-icon layui-timeline-axis">&#xe63f;</i>
-							<div class="layui-timeline-content layui-text">
-								<div class="layui-timeline-title">过去</div>
-							</div>
-						</li>
-					 -->
+
 					</ul>
 				</div>
 			</div>
@@ -221,107 +108,19 @@
 								<col width="200">
 								<col>
 							</colgroup>
-							<tbody>
-								<tr>
+							<tbody id="filebox">
+								<!-- <tr>
 									<td><i class="layui-icon layui-icon-file-b"></i>浅谈layui的妙用</td>
 									<td>2021-06-13</td>
 									<td>陈陈</td>
 									<td><i class="layui-icon layui-icon-download-circle"></i></td>
-								</tr>
-								<tr>
-									<td><i class="layui-icon layui-icon-file-b"></i>浅谈layui的妙用</td>
-									<td>2021-06-13</td>
-									<td>陈陈</td>
-									<td><i class="layui-icon layui-icon-download-circle"></i></td>
-								</tr>
-								<tr>
-									<td><i class="layui-icon layui-icon-file-b"></i>浅谈layui的妙用</td>
-									<td>2021-06-13</td>
-									<td>陈陈</td>
-									<td><i class="layui-icon layui-icon-download-circle"></i></td>
-								</tr>
-								<tr>
-									<td><i class="layui-icon layui-icon-file-b"></i>浅谈layui的妙用</td>
-									<td>2021-06-13</td>
-									<td>陈陈</td>
-									<td><i class="layui-icon layui-icon-download-circle"></i></td>
-								</tr>
-								<tr>
-									<td><i class="layui-icon layui-icon-file-b"></i>浅谈layui的妙用</td>
-									<td>2021-06-13</td>
-									<td>陈陈</td>
-									<td><i class="layui-icon layui-icon-download-circle"></i></td>
-								</tr>
-								<tr>
-									<td><i class="layui-icon layui-icon-file-b"></i>浅谈layui的妙用</td>
-									<td>2021-06-13</td>
-									<td>陈陈</td>
-									<td><i class="layui-icon layui-icon-download-circle"></i></td>
-								</tr>
-								<tr>
-									<td><i class="layui-icon layui-icon-file-b"></i>浅谈layui的妙用</td>
-									<td>2021-06-13</td>
-									<td>陈陈</td>
-									<td><i class="layui-icon layui-icon-download-circle"></i></td>
-								</tr>
-								<tr>
-									<td><i class="layui-icon layui-icon-file-b"></i>浅谈layui的妙用</td>
-									<td>2021-06-13</td>
-									<td>陈陈</td>
-									<td><i class="layui-icon layui-icon-download-circle"></i></td>
-								</tr>
-								<tr>
-									<td><i class="layui-icon layui-icon-file-b"></i>浅谈layui的妙用</td>
-									<td>2021-06-13</td>
-									<td>陈陈</td>
-									<td><i class="layui-icon layui-icon-download-circle"></i></td>
-								</tr>
-								<tr>
-									<td><i class="layui-icon layui-icon-file-b"></i>浅谈layui的妙用</td>
-									<td>2021-06-13</td>
-									<td>陈陈</td>
-									<td><i class="layui-icon layui-icon-download-circle"></i></td>
-								</tr>
-								<tr>
-									<td><i class="layui-icon layui-icon-file-b"></i>浅谈layui的妙用</td>
-									<td>2021-06-13</td>
-									<td>陈陈</td>
-									<td><i class="layui-icon layui-icon-download-circle"></i></td>
-								</tr>
-								<tr>
-									<td><i class="layui-icon layui-icon-file-b"></i>浅谈layui的妙用</td>
-									<td>2021-06-13</td>
-									<td>陈陈</td>
-									<td><i class="layui-icon layui-icon-download-circle"></i></td>
-								</tr>
-								<tr>
-									<td><i class="layui-icon layui-icon-file-b"></i>浅谈layui的妙用</td>
-									<td>2021-06-13</td>
-									<td>陈陈</td>
-									<td><i class="layui-icon layui-icon-download-circle"></i></td>
-								</tr>
-								<tr>
-									<td><i class="layui-icon layui-icon-file-b"></i>浅谈layui的妙用</td>
-									<td>2021-06-13</td>
-									<td>陈陈</td>
-									<td><i class="layui-icon layui-icon-download-circle"></i></td>
-								</tr>
-								<tr>
-									<td><i class="layui-icon layui-icon-file-b"></i>浅谈layui的妙用</td>
-									<td>2021-06-13</td>
-									<td>陈陈</td>
-									<td><i class="layui-icon layui-icon-download-circle"></i></td>
-								</tr>
-								<tr>
-									<td><i class="layui-icon layui-icon-file-b"></i>浅谈layui的妙用</td>
-									<td>2021-06-13</td>
-									<td>陈陈</td>
-									<td><i class="layui-icon layui-icon-download-circle"></i></td>
-								</tr>
+								</tr> -->
+							
 							</tbody>
 						</table>
 					</div>
 				</div>
+				
 			</div>
 		</div>
 		<!-- 水平导航栏 -->

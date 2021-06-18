@@ -11,8 +11,8 @@
 		<script src="reList.js" type="text/javascript" charset="utf-8"></script>
 		<style>
 			.paperContainer {
-				background-color: rgba(18, 18, 18, 0.92);
-				width: calc(100% - 260px);
+			/* 	background-color: rgba(18, 18, 18, 0.92);
+				width: calc(100% - 260px); */
 				height: 470px;
 				margin: 30px;
 				place-items: center center;
@@ -67,6 +67,25 @@
 
 	</head>
 	<body>
+		<!-- 重设密码 -->
+		<div id="test1" style="display: none;">
+			<form class="layui-form layui-form-pane" action="">
+				<div class="layui-form-item" pane style="width: 90%; margin: 20px auto;">
+					<label class="layui-form-label">原密码</label>
+					<div class="layui-input-block">
+						<input type="password" name="password" required lay-verify="required" placeholder="请输入原密码"
+							autocomplete="off" class="layui-input" id="password">
+					</div>
+				</div>
+				<div class="layui-form-item" pane style="width: 90%; margin: 20px auto;">
+					<label class="layui-form-label">新密码</label>
+					<div class="layui-input-block">
+						<input type="password" name="password" required lay-verify="required" placeholder="请输入新密码"
+							autocomplete="off" class="layui-input" id="newPassword">
+					</div>
+				</div>
+			</form>
+		</div>
 		<!-- 水平导航-->
 		<ul class="layui-nav level" lay-filter="">
 			<li class="layui-nav-item"><a href="">首页</a></li>
@@ -74,21 +93,21 @@
 				<a href="javascript:;">个人中心</a>
 				<dl class="layui-nav-child">
 					<!-- 二级菜单 -->
-					<dd><a href="">修改头像</a></dd>
-					<dd><a href="">修改密码</a></dd>
-					<dd><a href="">退出登录</a></dd>
+					<!-- <dd><a href="">修改头像</a></dd> -->
+					<dd onclick="change()">修改密码</dd>
+					<dd onclick="logout()">退出登录</dd>
 				</dl>
 			</li>
 		</ul>
 
 		<!-- 侧边导航-->
 		<ul class="layui-nav layui-nav-tree vertical" lay-filter="test">
-			<li class="layui-nav-item "><a href="">基本信息</a></li>
-			<li class="layui-nav-item"><a href="">公告与资料</a></li>
+			<!-- <li class="layui-nav-item "><a href="">基本信息</a></li> -->
+			<li class="layui-nav-item"><a href="../../notice/notice.html">公告与资料</a></li>
 			<li class="layui-nav-item layui-nav-itemed">
 				<a href="javascript:;">考试中心</a>
 				<dl class="layui-nav-child">
-					<dd><a href="">待考试卷</a></dd>
+					<dd><a href="../preList/preList.html">待考试卷</a></dd>
 					<dd class="layui-this"><a href="">已考试卷</a></dd>
 				</dl>
 			</li>

@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>待考试卷列表</title>
+		<title>已考试卷</title>
 		<script src="../../../../layui/layui/layui.js"></script>
 		<script src="../../../common/jquery-3.4.1.min.js"></script>
 		<script src="rePaper.js"></script>
@@ -147,6 +147,25 @@
 
 	</head>
 	<body>
+		<!-- 重设密码 -->
+		<div id="test1" style="display: none;">
+			<form class="layui-form layui-form-pane" action="">
+				<div class="layui-form-item" pane style="width: 90%; margin: 20px auto;">
+					<label class="layui-form-label">原密码</label>
+					<div class="layui-input-block">
+						<input type="password" name="password" required lay-verify="required" placeholder="请输入原密码"
+							autocomplete="off" class="layui-input" id="password">
+					</div>
+				</div>
+				<div class="layui-form-item" pane style="width: 90%; margin: 20px auto;">
+					<label class="layui-form-label">新密码</label>
+					<div class="layui-input-block">
+						<input type="password" name="password" required lay-verify="required" placeholder="请输入新密码"
+							autocomplete="off" class="layui-input" id="newPassword">
+					</div>
+				</div>
+			</form>
+		</div>
 		<!-- 水平导航-->
 		<ul class="layui-nav level" lay-filter="">
 			<li class="layui-nav-item"><a href="">首页</a></li>
@@ -154,20 +173,20 @@
 				<a href="javascript:;">个人中心</a>
 				<dl class="layui-nav-child">
 					<!-- 二级菜单 -->
-					<dd><a href="">修改头像</a></dd>
-					<dd><a href="">修改密码</a></dd>
-					<dd><a href="">退出登录</a></dd>
+					<!-- <dd><a href="">修改头像</a></dd> -->
+					<dd onclick="change()">修改密码</dd>
+					<dd onclick="logout()">退出登录</dd>
 				</dl>
 			</li>
 		</ul>
 
 		<!-- 侧边导航-->
 		<ul class="layui-nav layui-nav-tree vertical" lay-filter="test">
-			<li class="layui-nav-item"><a href="">公告与资料</a></li>
+			<li class="layui-nav-item"><a href="../../notice/notice.html">公告与资料</a></li>
 			<li class="layui-nav-item layui-nav-itemed">
 				<a href="javascript:;">考试中心</a>
 				<dl class="layui-nav-child">
-					<dd><a href="">待考试卷</a></dd>
+					<dd><a href="../preList/preList.html">待考试卷</a></dd>
 					<dd class="layui-this"><a href="">已考试卷</a></dd>
 				</dl>
 			</li>
@@ -247,38 +266,6 @@
 					</div>
 				</div>
 
-			</div>
-		</div>
-		<!-- 分页 -->
-		<div class="fenye">
-			<div class="fenye1">
-				<div class="zuiqian">
-					<i class="fa fa-angle-double-left"></i>
-				</div>
-				<div class="qian" onclick="shangyiye1()">
-					<i class="fa fa-angle-left"></i>
-				</div>
-				<div class="tiaozhuan">
-					<input type="" name="" id="shuruyeshu1" value="" />
-				</div>
-				<div class="tiaozhuan1" onclick="shuruys1()">
-					跳转
-				</div>
-				<div class="zongyeshu">
-					共1页
-				</div>
-				<div class="dangqianye">
-					第1页
-				</div>
-				<div class="hou" onclick="xiayiye1()">
-					<i class="fa fa-angle-right"></i>
-				</div>
-				<div class="zuihou" onclick="zuihouyiye1()">
-					<i class="fa fa-angle-double-right"></i>
-				</div>
-				<div class="clear">
-		
-				</div>
 			</div>
 		</div>
 

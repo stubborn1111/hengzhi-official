@@ -55,51 +55,7 @@ function change() {
 		});
 	});
 }
-// 修改头像
-function change1() {
-	layui.use('layer', function() {
-		var $ = layui.jquery;
-		var element = layui.element;
-		var layer = layui.layer;
-		var form = layui.form;
-		layer.open({
-			type: 1,
-			title: '修改头像',
-			area: ['350px', '250px'],
-			shade: 0.4,
-			content: $("#test2"),
-			btn: ['提交', '取消'],
-			scrollbar: false,
-			yes: function(index) {
-				layer.close(index);
-				showToast();
-			},
-			btn2: function() {
-				layer.msg('bbb');
-			}
-		});
-	});
-}
-layui.use(['upload', 'element', 'layer'], function() {
-	var $ = layui.jquery,
-		upload = layui.upload,
-		element = layui.element,
-		layer = layui.layer;
-	upload.render({
-		elem: '#test8',
-		url: 'http://123.56.29.67/hengzhi-official/user/updateHeadImg' //改成您自己的上传接口
-			,
-		auto: false
-			//,multiple: true
-			,
-		bindAction: '#test9',
-		done: function(res) {
-			layer.msg('上传成功');
-			console.log(res)
-		}
-	});
 
-})
 // 退出登录
 function logout() {
 	localStorage.setItem("authorization", "");
@@ -124,7 +80,7 @@ $(document).ready(function() {
 			var msg1 = document.getElementById("head")
 			var str1 = ""
 			str1 = `
-			<img class="headImgg" data-id="${data.userId}" src="http://123.56.29.67/hengzhi-official/headImage/newFileName${data.headImg}">
+			<img class="headImgg" data-id="${data.userId}" src="http://123.56.29.67/hengzhi-official/headImage/${data.headImg}">
 			`
 			msg1.innerHTML = str1;
 		},
@@ -164,4 +120,70 @@ $(document).ready(function() {
 		},
 		error: function() {}
 	});
+
+	// 显示资料
+	$(document).ready(function() {
+		var authorization = localStorage.getItem("authorization");
+		// console.log(authorization)
+		$.ajax({
+			type: 'post',
+			url: 'http://123.56.29.67/hengzhi-official/show/showFile',
+			dataType: 'json',
+			contentType: 'application/json;charset=utf-8',
+			headers: {
+				'Authorization': authorization
+			},
+			// data: JSON.stringify(data),
+			success: function(data) {
+				// console.log(data);
+				var str = ""
+				for (var i = 0; i < data.length; i++) {
+					// var url = data[i].url;
+					// console.log(data[i].url)
+					str += `
+						<tr>
+							<td url="${data[i].url}" id="getUrl"><i class="layui-icon layui-icon-file-b"></i>${data[i].description}</td>
+							<td>${data[i].time}</td>
+							<td>${data[i].userName}</td>
+							<td onlick="downloadFile()"><i class="layui-icon layui-icon-download-circle"></i></td>
+						</tr>
+					`
+					// console.log(str)
+				}
+				var filebox = document.getElementById("filebox");
+				filebox.innerHTML = str;
+			},
+			error: function() {}
+		});
+	})
+	
+	// 下载文件
+	// downloadFile = function() {
+	// 	console.log("chenhuil")
+	// 	var authorization = localStorage.getItem("authorization");
+	// 	console.log(authorization)
+	// 	var getUrl = document.getElementById("getUrl");
+	// 	console.log(getUrl);
+	// 	var fileName = getUrl.dataset.url;
+	// 	console.log(fileName)
+	// 	var data = {
+	// 		fileName: fileName
+	// 	}
+	// 	$.ajax({
+	// 		type: 'post',
+	// 		url: 'http://123.56.29.67/hengzhi-official/show/downloadFile',
+	// 		dataType: 'json',
+	// 		contentType: 'application/json;charset=utf-8',
+	// 		headers: {
+	// 			'Authorization': authorization
+	// 		},
+	// 		// data: JSON.stringify(data),
+	// 		success: function(data) {
+	// 			console.log(data);
+	// 			console.log(msg);
+	// 		},
+	// 		error: function() {}
+	// 	});
+	// }
+
 })

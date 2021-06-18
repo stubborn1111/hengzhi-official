@@ -1,5 +1,71 @@
+	// 修改密码
+	function change() {
+		layui.use('layer', function() {
+			var $ = layui.jquery;
+			var element = layui.element;
+			var layer = layui.layer;
+			var form = layui.form;
+			layer.open({
+				type: 1,
+				title: '修改密码',
+				area: ['350px', '250px'],
+				shade: 0.4,
+				content: $("#test1"),
+				btn: ['提交', '取消'],
+				scrollbar: false,
+				yes: function(index) {
+					// var studentId = $("#studentId").val();
+					var password = $("#password").val();
+					var newPassword = $("#newPassword").val();
+					var data = {
+						// "studentId": studentId,
+						"password": password,
+						"newPassword": newPassword,
+					};
+					var authorization = localStorage.getItem("authorization");
+					console.log(data)
+					console.log(authorization)
+					$.ajax({
+						type: 'post',
+						url: 'http://123.56.29.67/hengzhi-official/user/updatePassword',
+						dataType: 'json',
+						contentType: 'application/json;charset=utf-8',
+						headers: {
+							'Authorization': authorization
+						},
+						data: JSON.stringify(data),
+						success: function(data) {
+							if (data.status == "success") {
+								layer.close(index);
+								layer.msg("修改成功");
+								localStorage.setItem("authorization", "");
+								setTimeout(function() {
+									window.location.href = "../../login/login.html";
+								}, 2000);
+							} else {
+								layer.msg("修改失败")
+							}
+						},
+						error: function() {}
+					});
+				},
+				btn2: function() {
+					// layer.msg('bbb');
+				}
+			});
+		});
+	}
+	
+	// 退出登录
+	function logout() {
+		localStorage.setItem("authorization", "");
+		setTimeout(function() {
+			window.location.href = "../../login/login.html";
+		}, 2000);
+	}
 // 添加题目
 var list = []
+
 function add() {
 	layui.use('layer', function() {
 		var $ = layui.jquery;
@@ -50,12 +116,13 @@ function add() {
 					if (choices.length < 2) {
 						ok = false
 					} else {
-						content += '<div class="">'
-						for(var j =0 ;j<choices.length ;j++){
-							content += '<div><input type="radio" name="" value="'+choices[j]+'" title="'+choices[j]+'"></div>'
+						content += '<div class="ques" [innerHTML]><div class="">'
+						for (var j = 0; j < choices.length; j++) {
+							content += '<div><input type="radio" name="" value="' + choices[j] +
+								'" title="' + choices[j] + '"></div>'
 						}
-						content += '</div>'
-						
+						content += '</div></div>'
+
 					}
 				}
 				if (type == 2) {
@@ -68,11 +135,12 @@ function add() {
 					if (choices.length < 3) {
 						ok = false
 					} else {
-						content += '<div class="">'
-						for(var j =0 ;j<choices.length ;j++){
-							content += '<div><input type="checkbox" name="" value="'+choices[j]+'" title="'+choices[j]+'" lay-skin="primary"></div>'
+						content += '<div class="ques" [innerHTML]><div class="">'
+						for (var j = 0; j < choices.length; j++) {
+							content += '<div><input type="checkbox" name="" value="' + choices[j] +
+								'" title="' + choices[j] + '" lay-skin="primary"></div>'
 						}
-						content += '</div>'
+						content += '</div></div>'
 					}
 				}
 				if (ok == true) {
@@ -94,10 +162,9 @@ function add() {
 						},
 						data: JSON.stringify(data),
 						success: function(data) {
-							if(data.msg=="success"){
+							if (data.msg == "success") {
 								layer.msg("添加成功")
-							}
-							else{
+							} else {
 								layer.msg("添加失败")
 							}
 						},
@@ -223,6 +290,7 @@ $(document).ready(function() {
 		success: function(data) {
 			var box = ""
 			for (var i = 0; i < data.list.length; i++) {
+
 				if (data.list[i].qtype == 1) {
 					var qtype = "单选"
 					box += `
@@ -239,8 +307,7 @@ $(document).ready(function() {
 							</div>
 							<div class="mid">
 								<form class="layui-form" action="">
-									<div class="layui-form-item">
-										${data.list[i].content}
+									<div class="layui-form-item" class="data${i}">
 									</div>
 								</form>
 								<div class="answer">
@@ -273,7 +340,7 @@ $(document).ready(function() {
 							</div>
 							<div class="mid">
 								<form class="layui-form" action="">
-									<div class="layui-form-item">
+									<div class="layui-form-item" class="data${i}">
 										${data.list[i].content}
 									</div>
 								</form>
@@ -738,8 +805,15 @@ function nextPage() {
 			},
 			success: function(data) {
 				var box = ""
+
 				for (var i = 0; i < data.list.length; i++) {
+					setTimeout(function() {
+						var namee = "#mid" + i
+						$(namee).append(content)
+					}, 1000)
+
 					if (data.list[i].qtype == 1) {
+						var content = data.list[i].content
 						var qtype = "单选"
 						box += `
 							<div class="queList">
@@ -755,8 +829,8 @@ function nextPage() {
 								</div>
 								<div class="mid">
 									<form class="layui-form" action="">
-										<div class="layui-form-item">
-											${data.list[i].content}
+										<div class="layui-form-item" id="mid${i}">
+										
 										</div>
 									</form>
 									<div class="answer">
@@ -789,8 +863,8 @@ function nextPage() {
 								</div>
 								<div class="mid">
 									<form class="layui-form" action="">
-										<div class="layui-form-item">
-											${data.list[i].content}
+										<div class="layui-form-item"  id="mid${i}">
+											
 										</div>
 									</form>
 									<div class="answer">
@@ -829,7 +903,7 @@ function nextPage() {
 								<div class="mid">
 									<form class="layui-form" action="">
 										<div class="layui-form-item">
-											<div class="ques">${data.list[i].content}</div>
+											<div class="ques"  id="mid${i}"></div>
 										</div>
 									</form>
 									<div class="answer">

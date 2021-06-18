@@ -12,8 +12,8 @@
 		<style>
 			/* 试卷列表 */
 			.paperContainer {
-				background-color: rgba(18, 18, 18, 0.92);
-				width: calc(100% - 260px);
+/* 				background-color: rgba(18, 18, 18, 0.92); */
+/* 				width: calc(100% - 260px); */
 				height: 470px;
 				margin: 30px;
 				place-items: center center;
@@ -62,6 +62,10 @@
 				/* 				font-family: 宋体; */
 			}
 
+			#codeinput {
+				position: ;
+			}
+
 			#divs {
 				height: 380px;
 			}
@@ -69,33 +73,47 @@
 
 	</head>
 	<body>
-		<!-- 填写邀请码 -->
-		<div id="codeinput">
-			<input id="code" type="text" name="title" placeholder="请填写邀请码" autocomplete="off" class="layui-input">
-			<button onclick="getPaper()" type="button" class="layui-btn layui-btn-primary">获取试卷</button>
+		<!-- 重设密码 -->
+		<div id="test1" style="display: none;">
+			<form class="layui-form layui-form-pane" action="">
+				<div class="layui-form-item" pane style="width: 90%; margin: 20px auto;">
+					<label class="layui-form-label">原密码</label>
+					<div class="layui-input-block">
+						<input type="password" name="password" required lay-verify="required" placeholder="请输入原密码"
+							autocomplete="off" class="layui-input" id="password">
+					</div>
+				</div>
+				<div class="layui-form-item" pane style="width: 90%; margin: 20px auto;">
+					<label class="layui-form-label">新密码</label>
+					<div class="layui-input-block">
+						<input type="password" name="password" required lay-verify="required" placeholder="请输入新密码"
+							autocomplete="off" class="layui-input" id="newPassword">
+					</div>
+				</div>
+			</form>
 		</div>
 		<!-- 水平导航-->
 		<ul class="layui-nav level" lay-filter="">
 			<li class="layui-nav-item"><a href="">首页</a></li>
 			<li class="layui-nav-item layui-this">
-				<a href="javascript:;">个人中心</a>
-				<dl class="layui-nav-child">
+				<a href="javascript:;" style="z-index: 111111111111111111;">个人中心</a>
+				<dl class="layui-nav-child" style="z-index: 111111111111111111;">
 					<!-- 二级菜单 -->
-					<dd><a href="">修改密码</a></dd>
-					<dd><a href="">退出登录</a></dd>
+					<dd onclick="change()">修改密码</dd>
+					<dd onclick="logout()">退出登录</dd>
 				</dl>
 			</li>
 		</ul>
 
 		<!-- 侧边导航-->
 		<ul class="layui-nav layui-nav-tree vertical" lay-filter="test">
-			<li class="layui-nav-item"><a href="">基本信息</a></li>
-			<li class="layui-nav-item"><a href="">公告与资料</a></li>
+			<!-- <li class="layui-nav-item"><a href="">基本信息</a></li> -->
+			<li class="layui-nav-item"><a href="../../notice/notice.html">公告与资料</a></li>
 			<li class="layui-nav-item layui-nav-itemed">
 				<a href="javascript:;">考试中心</a>
 				<dl class="layui-nav-child">
 					<dd class="layui-this"><a href="">待考试卷</a></dd>
-					<dd><a href="">已考试卷</a></dd>
+					<dd><a href="../reList/reList.html">已考试卷</a></dd>
 				</dl>
 			</li>
 		</ul>
@@ -154,7 +172,12 @@
 						</div>
 					</div>
 				</div>
-
+				<!-- 填写邀请码 -->
+				<div id="codeinput">
+					<input id="code" type="text" name="title" placeholder="请填写邀请码" autocomplete="off"
+						class="layui-input" style="width: 120px; position: absolute; bottom: 45px;right: 250px;">
+					<button onclick="getPaper()" type="button" class="layui-btn" style="position: absolute; bottom: 45px;right: 150px;">获取试卷</button>
+				</div>
 			</div>
 
 		</div>

@@ -25,7 +25,6 @@ $(document).ready(function () {
       // console.log(data.paperInfo)
         var beginTime = data.paperInfo.beginTime;
         arr.push(beginTime);
-        // console.log(beginTime)
         var deadline = data.paperInfo.beginTime;
         var description = data.paperInfo.desciption;
         var name = data.paperInfo.name;
@@ -65,16 +64,23 @@ $(document).ready(function () {
         var data_length = data.qList.length;
         // console.log(data_length)
         // 单选题
+  
         if (qType == 1) {
 
           item += `
           <div class="qtype1 qtype">
             <div class="layui-form-item">
-              <div class="ques"><span>${qNumber}</span>
+                <span>${qNumber}</span>
                 ${content}
             </div>
           </div>
           `
+          // item += `
+          //   <div class="layui-form-item">
+          //     <div class="ques"><span>${qNumber}</span>
+          //       ${content}
+          //   </div>
+          // `
           var qtype1 = document.getElementById("paperC");
           qtype1.innerHTML = item;
 
@@ -90,7 +96,7 @@ $(document).ready(function () {
           item += `
           <div class="qtype2 qtype">
             <div class="layui-form-item">
-              <div class="ques"><span>${qNumber}</span>
+              <span>${qNumber}</span>
                 ${content}
             </div>
           </div>
@@ -223,7 +229,7 @@ $(document).ready(function () {
       data: JSON.stringify(data),
       success: function (data) {
         // console.log(data);
-        window.location.href = "../preList/preList.html";
+        window.location.href = "../../notice/notice.html";
       },
       error: function (XMLHttpRequest, textStatus, errorThrown) {
         alert(XMLHttpRequest.status);

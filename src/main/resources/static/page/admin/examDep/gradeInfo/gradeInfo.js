@@ -66,14 +66,19 @@
 $(document).ready(function(){
   var authorization = localStorage.getItem("authorization");
 	console.log(authorization);
+  //url带参数
+  var paperId = 3;
+  var paperName = "恒之第一次测试";
+  var str = "";
   var data = {
 		page: 1,
-		size: 5
+		size: 5,
+    paperId: paperId
 	}
   console.log(data);
   $.ajax({
 		type: 'post',
-		url: 'http://123.56.29.67/hengzhi-official/super/showAllUser',
+		url: 'http://123.56.29.67/hengzhi-official/managerPaper/scoreInformation',
 		dataType: 'json',
 		contentType: 'application/json;charset=utf-8',
 		data: JSON.stringify(data),
@@ -81,81 +86,35 @@ $(document).ready(function(){
 			'Authorization': authorization
 		},
 		success: function(data) {
-      console.log(data)
-      var TotalNumber = data.TotalNumber;
-      var pagesSize = data.pagesSize;
-      var size1 = TotalNumber/pagesSize;
-      var str = "";
-      for(var i = 0; i < 5; i++){
-        var headImg = data.list[i].headImg;
-        var name = data.list[i].name;
-        console.log(name);
-        var userId = data.list[i].userId;
-        var studentId = data.list[i].studentId;
-        var power = data.list[i].power;
+      console.log(data);
+      // console.log(average);
+      // var item = "";
+      // item = `
+      //   <span>本套试卷的的平均成绩为${average}</span>
+      // `
+      // var ave = document.getElementsByClassName("aver")
+			// ave.innerHTML = item;
+      // console.log(ave.innerHTML);
+      for(var i = 0; i < data.list.length; i++){
+        // console.log(i)
+        var score = data.list[i].score;
+        var userId = data.list[i].userId;  
+        var name = data.list[i].userScoreInformationList[0].name;
+        var studentId = data.list[i].userScoreInformationList[0].studentId;
+          // console.log(data.list[i].userScoreInformationList[0].name)
+          // console.log(data.list[1].userScoreInformationList[0].name)
         str += `
           <tr>
             <td>${userId}</td>
-            <td><img style="width: 45px;height: 45px;" src = "http://123.56.29.67/hengzhi-official/headImage/${headImg}"></td>
-            <td>${name}</td>
             <td>${studentId}</td>
-            <td>${power}</td>
+            <td>${name}</td>
+            <td>${score}</td>
+            <td>${data.average}</td>
+            <td><a class="layui-btn layui-btn-xs" lay-event="edit">查看试卷</a></td>
           </tr>
         `
-        console.log(str);
         var boxinfo = document.getElementById("boxinfo")
-				boxinfo.innerHTML = str;
-        // $(".boxinfo").innerHTML = str;
-      }
-
-		},
-		error: function() {}
-	})
-})
-
-$(document).ready(function(){
-  var authorization = localStorage.getItem("authorization");
-	console.log(authorization);
-  var data = {
-		page: 1,
-		size: 5
-	}
-  console.log(data);
-  $.ajax({
-		type: 'post',
-		url: 'http://123.56.29.67/hengzhi-official/super/showAllUser',
-		dataType: 'json',
-		contentType: 'application/json;charset=utf-8',
-		data: JSON.stringify(data),
-		headers: {
-			'Authorization': authorization
-		},
-		success: function(data) {
-      console.log(data)
-      var TotalNumber = data.TotalNumber;
-      var pagesSize = data.pagesSize;
-      var size1 = TotalNumber/pagesSize;
-      var str = "";
-      for(var i = 0; i < 5; i++){
-        var headImg = data.list[i].headImg;
-        var name = data.list[i].name;
-        console.log(name);
-        var userId = data.list[i].userId;
-        var studentId = data.list[i].studentId;
-        var power = data.list[i].power;
-        str += `
-          <tr>
-            <td>${userId}</td>
-            <td><img style="width: 45px;height: 45px;" src = "http://123.56.29.67/hengzhi-official/headImage/${headImg}"></td>
-            <td>${name}</td>
-            <td>${studentId}</td>
-            <td>${power}</td>
-          </tr>
-        `
-        console.log(str);
-        var boxinfo = document.getElementById("boxinfo")
-				boxinfo.innerHTML = str;
-        // $(".boxinfo").innerHTML = str;
+        boxinfo.innerHTML = str;
       }
 
 		},
