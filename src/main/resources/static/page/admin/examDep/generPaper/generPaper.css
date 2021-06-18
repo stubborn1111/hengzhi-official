@@ -1,0 +1,231 @@
+/* 选中的tags */
+/* 待选择和已选择的标签列表 */
+.tiaozhuan input{
+	width: 90px;
+	margin-right: 5px;
+}
+.add:hover{
+	border:1px solid #CF4E50!important
+}
+.add{
+	position: absolute;
+	top: 3px;
+	right: 15px;
+	padding: 9px 15px;
+	font-weight: 400;
+	line-height: 20px;
+	border:1px solid #f48a8f;
+	background: 0 0;
+	color: #666;
+	height: 38px;
+	line-height: 38px;
+	padding: 0 18px;
+	white-space: nowrap;
+	text-align: center;
+	font-size: 14px;
+	border-radius: 2px;
+	cursor: pointer;
+	outline: 0;
+}
+.fenye{
+	margin-top: 10px;
+}
+.hand .tags,
+.hand .tagList {
+	padding: 10px;
+	width: 80%;
+	min-height: 40px;
+	border: 1px solid #8F8F9D;
+	border-radius: 3px;
+}
+.quskind{
+	margin-bottom: 10px;
+}
+.quskind span{
+	font-size: 15px;
+	font-family: 宋体;
+	font-weight: 500;
+}
+.auto .tags,
+.auto .tagList {
+	padding: 10px;
+	width: 55%;
+	min-height: 100px;
+	border: 1px solid #8F8F9D;
+	border-radius: 3px;
+}
+.surtags{
+	margin-bottom: 10px;
+}
+.tagCheck,
+.title {
+	font-size: 15px;
+	font-family: 宋体;
+	font-weight: 500;
+	margin: 20px 0px 10px 0px;
+}
+
+.title1 {
+	margin: 0px 0px 10px 0px;
+}
+.surtags input {
+	width: 40%;
+	padding-left: 10px;
+	height: 38px;
+	line-height: 1.3;
+	border-width: 1px;
+	border-style: solid;
+	background-color: #fff;
+	color: rgba(0, 0, 0, .85);
+	border-radius: 2px;
+	outline: 0;
+	-webkit-appearance: none;
+	-webkit-transition: all .3s;
+	box-sizing: border-box;
+}
+#handsur{
+	width: 70%;
+}
+.tagsLimit{
+	width: 100%;
+}
+.search {
+	padding: 9px 15px;
+	width: 80px;
+	font-weight: 400;
+	line-height: 20px;
+	border: 1px solid #d2d2d2;
+	background: 0 0;
+	color: #666;
+	height: 38px;
+	line-height: 38px;
+	padding: 0 18px;
+	white-space: nowrap;
+	text-align: center;
+	font-size: 14px;
+	border-radius: 2px;
+	cursor: pointer;
+	outline: 0;
+}
+.search:hover{
+	border:1px solid #d2d2d2!important
+}
+.tag:hover{
+	border:1px solid #CF4E50!important
+}
+.tag{
+	padding: 9px 15px;
+	font-weight: 400;
+	line-height: 20px;
+	border: 1px solid #d2d2d2;
+	background: 0 0;
+	color: #666;
+	height: 38px;
+	line-height: 38px;
+	padding: 0 18px;
+	white-space: nowrap;
+	text-align: center;
+	font-size: 14px;
+	border-radius: 2px;
+	cursor: pointer;
+	outline: 0;
+	margin-bottom: 5px;
+}
+.quesLimit input{
+	color:#666666;padding: 5px;
+}
+/* 手动组卷题库 */
+.mid {
+	background-color: white;
+}
+
+.botm {
+	background-color: rgba(227, 227, 227, 0.9);
+	position: relative;
+}
+
+.qtitle {
+	box-sizing: border-box;
+	width: 50px;
+	padding: 20px 10px;
+	position: absolute;
+	top: 90px;
+	left: 330px;
+	background-color: seashell;
+	text-align: center;
+	font-size: 16px;
+	border-radius: 3px 0 0 3px;
+	color: #292c2f;
+}
+/* 题库列表 */
+.queList{
+	box-sizing: border-box;
+	width: calc(100% - 30px);
+	margin:20px 0px 30px 10px;
+	border: 1px solid #3F3F3F;
+	box-shadow: rgba(0, 0, 0, 0.08) 0px 0px 8px;
+}
+.sqes{
+	margin-top:10px;
+}
+.top{
+	padding: 10px;
+	line-height: 24px;
+	font-size: 13px;
+	color: #292c2f;
+	background-color: rgba(227, 227, 227, 0.9);
+}
+.top span{
+	margin-right: 20px;
+}
+.mid{
+	padding: 10px;
+	background-color: white;
+}
+.botm{
+	padding: 10px;
+	line-height: 24px;
+	font-size: 13px;
+	color: #292c2f;
+}
+.ques {
+	font-size: 15px;
+	letter-spacing: 0.05rem;
+	line-height: 35px;
+	color: #292c2f;
+}
+.layui-form-radio, .layui-form-radio *{
+	color: #292c2f !important;
+}
+.layui-form-label {
+	font-size: 1rem !important;
+	letter-spacing: 0.05rem !important;
+}
+
+.ques span {
+	font-family: Times New Roman;
+	font-weight: 600;
+	margin-right: 10px;
+	font-size: 17px;
+}
+.layui-input-block{
+	margin-left: 0px;
+}
+/* 正确答案 */
+.answer {
+	font-size: 0.8rem;
+	letter-spacing: 0.05rem;
+	margin-top: 20px;
+	line-height: 24px;
+}
+
+.qans {
+	margin-right: 10px;
+	color:#666
+}
+.anss{
+	color: #CF4E50;
+}
+.des{
+	color:#666
+}

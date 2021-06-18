@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Access-Control-Allow-Origin" content="*" charset="utf-8" />
+		<title>登录</title>
+		<link rel="stylesheet" type="text/css" href="../../layui/layui/css/layui.css" />
+		<link rel="stylesheet" type="text/css" href="login.css" />
+		<script src="../common/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../layui/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+		<script src="login.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div class="loginBox">
+			<div id="loginBox2">
+				<div class="box1">
+					<div class="la" style="font-size: 16px;">
+						userId
+					</div>
+					<input type="" name="" value="" id="studentId" />
+				</div>
+				<div class="box2" style="margin-top: 50px;">
+					<div class="la" style="font-size: 16px;">
+						password
+					</div>
+					<input type="password" name="" value="" id="password" />
+				</div>
+				<div class="box3">
+					<div class="forget" onclick="forget()">
+						忘记密码
+					</div>
+					<div class="box3-1" onclick="login()">
+						登 录
+					</div>
+					<div class="clear">
+
+					</div>
+				</div>
+			</div>
+			<div id="test" style="display: none;">
+				<form class="layui-form layui-form-pane" action="">
+					<div class="layui-form-item" pane style="width: 90%; margin: 20px auto;">
+						<label class="layui-form-label">学号</label>
+						<div class="layui-input-block">
+							<input type="text" name="" required lay-verify="required" placeholder="请输入您的学号"
+								autocomplete="off" class="layui-input" id="studentId1">
+						</div>
+					</div>
+					<div class="layui-form-item" pane style="width: 90%; margin: 20px auto;">
+						<label class="layui-form-label">密码框</label>
+						<div class="layui-input-block">
+							<input type="password" name="password" required lay-verify="required" placeholder="重设密码"
+								autocomplete="off" class="layui-input" id="password1">
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</body>
+</html>
