@@ -25,7 +25,7 @@ import java.util.Map;
 import java.util.UUID;
 
 @RequestMapping("/super")
-@Controller
+@RestController
 @CrossOrigin(origins = "*",maxAge = 3600)
 public class SuperManagerController {
     @Autowired
@@ -101,7 +101,7 @@ public class SuperManagerController {
     }
     @RequestMapping("/showAllUser")
     @ResponseBody
-    @RequiresRoles(value = {"super"})
+    @RequiresRoles(value = {"super","admin"},logical = Logical.OR)
     public Map showAllUser(@RequestBody JSONObject jsonObject){
         int page=jsonObject.getInteger("page");
         int size=jsonObject.getInteger("size");

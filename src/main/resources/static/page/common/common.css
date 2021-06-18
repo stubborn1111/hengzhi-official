@@ -1,0 +1,193 @@
+body {
+	color: #1C1E20;
+}
+.fenye input{
+	margin-right: 5px;
+}
+.layui-timeline-axis {
+	color: rgba(207, 78, 89, 0.75);
+}
+
+.layui-timeline-axis:hover {
+	color: rgba(207, 78, 89, 0.75);
+}
+
+.layui-nav-child dd {
+	font-size: 14px;
+	text-align: center;
+	color: rgba(0, 0, 0, .8);
+	cursor: pointer;
+
+}
+
+.layui-nav .layui-this:after,
+.layui-nav-bar {
+	background-color: #cf4e50 !important;
+}
+
+.layui-btn {
+	background-color: #cf4e50 !important;
+}
+
+/* 卷子的样式 */
+.layui-form-radio,
+.layui-form-radio * {
+	color: #666 !important;
+	line-height: 23px;
+}
+
+.layui-form-radio:hover *,
+.layui-form-radioed,
+.layui-form-radioed>i {
+	color: #cf4e50 !important;
+}
+
+.layui-form-radio>i {
+	font-size: 21px !important;
+}
+
+.layui-form-checked[lay-skin="primary"] i {
+	color: rgba(207, 78, 89, 0.95) !important;
+	background-color: rgba(207, 78, 89, 0.95);
+	border-color: rgba(207, 78, 89, 0.95) !important;
+}
+
+.layui-form-checkbox[lay-skin="primary"]:hover i {
+	border-color: rgba(207, 78, 89, 0.95);
+}
+
+.layui-form-checkbox:hover span {
+	color: rgba(207, 78, 89, 0.95);
+}
+
+.layui-nav-tree .layui-this,
+.layui-nav-tree .layui-this>a {
+	background-color: #cf4e50 !important;
+}
+
+.qtype3 input {
+	border: 1px solid #c5c5c5;
+	border-top-style: none;
+	border-right-style: none;
+	border-left-style: none;
+}
+
+.clear {
+	clear: both;
+}
+
+.quesInpu {
+	margin-top: 10px;
+	line-height: 18px;
+	color: #666;
+	font-size: 14px;
+}
+
+.quesInpu input {
+	padding: 5px;
+	width: 50%;
+}
+
+/* 水平导航和垂直导航 */
+body {
+	background-color: #121212;
+}
+
+.level {
+	width: 100%;
+	margin: 0 auto;
+	padding: 0 3%;
+	background-color: rgba(18, 18, 18, 0.92);
+	box-shadow: 10px 10px 5px black;
+	text-align: right;
+}
+
+.level .layui-nav-item {
+	margin: 0 15px;
+}
+
+/* 垂直导航 */
+.vertical {
+	background-color: rgba(18, 18, 18, 0.92);
+	box-shadow: 10px 5px 10px black;
+}
+
+/* 分页 */
+
+.managea {
+	border: 1px solid #D5D5D5;
+}
+
+.qian,
+.zuiqian,
+.zuihou,
+.hou {
+	float: left;
+	width: 30px;
+	height: 30px;
+	text-align: center;
+	line-height: 30px;
+	color: #777;
+	background-color: #fff;
+	border: 1px solid #D5D5D5;
+	border-radius: 4px;
+	margin-right: 5px;
+	cursor: pointer;
+}
+
+.zongyeshu {
+	float: left;
+	width: 80px;
+	height: 30px;
+	text-align: center;
+	line-height: 30px;
+	color: #777;
+}
+
+.dangqianye {
+	float: left;
+	width: 50px;
+	height: 30px;
+	text-align: center;
+	line-height: 30px;
+	color: #777;
+	margin-right: 5px;
+}
+
+.tiaozhuan1 {
+	float: left;
+	width: 60px;
+	height: 30px;
+	text-align: center;
+	line-height: 30px;
+	color: #777;
+	background-color: #fff;
+	border: 1px solid #D5D5D5;
+	border-radius: 4px;
+	margin-right: 5px;
+	cursor: pointer;
+}
+
+.tiaozhuan {
+	float: left;
+}
+
+.tiaozhuan input {
+	width: 180px;
+	height: 30px;
+	text-align: center;
+	line-height: 30px;
+	color: #777;
+	background-color: #ededed;
+	border: 1px solid #D5D5D5;
+	border-radius: 4px;
+}
+
+.headImgg {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	border: 2px solid white;
+	margin-bottom: 10px;
+	margin-right: 10px;
+}

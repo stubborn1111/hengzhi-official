@@ -41,6 +41,7 @@
         <collection property="userScoreInformationList" ofType="com.hengzhi.dto.ManagerPaper.UserScoreInformation">
             <id property="userId" column="user_id"/>
             <result property="name" column="name"/>
+            <result property="studentId" column="Student_id"/>
         </collection>
     </resultMap>
 

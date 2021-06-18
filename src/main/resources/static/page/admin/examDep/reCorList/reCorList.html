@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>已改试卷列表</title>
+		<link rel="stylesheet" href="../../../../layui/layui/css/layui.css">
+		<link rel="stylesheet" type="text/css" href="../../../../font-awesome-4.7.0/css/font-awesome.css" />
+		<link rel="stylesheet" type="text/css" href="../../../common/common.css" />
+		<script src="../../../common/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../../../layui/layui/layui.js"></script>
+		<script src="reCorList.js"></script>
+		<style>
+			.paperContainer {
+				background-color: rgba(18, 18, 18, 0.92);
+				width: calc(100% - 260px);
+				height: 470px;
+				margin: 30px;
+				place-items: center center;
+				place-content: space-between;
+			}
+
+			.paperBox {
+				box-sizing: border-box;
+				width: 120px;
+				height: 160px;
+				background-color: white;
+				border-radius: 5px;
+				float: left;
+				margin: 15px;
+				box-shadow: inset rgba(1, 1, 1, 0.4) 0px 0px 8px;
+				/* border: 1px solid #CF4E50; */
+			}
+
+			.paperBox div {
+				margin: 4px;
+				padding: 0 2px;
+				line-height: 33px;
+				text-align: center;
+				color: #454545;
+			}
+
+			.paperBox:hover {
+				border-bottom: 5px solid #CF4E50;
+			}
+
+			.zongyeshu,
+			.dangqianye {
+				color: white;
+			}
+
+			.fenye {
+				margin: 15px;
+			}
+
+			.title {
+				font-size: 16px;
+				text-align: center;
+				font-weight: 500;
+				height: 66px;
+				color: #454545;
+			}
+
+			#divs {
+				height: 380px;
+			}
+		</style>
+
+	</head>
+	<body>
+		<!-- 水平导航-->
+		<ul class="layui-nav level" lay-filter="">
+			<li class="layui-nav-item"><a href="">首页</a></li>
+			<li class="layui-nav-item layui-this">
+				<a href="javascript:;">个人中心</a>
+				<dl class="layui-nav-child">
+					<!-- 二级菜单 -->
+					<dd><a href="">修改头像</a></dd>
+					<dd><a href="">修改密码</a></dd>
+					<dd><a href="">退出登录</a></dd>
+				</dl>
+			</li>
+		</ul>
+
+		<!-- 侧边导航-->
+		<ul class="layui-nav layui-nav-tree vertical" lay-filter="test">
+			<li class="layui-nav-item"><a href="">人员信息</a></li>
+			<li class="layui-nav-item"><a href="">留言审核</a></li>
+			<li class="layui-nav-item"><a href="">资料上传</a></li>
+			<li class="layui-nav-item layui-nav-itemed">
+				<a href="javascript:;">考试管理</a>
+				<dl class="layui-nav-child">
+					<dd>
+						<a href="">组卷</a>
+						<!-- <dl class="layui-nav-child">
+              <dd><a href="">自动组卷</a></dd>
+              <dd><a href="">手动组卷</a></dd>
+            </dl> -->
+					</dd>
+					<dd><a href="">未考试卷</a></dd>
+					<dd><a href="">改卷</a></dd>
+					<dd class="layui-this"><a href="">已改试卷</a></dd>
+				</dl>
+			</li>
+			<li class="layui-nav-item">
+				<a href="javascript:;">题库</a>
+				<dl class="layui-nav-child">
+					<dd><a href="">题目</a></dd>
+					<dd><a href="">标签</a></dd>
+				</dl>
+			</li>
+		</ul>
+
+		<!-- 未考试卷列表 -->
+		<div class="layui-layout layui-layout-admin">
+			<div class="layui-body paperContainer">
+				<!-- 内容主体区域 -->
+				<div id="divs">
+					<!-- <div class="paperBox">
+						<div>试卷名</div>
+
+						<div>6.8 10:00-12:00</div>
+						<div>出卷人：陈陈</div>
+					</div>
+					<div class="paperBox"></div>
+					<div class="paperBox"></div>
+					<div class="paperBox"></div>
+					<div class="paperBox"></div>
+					<div class="paperBox"></div>
+					<div class="paperBox"></div>
+					<div class="paperBox"></div>
+					<div class="paperBox"></div>
+					<div class="paperBox"></div>
+					<div class="paperBox"></div>
+					<div class="paperBox"></div>
+					<div class="clear">
+
+					</div> -->
+				</div>
+				<div class="fenye">
+					<div class="fenye1">
+						<div class="zuiqian">
+							<i class="fa fa-angle-double-left"></i>
+						</div>
+						<div class="qian" onclick="shangyiye1()">
+							<i class="fa fa-angle-left"></i>
+						</div>
+						<div class="tiaozhuan">
+							<input type="" name="" id="shuruyeshu1" value="" />
+						</div>
+						<div class="tiaozhuan1" onclick="shuruys1()">
+							跳转
+						</div>
+						<div class="zongyeshu">
+							共1页
+						</div>
+						<div class="dangqianye">
+							第1页
+						</div>
+						<div class="hou" onclick="xiayiye1()">
+							<i class="fa fa-angle-right"></i>
+						</div>
+						<div class="zuihou" onclick="zuihouyiye1()">
+							<i class="fa fa-angle-double-right"></i>
+						</div>
+						<div class="clear">
+
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<!-- 分页 -->
+
+		<script>
+			//注意：导航 依赖 element 模块，否则无法进行功能性操作
+			layui.use('element', function() {
+				var element = layui.element;
+
+			});
+		</script>
+
+	</body>
+</html>

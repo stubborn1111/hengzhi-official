@@ -14,10 +14,7 @@ import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import sun.rmi.server.InactiveGroupException;
 
 import javax.crypto.spec.PSource;
@@ -25,7 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
 @RequestMapping("/managerPaper")
-@Controller
+@RestController
 @CrossOrigin(origins = "*",maxAge = 3600)
 public class ManagerPaperController {
 

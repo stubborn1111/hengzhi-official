@@ -49,10 +49,14 @@ public class ShiroConfig {
         map.put("/user/getUserInfo", "anon");
         map.put("/headImage/**", "anon");
         map.put("/user/verify","anon");
+        map.put("/page/**","anon");
+        map.put("/layui/**","anon");
+        map.put("/images/**","anon");
+        map.put("/font-awesome-4.7.0/**","anon");
         map.put("/**", "jwt");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(map);
-        shiroFilterFactoryBean.setLoginUrl("/login.html");
-        shiroFilterFactoryBean.setUnauthorizedUrl("/login.html");
+        shiroFilterFactoryBean.setLoginUrl("/page/login/login.html");
+        shiroFilterFactoryBean.setUnauthorizedUrl("/page/login/login.html");
         return shiroFilterFactoryBean;
     }
 

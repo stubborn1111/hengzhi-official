@@ -1,0 +1,180 @@
+body {
+  background-color: #121212;
+}
+
+.level {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 3%;
+  background-color: rgba(18, 18, 18, 0.92);
+  box-shadow: 10px 10px 5px black;
+}
+
+.level .layui-nav-item {
+  margin: 0 15px;
+}
+
+/* 垂直导航 */
+.vertical {
+  background-color: rgba(18, 18, 18, 0.92);
+  box-shadow: 10px 5px 10px black;
+}
+
+/* 左侧公告栏 */
+.left {
+  width: 50%;
+  color: rgba(255, 255, 255, 0.87);
+}
+
+/* 右侧资料栏 */
+
+.container {
+  box-sizing: border-box;
+  position: absolute;
+  width: 1080px;
+  height: 88%;
+  top: 60px;
+  left: 200px;
+  padding: 80px 50px 50px 50px;
+  color: #666;
+}
+
+#right {
+  box-sizing: border-box;
+  width: 48%;
+  height: 100%;
+  background-color: seashell;
+  float: left;
+  margin-left: 30px;
+}
+
+/* 滚动栏 */
+#demo {
+  position: relative;
+  box-sizing: border-box;
+  overflow: hidden;
+  width: 48%;
+  height: 100%;
+  background-color: seashell;
+  float: left;
+}
+
+.title1 {
+  color: #333;
+  position: absolute;
+  top: 40px;
+  left: 50px;
+  padding-left: 15px;
+  height: 40px;
+  line-height: 40px;
+  width: 110px;
+  background-color: seashell;
+  border-radius: 3px 3px 0 0;
+  font-size: 15px;
+}
+
+.title2 {
+  color: #333;
+  position: absolute;
+  top: 40px;
+  left: calc(48% + 32px);
+  padding-left: 15px;
+  height: 40px;
+  line-height: 40px;
+  width: 110px;
+  background-color: seashell;
+  border-radius: 3px 3px 0 0;
+  font-size: 15px;
+}
+
+/* 文件上传按钮 */
+.title3{
+  position: absolute;
+  top: 40px;
+  left: calc(96% - 146px);
+  padding-left: 15px;
+  height: 35px;
+  width: 120px;
+  line-height: 35px;
+  font-size: 15px;
+}
+/* 发布公告 */
+.title4{
+  position: absolute;
+  top: 40px;
+  left: calc(48% - 118px);
+  padding-left: 15px;
+  height: 35px;
+  width: 120px;
+  line-height: 35px;
+  font-size: 15px;
+}
+.demoo {
+  margin: 20px 30px 20px 20px;
+}
+
+.zUIpanelScrollBox,
+.zUIpanelScrollBar {
+  width: 10px;
+  top: 4px;
+  right: 2px;
+  border-radius: 5px;
+
+}
+
+.zUIpanelScrollBox {
+  background: black;
+  opacity: 0.1;
+  filter: alpha(opacity=10);
+}
+
+.zUIpanelScrollBar {
+  background: rgba(207, 78, 89, 0.75);
+  opacity: 0.8;
+  filter: alpha(opacity=80);
+}
+
+/* 第二个滚动条 */
+#right .box {
+  overflow: hidden;
+}
+
+#right .box p {
+  margin: 0;
+  padding: 0;
+  line-height: 40px;
+}
+
+.table1 {
+  height: 10%;
+}
+
+.box1 {
+  height: 90%;
+}
+
+.layui-table {
+  margin: 0 !important;
+  background-color: seashell;
+}
+
+.layui-table th {
+  padding: 0 !important;
+  text-align: center;
+  line-height: 10%;
+  background-color: seashell;
+}
+.aa{
+	text-align: right;
+}
+/* 发布公告 */
+textarea{
+	width: 300px!important;
+	margin:10px 25px;
+	height: 120px;
+	max-height: 120px;
+	min-height: 120px !important;
+	letter-spacing: 0.02rem;
+	font-size: 14px;
+	color: #2f2f2f;
+}

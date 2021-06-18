@@ -23,5 +23,5 @@ public interface ShowService {
     public void updateIntroduction(String teamIntroduction,String behind,String front);
     public Introduction showIntroduction();
     public void addFile(int userId,String description,String url);
-    public List<Data> showFile();
+    public List showFile();
 }

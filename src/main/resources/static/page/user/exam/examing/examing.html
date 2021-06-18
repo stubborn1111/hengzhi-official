@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>考试界面</title>
+		<link rel="stylesheet" href="../../../../layui/layui/css/layui.css">
+		<!-- <link rel="stylesheet" type="text/css" href="../../font-awesome-4.7.0/css/font-awesome.css" /> -->
+		<link rel="stylesheet" type="text/css" href="../../../common/common.css" />
+		<link rel="stylesheet" type="text/css" href="examing.css" />
+		<script src="../../../../layui/layui/layui.js"></script>
+		<script src="../../../common/jquery-3.4.1.min.js"></script>
+		<script src="examing.js" type="text/javascript" charset="utf-8"></script>
+		<style>
+			body {
+				color: #899097;
+			}
+
+			.qtype3 input {
+				border: 1px solid #c5c5c5;
+				border-top-style: none;
+				border-right-style: none;
+				border-left-style: none;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div class="paperB">
+			<form id="paperC" class="layui-form"  action="">
+				<!-- 单选题 -->
+				<!-- <div class="qtype1 qtype">
+					<div class="layui-form-item">
+						<div class="ques"><span>1.</span>
+							(单选题)衬衫的价格是？</div>
+						<div class="">
+							<div><input type="radio" name="sex" value="A" title="九磅十五便士"></div>
+							<div><input type="radio" name="sex" value="B" title="九磅五便士"></div>
+							<div><input type="radio" name="sex" value="C" title="十磅五便士"></div>
+							<div><input type="radio" name="sex" value="D" title="十磅九五便士"></div>
+						</div>
+					</div>
+				</div> -->
+				<!-- 多选题 -->
+				<!-- <div class="qtype2 qtype">
+					<div class="layui-form-item">
+						<div class="ques"><span>2.</span>
+							大二下学期的专业课有哪些？</div>
+						<div class="">
+							<div><input type="checkbox" name="sex" value="A" title="软件工程导论" lay-skin="primary"></div>
+							<div><input type="checkbox" name="sex" value="B" title="数据库系统概论" lay-skin="primary"></div>
+							<div><input type="checkbox" name="sex" value="C" title="计算机组成原理" lay-skin="primary"></div>
+							<div><input type="checkbox" name="sex" value="D" title="概率论数理统计" lay-skin="primary"></div>
+						</div>
+					</div>
+				</div> -->
+				<!-- 填空题 -->
+				<!-- <div class="qtype3 qtype">
+					<div class="layui-form-item">
+						<div class="ques">
+							<span>3.</span>地崩山摧壮士死，__________________。
+						</div>
+						<div class="quesInpu">
+							<input type="text" value="然后天梯石栈相勾连">
+						</div>
+					</div>
+				</div> -->
+				<!-- 主观题 -->
+				<!-- <div class="qtype4 qtype">
+					<div class="layui-form-item layui-form-text">
+						<div class="ques"><span>4.</span>浅谈一下你在恒之学习的收获与感想？</div>
+						<div class="">
+							<textarea name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
+						</div>
+					</div>
+				</div> -->
+
+			</form>
+			<!-- 提交 -->
+			<div class="layui-form-item btnn">
+				<div>
+					<button id="frmbtn" class="layui-btn" lay-submit lay-filter="formDemo" onclick="submit()">立即提交</button>
+					<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+				</div>
+			</div>
+		</div>
+		<div class="info">
+			<!-- <div class="paperName">
+				恒之工作室第一次测试
+			</div>
+			<div class="beginTime">
+				11:00——15:00
+			</div>
+			<div class="score">
+				总分：100
+			</div> -->
+			<!-- <div id="test"></div> -->
+		</div>
+
+		<!-- 倒计时 -->
+		<script>
+			function showNum(num) {
+				if (num < 10) {
+					return '0' + num
+				}
+				return num
+			}
+			layui.use('util', function() {
+				var util = layui.util;
+				//示例
+				var endTime = new Date(2021, 6, 13).getTime() //假设为结束日期
+					,
+					serverTime = new Date().getTime(); //假设为当前服务器时间，这里采用的是本地时间，实际使用一般是取服务端的
+
+				util.countdown(endTime, serverTime, function(date, serverTime, timer) {
+					var data1 = showNum(date[1])
+					var data2 = showNum(date[2])
+					var data3 = showNum(date[3])
+					var str = data1 + ' : ' + data2 + ' : ' + data3;
+					if(str == 0){
+						$("#frmbtn").submit();
+            // window.clearInterval(timeObj);
+            layer.msg("时间到，已自动提交试卷")
+					}
+					layui.$('#test').html(str);
+				});
+			});
+		</script>
+	</body>
+</html>

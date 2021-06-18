@@ -1,0 +1,108 @@
+body {
+	background-color: #222328;
+	background-size: 100% auto;
+}
+
+.mask:before {
+	content: "";
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	top: 0;
+	background-color: rgba(0, 0, 0, .5);
+	z-index: 2;
+}
+
+.clear{
+	clear: both;
+}
+
+.nav {
+	box-sizing: border-box;
+	position: relative;
+	z-index: 6;
+	width: 100%;
+	color: white;
+	padding: 10px;
+}
+
+.nav img {
+	width: 25px;
+	height: 20px;
+}
+
+
+.hengzhi {
+	color: rgba(255, 255, 255, 0.6);
+	font-size: 50px;
+	margin-left: 40px;
+
+}
+
+.studio {
+	color: rgba(255, 255, 255, 0.6);
+	font-size: 50px;
+	margin-top: 30px;
+}
+
+.loginBox {
+	margin: 120px auto;
+	width: 400px;
+}
+
+#loginBox2 {
+	position: relative;
+	z-index: 4;
+	color: white;
+	width: 400px;
+}
+
+
+
+.box2 {
+	margin-top: 20px;
+}
+
+.la {
+	margin-bottom: 10px;
+}
+
+.box3-1{
+	float: left;
+	color: #ffffff;
+	width: 120px;
+	height: 35px;
+	background-color: rgba(253, 253, 253, 0.4);
+	border-radius: 17.5px;
+	text-align: center;
+	line-height: 35px;
+	width: 100px;
+}
+
+#loginBox2 input {
+	color: white;
+	width: 90%;
+	height: 30px;
+	border: none;
+	border-bottom: 2px solid #ffffff;
+	background-color: transparent;
+	font-size: 15px;
+}
+
+.forget {
+	float: left;
+	width: 100px;
+	width: 120px;
+	height: 35px;
+	line-height: 35px;
+	margin-right:145px;
+	cursor: pointer;
+}
+.box3{
+	margin-top:60px
+}
+#test layui-form-item{
+	width: 90%;
+	margin: 20px auto;
+}

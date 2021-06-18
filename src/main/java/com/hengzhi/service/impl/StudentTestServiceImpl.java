@@ -30,11 +30,13 @@ public class StudentTestServiceImpl implements StudentTestService {
     @Override
     public GetPaper getPaper(String code, Integer userId) {
         GetPaper getPaper = testDao.selectPaperIdByCode(code);
+        //邀请码不存在
         if (getPaper == null) {
             return new GetPaper();
         }
         Integer integer = testDao.selectPaper(getPaper.getPaperId(), userId);
-        if(integer==null){
+        //用户已有试卷
+        if(!(integer==null)){
             GetPaper getPaper1 = new GetPaper();
             getPaper1.setPaperId(0);
             return getPaper1;
@@ -102,7 +104,7 @@ public class StudentTestServiceImpl implements StudentTestService {
         String tName;
         for (int i = 0; i < qInfo.size(); i++) {
             tName = SelectTableUtils.selectT(qInfo.get(i).getQType());
-            qList.add(new TestQuestion(qInfo.get(i).getQuestionId(), qInfo.get(i).getQType(), testDao.getTestQuestions(qInfo.get(i).getQuestionId(), tName)));
+            qList.add(new TestQuestion(i+1, qInfo.get(i).getQType(), testDao.getTestQuestions(qInfo.get(i).getQuestionId(), tName)));
         }
         TestPaperInfo paperInfo = testDao.getTestPaperInfo(paperId);
         map.put("qList", qList);

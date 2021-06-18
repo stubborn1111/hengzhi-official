@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>改卷</title>
+		<script src="http://www.jq22.com/jquery/1.11.1/jquery.min.js"></script>
+		<script src="../../../../layui/layui/layui.js"></script>
+		<script type="text/javascript" src="../../../common/zUI.js"></script>
+		<script src="../../../common/test.js"></script>
+		<script src="corPaper.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" href="../../../../layui/layui/css/layui.css">
+		<link rel="stylesheet" href="../../../common/reset.css" type="text/css" />
+		<link rel="stylesheet" href="../../../common/test.css">
+		<link rel="stylesheet" type="text/css" href="../../../common/common.css" />
+		<link rel="stylesheet" type="text/css" href="corPaper.css" />
+		<style>
+			body {
+				background-color: #121212;
+			}
+
+			.level .layui-nav-item {
+				margin: 0 15px;
+			}
+
+			/* 垂直导航 */
+			.vertical {
+				background-color: rgba(18, 18, 18, 0.92);
+				box-shadow: 10px 5px 10px black;
+			}
+
+			/* 改卷界面 */
+			.container {
+				position: absolute;
+				top: 90px;
+				left: 230px;
+				width: calc(100% - 260px);
+				height: calc(100% - 120px);
+			}
+
+			#demo {
+				width: 100%;
+				height: 100%;
+				/* border: 2px solid #1F1F1F;  */
+				/* margin: 20px auto;  */
+				overflow: hidden;
+				background-color: white;
+			}
+
+			#demo .box {
+				width: 100%;
+			}
+
+			.zUIpanelScrollBox,
+			.zUIpanelScrollBar {
+				width: 10px;
+				top: 4px;
+				right: 2px;
+				border-radius: 5px;
+
+			}
+
+			.zUIpanelScrollBox {
+				background: rgba(207, 78, 89, 0.75);
+				opacity: 0.1;
+				filter: alpha(opacity=10);
+			}
+
+			.zUIpanelScrollBar {
+				background: #fff;
+				opacity: 0.8;
+				filter: alpha(opacity=80);
+			}
+
+			/* 滚动栏里的改卷界面 */
+			.left {
+				box-sizing: border-box;
+				width: 50%;
+				float: left;
+				padding: 10px;
+				position: relative;
+			}
+
+			.right {
+				box-sizing: border-box;
+				padding: 10px;
+				width: 50%;
+				float: left;
+			}
+
+			.cpaper {
+				top: 0;
+				left: 0;
+			}
+
+			.submit {
+				position: absolute;
+				bottom: 10px;
+				left: 740px;
+			}
+		</style>
+
+	</head>
+	<body>
+		<!-- 水平导航-->
+		<ul class="layui-nav level" lay-filter="">
+			<li class="layui-nav-item"><a href="">首页</a></li>
+			<li class="layui-nav-item layui-this">
+				<a href="javascript:;">个人中心</a>
+				<dl class="layui-nav-child">
+					<!-- 二级菜单 -->
+					<dd><a href="">修改密码</a></dd>
+					<dd><a href="">退出登录</a></dd>
+				</dl>
+			</li>
+		</ul>
+
+		<!-- 侧边导航-->
+		<ul class="layui-nav layui-nav-tree vertical" lay-filter="test">
+			<li class="layui-nav-item"><a href="">人员信息</a></li>
+			<li class="layui-nav-item"><a href="">留言审核</a></li>
+			<li class="layui-nav-item"><a href="">资料上传</a></li>
+			<li class="layui-nav-item layui-nav-itemed">
+				<a href="javascript:;">考试管理</a>
+				<dl class="layui-nav-child">
+					<dd><a href="">组卷</a></dd>
+					<dd><a href="">未考试卷</a></dd>
+					<dd class="layui-this"><a href="">改卷</a></dd>
+					<dd><a href="">已改试卷</a></dd>
+
+				</dl>
+			</li>
+			<li class="layui-nav-item">
+				<a href="javascript:;">题库</a>
+				<dl class="layui-nav-child">
+					<dd><a href="">题目</a></dd>
+					<dd><a href="">标签</a></dd>
+				</dl>
+			</li>
+		</ul>
+
+		<div class="container">
+			<div id="demo">
+				<div class="box">
+					<!-- 滚动栏里的改卷 -->
+					<div class="cpaper">
+						<!-- 答案栏 -->
+						<div class="left">
+							<!-- 有答案的试卷 -->
+							<form class="layui-form" action="" id="result">
+								<!-- 填空题 -->
+								<!-- <div class="qtype3">
+									<div class="layui-form-item">
+										<div class="ques">
+											<span>3.</span>地崩山摧壮士死,_______________
+										</div>
+										<div class="quesInpu">
+											<span>正确答案：</span>然后天梯石栈相勾连
+										</div>
+										<div class="ans">
+											<span>题目解析：</span>
+											<img id="img2" src="../../../../images/question.png" height="24"
+												width="24" />
+											<span
+												style="position: absolute; top: 230px;left: 300px;width:25px;text-align: center"></span>
+										</div>
+									</div>
+								</div> -->
+								<!-- 主观题 -->
+<!-- 								<div class="qtype4">
+									<div class="layui-form-item layui-form-text">
+										<div class="ques"><span>4.</span>浅谈一下你在恒之学习的收获与感想？</div>
+										<div class="quesInpu">
+											<textarea name="desc" placeholder="请输入内容" class="layui-textarea"
+												disabled></textarea>
+										</div>
+										<div class="ans">
+											<span>题目解析：</span>
+											<img id="img2" src="../../../../images/question.png" height="24"
+												width="24" />
+											<span
+												style="position: absolute; top: 230px;left: 300px;width:25px;text-align: center"></span>
+										</div>
+									</div>
+								</div>
+							 -->
+							</form>
+						</div>
+						<!-- 评分栏 -->
+						<div class="right">
+							<form class="layui-form" action="" id="paper">
+								<!-- 填空题 -->
+								<!-- <div class="qtype3">
+									<div class="layui-form-item">
+										<div class="ques">
+											<span>3.</span>地崩山摧壮士死，________________
+										</div>
+										<div class="quesInpu">
+											然后天梯石栈相勾连
+										</div> -->
+										<!-- 打分栏 -->
+									<!-- 	<div class="grade">
+											<span>得分：</span>
+											<input type="text">
+										</div>
+									</div>
+								</div> -->
+								<!-- 主观题 -->
+								<!-- <div class="qtype4">
+									<div class="layui-form-item layui-form-text">
+										<div class="ques"><span>4.</span>浅谈一下你在恒之学习的收获与感想？</div>
+										<div class="quesInpu">
+											<textarea name="desc" placeholder="请输入内容" class="layui-textarea"
+												disabled></textarea>
+										</div> -->
+										<!-- 打分栏 -->
+										<!-- <div class="grade">
+											<span>得分：</span>
+											<input type="text">
+										</div>
+									</div>
+								</div> -->
+							</form>
+							<button type="button" class="layui-btn" style="float: right;" onclick="check()">下一张试卷</button>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<div class="tii">
+			答案
+		</div>
+		<div class="tii1">
+			试卷
+		</div>
+		<script>
+			$(function() {
+				$("#demo").panel({
+					iWheelStep: 32
+				});
+			});
+		</script>
+
+		<!-- 水平导航栏 -->
+		<script>
+			//注意：导航 依赖 element 模块，否则无法进行功能性操作
+			layui.use('element', function() {
+				var element = layui.element;
+
+			});
+		</script>
+
+	</body>
+</html>

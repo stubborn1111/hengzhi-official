@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>待考试卷列表</title>
+		<script src="../../../../layui/layui/layui.js"></script>
+		<script src="../../../common/jquery-3.4.1.min.js"></script>
+		<script src="rePaper.js"></script>
+		<script src="test.js"></script>
+		<script src="../../notice/zUI.js"></script>
+		<link rel="stylesheet" href="../../../../layui/layui/css/layui.css">
+		<link rel="stylesheet" href="test.css">
+		<link rel="stylesheet" href="../../../user/notice/reset.css">
+		<link rel="stylesheet" type="text/css" href="../../../common/common.css" />
+		<link rel="stylesheet" href="rePaper.css">
+		<style>
+			body {
+				background-color: #121212;
+			}
+
+			.level {
+				text-align: right;
+				width: 100%;
+				margin: 0 auto;
+				padding: 0 3%;
+				background-color: rgba(18, 18, 18, 0.92);
+				box-shadow: 10px 10px 5px black;
+			}
+
+			.level .layui-nav-item {
+				margin: 0 15px;
+			}
+
+			/* 垂直导航 */
+			.vertical {
+				background-color: rgba(18, 18, 18, 0.92);
+				box-shadow: 10px 5px 10px black;
+			}
+
+			/* 试卷列表 */
+			.paperContainer {
+				display: grid;
+				grid-template-columns: repeat(auto-fill, 150px);
+				background-color: rgba(18, 18, 18, 0.92);
+				margin: 5% 2.5%;
+				padding: 2.5%;
+				width: 1000px;
+				height: 470px;
+				margin: 5% auto;
+				place-items: center center;
+				place-content: space-between;
+			}
+
+			.paperBox {
+				width: 120px;
+				height: 160px;
+				background-color: rgba(255, 255, 255, 0.87);
+				margin-bottom: 20px;
+				box-shadow: -5px 5px 5px whitesmoke;
+				border-radius: 5px;
+			}
+
+			.paperBox div {
+				border: 1px solid rgba(149, 177, 190, 1);
+				height: 30px;
+				margin: 6px auto;
+				padding: 0 2px;
+				line-height: 30px;
+			}
+
+			.qtype3 input {
+				border: 1px solid #c5c5c5;
+				border-top-style: none;
+				border-right-style: none;
+				border-left-style: none;
+			}
+
+			.paperB {
+				background-color: #fffcf9;
+				width: 65%;
+			}
+
+			.layui-layout-admin {
+				width: 1000px;
+				position: absolute;
+				top: 100px;
+				left: 250px;
+			}
+
+			.score {
+				margin: 20px auto;
+				width: 100px;
+				height: 50px;
+				color: #cf4e50;
+				font-size: 25px;
+				line-height: 50px;
+				font-family: MV Boli;
+			}
+
+			/* 滚动栏界面 */
+			.container {
+				width: calc(100% - 260px);
+				height: calc(100% - 120px);
+				background-color: #fffcf9;
+				position: absolute;
+				top: 60px;
+				left: 200px;
+				margin: 30px;
+			}
+
+			#demo {
+				width: 100%;
+				height: 100%;
+				overflow: hidden;
+				margin: 0 auto;
+			}
+
+			.zUIpanelScrollBox,
+			.zUIpanelScrollBar {
+				width: 10px;
+				top: 4px;
+				right: 2px;
+				border-radius: 5px;
+
+			}
+
+			.zUIpanelScrollBox {
+				background: black;
+				opacity: 0.1;
+				filter: alpha(opacity=10);
+			}
+
+			.zUIpanelScrollBar {
+				background: rgba(207, 78, 89, 0.75);
+				opacity: 0.8;
+				filter: alpha(opacity=80);
+			}
+
+			/* 滚动栏里的试卷 */
+			.box {
+				width: 100%;
+				background-color: #fffcf9;
+				box-sizing: border-box;
+				position: relative;
+			}
+		</style>
+
+	</head>
+	<body>
+		<!-- 水平导航-->
+		<ul class="layui-nav level" lay-filter="">
+			<li class="layui-nav-item"><a href="">首页</a></li>
+			<li class="layui-nav-item layui-this">
+				<a href="javascript:;">个人中心</a>
+				<dl class="layui-nav-child">
+					<!-- 二级菜单 -->
+					<dd><a href="">修改头像</a></dd>
+					<dd><a href="">修改密码</a></dd>
+					<dd><a href="">退出登录</a></dd>
+				</dl>
+			</li>
+		</ul>
+
+		<!-- 侧边导航-->
+		<ul class="layui-nav layui-nav-tree vertical" lay-filter="test">
+			<li class="layui-nav-item"><a href="">公告与资料</a></li>
+			<li class="layui-nav-item layui-nav-itemed">
+				<a href="javascript:;">考试中心</a>
+				<dl class="layui-nav-child">
+					<dd><a href="">待考试卷</a></dd>
+					<dd class="layui-this"><a href="">已考试卷</a></dd>
+				</dl>
+			</li>
+		</ul>
+
+		<div class="container">
+			<div id="demo">
+				<div class="box">
+					<div class="paperB">
+						<form class="layui-form" action="">
+							<!-- 选择题 -->
+							<div class="qtype1">
+								<!-- 单选题 -->
+								<div class="layui-form-item">
+									<div class="ques"><span>1.</span>(单选题)衬衫的价格是？</div>
+									<div class="">
+										<div><input type="radio" name="sex" value="A" title="九磅十五便士" checked></div>
+										<div><input type="radio" name="sex" value="B" title="九磅五便士" disabled></div>
+										<div><input type="radio" name="sex" value="C" title="十磅五便士" disabled></div>
+										<div><input type="radio" name="sex" value="D" title="十磅九五便士" disabled></div>
+									</div>
+									<div class="answer">
+										<span>正确答案：</span>
+										<span class="qans">A</span>
+										<img id="img2" src="../../../../images/question.png" height="24" width="24" />
+										<span
+											style="position: absolute; top: 230px;left: 300px;width:25px;text-align: center"></span>
+									</div>
+								</div>
+							</div>
+							<!-- 多选题 -->
+							<div class="qtype2">
+								<div class="layui-form-item">
+									<div class="ques"><span>2.</span>大二下学期的专业课有哪些？</div>
+									<div class="">
+										<div><input type="checkbox" name="sex" value="A" title="软件工程导论"
+												lay-skin="primary" checked></div>
+										<div><input type="checkbox" name="sex" value="B" title="数据库系统概论"
+												lay-skin="primary" checked></div>
+										<div><input type="checkbox" name="sex" value="C" title="计算机组成原理"
+												lay-skin="primary" disabled>
+										</div>
+										<div><input type="checkbox" name="sex" value="D" title="概率论数理统计"
+												lay-skin="primary" disabled>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- 填空题 -->
+							<div class="qtype3">
+								<div class="layui-form-item">
+									<div class="ques">
+										<span>3.</span>地崩山摧壮士死，__________________。
+									</div>
+									<div class="quesInpu">
+										然后天梯石栈相勾连
+									</div>
+								</div>
+							</div>
+							<!-- 主观题 -->
+							<div class="qtype4">
+								<div class="layui-form-item layui-form-text">
+									<div class="ques"><span>4.</span>浅谈一下你在恒之学习的收获与感想？</div>
+									<div class="">
+										<textarea name="desc" placeholder="请输入内容" class="layui-textarea"
+											disabled></textarea>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="info">
+						<div class="paperName">
+							恒之第一次测试
+						</div>
+						<div class="score"><span>120</span>/<span>150</span></div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<!-- 分页 -->
+		<div class="fenye">
+			<div class="fenye1">
+				<div class="zuiqian">
+					<i class="fa fa-angle-double-left"></i>
+				</div>
+				<div class="qian" onclick="shangyiye1()">
+					<i class="fa fa-angle-left"></i>
+				</div>
+				<div class="tiaozhuan">
+					<input type="" name="" id="shuruyeshu1" value="" />
+				</div>
+				<div class="tiaozhuan1" onclick="shuruys1()">
+					跳转
+				</div>
+				<div class="zongyeshu">
+					共1页
+				</div>
+				<div class="dangqianye">
+					第1页
+				</div>
+				<div class="hou" onclick="xiayiye1()">
+					<i class="fa fa-angle-right"></i>
+				</div>
+				<div class="zuihou" onclick="zuihouyiye1()">
+					<i class="fa fa-angle-double-right"></i>
+				</div>
+				<div class="clear">
+		
+				</div>
+			</div>
+		</div>
+
+		<script>
+			$(function() {
+				$("#demo").panel({
+					iWheelStep: 32
+				});
+			});
+		</script>
+		<script>
+			//注意：导航 依赖 element 模块，否则无法进行功能性操作
+			layui.use('element', function() {
+				var element = layui.element;
+
+			});
+		</script>
+
+		<!-- 倒计时 -->
+		<!-- <div id="test"></div> -->
+
+		<script>
+			layui.use('util', function() {
+				var util = layui.util;
+
+				//示例
+				var endTime = new Date(2021, 6, 13).getTime() //假设为结束日期
+					,
+					serverTime = new Date().getTime(); //假设为当前服务器时间，这里采用的是本地时间，实际使用一般是取服务端的
+
+				util.countdown(endTime, serverTime, function(date, serverTime, timer) {
+					var str = date[1] + ':' + date[2] + ':' + date[3];
+					layui.$('#test').html(str);
+				});
+			});
+		</script>
+
+	</body>
+</html>

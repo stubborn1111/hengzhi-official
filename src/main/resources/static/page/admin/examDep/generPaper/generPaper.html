@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>组卷</title>
+		<link rel="stylesheet" href="../../../../layui/layui/css/layui.css">
+		<link rel="stylesheet" href="../../../user/notice/reset.css">
+		<link rel="stylesheet" type="text/css" href="../../../../font-awesome-4.7.0/css/font-awesome.css" />
+		<link rel="stylesheet" type="text/css" href="../../../common/common.css" />
+		<link rel="stylesheet" type="text/css" href="generPaper.css" />
+		<script src="../../../common/jquery-3.4.1.min.js"></script>
+		<script src="../../../../layui/layui/layui.js"></script>
+		<script src="../../../common/zUI.js"></script>
+		<script src="../../../common/my_scrollbar.js"></script>
+		<script src="generPaper.js" type="text/javascript" charset="utf-8"></script>
+		<style>
+			/* 布局 */
+			.hand .left {
+				box-sizing: border-box;
+				width: 49%;
+				border: 1px solid #000000;
+				float: left;
+				padding: 10px;
+			}
+
+			.hand #right {
+				box-sizing: border-box;
+				width: 49%;
+				float: left;
+				margin-left: 10px;
+			}
+
+			.hand .surf {
+				width: 100%;
+
+			}
+
+			/* 左边的滚动栏界面 */
+			.container {
+				position: absolute;
+				top: 100px;
+				left: 400px;
+			}
+
+			#demo {
+				border: 1px solid #3F3F3F;
+				width: 100%;
+				height: 250px;
+				overflow: hidden;
+				margin-top: 10px;
+			}
+
+			#demo .box {
+				width: 100%;
+			}
+
+			.zUIpanelScrollBox,
+			.zUIpanelScrollBar {
+				width: 10px;
+				top: 4px;
+				right: 2px;
+				border-radius: 5px;
+			}
+
+			.zUIpanelScrollBox {
+				background: black;
+				opacity: 0.1;
+				filter: alpha(opacity=10);
+			}
+
+			.zUIpanelScrollBar {
+				background: rgba(207, 78, 89, 0.75);
+				opacity: 0.8;
+				filter: alpha(opacity=80);
+			}
+
+			/* 右侧滚动栏 */
+			#right .box {
+				width: 100%;
+				height: 550px;
+				overflow: hidden;
+				padding: 10px;
+			}
+
+			.layui-tab {
+				position: absolute;
+				top: 90px;
+				left: 230px;
+				width: calc(100% - 260px);
+			}
+
+			.layui-tab-content {
+				background-color: white;
+				padding: 15px;
+				margin-bottom: 30px;
+			}
+
+			.layui-tab-title .layui-this::after {
+				position: relative;
+				height: 0px;
+			}
+
+			.layui-tab-title li {
+				background-color: white;
+				border-radius: 4px 4px 0px 0px;
+				margin-right: 10px;
+			}
+
+			.layui-form-checkbox {
+				margin: auto;
+			}
+
+			.layui-form-checkbox:hover span {
+				color: rgb(255, 255, 255);
+			}
+
+			.right1 {
+				border: 1px solid #000000;
+			}
+		</style>
+
+	</head>
+	<body>
+		<!-- 水平导航-->
+		<ul class="layui-nav level" lay-filter="">
+			<li class="layui-nav-item"><a href="">首页</a></li>
+			<li class="layui-nav-item layui-this">
+				<a href="javascript:;">个人中心</a>
+				<dl class="layui-nav-child">
+					<!-- 二级菜单 -->
+					<dd><a href="">修改头像</a></dd>
+					<dd><a href="">修改密码</a></dd>
+					<dd><a href="">退出登录</a></dd>
+				</dl>
+			</li>
+		</ul>
+		<!-- 侧边导航-->
+		<ul class="layui-nav layui-nav-tree vertical" lay-filter="test">
+			<li class="layui-nav-item"><a href="">人员信息</a></li>
+			<li class="layui-nav-item"><a href="">留言审核</a></li>
+			<li class="layui-nav-item"><a href="">资料上传</a></li>
+			<li class="layui-nav-item layui-nav-itemed">
+				<a href="javascript:;">考试管理</a>
+				<dl class="layui-nav-child">
+					<dd class="layui-this"><a href="">组卷</a></dd>
+					<dd><a href="">未考试卷</a></dd>
+					<dd><a href="">改卷</a></dd>
+					<dd><a href="">已改试卷</a></dd>
+
+				</dl>
+			</li>
+			<li class="layui-nav-item">
+				<a href="javascript:;">题库</a>
+				<dl class="layui-nav-child">
+					<dd><a href="">题目</a></dd>
+					<dd><a href="">标签</a></dd>
+				</dl>
+			</li>
+		</ul>
+		<div class="layui-tab">
+			<ul class="layui-tab-title">
+				<li class="layui-this">自动组卷</li>
+				<li>手动组卷</li>
+			</ul>
+			<div class="layui-tab-content">
+				<div class="layui-tab-item  layui-show">
+					<!-- 自动组卷 -->
+					<div class="auto">
+						<!-- 标签限制 -->
+						<div class="title title1">选择标签</div>
+						<div class="tagsLimit">
+							<div class="surtags">
+								<input type="text" placeholder="请输入要查询的标签" id="findtap">
+								<button onclick="findTag()" type="button" class="search lauui-btn layui-btn-primary"><i
+										class="layui-icon layui-icon-search"></i>搜索</button>
+							</div>
+							<div class="tagList" id="automaticTag">
+							</div>
+							<!-- 用户选择的tag -->
+							<div class="tagCheck">选中的标签栏：</div>
+							<div class="tags" id="automaticTag1"></div>
+						</div>
+						<!-- 题型设置 -->
+						<div class="title">选择题型</div>
+						<table class="layui-table quesLimit">
+							<colgroup>
+								<col width="150">
+								<col width="200">
+								<col>
+							</colgroup>
+							<thead>
+								<tr>
+									<th>序号</th>
+									<th>题型</th>
+									<th>数量</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>1</td>
+									<td>单选题</td>
+									<td><input type="number" value="0" class="autoType"></td>
+								</tr>
+								<tr>
+									<td>2</td>
+									<td>多选题</td>
+									<td><input type="number" value="0" class="autoType"></td>
+								</tr>
+								<tr>
+									<td>3</td>
+									<td>填空题</td>
+									<td><input type="number" value="0" class="autoType"></td>
+								</tr>
+								<tr>
+									<td>4</td>
+									<td>主观题</td>
+									<td><input type="number" value="0" class="autoType"></td>
+								</tr>
+							</tbody>
+						</table>
+						<button type="button" class="layui-btn" onclick="test1()">组卷</button>
+					</div>
+
+				</div>
+				<div class="layui-tab-item">
+					<!-- 手动组卷 -->
+					<div class="hand">
+						<div class="left">
+							<!-- 题型、找tag，通过tag找题目 -->
+							<div class="surf">
+								<form class="layui-form quskind" action="">
+									<div class="layui-form-item">
+										<label class="layui-form-label"
+											style="padding: 9px 10px 9px 0px;width: auto;font-family: 宋体;font-size: 15px !important;font-weight: 500;">题型</label>
+										<div class="layui-input-block">
+											<input type="checkbox" name="like[write]" title="单选题" class="handType">
+											<input type="checkbox" name="like[read]" title="多选题" class="handType">
+											<input type="checkbox" name="like[dai]" title="填空题" class="handType">
+											<input type="checkbox" name="like[dai]" title="主观题" class="handType">
+										</div>
+									</div>
+								</form>
+								<div class="tagsLimit">
+									<div class="surtags">
+										<input id="handsur" type="text" placeholder="请输入要查询的标签">
+										<button onclick="findTag1()" type="button"
+											class="search lauui-btn layui-btn-primary"><i
+												class="layui-icon layui-icon-search"></i>搜索</button>
+									</div>
+									<div class="tagList" id="handTag">
+									</div>
+									<!-- 用户选择的tag -->
+									<div class="tagCheck">选中的标签栏：</div>
+									<div class="tags" id="handTag1"></div>
+									<button type="button" class="sqes layui-btn" onclick="searchQ()">搜索题目</button>
+								</div>
+							</div>
+							<!-- 找到的题目列表 -->
+							<div class="boxL">
+								<div id="demo">
+									<div class="box" id="queListBox">
+									</div>
+								</div>
+							</div>
+							<!-- 分页的位置 -->
+							<div class="fenye">
+								<div class="fenye1">
+									<div class="zuiqian">
+										<i class="fa fa-angle-double-left"></i>
+									</div>
+									<div class="qian" onclick="shangyiye1()">
+										<i class="fa fa-angle-left"></i>
+									</div>
+									<div class="tiaozhuan">
+										<input type="" name="" id="shuruyeshu1" value="" />
+									</div>
+									<div class="tiaozhuan1" onclick="shuruys1()">
+										跳转
+									</div>
+									<div class="zongyeshu">
+										共1页
+									</div>
+									<div class="dangqianye">
+										第1页
+									</div>
+									<div class="hou" onclick="xiayiye1()">
+										<i class="fa fa-angle-right"></i>
+									</div>
+									<div class="zuihou" onclick="zuihouyiye1()">
+										<i class="fa fa-angle-double-right"></i>
+									</div>
+									<div class="clear">
+
+									</div>
+								</div>
+
+							</div>
+						</div>
+						<!-- 手动组卷生成的试卷 -->
+						<div id="right">
+							<div class="right1">
+								<div class="box box1" id="wrapper1">
+									<div class="scroll" id="scrollOne">
+										<!-- 右侧滚动栏里组的卷子 -->
+										<form class="layui-form" action="" id="yulan">
+											<div class="qtype2">
+												<div class="layui-form-item">
+													<div class="ques"><span>2.</span>大二下学期的专业课有哪些？</div>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+
+							<!-- 组卷成功 -->
+							<div class="" style="text-align: right;">
+								<button type="button" class="layui-btn" style="margin-top: 10px;"
+									onclick="next()">下一步</button>
+							</div>
+
+						</div>
+						<div class="clear">
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<div id="testxx" style="display: none;">
+			<form class="layui-form layui-form-pane" action="">
+				<div class="layui-form-item" pane style="width: 90%; margin: 20px auto;">
+					<label class="layui-form-label">试卷名字</label>
+					<div class="layui-input-block">
+						<input type="text" name="password" required lay-verify="required" placeholder="试卷名"
+							autocomplete="off" class="xx layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item" pane style="width: 90%; margin: 20px auto;">
+					<label class="layui-form-label">开始时间</label>
+					<div class="layui-input-block">
+						<input type="text" name="password" required lay-verify="required"
+							placeholder="xxxx-xx-xx xx:xx:xx" autocomplete="off" class="xx layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item" pane style="width: 90%; margin: 20px auto;">
+					<label class="layui-form-label">截止时间</label>
+					<div class="layui-input-block">
+						<input type="text" name="password" required lay-verify="required"
+							placeholder="xxxx-xx-xx xx:xx:xx" autocomplete="off" class="xx layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item" pane style="width: 90%; margin: 20px auto;">
+					<label class="layui-form-label">试卷描述</label>
+					<div class="layui-input-block">
+						<input type="text" name="password" required lay-verify="required" placeholder="试卷描述"
+							autocomplete="off" class="xx layui-input">
+					</div>
+				</div>
+			</form>
+		</div>
+		<button type="button" class="layui-btn" onclick="ceshi()">ceshi</button>
+		<div id="testyl" style="display: none; padding: 15px;">
+			
+		</div>
+		<div id="testcode" style="text-align: center; line-height: 40px; display: none;">
+		</div>
+		<!-- 左侧滚动栏 -->
+		<script>
+			$(function() {
+				$("#demo").panel({
+					iWheelStep: 32
+				});
+			});
+		</script>
+		<!-- 右侧滚动栏 -->
+		<script>
+			//注意：导航 依赖 element 模块，否则无法进行功能性操作
+			window.onload = function() {
+				var oMyBar1 = new MyScrollBar({
+					selId: 'wrapper1',
+					bgColor: '#fef5ee',
+					barColor: 'rgba(207, 78, 89, 0.75)',
+					enterColor: 'rgba(207, 78, 89, 0.75)',
+					enterShow: false,
+					borderRadius: 5
+				});
+			}
+		</script>
+
+
+		<script>
+			//注意：导航 依赖 element 模块，否则无法进行功能性操作
+			layui.use('element', function() {
+				var element = layui.element;
+
+			});
+		</script>
+
+	</body>
+</html>

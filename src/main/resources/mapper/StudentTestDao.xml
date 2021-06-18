@@ -67,12 +67,12 @@
         <result property="paperId" column="paper_id"/>
         <result property="paperName" column="paper_name"/>
         <result property="beginTime" column="begin_time"/>
-        <result property="deadline" column="finish_time"/>
+        <result property="deadline" column="end_time"/>
         <result property="name" column="username"/>
     </resultMap>
     <!--    获取试卷id-->
     <select id="selectPaperIdByCode" resultMap="getPaper">
-        SELECT paper_id,papers.name AS paper_name,begin_time,finish_time,`user`.`name` AS username
+        SELECT paper_id,papers.name AS paper_name,begin_time,end_time,`user`.`name` AS username
         FROM papers,`user`
         WHERE papers.code = #{code} AND `user`.user_id=papers.`user_id`
     </select>

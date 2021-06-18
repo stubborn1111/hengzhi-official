@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>主页</title>
+		<link rel="stylesheet" type="text/css" href="../../font-awesome-4.7.0/css/font-awesome.css" />
+		<link rel="stylesheet" href="../../layui/layui/css/layui.css">
+		<link rel="stylesheet" type="text/css" href="index.css" />
+		<script src="../common/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../layui/layui/layui.js"></script>
+		<script src="index.js" type="text/javascript" charset="utf-8"></script>
+		<style>
+			/* 水平导航栏 */
+			body{
+				background-color: white;
+			}
+			.level {
+				padding: 0 12%;
+				width: 100%;
+				margin: 0 auto;
+				background-color: #222328;
+				position: fixed;
+				top: 0;
+				z-index: 11;
+			}
+
+			.footer {
+				background-color: #222328;
+				padding: 10px 0;
+				text-align: center;
+				color: #A4A5A6;
+				height: 80px;
+			}
+
+			.level li {
+				margin: 0 48px;
+			}
+
+			i {
+				margin-right: 10px;
+			}
+
+			.layui-btn {
+				margin-top: 15px;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- 水平导航栏 -->
+		<ul class="layui-nav level" lay-filter="">
+			<li class="layui-nav-item layui-this"><a href="#d1">工作室简介</a></li>
+			<li class="layui-nav-item"><a href="#d2">前端</a></li>
+			<li class="layui-nav-item"><a href="#d3">后端</a></li>
+			<li class="layui-nav-item"><a href="#d4"><i class="layui-icon layui-icon-survey"></i>留言板</a></li>
+			<li class="layui-nav-item"><a href="#"><i class="layui-icon layui-icon-user"></i>登录</a></li>
+		</ul>
+
+		<!-- 工作室简介 -->
+		<div id="d1">
+			<div class="what">
+				WHAT WE HAVE DONE
+			</div>
+			<div class="do">
+				<div class="brief1">
+					<div class="name">
+						<span style="font-family: 宋体; font-weight: 600;">恒之工作室</span>（HENGZHI STUDIO）
+					</div>
+					<div class="" style="margin-bottom: 30px;">
+						恒之工作室隶属于东北师范大学党委学生工作处，协助学生处开展在校师生的思想政治教育工作，坚持“持之以恒，恒之以长”的工作室精神，全心全意为广大师生服务。
+					</div>
+					<div class="">
+						工作室团队是由周志国老师和研究生团队带领下的一支兼具勤奋与活力的互联网团队。团队成员在互联网的各个领域都有相关研究，包括网站开发，网络爬虫，微信小程序开发等
+					</div>
+				</div>
+				<div class="brief2">
+					<div class="cards">
+						<div class="imgs">
+							<img src="../../images/headImg.jpg">
+						</div>
+						<div class="card1">
+							<div class="namea">
+								服务范围
+							</div>
+							<div class="all">
+								<!-- 恒之工作室旨在建设学生处一站式多媒体社区，打造信息全面、功能多元化的网络思想政治教育平台，也引入为在校师生定制教育信息化一体式平台服务功能。主要负责学生处网站的建设和易班平台的建设 -->
+							</div>
+							<div class="clear">
+								
+							</div>
+						</div>
+					</div>
+					<div class="cards">
+						<div class="imgs">
+							<img src="../../images/headImg.jpg">
+						</div>
+						<div class="card1">
+							<div class="namea">
+								前端工作部
+							</div>
+							<div class="all">
+
+							</div>
+							<div class="clear">
+								
+							</div>
+						</div>
+					</div>
+					<div class="cards">
+						<div class="imgs">
+							<img src="../../images/headImg.jpg">
+						</div>
+						<div class="card1">
+							<div class="namea">
+								后端工作部
+							</div>
+							<div class="all">
+							</div>
+							<div class="clear">
+								
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+
+		<!-- 留言板 -->
+		<div id="d1">
+			<div class="what">
+				WHAT YOU WANT TO SAY
+				<div class="say">
+					<textarea name="desc" placeholder="请输入内容" class="layui-textarea" id="mess"></textarea>
+					<button type="button" class="layui-btn" onclick="message()">发表留言</button>
+				</div>
+			</div>
+			<div class="do">
+				<div class="brief1">
+					<div class="name">
+						<span style="font-family: 宋体; font-weight: 600;">留言板</span>（MESSAGE BOARD）
+					</div>
+				</div>
+				<div class="messages">
+					<!-- <div class="message">
+						我只不过是留个言而已啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊
+					</div>
+					<div class="message">
+						我想留个言哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈
+					</div>
+					<div class="message">
+						笑死我啦kkkkkkkkkkkkkkkkkkk
+					</div>
+					<div class="message">
+						djsiaohfcnsanciosajdoxisncuiwqog
+					</div>
+					<div class="message">
+						啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊
+					</div> -->
+				</div>
+				<div class="fenye">
+				<!-- 	<div class="fenye1">
+						<div class="zuiqian">
+							<i class="fa fa-angle-double-left"></i>
+						</div>
+						<div class="qian" onclick="shangyiye1()">
+							<i class="fa fa-angle-left"></i>
+						</div>
+						<div class="tiaozhuan">
+							<input type="" name="" id="shuruyeshu1" value="" />
+						</div>
+						<div class="tiaozhuan1" onclick="shuruys1()">
+							跳转
+						</div>
+						<div class="zongyeshu">
+							共1页
+						</div>
+						<div class="dangqianye">
+							第1页
+						</div>
+						<div class="hou" onclick="xiayiye1()">
+							<i class="fa fa-angle-right"></i>
+						</div>
+						<div class="zuihou" onclick="zuihouyiye1()">
+							<i class="fa fa-angle-double-right"></i>
+						</div>
+						<div class="clear">
+
+						</div>
+					</div> -->
+				
+				</div>
+			</div>
+		</div>
+
+
+		<div class="footer">
+			<div class="footer1">
+				<img src="../../images/图层%201.png">
+			</div>
+			<div class="footer1">
+				&copy;2021 HengZhi
+			</div>
+			<div class="footer1">
+				Contact Us: 888-8888
+			</div>
+			<div class="clear">
+
+			</div>
+		</div>
+		<script>
+			//注意：导航 依赖 element 模块，否则无法进行功能性操作
+			layui.use('element', function() {
+				var element = layui.element;
+
+				//…
+			});
+		</script>
+	</body>
+</html>

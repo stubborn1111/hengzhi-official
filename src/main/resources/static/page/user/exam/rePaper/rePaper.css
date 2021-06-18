@@ -1,0 +1,110 @@
+/* 试卷页面样式 */
+body {
+	background-color: rgb(252, 252, 252);
+}
+
+.ques {
+	font-size: 1rem;
+	letter-spacing: 0.05rem;
+	line-height: 35px;
+}
+
+.layui-form-label {
+	font-size: 1rem !important;
+	letter-spacing: 0.05rem !important;
+}
+
+.ques span {
+	font-family: Times New Roman;
+	font-weight: 600;
+	margin-right: 10px;
+	font-size: 17px;
+}
+
+input {
+	color: #666;
+	font-weight: 350;
+	font-size: 14px;
+}
+
+.layui-textarea {
+	color: #666 !important;
+	font-weight: 200;
+	min-height: 180px;
+	max-height: 180px;
+}
+
+.qtype1,
+.qtype2,
+.qtype3,
+.qtype4 {
+	background-color: #FFFFFF;
+	margin-bottom: 20px;
+	/* border-radius: 5px; */
+	/* 	border: 1px solid #dfdfdf; */
+	padding: 20px;
+	box-shadow: rgba(0, 0, 0, 0.08) 0px 0px 8px;
+}
+
+.paperB {
+	padding: 50px;
+	width: 60%;
+	/* 	border: 1px solid #666; */
+	background-color: rgb(252, 252, 252);
+}
+
+/* 倒计时 */
+#test {
+	position: absolute;
+	top: 40px;
+	left: 40px;
+	width: 300px;
+	height: 80px;
+	background-color: #cf4e50;
+	color: white;
+	font-size: 18px;
+}
+
+.layui-btn-primary {
+	border-color: #d2d2d2 !important;
+	background: white !important;
+	color: #666 !important;
+}
+
+.btnn {
+	text-align: right;
+}
+
+.info {
+	box-sizing: border-box;
+	padding: 30px;
+	position: absolute;
+	right: 0;
+	top: 50px;
+	width: 25%;
+	min-height: 200px;
+	background-color: white;
+	border-radius: 5px;
+	box-shadow: rgba(0, 0, 0, 0.08) 0px 0px 8px;
+	text-align: center;
+}
+
+.paperName {
+	font-size: 20px;
+	font-family: 宋体;
+	font-weight: 600;
+	letter-spacing: 0.05rem;
+	line-height: 35px;
+	margin-bottom: 20px;
+}
+
+.answer {
+	font-size: 0.8rem;
+	letter-spacing: 0.05rem;
+	margin-top: 20px;
+	line-height: 24px;
+}
+
+.qans {
+	margin-right: 10px;
+}

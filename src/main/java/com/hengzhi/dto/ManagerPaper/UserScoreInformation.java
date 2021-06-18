@@ -10,4 +10,5 @@ import lombok.experimental.Accessors;
 public class UserScoreInformation {
     private Integer userId;
     private String name;
+    private String studentId;
 }

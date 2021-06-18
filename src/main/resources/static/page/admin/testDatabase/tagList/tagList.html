@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>标签列表</title>
+		<link rel="stylesheet" href="../../../../layui/layui/css/layui.css">
+		<link rel="stylesheet" type="text/css" href="../../../common/common.css" />
+		<link rel="stylesheet" type="text/css" href="tagList.css"/>
+		<script src="../../../common/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../../../layui/layui/layui.js"></script>
+		<script src="tagList.js" type="text/javascript" charset="utf-8"></script>
+		<style>
+		</style>
+	</head>
+	<body>
+		<div id="testbq" style="display: none;">
+			<form class="layui-form layui-form-pane" action="">
+				<div class="layui-form-item" pane style="width: 90%; margin: 20px auto;">
+					<label class="layui-form-label">标签</label>
+					<div class="layui-input-block">
+						<input type="text" name="password" required lay-verify="required" placeholder="输入标签名"
+							autocomplete="off" class="layui-input" id="tagName">
+					</div>
+				</div>
+			</form>
+		</div>
+		<!-- 水平导航-->
+		<ul class="layui-nav level" lay-filter="">
+			<li class="layui-nav-item"><a href="">首页</a></li>
+			<li class="layui-nav-item layui-this">
+				<a href="javascript:;">个人中心</a>
+				<dl class="layui-nav-child">
+					<!-- 二级菜单 -->
+					<dd><a href="">修改头像</a></dd>
+					<dd><a href="">修改密码</a></dd>
+					<dd><a href="">退出登录</a></dd>
+				</dl>
+			</li>
+		</ul>
+		<!-- 侧边导航-->
+		<ul class="layui-nav layui-nav-tree vertical" lay-filter="test">
+			<li class="layui-nav-item"><a href="">人员信息</a></li>
+			<li class="layui-nav-item"><a href="">留言审核</a></li>
+			<li class="layui-nav-item"><a href="">资料上传</a></li>
+			<li class="layui-nav-item">
+				<a href="javascript:;">考试管理</a>
+				<dl class="layui-nav-child">
+					<dd>
+						<a href="">组卷</a>
+					</dd>
+					<dd><a href="">未考试卷</a></dd>
+					<dd><a href="">改卷</a></dd>
+					<dd><a href="">已改试卷</a></dd>
+				</dl>
+			</li>
+			<li class="layui-nav-item layui-nav-itemed">
+				<a href="javascript:;">题库</a>
+				<dl class="layui-nav-child">
+					<dd><a href="">题目</a></dd>
+					<dd class="layui-this"><a href="">标签</a></dd>
+				</dl>
+			</li>
+		</ul>
+		<div class="container">
+			<!-- 标签库 -->
+			<div class="title">
+				标签库
+			</div>
+			<div class="tagList">
+				<!-- <button type="button" class="tag lauui-btn">前端</button>
+				<button type="button" class="tag lauui-btn">后端</button>
+				<button type="button" class="tag lauui-btn">Java</button>
+				<button type="button" class="tag lauui-btn">React</button> -->
+			</div>
+			<!-- 添加标签 -->
+			<button type="button" class="layui-btn" style="margin-left: calc(100% - 94px); margin-top: 10px;" onclick="add()">添加标签</button>
+		</div>
+
+
+		<script>
+			//注意：导航 依赖 element 模块，否则无法进行功能性操作
+			layui.use('element', function() {
+				var element = layui.element;
+
+			});
+		</script>
+
+	</body>
+</html>
