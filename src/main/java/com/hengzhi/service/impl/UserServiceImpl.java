@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public int updatePassword(Integer studentId, String password, String newPassword) {
         String realPassword = userDao.selectUserByStudentId(studentId);
-        if (bCryptPasswordEncoder.matches(password,newPassword)) {
+        if (bCryptPasswordEncoder.matches(password,realPassword)) {
             User user = new User();
             user.setStudentId(studentId);
             user.setPassword(bCryptPasswordEncoder.encode(newPassword));
