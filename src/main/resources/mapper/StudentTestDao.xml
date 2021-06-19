@@ -21,6 +21,7 @@
         <result property="name" column="name"/>
         <result property="answerTime" column="answer_time"/>
         <result property="score" column="score"/>
+        <result property="totalScore" column="totalScore"/>
     </resultMap>
     <resultMap id="question" type="com.hengzhi.entity.Questions">
         <result property="questionId" column="question_id"/>
@@ -92,7 +93,7 @@
         WHERE user.`user_id` = papers.`user_id` AND user_paper.`user_id`=#{userId} AND papers.paper_id = user_paper.`paper_id` AND whether_answer = 1
     </select>
     <select id="getPaperInformation" resultMap="PaperInformation">
-        SELECT `name`,answer_time,user_paper.score
+        SELECT `name`,answer_time,user_paper.score,papers.score AS totalScore
         FROM user_paper,papers
         WHERE user_paper.`paper_id`=#{paperId} AND papers.`paper_id`=#{paperId} AND user_paper.user_id=#{userId}
     </select>

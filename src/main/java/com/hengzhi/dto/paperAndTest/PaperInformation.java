@@ -17,4 +17,5 @@ public class PaperInformation {
     private String name;
     private String answerTime;
     private Integer score;
+    private Integer totalScore;
 }
