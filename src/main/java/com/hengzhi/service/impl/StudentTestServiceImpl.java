@@ -77,6 +77,7 @@ public class StudentTestServiceImpl implements StudentTestService {
             TestedQuestion question = testDao.getQuestion(qInfo.get(i).getQuestionId(), tName);
             question.setQType(qInfo.get(i).getQType());
             TestedQuestion2 question2 = question.transfer();
+            question2.setQNumber(i+1);
             qList.add(question2);
             //qList.add(testDao.getQuestion(qInfo.get(i).getQuestionId(),tName));
         }

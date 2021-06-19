@@ -31,4 +31,7 @@ public class TestedQuestion2 {
     //题目类型
     @JsonProperty("qType")
     private String qType;
+    //题号
+    @JsonProperty("qNumber")
+    private Integer qNumber;
 }

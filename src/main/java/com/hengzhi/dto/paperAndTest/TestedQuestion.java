@@ -29,7 +29,7 @@ public class TestedQuestion {
 
     public TestedQuestion2 transfer(){
         double cRate = ((int)((getCorrectNumber()/1.0/getTotalNumber())*100))/100;
-        TestedQuestion2 question2 = new TestedQuestion2(getKind(),getContent(),getAnswer(),cRate,getDescription(),getQType());
+        TestedQuestion2 question2 = new TestedQuestion2(getKind(),getContent(),getAnswer(),cRate,getDescription(),getQType(),1);
         return question2;
     }
 }
