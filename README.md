@@ -15,3 +15,7 @@ hengzhi官网
 后端：maven tomcat mysql springboot mybatis log4j2 shiro junit JWT websocket ehcache<br>
 前端：html css javascript jqury ajax layui
 
+#测试账户
+用  户：2019013626 123456 <br>
+管理员：2019013012 123456<br>
+超级管理员：2019013123 123456<br>

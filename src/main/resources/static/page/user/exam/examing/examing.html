@@ -23,12 +23,11 @@
 				border-right-style: none;
 				border-left-style: none;
 			}
-			
 		</style>
 	</head>
 	<body>
 		<div class="paperB">
-			<form id="paperC" class="layui-form"  action="">
+			<form id="paperC" class="layui-form" action="">
 				<!-- 单选题 -->
 				<!-- <div class="qtype1 qtype"> 
 					<div class="layui-form-item">
@@ -46,7 +45,7 @@
 				</div> -->
 				<!-- 多选题 -->
 				<!-- <div class="qtype2 qtype"> -->
-					<!-- <div class="layui-form-item">
+				<!-- <div class="layui-form-item">
 						<span>2.</span>
 						<div class="ques">
 							大二下学期的专业课有哪些？</div>
@@ -83,7 +82,8 @@
 			<!-- 提交 -->
 			<div class="layui-form-item btnn">
 				<div>
-					<button id="frmbtn" class="layui-btn" lay-submit lay-filter="formDemo" onclick="submit()">立即提交</button>
+					<button id="frmbtn" class="layui-btn" lay-submit lay-filter="formDemo"
+						onclick="submit()">立即提交</button>
 					<button type="reset" class="layui-btn layui-btn-primary">重置</button>
 				</div>
 			</div>
@@ -98,37 +98,9 @@
 			<div class="score">
 				总分：100
 			</div> -->
-			<!-- <div id="test"></div> -->
+			<!-- <div id="test"></div> -->			
 		</div>
 
-		<!-- 倒计时 -->
-		<script>
-			function showNum(num) {
-				if (num < 10) {
-					return '0' + num
-				}
-				return num
-			}
-			layui.use('util', function() {
-				var util = layui.util;
-				//示例
-				var endTime = new Date(2021, 6, 13).getTime() //假设为结束日期
-					,
-					serverTime = new Date().getTime(); //假设为当前服务器时间，这里采用的是本地时间，实际使用一般是取服务端的
-
-				util.countdown(endTime, serverTime, function(date, serverTime, timer) {
-					var data1 = showNum(date[1])
-					var data2 = showNum(date[2])
-					var data3 = showNum(date[3])
-					var str = data1 + ' : ' + data2 + ' : ' + data3;
-					if(str == 0){
-						$("#frmbtn").submit();
-            // window.clearInterval(timeObj);
-            layer.msg("时间到，已自动提交试卷")
-					}
-					layui.$('#test').html(str);
-				});
-			});
-		</script>
+		
 	</body>
 </html>

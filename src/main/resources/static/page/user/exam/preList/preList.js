@@ -1,3 +1,58 @@
+// 修改头像
+function change1() {
+	layui.use('layer', function() {
+		var $ = layui.jquery;
+		var element = layui.element;
+		var layer = layui.layer;
+		var form = layui.form;
+		layer.open({
+			type: 1,
+			title: '修改头像',
+			area: ['350px', '250px'],
+			shade: 0.4,
+			content: $("#test2"),
+			btn: ['提交', '取消'],
+			scrollbar: false,
+			yes: function(index) {
+				// function postData() {
+				var authorization = localStorage.getItem("authorization");
+				console.log(authorization);
+				var formData = new FormData();
+				formData.append("headImage", $("#uploadImage")[0].files[0]);
+				$.ajax({
+					url: "http://123.56.29.67/hengzhi-official/user/updateHeadImg",
+					type: "post",
+					data: formData,
+					headers: {
+						'Authorization': authorization
+					},
+					processData: false, // 告诉jQuery不要去处理发送的数据
+					contentType: false, // 告诉jQuery不要去设置Content-Type请求头
+					dataType: 'text',
+					success: function(data) {
+						console.log(data)
+
+						var params = JSON.parse(data)
+						$("#img").attr("src", params);
+						layer.close(index);
+						layer.msg("修改成功")
+						setTimeout(function() {
+							window.location.href =
+								"../staffInfo/staffInfo.html";
+						}, 1000);
+					},
+					error: function(data) {
+
+					}
+				});
+				// }
+			},
+			btn2: function() {
+				// layer.msg('bbb');
+			}
+		});
+	});
+}
 // 修改密码
 function change() {
 	layui.use('layer', function() {
@@ -110,7 +165,7 @@ var getPaper = function() {
 							var time5 = time4.slice(11, 16)
 							console.log(time1)
 							box += `
-						<div class="paperBox" data-id="${data.list[i].paperId}">
+						<div class="paperBox" data-id="${data.list[i].paperId}" data-time="${time}" onclick="check(this)">
 							<div>${data.list[i].paperName}</div>
 							<div>${time1}.${time2}</div>
 							<div>${time3}-${time5}</div>
@@ -192,7 +247,7 @@ $(document).ready(function() {
 				var time5 = time4.slice(11, 16)
 				console.log(time1)
 				box += `
-				<div class="paperBox" data-id="${data.list[i].paperId}">
+				<div class="paperBox" data-id="${data.list[i].paperId}" data-time="${time}" onclick="check(this)">
 					<div>${data.list[i].paperName}</div>
 					<div>${time1}.${time2}</div>
 					<div>${time3}-${time5}</div>
@@ -268,7 +323,7 @@ function firstPage() {
 				var time5 = time4.slice(11, 16)
 				console.log(time1)
 				box += `
-				<div class="paperBox" data-id="${data.list[i].paperId}">
+				<div class="paperBox" data-id="${data.list[i].paperId}" data-time="${time}" onclick="check(this)">
 					<div>${data.list[i].paperName}</div>
 					<div>${time1}.${time2}</div>
 					<div>${time3}-${time5}</div>
@@ -348,7 +403,7 @@ function prePage() {
 					var time5 = time4.slice(11, 16)
 					console.log(time1)
 					box += `
-					<div class="paperBox" data-id="${data.list[i].paperId}">
+					<div class="paperBox" data-id="${data.list[i].paperId}" data-time="${time}" onclick="check(this)">
 						<div>${data.list[i].paperName}</div>
 						<div>${time1}.${time2}</div>
 						<div>${time3}-${time5}</div>
@@ -430,7 +485,7 @@ function nextPage() {
 					var time5 = time4.slice(11, 16)
 					console.log(time1)
 					box += `
-				<div class="paperBox" data-id="${data.list[i].paperId}">
+				<div class="paperBox" data-id="${data.list[i].paperId}" data-time="${time}" onclick="check(this)">
 					<div>${data.list[i].paperName}</div>
 					<div>${time1}.${time2}</div>
 					<div>${time3}-${time5}</div>
@@ -511,7 +566,7 @@ function lastPage() {
 				var time5 = time4.slice(11, 16)
 				console.log(time1)
 				box += `
-				<div class="paperBox" data-id="${data.list[i].paperId}">
+				<div class="paperBox" data-id="${data.list[i].paperId}" data-time="${time}" onclick="check(this)">
 					<div>${data.list[i].paperName}</div>
 					<div>${time1}.${time2}</div>
 					<div>${time3}-${time5}</div>
@@ -594,7 +649,7 @@ function jump() {
 					var time5 = time4.slice(11, 16)
 					console.log(time1)
 					box += `
-				<div class="paperBox" data-id="${data.list[i].paperId}">
+				<div class="paperBox" data-id="${data.list[i].paperId}" data-time="${time}" onclick="check(this)">
 					<div>${data.list[i].paperName}</div>
 					<div>${time1}.${time2}</div>
 					<div>${time3}-${time5}</div>
@@ -645,4 +700,44 @@ function jump() {
 	} else {
 		layer.msg("请输入合法数字")
 	}
+}
+
+function check(e) {
+	var thisTime = new Date()
+	var year = thisTime.getFullYear()
+	var month = thisTime.getMonth() + 1
+	var day = thisTime.getDate()
+	var hour = thisTime.getHours()
+	var min = thisTime.getMinutes()
+	var sec = thisTime.getSeconds()
+	if (month < 10) {
+		month = "0" + month
+	}
+	if (day < 10) {
+		day = "0" + day
+	}
+	if (hour < 10) {
+		hour = "0" + hour
+	}
+	if (min < 10) {
+		min = "0" + min
+	}
+	if (sec < 10) {
+		sec = "0" + sec
+	}
+	var beginTime = e.dataset.time
+	var beginYear = beginTime.slice(0, 4)
+	var beginMonth = beginTime.slice(5, 7)
+	var beginDay = beginTime.slice(8, 10)
+	var beginHour = beginTime.slice(11, 13)
+	var beginMin = beginTime.slice(14, 16)
+	var beginSec = beginTime.slice(17, 19)
+	var beginTime1 = beginYear + beginMonth + beginDay + beginHour + beginMin + beginSec
+	var thisTime1 = year + month + day + hour + min + sec
+	console.log(thisTime1)
+	console.log(beginTime1)
+	if (thisTime1 >= beginTime1) {
+		window.location.href = "../examing/examing.html?id=" + e.dataset.id
+	}
+
 }

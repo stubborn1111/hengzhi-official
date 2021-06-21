@@ -1,3 +1,57 @@
+// 修改头像
+function change1() {
+	layui.use('layer', function() {
+		var $ = layui.jquery;
+		var element = layui.element;
+		var layer = layui.layer;
+		var form = layui.form;
+		layer.open({
+			type: 1,
+			title: '修改头像',
+			area: ['350px', '250px'],
+			shade: 0.4,
+			content: $("#test2"),
+			btn: ['提交', '取消'],
+			scrollbar: false,
+			yes: function(index) {
+				// function postData() {
+					var authorization = localStorage.getItem("authorization");
+					console.log(authorization);
+					var formData = new FormData();
+					formData.append("headImage", $("#uploadImage")[0].files[0]);
+					$.ajax({
+							url: "http://123.56.29.67/hengzhi-official/user/updateHeadImg",
+							type: "post",
+							data: formData,
+							headers: {
+								'Authorization': authorization
+							},
+							processData: false, // 告诉jQuery不要去处理发送的数据
+							contentType: false, // 告诉jQuery不要去设置Content-Type请求头
+							dataType: 'text',
+							success: function(data) {
+								console.log(data)
+
+									var params = JSON.parse(data)
+									$("#img").attr("src", params);
+									layer.close(index);
+									layer.msg("修改成功")
+									setTimeout(function() {
+										window.location.href = "../staffInfo/staffInfo.html";
+									}, 1000);
+							},
+							error: function(data) {
+									
+							}
+					});
+				// }
+			},
+			btn2: function() {
+				// layer.msg('bbb');
+			}
+		});
+	});
+}
 // 显示所有tag
 $(document).ready(function() {
 	var authorization = localStorage.getItem("authorization");

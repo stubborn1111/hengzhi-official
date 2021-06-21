@@ -15,35 +15,36 @@ function change1() {
 			scrollbar: false,
 			yes: function(index) {
 				// function postData() {
-					var authorization = localStorage.getItem("authorization");
-					console.log(authorization);
-					var formData = new FormData();
-					formData.append("headImage", $("#uploadImage")[0].files[0]);
-					$.ajax({
-							url: "http://123.56.29.67/hengzhi-official/user/updateHeadImg",
-							type: "post",
-							data: formData,
-							headers: {
-								'Authorization': authorization
-							},
-							processData: false, // 告诉jQuery不要去处理发送的数据
-							contentType: false, // 告诉jQuery不要去设置Content-Type请求头
-							dataType: 'text',
-							success: function(data) {
-								console.log(data)
+				var authorization = localStorage.getItem("authorization");
+				console.log(authorization);
+				var formData = new FormData();
+				formData.append("headImage", $("#uploadImage")[0].files[0]);
+				$.ajax({
+					url: "http://123.56.29.67/hengzhi-official/user/updateHeadImg",
+					type: "post",
+					data: formData,
+					headers: {
+						'Authorization': authorization
+					},
+					processData: false, // 告诉jQuery不要去处理发送的数据
+					contentType: false, // 告诉jQuery不要去设置Content-Type请求头
+					dataType: 'text',
+					success: function(data) {
+						console.log(data)
 
-									var params = JSON.parse(data)
-									$("#img").attr("src", params);
-									layer.close(index);
-									layer.msg("修改成功")
-									setTimeout(function() {
-										window.location.href = "../staffInfo/staffInfo.html";
-									}, 1000);
-							},
-							error: function(data) {
-									
-							}
-					});
+						var params = JSON.parse(data)
+						$("#img").attr("src", params);
+						layer.close(index);
+						layer.msg("修改成功")
+						setTimeout(function() {
+							window.location.href =
+							"../staffInfo/staffInfo.html";
+						}, 1000);
+					},
+					error: function(data) {
+
+					}
+				});
 				// }
 			},
 			btn2: function() {
@@ -120,8 +121,10 @@ function logout() {
 
 $(document).ready(function() {
 	var authorization = localStorage.getItem("authorization");
-	var paperId = 2;
-	var userId = 6;
+	var userId = location.search.slice(4,5)
+	var paperId = location.search.slice(14)
+	console.log(userId)
+	console.log(paperId)
 	var data = {
 		"paperId": paperId,
 		"userId": userId
@@ -148,7 +151,7 @@ $(document).ready(function() {
 			var info1 = document.getElementsByClassName("info")[0];
 			info1.innerHTML = str;
 
-			for(var i=0; i<data.questionList.length; i++){
+			for (var i = 0; i < data.questionList.length; i++) {
 				var qNumber = data.questionList[i].qNumber;
 				var content = data.questionList[i].content;
 				var description = data.questionList[i].description;
@@ -156,12 +159,12 @@ $(document).ready(function() {
 				var kind = data.questionList[i].kind;
 				var cRate = data.questionList[i].cRate;
 				var answer = data.questionList[i].answer;
-				
+
 				// var answer = data.answerList[i].answer;
-				var score  = data.answerList[i].score;
+				var score = data.answerList[i].score;
 
 				if (qType == 1) {
-          item += `
+					item += `
           <div class="qtype1 qtype">
             <div class="layui-form-item">
 							<span>${qNumber}</span>
@@ -183,13 +186,13 @@ $(document).ready(function() {
 						</div>
           </div>
           `
-          var qtype1 = document.getElementById("paperInfo");
-          qtype1.innerHTML = item;
+					var qtype1 = document.getElementById("paperInfo");
+					qtype1.innerHTML = item;
 
-        }
-        // 多选题
-        if (qType == 2) {
-          item += `
+				}
+				// 多选题
+				if (qType == 2) {
+					item += `
 					<div class="qtype2 qtype">
 						<div class="layui-form-item">
 							<span>${qNumber}</span>
@@ -211,12 +214,12 @@ $(document).ready(function() {
 						</div>
 					</div>
           `
-          var qtype2 = document.getElementById("paperInfo");
-          qtype2.innerHTML = item;
-        }
-        // 填空题
-        if (qType == 0) {
-          item += `
+					var qtype2 = document.getElementById("paperInfo");
+					qtype2.innerHTML = item;
+				}
+				// 填空题
+				if (qType == 0) {
+					item += `
 					<div class="qtype3">
 						<div class="layui-form-item">
 							<div class="ques">
@@ -241,12 +244,12 @@ $(document).ready(function() {
 						</div>
 					</div>
           `
-          var qtype3 = document.getElementById("paperInfo");
-          qtype3.innerHTML = item;
-        }
-        // 主观题
-        if (qType == 3) {
-          item += `
+					var qtype3 = document.getElementById("paperInfo");
+					qtype3.innerHTML = item;
+				}
+				// 主观题
+				if (qType == 3) {
+					item += `
 					<div class="qtype4">
 						<div class="layui-form-item layui-form-text">
 							<div class="ques"><span>${qNumber}</span>${content}</div>
@@ -271,10 +274,10 @@ $(document).ready(function() {
 						</div>
 					</div>
           `
-          var qtype4 = document.getElementById("paperInfo");
-          qtype4.innerHTML = item;
-        }
-      }
+					var qtype4 = document.getElementById("paperInfo");
+					qtype4.innerHTML = item;
+				}
+			}
 		},
 		error: function() {}
 	})

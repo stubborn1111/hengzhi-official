@@ -117,10 +117,26 @@
 			.right1 {
 				border: 1px solid #000000;
 			}
+			/* 修改头像 */
+			#test2{
+				margin: 20px 30px;
+			}
+			.img1{
+				margin: 8px;
+				margin-bottom: 45px;
+			}
 		</style>
 
 	</head>
 	<body>
+		<!-- 修改头像 -->
+		<div id="test2" style="display: none;">
+			<div class="form-group">
+				<div class="img1"><label>图片：</label></div>
+				<img src=" " alt="" id="img" />
+				<input type="file" name="file" id="uploadImage">
+			</div>
+		</div>	
 		<!-- 重设密码 -->
 		<div id="test1" style="display: none;">
 			<form class="layui-form layui-form-pane" action="">
@@ -147,7 +163,7 @@
 				<a href="javascript:;">个人中心</a>
 				<dl class="layui-nav-child">
 					<!-- 二级菜单 -->
-					<!-- <dd><a href="">修改头像</a></dd> -->
+					<dd onclick="change1()">修改头像</dd>
 					<dd onclick="change()">修改密码</dd>
 					<dd onclick="logout()">退出登录</dd>
 				</dl>
@@ -164,7 +180,6 @@
 					<dd class="layui-this"><a href="../corPaper/corPaper.html">组卷</a></dd>
 					<dd><a href="../preList/preList.html">未考试卷</a></dd>
 					<dd><a href="../preCorList/preCorList.html">已考未改试卷</a></dd>
-					<dd><a href="../corPaper/corPaper.html">改卷</a></dd>
 					<dd><a href="../reCorList/reCorList.html">已改试卷</a></dd>
 
 				</dl>

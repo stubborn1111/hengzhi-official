@@ -2,17 +2,18 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>公告与资料——文件上传</title>
+		<title>公告与资料上传</title>
 		<link rel="stylesheet" type="text/css" href="../../../layui/layui/css/layui.css" />
 		<link rel="stylesheet" href="../../common/reset.css">
 		<link rel="stylesheet" type="text/css" href="../../common/common.css" />
 		<link rel="stylesheet" href="filesUpload.css">
 		<script src="../../common/jquery-3.4.1.min.js"></script>
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
 		<script src="../../../layui/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../common/common.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../common/zUI.js"></script>
 		<script src="../../common/my_scrollbar.js"></script>
-		<script src="filesUpload.js" type="text/javascript" charset="utf-8"></script>
 		<script>
 			$(function() {
 				$("#demo").panel({
@@ -20,11 +21,49 @@
 				});
 			});
 		</script>
+		<style>
+			.userbox2 , #uploadImage{
+				margin: 10px 50px;
+			}
+			/* 修改头像 */
+			#test2{
+				margin: 20px 30px;
+			}
+			.img1{
+				margin: 8px;
+				margin-bottom: 45px;
+			}
+		</style>
 	</head>
 	<body>
+		<!-- 修改头像 -->
+		<div id="test2" style="display: none;">
+			<div class="form-group">
+				<div class="img1"><label>图片：</label></div>
+				<img src=" " alt="" id="img" />
+				<input type="file" name="file" id="uploadImage">
+			</div>
+		</div>		
 		<!-- 发布公告 -->
 		<div id="testgg" style="display: none;">
 			<textarea name="desc" placeholder="请输入公告内容" class="layui-textarea" id="mess"></textarea>
+		</div>
+
+		<!-- 上传资料 -->
+		<div id="test3" style="display: none;">
+			<div class="form-group">
+				<!-- <label>资料</label> -->
+				<label id="userr"></label>
+				<input type="file" name="file" id="uploadImage3">
+				<form class="layui-form" action="">
+					<div class="layui-form-item layui-form-text">
+						<label class="layui-form-label">资料描述</label>
+						<div class="layui-input-block">
+							<textarea id="des" name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
+						</div>
+					</div>
+				</form>
+			</div>
 		</div>
 
 		<!-- 重设密码 -->
@@ -53,7 +92,7 @@
 				<a href="javascript:;" id="head"></a>
 				<dl class="layui-nav-child">
 					<!-- 二级菜单 -->
-					<!-- <dd><a href="">修改头像</a></dd> -->
+					<dd onclick="change1()">修改头像</dd>
 					<dd onclick="change()">修改密码</dd>
 					<dd onclick="logout()">退出登录</dd>
 				</dl>
@@ -92,9 +131,8 @@
 			<div class="title2">
 				资料栏
 			</div>
-			<!-- 文件上传按钮 -->
 			<button type="button" class="layui-btn title4" onclick="add()">发布公告</button>
-			<button type="button" class="layui-btn title3">上传资料</button>
+			<button type="button" class="layui-btn title3" onclick="addFile()">上传资料</button>
 			<!-- 发布公告按钮 -->
 			<div id="demo">
 				<div class="demoo">
@@ -102,6 +140,7 @@
 					</ul>
 				</div>
 			</div>
+
 
 			<div id="right">
 				<table class="layui-table table1">
@@ -129,103 +168,13 @@
 								<col width="200">
 								<col>
 							</colgroup>
-							<tbody>
-								<tr>
+							<tbody id="filebox">
+								<!-- <tr>
 									<td><i class="layui-icon layui-icon-file-b"></i>浅谈layui的妙用</td>
 									<td>2021-06-13</td>
 									<td>陈陈</td>
 									<td><i class="layui-icon layui-icon-download-circle"></i></td>
-								</tr>
-								<tr>
-									<td><i class="layui-icon layui-icon-file-b"></i>浅谈layui的妙用</td>
-									<td>2021-06-13</td>
-									<td>陈陈</td>
-									<td><i class="layui-icon layui-icon-download-circle"></i></td>
-								</tr>
-								<tr>
-									<td><i class="layui-icon layui-icon-file-b"></i>浅谈layui的妙用</td>
-									<td>2021-06-13</td>
-									<td>陈陈</td>
-									<td><i class="layui-icon layui-icon-download-circle"></i></td>
-								</tr>
-								<tr>
-									<td><i class="layui-icon layui-icon-file-b"></i>浅谈layui的妙用</td>
-									<td>2021-06-13</td>
-									<td>陈陈</td>
-									<td><i class="layui-icon layui-icon-download-circle"></i></td>
-								</tr>
-								<tr>
-									<td><i class="layui-icon layui-icon-file-b"></i>浅谈layui的妙用</td>
-									<td>2021-06-13</td>
-									<td>陈陈</td>
-									<td><i class="layui-icon layui-icon-download-circle"></i></td>
-								</tr>
-								<tr>
-									<td><i class="layui-icon layui-icon-file-b"></i>浅谈layui的妙用</td>
-									<td>2021-06-13</td>
-									<td>陈陈</td>
-									<td><i class="layui-icon layui-icon-download-circle"></i></td>
-								</tr>
-								<tr>
-									<td><i class="layui-icon layui-icon-file-b"></i>浅谈layui的妙用</td>
-									<td>2021-06-13</td>
-									<td>陈陈</td>
-									<td><i class="layui-icon layui-icon-download-circle"></i></td>
-								</tr>
-								<tr>
-									<td><i class="layui-icon layui-icon-file-b"></i>浅谈layui的妙用</td>
-									<td>2021-06-13</td>
-									<td>陈陈</td>
-									<td><i class="layui-icon layui-icon-download-circle"></i></td>
-								</tr>
-								<tr>
-									<td><i class="layui-icon layui-icon-file-b"></i>浅谈layui的妙用</td>
-									<td>2021-06-13</td>
-									<td>陈陈</td>
-									<td><i class="layui-icon layui-icon-download-circle"></i></td>
-								</tr>
-								<tr>
-									<td><i class="layui-icon layui-icon-file-b"></i>浅谈layui的妙用</td>
-									<td>2021-06-13</td>
-									<td>陈陈</td>
-									<td><i class="layui-icon layui-icon-download-circle"></i></td>
-								</tr>
-								<tr>
-									<td><i class="layui-icon layui-icon-file-b"></i>浅谈layui的妙用</td>
-									<td>2021-06-13</td>
-									<td>陈陈</td>
-									<td><i class="layui-icon layui-icon-download-circle"></i></td>
-								</tr>
-								<tr>
-									<td><i class="layui-icon layui-icon-file-b"></i>浅谈layui的妙用</td>
-									<td>2021-06-13</td>
-									<td>陈陈</td>
-									<td><i class="layui-icon layui-icon-download-circle"></i></td>
-								</tr>
-								<tr>
-									<td><i class="layui-icon layui-icon-file-b"></i>浅谈layui的妙用</td>
-									<td>2021-06-13</td>
-									<td>陈陈</td>
-									<td><i class="layui-icon layui-icon-download-circle"></i></td>
-								</tr>
-								<tr>
-									<td><i class="layui-icon layui-icon-file-b"></i>浅谈layui的妙用</td>
-									<td>2021-06-13</td>
-									<td>陈陈</td>
-									<td><i class="layui-icon layui-icon-download-circle"></i></td>
-								</tr>
-								<tr>
-									<td><i class="layui-icon layui-icon-file-b"></i>浅谈layui的妙用</td>
-									<td>2021-06-13</td>
-									<td>陈陈</td>
-									<td><i class="layui-icon layui-icon-download-circle"></i></td>
-								</tr>
-								<tr>
-									<td><i class="layui-icon layui-icon-file-b"></i>浅谈layui的妙用</td>
-									<td>2021-06-13</td>
-									<td>陈陈</td>
-									<td><i class="layui-icon layui-icon-download-circle"></i></td>
-								</tr>
+								</tr> -->
 							</tbody>
 						</table>
 					</div>
@@ -246,6 +195,9 @@
 				});
 			}
 		</script>
+
+<script src="filesUpload.js" type="text/javascript" charset="utf-8"></script>
+
 
 	</body>
 </html>
