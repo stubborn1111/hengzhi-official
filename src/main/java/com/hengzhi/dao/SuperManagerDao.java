@@ -25,4 +25,5 @@ public interface SuperManagerDao {
     void addUser(String password ,String name,int studentId);
     User findUserByStudentId(int studentId);
     void deleteUser(int userId);
+    Integer getRPNumber();
 }

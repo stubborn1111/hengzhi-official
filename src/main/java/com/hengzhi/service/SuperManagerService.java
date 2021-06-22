@@ -21,4 +21,5 @@ public interface SuperManagerService {
     public String addUser(String name,int studentId);
     public String deleteUser(int userId);
     public List findAllUser();
+    public Integer getRPNumber();
 }

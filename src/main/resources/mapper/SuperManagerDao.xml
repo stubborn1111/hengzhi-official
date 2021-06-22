@@ -44,4 +44,7 @@
     <delete id="deleteUser">
         delete from user where user_id=#{userId}
     </delete>
+    <select id="getRPNumber" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM user WHERE required !='0' OR required IS NULL
+    </select>
 </mapper>

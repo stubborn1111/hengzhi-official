@@ -3,6 +3,7 @@ package com.hengzhi;
 import com.hengzhi.dao.GeneralManagerDao;
 import com.hengzhi.dao.MakePaperDao;
 import com.hengzhi.dao.StudentTestDao;
+import com.hengzhi.dao.SuperManagerDao;
 import com.hengzhi.dto.paperAndTest.MybatisData;
 import com.hengzhi.dto.paperAndTest.QuestionAnswer;
 
@@ -34,6 +35,8 @@ public class StudenTestTests {
     StudentTestDao studentTestDao;
     @Resource
     MakePaperDao makePaperDao;
+    @Resource
+    SuperManagerDao superManagerDao;
     //获得邀请码测试
 //    @Test
 //    void test() {
@@ -225,5 +228,10 @@ public class StudenTestTests {
     public void test16(){
         String s = bCryptPasswordEncoder.encode("1234");
         System.out.println(bCryptPasswordEncoder.matches("1234",s));
+    }
+
+    @Test
+    public void test17(){
+        System.out.println(superManagerDao.getRPNumber());
     }
 }

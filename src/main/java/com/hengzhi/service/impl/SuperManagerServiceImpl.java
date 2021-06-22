@@ -98,4 +98,10 @@ public String addUser(String name,int studentId){
     public List findAllUser(){
         return userDao.findAllUser();
     }
+
+    @Override
+    public Integer getRPNumber() {
+        Integer rpNumber = superManagerDao.getRPNumber();
+        return rpNumber;
+    }
 }

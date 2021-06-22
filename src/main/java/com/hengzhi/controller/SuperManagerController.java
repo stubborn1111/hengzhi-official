@@ -109,6 +109,17 @@ public class SuperManagerController {
         List list=superManagerService.findAllUser();
         return Paging.getPage(list,list.size(),size,page);
     }
+
+    @RequestMapping("/getRPNumber")
+    @ResponseBody
+    @RequiresRoles(value = {"super"})
+    public Map<String,Integer> getRPNumber(){
+        Integer rpNumber = superManagerService.getRPNumber();
+        Map<String,Integer> map = new HashMap();
+        map.put("rpNumber",rpNumber);
+        return map;
+    }
+
 }
 
 
