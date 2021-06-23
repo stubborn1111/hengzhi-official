@@ -54,8 +54,6 @@ public class BCryptPasswordEncoder implements PasswordEncoder {
 
         return BCrypt.hashpw(rawPassword.toString(), salt);
     }
-
-
     /*
      *匹配密码具体实现
      */
