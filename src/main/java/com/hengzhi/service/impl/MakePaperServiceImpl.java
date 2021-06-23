@@ -72,6 +72,50 @@ public class MakePaperServiceImpl implements MakePaperService {
         System.out.println(list);
         return list4;
     }
+    public List<ShowQuestions> showQuestionsByKeyWord(String keyWord){
+        List<Questions> list = makePaperDao.findQuestionsByKeyWords(keyWord,"questions_fill");
+        for(int i=0;i<list.size();i++){
+            list.get(i).setQType("0");
+        }
+        List<Questions> list1=makePaperDao.findQuestionsByKeyWords(keyWord,"questions_multiple");
+        List<Questions> list2=makePaperDao.findQuestionsByKeyWords(keyWord,"questions_single");
+        List<Questions> list3=makePaperDao.findQuestionsByKeyWords(keyWord,"questions_subjective");
+        for(int m=0;m<list1.size();m++){
+            list1.get(m).setQType("1");
+            Questions questions= (Questions) list1.get(m);
+            list.add(questions);
+        }
+        for(int m=0;m<list2.size();m++){
+            list2.get(m).setQType("2");
+            Questions questions= (Questions) list2.get(m);
+            list.add(questions);
+        }
+        for(int m=0;m<list3.size();m++){
+            list3.get(m).setQType("3");
+            Questions questions= (Questions) list3.get(m);
+            list.add(questions);
+        }
+        List<ShowQuestions> list4=new ArrayList<>();
+        for(int n=0;n<list.size();n++){
+            Questions questions=list.get(n);
+            int userId=questions.getUserId();
+            UserInfo user=userDao.getUserInfo(userId);
+            ShowQuestions showQuestions=new ShowQuestions();
+            showQuestions.setUserName(user.getName());
+            showQuestions.setAnswer(questions.getAnswer());
+            showQuestions.setContent(questions.getContent());
+            showQuestions.setCorrectNumber(questions.getCorrectNumber());
+            showQuestions.setCRate(questions.getCRate());
+            showQuestions.setDescription(questions.getDescription());
+            showQuestions.setKind(questions.getKind());
+            showQuestions.setQType(questions.getQType());
+            showQuestions.setQuestionId(questions.getQuestionId());
+            showQuestions.setTotalNumber(questions.getTotalNumber());
+            list4.add(showQuestions);
+        }
+        System.out.println(list);
+        return list4;
+    }
     @Override
     public Integer showQNumber(){
         return makePaperDao.showQNumber1()+makePaperDao.showQNumber2()+makePaperDao.showQNumber3()+makePaperDao.showQNumber4();

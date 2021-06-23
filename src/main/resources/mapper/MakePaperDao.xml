@@ -56,12 +56,15 @@
     <select id="findTagFuzzy" resultMap="tag">
         select * from tag where tag_name like  concat('%',#{tagName},'%')
     </select>
-    <select id="findQuestionByType" resultMap="question">
-        select * from ${qType}
+    <select id="findQuestionsByKeyWords" resultMap="question">
+        select * from ${qType} where content like concat('%',#{keyWord},'%')
     </select>
-    <select id="findQuestionByTypeNumber" resultType="int">
-        select count(*) from ${qType}
-    </select>
+<!--    <select id="findQuestionByType" resultMap="question">-->
+<!--        select * from ${qType}-->
+<!--    </select>-->
+<!--    <select id="findQuestionByTypeNumber" resultType="int">-->
+<!--        select count(*) from ${qType}-->
+<!--    </select>-->
     <select id="findQuestionByTag1" resultMap="question" parameterType="List">
         select * from questions_fill
         <where>

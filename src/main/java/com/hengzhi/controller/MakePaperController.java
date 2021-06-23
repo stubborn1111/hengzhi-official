@@ -59,8 +59,17 @@ public class MakePaperController {
     public Map showQuestions(@RequestBody JSONObject jsonObject){
         Integer page = jsonObject.getInteger("page");
         Integer size = jsonObject.getInteger("size");
-        Integer TotalNumber = makePaperService.showQNumber();
-        List<ShowQuestions> list = makePaperService.showQuestions();
+        String keyWord=jsonObject.getString("keyWord");
+        Integer TotalNumber;
+        List<ShowQuestions> list=new ArrayList<>();
+        if(!keyWord.equals("")){
+            list= makePaperService.showQuestionsByKeyWord(keyWord);
+            TotalNumber=list.size();
+        }
+        else {
+            TotalNumber = makePaperService.showQNumber();
+            list = makePaperService.showQuestions();
+        }
         return Paging.getPage(list,TotalNumber,size,page);
     }
     @RequestMapping("/addTag")

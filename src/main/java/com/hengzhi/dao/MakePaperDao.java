@@ -25,6 +25,7 @@ public interface MakePaperDao {
     Tag findTag(String tagName);
     List<String> findAllTag();
     List<Tag> findTagFuzzy(String tagName);
+    List<Questions> findQuestionsByKeyWords(String keyWord,String qType);
     List<Questions> findQuestionByTag1(List list);
     List<Questions> findQuestionByTag2(List list);
     List<Questions> findQuestionByTag3(List list);

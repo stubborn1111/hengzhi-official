@@ -18,6 +18,7 @@ public interface MakePaperService {
     public List findTagFuzzy(String tagName);
     public List findQuestions(List<String> tList, List<String> sList);
     public ShowQuestions findQuestionsById(String qType,int questionId);
+    public List<ShowQuestions> showQuestionsByKeyWord(String keyWord);
     public Map makePaper(String type, int num0, int num1, int num2, int num3);
     public void makePaperSuccess(Date beginTime, Date endTime,String paperName, int userId, String description, String code, List<QInfo> list);
 
