@@ -259,4 +259,16 @@ public class ManagerPaperController {
         map.put("message","success");
         return map;
     }
+    /*
+    返回给前端未审核的留言数
+     */
+    @ResponseBody
+    @RequestMapping("/selectUnExamMessage")
+    @RequiresRoles(value = {"admin"})
+    public Map selectUnExamMessage(){
+        Map map = new HashMap();
+        Integer number = managerPaperService.selectUnExamMessage();
+        map.put("number",number);
+        return  map;
+    }
 }
