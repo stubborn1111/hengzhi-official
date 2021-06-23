@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 
+import javax.naming.InsufficientResourcesException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -101,4 +102,8 @@ public interface ManagerPaperDao {
     将总分存到user_paper
      */
     void updateSum(Integer score,Integer userId,Integer paperId);
+    /*
+    返回给前端未审核的留言数
+     */
+    Integer selectUnExamMessage();
 }

@@ -94,4 +94,8 @@ public interface ManagerPaperService {
     将总分存到user_paper
      */
     void updateSum(Integer score,Integer userId,Integer paperId);
+    /*
+   返回给前端未审核的留言数
+    */
+    Integer selectUnExamMessage();
 }
