@@ -254,4 +254,10 @@
         where user_id = #{userId}
         and paper_id = #{paperId}
     </update>
+<!--    返回给前端未审核留言的条数-->
+    <select id="selectUnExamMessage" resultType="Integer">
+        select count(*)
+        from message
+        where whether_review = 0
+    </select>
 </mapper>

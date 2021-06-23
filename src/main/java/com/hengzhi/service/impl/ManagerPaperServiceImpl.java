@@ -149,4 +149,9 @@ public class ManagerPaperServiceImpl implements ManagerPaperService {
     public void updateSum(Integer score, Integer userId, Integer paperId) {
         managerPaperDao.updateSum(score,userId,paperId);
     }
+
+    @Override
+    public Integer selectUnExamMessage() {
+        return managerPaperDao.selectUnExamMessage();
+    }
 }
