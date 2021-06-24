@@ -154,9 +154,18 @@ public class ShowController {
         int len = 0;
 
         response.reset(); // 非常重要
-         // 纯下载方式
-            response.setContentType("application/x-msdownload");
-            response.setHeader("Content-Disposition", "attachment; filename=" + file.getName());
+        // 纯下载方式
+        response.setContentType("application/x-msdownload");
+        response.setHeader("Content-Disposition", "attachment; filename=" + file.getName());
+        response.setHeader("Access-control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Max-Age", "3600");
+        response.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS,PUT,DELETE");
+        response.setHeader("Access-Control-Expose-Headers", "Authorization");
+        response.setHeader("Access-Control-Allow-Headers", "Authorization,Content-Type,Access-Control-Expose-Headers");
+        //response.setContentType("application/octet-stream");
+        // 纯下载方式
+        response.setContentType("application/x-msdownload");
+        response.setHeader("Content-Disposition", "attachment; filename=" + file.getName());
 
         OutputStream out = response.getOutputStream();
         while ((len = br.read(buf)) > 0)
