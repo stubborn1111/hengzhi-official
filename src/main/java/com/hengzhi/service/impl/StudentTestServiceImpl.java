@@ -128,7 +128,7 @@ public class StudentTestServiceImpl implements StudentTestService {
         //答案列表
         String text = JSONArray.toJSONString(jsonObject.get("answerList"));
         List<QuestionAnswer> answerList = JSONArray.parseArray(text, QuestionAnswer.class);
-        String beginTime = (String) jsonObject.get("answerTime");//答题所用时间
+        String beginTime = (String) jsonObject.get("beginTime");//答题所用时间
         Integer paperId = (Integer) jsonObject.get("paperId");
         if (answerList == null || beginTime == null || paperId == null) return false;
         DateFormat simpleFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
