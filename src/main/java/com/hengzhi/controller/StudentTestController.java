@@ -126,12 +126,18 @@ public class StudentTestController {
     @RequiresRoles(value = {"user", "admin"}, logical = Logical.OR)
     public Map<String,String> submitPaper(@RequestBody JSONObject jsonObject,HttpServletRequest request) {
         Integer userId = jwtService.getUserId(request);
-        boolean b = testService.submitPaper(jsonObject, userId);
-        Map<String, String> map = new HashMap<>();
-        if (b) {
-            map.put("msg","success");
-        }else map.put("msg","error");
-        return map;
+        try {
+            boolean b = testService.submitPaper(jsonObject, userId);
+            Map<String, String> map = new HashMap<>();
+            if (b) {
+                map.put("msg","success");
+            }else map.put("msg","error");
+            return map;
+        }catch (Exception e){
+            Map<String, String> map = new HashMap<>();
+            map.put("msg","error");
+            return map;
+        }
     }
 
 }
