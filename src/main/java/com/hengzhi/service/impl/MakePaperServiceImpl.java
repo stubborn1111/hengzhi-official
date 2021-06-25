@@ -156,24 +156,35 @@ public class MakePaperServiceImpl implements MakePaperService {
         List<Questions> list2 = new ArrayList<>();
         List<Questions> list3 = new ArrayList<>();
         if(tList.isEmpty()){
-            list0=makePaperDao.showQuestions1();
-            list1=makePaperDao.showQuestions2();
-            list2=makePaperDao.showQuestions3();
-            list3=makePaperDao.showQuestions4();
+            for (int i = 0; i < sList.size(); i++) {
+                String type1 = (String) sList.get(i);
+                if (type1.equals("0"))
+                    list0 = makePaperDao.showQuestions1();
+                if (type1.equals("1"))
+                    list1 = makePaperDao.showQuestions2();
+                if (type1.equals("2"))
+                    list2 = makePaperDao.showQuestions3();
+                if (type1.equals("3"))
+                    list3 = makePaperDao.showQuestions4();
+            }
         }
-        for (int i = 0; i < type.size(); i++) {
-            String type1 = (String) type.get(i);
-            if (type1.equals("0"))
-                list0 = makePaperDao.findQuestionByTag1(tList);
-            if (type1.equals("1"))
-                list1 = makePaperDao.findQuestionByTag2(tList);
-            if (type1.equals("2"))
-                list2 = makePaperDao.findQuestionByTag3(tList);
-            if (type1.equals("3"))
-                list3 = makePaperDao.findQuestionByTag4(tList);
+        else {
+            for (int i = 0; i < type.size(); i++) {
+                String type1 = (String) type.get(i);
+                System.out.println(type1);
+                if (type1.equals("0"))
+                    list0 = makePaperDao.findQuestionByTag1(tList);
+                if (type1.equals("1"))
+                    list1 = makePaperDao.findQuestionByTag2(tList);
+                if (type1.equals("2"))
+                    list2 = makePaperDao.findQuestionByTag3(tList);
+                if (type1.equals("3"))
+                    list3 = makePaperDao.findQuestionByTag4(tList);
+            }
+
         }
 
-
+        System.out.println(list0+"\n"+list1+"\n"+list2+"\n"+list3+"\n");
         if (list0 != null) {
             for (int i = 0; i < list0.size(); i++) {
                 Questions questions = list0.get(i);
