@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -123,9 +124,14 @@ public class StudentTestController {
     @ResponseBody
     @RequestMapping("/submitPaper")
     @RequiresRoles(value = {"user", "admin"}, logical = Logical.OR)
-    public void submitPaper(@RequestBody JSONObject jsonObject,HttpServletRequest request) {
+    public Map<String,String> submitPaper(@RequestBody JSONObject jsonObject,HttpServletRequest request) {
         Integer userId = jwtService.getUserId(request);
-        testService.submitPaper(jsonObject,userId);
+        boolean b = testService.submitPaper(jsonObject, userId);
+        Map<String, String> map = new HashMap<>();
+        if (b) {
+            map.put("msg","success");
+        }else map.put("msg","error");
+        return map;
     }
 
 }

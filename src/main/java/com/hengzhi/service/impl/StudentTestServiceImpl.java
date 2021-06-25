@@ -125,6 +125,7 @@ public class StudentTestServiceImpl implements StudentTestService {
         List<QuestionAnswer> answerList = JSONArray.parseArray(text, QuestionAnswer.class);
         Integer answerTime = (Integer) jsonObject.get("answerTime");//答题所用时间
         Integer paperId = (Integer) jsonObject.get("paperId");
+        if(answerList==null||answerTime==null||paperId==null)return false;
         //提交答案
         testDao.submitPaper(paperId, userId, answerList);
         //批改试卷
