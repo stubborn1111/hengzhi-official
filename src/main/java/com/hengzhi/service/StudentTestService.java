@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.hengzhi.dto.paperAndTest.GetPaper;
 
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 
@@ -24,7 +25,7 @@ public interface StudentTestService {
 
     Map test(Integer paperId);
 
-    boolean submitPaper(JSONObject jsonObject,Integer userId);
+    boolean submitPaper(JSONObject jsonObject,Integer userId) throws ParseException;
 
 
 }

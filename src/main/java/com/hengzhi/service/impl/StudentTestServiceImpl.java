@@ -13,6 +13,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -36,7 +39,7 @@ public class StudentTestServiceImpl implements StudentTestService {
         }
         Integer integer = testDao.selectPaper(getPaper.getPaperId(), userId);
         //用户已有试卷
-        if(!(integer==null)){
+        if (!(integer == null)) {
             GetPaper getPaper1 = new GetPaper();
             getPaper1.setPaperId(0);
             return getPaper1;
@@ -77,7 +80,7 @@ public class StudentTestServiceImpl implements StudentTestService {
             TestedQuestion question = testDao.getQuestion(qInfo.get(i).getQuestionId(), tName);
             question.setQType(qInfo.get(i).getQType());
             TestedQuestion2 question2 = question.transfer();
-            question2.setQNumber(i+1);
+            question2.setQNumber(i + 1);
             qList.add(question2);
             //qList.add(testDao.getQuestion(qInfo.get(i).getQuestionId(),tName));
         }
@@ -93,6 +96,7 @@ public class StudentTestServiceImpl implements StudentTestService {
 
     /**
      * 考试
+     *
      * @param paperId
      * @return
      */
@@ -105,7 +109,7 @@ public class StudentTestServiceImpl implements StudentTestService {
         String tName;
         for (int i = 0; i < qInfo.size(); i++) {
             tName = SelectTableUtils.selectT(qInfo.get(i).getQType());
-            qList.add(new TestQuestion(i+1, qInfo.get(i).getQType(), testDao.getTestQuestions(qInfo.get(i).getQuestionId(), tName)));
+            qList.add(new TestQuestion(i + 1, qInfo.get(i).getQType(), testDao.getTestQuestions(qInfo.get(i).getQuestionId(), tName)));
         }
         TestPaperInfo paperInfo = testDao.getTestPaperInfo(paperId);
         map.put("qList", qList);
@@ -115,17 +119,25 @@ public class StudentTestServiceImpl implements StudentTestService {
 
     /**
      * 交卷
+     *
      * @param jsonObject
      * @return
      */
     @Override
-    public boolean submitPaper(JSONObject jsonObject,Integer userId) {
+    public boolean submitPaper(JSONObject jsonObject, Integer userId) throws ParseException {
         //答案列表
         String text = JSONArray.toJSONString(jsonObject.get("answerList"));
         List<QuestionAnswer> answerList = JSONArray.parseArray(text, QuestionAnswer.class);
-        Integer answerTime = (Integer) jsonObject.get("answerTime");//答题所用时间
+        String beginTime = (String) jsonObject.get("answerTime");//答题所用时间
         Integer paperId = (Integer) jsonObject.get("paperId");
-        if(answerList==null||answerTime==null||paperId==null)return false;
+        if (answerList == null || beginTime == null || paperId == null) return false;
+        DateFormat simpleFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        String format = simpleFormat.format(new Date());
+        Date date1 = simpleFormat.parse(beginTime);
+        Date date2 = simpleFormat.parse(format);
+        long to1 = date1.getTime();
+        long to2 = date2.getTime();
+        Integer answerTime = (int) ((to2 - to1) / (1000 * 60));
         //提交答案
         testDao.submitPaper(paperId, userId, answerList);
         //批改试卷
@@ -147,8 +159,8 @@ public class StudentTestServiceImpl implements StudentTestService {
                 TestedQuestion testedQuestion = testDao.getQuestion(questionId, tName);
                 String rAnswer = testedQuestion.getAnswer();//正确答案
                 String uAnswer = answerList.get(i).getAnswer();//用户答案
-                Double cRate = ((double)((int)((testedQuestion.getCorrectNumber()/1.0/testedQuestion.getTotalNumber())*100)))/100;
-                testDao.updateCRate(cRate,tName,questionId);
+                Double cRate = ((double) ((int) ((testedQuestion.getCorrectNumber() / 1.0 / testedQuestion.getTotalNumber()) * 100))) / 100;
+                testDao.updateCRate(cRate, tName, questionId);
                 if (rAnswer.equals(uAnswer)) {
                     score = 5;//完全正确
                     //修改题目正确率，在试题表中修改并放到paper_content表中
@@ -167,8 +179,8 @@ public class StudentTestServiceImpl implements StudentTestService {
             }
         }
         //提交总分和时间
-        System.out.println("sum:"+sum);
-        testDao.setSum(sum, paperId, userId,answerTime);
+        System.out.println("sum:" + sum);
+        testDao.setSum(sum, paperId, userId, answerTime);
         return true;
     }
 }
