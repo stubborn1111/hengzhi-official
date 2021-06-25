@@ -59,7 +59,8 @@ public class ManagerPaperController {
         if(page>pagesSize){
             return null;
         }else {
-            List<UnChangePapers> list = managerPaperService.selectUnChange(page, size,userId);
+            List<UnChangePapers> list = managerPaperService.selectUnChange(page,size+1,userId);
+            //System.out.println("list"+list);
             map.put("list",list);
             map.put("page",page);
             return map;
