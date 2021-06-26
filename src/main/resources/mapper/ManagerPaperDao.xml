@@ -109,12 +109,12 @@
     <select id="selectUnFinish" resultMap="UnFinishPapers">
         select *
         from papers
-        where begin_time &lt;&gt; NOW()
+        where begin_time &gt; NOW()
     </select>
     <select id="selectUnFinishNumber" resultType="int">
         select count(*)
         from papers
-        where begin_time &lt;&gt; NOW()
+        where begin_time &gt; NOW()
     </select>
 <!--试卷成绩信息-->
     <select id="selectScoreInformation" resultMap="ScoreInformation">
