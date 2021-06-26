@@ -14,9 +14,9 @@ public class UnFinishPapers {
     //试卷id
     private  Integer paperId;
     //开始时间
-    private Timestamp beginTime;
+    private String beginTime;
     //截止时间
-    private Timestamp deadLine;
+    private String deadLine;
     //试卷名
     private  String paperName;
     //邀请码

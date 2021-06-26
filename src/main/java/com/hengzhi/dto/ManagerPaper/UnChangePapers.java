@@ -15,9 +15,9 @@ public class UnChangePapers {
     //试卷id
     private Integer paperId;
     //试卷开始时间
-    private Timestamp beginTime;
+    private String beginTime;
     //我们规定的完成时间
-    private Timestamp deadLine;
+    private String deadLine;
     //试卷名
     private String paperName;
     //试卷总分
