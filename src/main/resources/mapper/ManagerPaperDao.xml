@@ -147,7 +147,7 @@
         where paper_id=#{paperId}
     </update>
 
-<!--    改卷（给前端）-->
+<!--改卷（给前端）-->
     <!--返回给前端学生作答的列表包含答案-->
     <select id="unCorrectStudent" resultMap="unCorrectStudentList">
         select *
@@ -157,7 +157,6 @@
         and ap.paper_id = #{paper_id}
         and up.paper_id = #{paper_id}
         and up.whether_answer=1
-        and up.whether_end=1
         and up.whether_correct=0
     </select>
     <!--返回答题人数-->
