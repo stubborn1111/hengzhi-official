@@ -131,7 +131,7 @@ public class StudentTestServiceImpl implements StudentTestService {
         String beginTime = (String) jsonObject.get("beginTime");//答题所用时间
         Integer paperId = (Integer) jsonObject.get("paperId");
         if (answerList == null || beginTime == null || paperId == null) return false;
-        DateFormat simpleFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        DateFormat simpleFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String format = simpleFormat.format(new Date());
         Date date1 = simpleFormat.parse(beginTime);
         Date date2 = simpleFormat.parse(format);
