@@ -49,8 +49,20 @@ public class StudentTestServiceImpl implements StudentTestService {
     }
 
     @Override
-    public List<UntestedPaper> getUntestedPapers(Integer userId) {
+    public List<UntestedPaper> getUntestedPapers(Integer userId) throws ParseException {
         List<UntestedPaper> papers = testDao.getUntestedPapers(userId);
+        List<UntestedPaper> papers1 = testDao.getUntestedPapers(userId);
+        for (int i = 0; i <papers.size() ; i++) {
+            DateFormat simpleFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String format = simpleFormat.format(new Date());
+            Date date1 = simpleFormat.parse(papers.get(i).getBeginTime());
+            Date date2 = simpleFormat.parse(format);
+            long to1 = date1.getTime();
+            long to2 = date2.getTime();
+            Integer answerTime = (int) ((to2 - to1) / (1000 * 60));
+            if(answerTime>0)
+            papers1.add(papers.get(i));
+        }
         return papers;
     }
 

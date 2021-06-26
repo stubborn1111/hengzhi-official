@@ -17,7 +17,7 @@ import java.util.Map;
 public interface StudentTestService {
     GetPaper getPaper(String code, Integer userId);
 
-    List getUntestedPapers(Integer studentId);
+    List getUntestedPapers(Integer studentId) throws ParseException;
 
     List getTestedPapers(Integer studentId);
 

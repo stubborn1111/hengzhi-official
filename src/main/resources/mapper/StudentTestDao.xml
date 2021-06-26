@@ -84,7 +84,7 @@
     <select id="getUntestedPapers" resultMap="UntestedPaper">
         SELECT papers.paper_id,papers.name AS paper_name,begin_time,end_time AS deadline,user.`name`
         FROM `user`,papers,user_paper
-        WHERE user.`user_id` = papers.`user_id` AND user_paper.`user_id`=#{userId} AND papers.paper_id = user_paper.`paper_id` AND whether_correct = 0
+        WHERE user.`user_id` = papers.`user_id` AND user_paper.`user_id`=#{userId} AND papers.paper_id = user_paper.`paper_id` AND whether_answer = 0
     </select>
     <!--获得考试了的试卷信息-->
     <select id="getTestedPapers" resultMap="testedPaper">
