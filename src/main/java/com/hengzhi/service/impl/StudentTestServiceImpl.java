@@ -62,6 +62,7 @@ public class StudentTestServiceImpl implements StudentTestService {
             Integer answerTime = (int) ((to2 - to1) / (1000 * 60));
             if(answerTime>0)
             papers1.add(papers.get(i));
+            else testDao.update1(papers.get(i).getPaperId(),userId);
         }
         return papers;
     }

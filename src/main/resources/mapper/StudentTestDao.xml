@@ -165,4 +165,9 @@
         set c_rate=#{cRate}
         where question_id =#{questionId}
     </update>
+    <update id="update1">
+        UPDATE user_paper
+        SET whether_answer = 1
+        WHERE paper_id =#{papereId} AND user_id =#{userId}
+    </update>
 </mapper>

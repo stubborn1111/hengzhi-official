@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,7 +60,7 @@ public class StudentTestController {
     @ResponseBody
     @RequestMapping("getUnTestedPapers")
     @RequiresRoles(value = {"user", "admin"}, logical = Logical.OR)
-    public PageInfo<UntestedPaper> getUnTestedPapers(@RequestBody JSONObject jsonObject,HttpServletRequest request) {
+    public PageInfo<UntestedPaper> getUnTestedPapers(@RequestBody JSONObject jsonObject,HttpServletRequest request) throws ParseException {
         Integer pageNo = jsonObject.getInteger("pageNo");//第n页
         Integer pageSize = jsonObject.getInteger("pageSize");//n条数据
         //开始分页

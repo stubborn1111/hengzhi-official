@@ -154,4 +154,6 @@ public interface StudentTestDao {
 
     Integer updateCRate(Double cRate,String tName,Integer questionId);
 
+    Integer update1(Integer paperId,Integer userId);
+
 }
