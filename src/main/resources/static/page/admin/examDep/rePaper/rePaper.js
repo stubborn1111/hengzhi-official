@@ -1,3 +1,60 @@
+// 获取url参数
+function GetRequest() {
+	var url = location.search; //获取url中"?"符后的字串
+	var theRequest = new Object();
+	if (url.indexOf("?") != -1) {
+		var str = url.substr(1);
+		strs = str.split("&");
+		for (var i = 0; i < strs.length; i++) {
+			theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+		}
+	}
+	return theRequest;
+}
+var Request = new Object();
+Request = GetRequest();
+var paperId;
+var userId;
+userId = Request['id'];
+paperId = Request['paperId'];
+
+$(document).ready(function() {
+	var authorization = localStorage.getItem("authorization");
+	$.ajax({
+		type: 'post',
+		url: 'http://123.56.29.67/hengzhi-official/managerPaper/selectUnExamMessage',
+		dataType: 'json',
+		contentType: 'application/json;charset=utf-8',
+		headers: {
+			'Authorization': authorization
+		},
+		success: function(res) {
+			var number = res.number
+			$.ajax({
+				type: 'post',
+				url: 'http://123.56.29.67/hengzhi-official/user/getUserInfo',
+				dataType: 'json',
+				contentType: 'application/json;charset=utf-8',
+				headers: {
+					'Authorization': authorization
+				},
+				// data: JSON.stringify(data),
+				success: function(data) {
+					var msg1 = document.getElementById("head")
+					var str1 = ""
+					str1 = `
+				<img class="headImgg" data-id="${data.userId}" src="http://123.56.29.67/hengzhi-official/headImage/${data.headImg}">
+				<span class="layui-badge huizhang" title="您有${number}条留言未审核">${number}</span>
+			`
+					msg1.innerHTML = str1;
+				},
+				error: function() {}
+			});
+		},
+		error: function() {}
+	});
+
+})
 // 修改头像
 function change1() {
 	layui.use('layer', function() {
@@ -115,16 +172,13 @@ function change() {
 function logout() {
 	localStorage.setItem("authorization", "");
 	setTimeout(function() {
-		window.location.href = "../../login/login.html";
+		window.location.href = "../../../login/login.html";
 	}, 2000);
 }
 
 $(document).ready(function() {
 	var authorization = localStorage.getItem("authorization");
-	var userId = location.search.slice(4,5)
-	var paperId = location.search.slice(14)
-	console.log(userId)
-	console.log(paperId)
+
 	var data = {
 		"paperId": paperId,
 		"userId": userId
@@ -164,12 +218,34 @@ $(document).ready(function() {
 				var score = data.answerList[i].score;
 
 				if (qType == 1) {
-					item += `
+
+					var arr1 = content.slice(1, content.length - 1).split(",");
+					var options = arr1.length;
+
+          item += `
           <div class="qtype1 qtype">
             <div class="layui-form-item">
-							<span>${qNumber}</span>
-              ${content}
-            </div>
+						<div class="ques"><span>${qNumber}</span>（单选题）${arr1[0]}
+						`
+					for (var j = 1; j < options; j++) {
+						var dax = String.fromCharCode(64 + j)
+						// console.log(arr1[j])
+
+						if(dax == data.answerList[i].answer){
+							item += `					
+							<div class="boxA">${dax}.${arr1[j]}</div>
+						`
+						}else{
+							item += `					
+							<div class="boxB">${dax}.${arr1[j]}</div>
+						`
+						}
+
+					}
+
+					item +=`
+					</div>
+						</div>
 						<div class="ans">
 							<span>正确答案：</span>
 							<span class="qans">${answer}</span>
@@ -185,18 +261,43 @@ $(document).ready(function() {
 							<span>题目标签：${kind}</span>
 						</div>
           </div>
-          `
-					var qtype1 = document.getElementById("paperInfo");
-					qtype1.innerHTML = item;
+					`
+
+          var qtype1 = document.getElementById("paperInfo");
+          qtype1.innerHTML = item;
+
 
 				}
 				// 多选题
 				if (qType == 2) {
-					item += `
-					<div class="qtype2 qtype">
-						<div class="layui-form-item">
-							<span>${qNumber}</span>
-							${content}
+
+					var arr1 = content.slice(1, content.length - 1).split(",");
+					var options = arr1.length;
+
+          item += `
+          <div class="qtype1 qtype">
+            <div class="layui-form-item">
+						<div class="ques"><span>${qNumber}</span>（多选题）${arr1[0]}
+						`
+						var ansdax = data.answerList[i].answer;
+						
+					for (var j = 1; j < options; j++) {
+						var dax = String.fromCharCode(64 + j)
+						if(ansdax.indexOf(dax)!= -1){
+							item += `					
+									<div class="boxA">${dax}.${arr1[j]}</div>
+								`
+						}
+						else{
+									item += `					
+									<div class="boxB">${dax}.${arr1[j]}</div>
+								`
+								}
+					}
+					
+
+					item +=`
+					</div>
 						</div>
 						<div class="ans">
 							<span>正确答案：</span>
@@ -204,7 +305,7 @@ $(document).ready(function() {
 							<div>
 									<span>题目解析：</span>
 									<i class="layui-icon layui-icon-survey" title="${description}"></i>
-							</div>   
+							</div>     
 						</div>
 						<div class="rate">
 							<span>正确率：${cRate}</span>
@@ -212,8 +313,9 @@ $(document).ready(function() {
 						<div class="kind">
 							<span>题目标签：${kind}</span>
 						</div>
-					</div>
-          `
+          </div>
+					`
+
 					var qtype2 = document.getElementById("paperInfo");
 					qtype2.innerHTML = item;
 				}

@@ -1,3 +1,40 @@
+$(document).ready(function() {
+	var authorization = localStorage.getItem("authorization");
+	$.ajax({
+		type: 'post',
+		url: 'http://123.56.29.67/hengzhi-official/managerPaper/selectUnExamMessage',
+		dataType: 'json',
+		contentType: 'application/json;charset=utf-8',
+		headers: {
+			'Authorization': authorization
+		},
+		success: function(res) {
+			var number = res.number
+			$.ajax({
+				type: 'post',
+				url: 'http://123.56.29.67/hengzhi-official/user/getUserInfo',
+				dataType: 'json',
+				contentType: 'application/json;charset=utf-8',
+				headers: {
+					'Authorization': authorization
+				},
+				// data: JSON.stringify(data),
+				success: function(data) {
+					var msg1 = document.getElementById("head")
+					var str1 = ""
+					str1 = `
+				<img class="headImgg" data-id="${data.userId}" src="http://123.56.29.67/hengzhi-official/headImage/${data.headImg}">
+				<span class="layui-badge huizhang" title="您有${number}条留言未审核">${number}</span>
+			`
+					msg1.innerHTML = str1;
+				},
+				error: function() {}
+			});
+		},
+		error: function() {}
+	});
+
+})
 	// 修改头像
 function change1() {
 	layui.use('layer', function() {
@@ -114,7 +151,7 @@ function change1() {
 	function logout() {
 		localStorage.setItem("authorization", "");
 		setTimeout(function() {
-			window.location.href = "../../login/login.html";
+			window.location.href = "../../../login/login.html";
 		}, 2000);
 	}
 $(document).ready(function() {

@@ -5,40 +5,11 @@
 		<title>审核留言</title>
 		<link rel="stylesheet" type="text/css" href="../../../layui/layui/css/layui.css" />
 		<link rel="stylesheet" type="text/css" href="../../../font-awesome-4.7.0/css/font-awesome.css" />
-		<link rel="stylesheet" href="auditMsg.css">
 		<link rel="stylesheet" type="text/css" href="../../common/common.css" />
+		<link rel="stylesheet" type="text/css" href="auditMsg.css"/>
 		<script src="../../common/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../../layui/layui/layui.js"></script>
 		<script src="auditMsg.js"></script>
-		<style>
-			.info {
-				position: absolute;
-				top: 50px;
-				left: 120px;
-				width: calc(100% - 240px);
-				height: calc(100% - 100px);
-			}
-			.fenye {
-				position: absolute;
-				top: calc(100% - 100px);
-				left: 440px;
-			}
-			.pwdbox{
-				width: 700px;
-				position: absolute;
-				top: 150px;
-				left: 350px;
-			}
-			/* 修改头像 */
-			#test2{
-				margin: 20px 30px;
-			}
-			.img1{
-				margin: 8px;
-				margin-bottom: 45px;
-			}
-		</style>
-
 	</head>
 	<body>
 		<!-- 修改头像 -->
@@ -70,9 +41,9 @@
 		</div>
 		<!-- 水平导航-->
 		<ul class="layui-nav level" lay-filter="">
-			<li class="layui-nav-item"><a href="">首页</a></li>
+			<li class="layui-nav-item"><a href="../../index/index.html">首页</a></li>
 			<li class="layui-nav-item layui-this">
-				<a href="javascript:;">个人中心</a>
+				<a href="javascript:;" id="head"></a>
 				<dl class="layui-nav-child">
 					<!-- 二级菜单 -->
 					<dd onclick="change1()">修改头像</dd>
@@ -86,14 +57,14 @@
 		<ul class="layui-nav layui-nav-tree vertical" lay-filter="test">
 			<li class="layui-nav-item"><a href="../staffInfo/staffInfo.html">人员信息</a></li>
 			<li class="layui-nav-item layui-this"><a href="">留言审核</a></li>
-			<li class="layui-nav-item"><a href="../filesUpload/filesUpload.html">资料上传</a></li>
+			<li class="layui-nav-item"><a href="../filesUpload/filesUpload.html">公告与资料上传</a></li>
 			<li class="layui-nav-item">
 				<a href="javascript:;">考试管理</a>
 				<dl class="layui-nav-child">
 					<dd><a href="../examDep/generPaper/generPaper.html">组卷</a></dd>
 					<dd><a href="../examDep/preList/preList.html">未考试卷</a></dd>
 					<dd><a href="../examDep/preCorList/preCorList.html">已考未改试卷</a></dd>
-					<dd><a href="../examDep/corPaper/corPaper.html">改卷</a></dd>
+					<!-- <dd><a href="../examDep/corPaper/corPaper.html">改卷</a></dd> -->
 					<dd><a href="../examDep/reCorList/reCorList.html">已改试卷</a></dd>
 
 				</dl>

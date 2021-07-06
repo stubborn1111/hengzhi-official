@@ -1,3 +1,40 @@
+$(document).ready(function() {
+	var authorization = localStorage.getItem("authorization");
+	$.ajax({
+		type: 'post',
+		url: 'http://123.56.29.67/hengzhi-official/managerPaper/selectUnExamMessage',
+		dataType: 'json',
+		contentType: 'application/json;charset=utf-8',
+		headers: {
+			'Authorization': authorization
+		},
+		success: function(res) {
+			var number = res.number
+			$.ajax({
+				type: 'post',
+				url: 'http://123.56.29.67/hengzhi-official/user/getUserInfo',
+				dataType: 'json',
+				contentType: 'application/json;charset=utf-8',
+				headers: {
+					'Authorization': authorization
+				},
+				// data: JSON.stringify(data),
+				success: function(data) {
+					var msg1 = document.getElementById("head")
+					var str1 = ""
+					str1 = `
+				<img class="headImgg" data-id="${data.userId}" src="http://123.56.29.67/hengzhi-official/headImage/${data.headImg}">
+				<span class="layui-badge huizhang" title="您有${number}条留言未审核">${number}</span>
+			`
+					msg1.innerHTML = str1;
+				},
+				error: function() {}
+			});
+		},
+		error: function() {}
+	});
+
+})
 // 修改头像
 function change1() {
 	layui.use('layer', function() {
@@ -38,7 +75,7 @@ function change1() {
 						layer.msg("修改成功")
 						setTimeout(function() {
 							window.location.href =
-							"../staffInfo/staffInfo.html";
+								"../staffInfo/staffInfo.html";
 						}, 1000);
 					},
 					error: function(data) {
@@ -115,7 +152,7 @@ function change() {
 function logout() {
 	localStorage.setItem("authorization", "");
 	setTimeout(function() {
-		window.location.href = "../../login/login.html";
+		window.location.href = "../../../login/login.html";
 	}, 2000);
 }
 var url = location.search.slice(4)
@@ -149,9 +186,10 @@ $(document).ready(function() {
 			var str1 = ""
 			var length1 = 0
 			for (var i = 0; i < data.subjectContentList.length; i++) {
-				if (data.subjectContentList[i][0].qtype == 0) {
-					length1++
-					str += `
+				if (data.subjectContentList[i].length != 0) {
+					if (data.subjectContentList[i][0].qtype == 0) {
+						length1++
+						str += `
 					<div class="qtype3">
 						<div class="layui-form-item">
 							<div class="ques">
@@ -168,7 +206,7 @@ $(document).ready(function() {
 						</div>
 					</div>
 					`
-					str1 += `
+						str1 += `
 					<div class="qtype3">
 						<div class="layui-form-item">
 							<div class="ques">
@@ -185,10 +223,10 @@ $(document).ready(function() {
 						</div>
 					</div>
 					`
-				}
-				if (data.subjectContentList[i][0].qtype == 3) {
-					length1++
-					str += `
+					}
+					if (data.subjectContentList[i][0].qtype == 3) {
+						length1++
+						str += `
 					<div class="qtype4">
 						<div class="layui-form-item layui-form-text">
 							<div class="ques"><span>${data.subjectContentList[i][0].qnumber}.</span>${data.subjectContentList[i][0].correctSubjectList[0].content}(10分)</div>
@@ -204,7 +242,7 @@ $(document).ready(function() {
 						</div>
 					</div>
 					`
-					str1 += `
+						str1 += `
 					<div class="qtype4">
 						<div class="layui-form-item layui-form-text">
 							<div class="ques"><span>${data.subjectContentList[i][0].qnumber}.</span>${data.subjectContentList[i][0].correctSubjectList[0].content}(10分)</div>
@@ -220,14 +258,10 @@ $(document).ready(function() {
 						</div>
 					</div>
 					`
+					}
+
 				}
-				// setTimeout(function() {
-				// 	document.getElementsByClassName("analysis")[length1].suspensionTips({
-				// 		"content": data.subjectContentList[i].correctSubjectList
-				// 			.description,
-				// 		position: "right"
-				// 	});
-				// }, 200);
+
 
 			}
 			var divs = document.getElementById("result")
@@ -349,10 +383,10 @@ function check() {
 					var str1 = ""
 					var length1 = 0
 					for (var i = 0; i < data.subjectContentList.length; i++) {
-						console.log(data.studentList[i].qnumber)
-						if (data.subjectContentList[i][0].qtype == 0) {
-							length1++
-							str += `
+						if (data.subjectContentList[i].length != 0) {
+							if (data.subjectContentList[i][0].qtype == 0) {
+								length1++
+								str += `
 							<div class="qtype3">
 								<div class="layui-form-item">
 									<div class="ques">
@@ -369,7 +403,7 @@ function check() {
 								</div>
 							</div>
 							`
-							str1 += `
+								str1 += `
 							<div class="qtype3">
 								<div class="layui-form-item">
 									<div class="ques">
@@ -386,10 +420,10 @@ function check() {
 								</div>
 							</div>
 							`
-						}
-						if (data.subjectContentList[i][0].qtype == 3) {
-							length1++
-							str += `
+							}
+							if (data.subjectContentList[i][0].qtype == 3) {
+								length1++
+								str += `
 							<div class="qtype4">
 								<div class="layui-form-item layui-form-text">
 									<div class="ques"><span>${data.subjectContentList[i][0].qnumber}.</span>${data.subjectContentList[i][0].correctSubjectList[0].content}(10分)</div>
@@ -405,7 +439,7 @@ function check() {
 								</div>
 							</div>
 							`
-							str1 += `
+								str1 += `
 							<div class="qtype4">
 								<div class="layui-form-item layui-form-text">
 									<div class="ques"><span>${data.subjectContentList[i][0].qnumber}.</span>${data.subjectContentList[i][0].correctSubjectList[0].content}(10分)</div>
@@ -421,14 +455,9 @@ function check() {
 								</div>
 							</div>
 							`
+							}
+
 						}
-						// setTimeout(function() {
-						// 	document.getElementsByClassName("analysis")[length1].suspensionTips({
-						// 		"content": data.subjectContentList[i].correctSubjectList
-						// 			.description,
-						// 		position: "right"
-						// 	});
-						// }, 200);
 
 					}
 					var divs = document.getElementById("result")
@@ -449,9 +478,4 @@ function check() {
 		list = []
 		layer.msg("请输入合理分数")
 	}
-}
-
-function nextPage() {
-
-
 }

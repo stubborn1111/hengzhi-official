@@ -65,9 +65,13 @@ function forget() {
 					// 	'Authorization':authorization
 					// },
 					data: JSON.stringify(data),
-					success: function(data) {},
+					success: function(data) {
+						layer.msg("成功提交申请")
+						layer.close(index)
+					},
 					error: function() {}
 				});
+				
 			},
 			btn2: function() {}
 		});

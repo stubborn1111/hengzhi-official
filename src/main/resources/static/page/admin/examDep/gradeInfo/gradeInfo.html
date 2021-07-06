@@ -78,9 +78,9 @@
 		</div>
 		<!-- 水平导航-->
 		<ul class="layui-nav level" lay-filter="">
-			<li class="layui-nav-item"><a href="">首页</a></li>
+			<li class="layui-nav-item"><a href="../../index/index.html">首页</a></li>
 			<li class="layui-nav-item layui-this">
-				<a href="javascript:;">个人中心</a>
+				<a href="javascript:;" id="head"></a>
 				<dl class="layui-nav-child">
 					<!-- 二级菜单 -->
 					<dd onclick="change1()">修改头像</dd>
@@ -94,17 +94,11 @@
 		<ul class="layui-nav layui-nav-tree vertical" lay-filter="test">
 			<li class="layui-nav-item"><a href="../../staffInfo/staffInfo.html">人员信息</a></li>
 			<li class="layui-nav-item"><a href="../../auditMsg/auditMsg.html">留言审核</a></li>
-			<li class="layui-nav-item"><a href="../../filesUpload/filesUpload.html">资料上传</a></li>
+			<li class="layui-nav-item"><a href="../../filesUpload/filesUpload.html">公告与资料上传</a></li>
 			<li class="layui-nav-item layui-nav-itemed">
 				<a href="javascript:;">考试管理</a>
 				<dl class="layui-nav-child">
-					<dd>
-						<a href="../generPaper/generPaper.html">组卷</a>
-						<!-- <dl class="layui-nav-child">
-              <dd><a href="">自动组卷</a></dd>
-              <dd><a href="">手动组卷</a></dd>
-            </dl> -->
-					</dd>
+					<dd><a href="../generPaper/generPaper.html">组卷</a></dd>
 					<dd><a href="../preList/preList.html">未考试卷</a></dd>
 					<dd><a href="../preCorList/preCorList.html">已考未改试卷</a></dd>
 					<dd class="layui-this"><a href="">已改试卷</a></dd>

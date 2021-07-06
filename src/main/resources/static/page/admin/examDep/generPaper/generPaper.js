@@ -1,4 +1,41 @@
-	// 修改头像
+$(document).ready(function() {
+	var authorization = localStorage.getItem("authorization");
+	$.ajax({
+		type: 'post',
+		url: 'http://123.56.29.67/hengzhi-official/managerPaper/selectUnExamMessage',
+		dataType: 'json',
+		contentType: 'application/json;charset=utf-8',
+		headers: {
+			'Authorization': authorization
+		},
+		success: function(res) {
+			var number = res.number
+			$.ajax({
+				type: 'post',
+				url: 'http://123.56.29.67/hengzhi-official/user/getUserInfo',
+				dataType: 'json',
+				contentType: 'application/json;charset=utf-8',
+				headers: {
+					'Authorization': authorization
+				},
+				// data: JSON.stringify(data),
+				success: function(data) {
+					var msg1 = document.getElementById("head")
+					var str1 = ""
+					str1 = `
+				<img class="headImgg" data-id="${data.userId}" src="http://123.56.29.67/hengzhi-official/headImage/${data.headImg}">
+				<span class="layui-badge huizhang" title="您有${number}条留言未审核">${number}</span>
+			`
+					msg1.innerHTML = str1;
+				},
+				error: function() {}
+			});
+		},
+		error: function() {}
+	});
+
+})
+// 修改头像
 function change1() {
 	layui.use('layer', function() {
 		var $ = layui.jquery;
@@ -15,108 +52,108 @@ function change1() {
 			scrollbar: false,
 			yes: function(index) {
 				// function postData() {
-					var authorization = localStorage.getItem("authorization");
-					console.log(authorization);
-					var formData = new FormData();
-					formData.append("headImage", $("#uploadImage")[0].files[0]);
-					$.ajax({
-							url: "http://123.56.29.67/hengzhi-official/user/updateHeadImg",
-							type: "post",
-							data: formData,
-							headers: {
-								'Authorization': authorization
-							},
-							processData: false, // 告诉jQuery不要去处理发送的数据
-							contentType: false, // 告诉jQuery不要去设置Content-Type请求头
-							dataType: 'text',
-							success: function(data) {
-								console.log(data)
+				var authorization = localStorage.getItem("authorization");
+				console.log(authorization);
+				var formData = new FormData();
+				formData.append("headImage", $("#uploadImage")[0].files[0]);
+				$.ajax({
+					url: "http://123.56.29.67/hengzhi-official/user/updateHeadImg",
+					type: "post",
+					data: formData,
+					headers: {
+						'Authorization': authorization
+					},
+					processData: false, // 告诉jQuery不要去处理发送的数据
+					contentType: false, // 告诉jQuery不要去设置Content-Type请求头
+					dataType: 'text',
+					success: function(data) {
+						console.log(data)
 
-									var params = JSON.parse(data)
-									$("#img").attr("src", params);
-									layer.close(index);
-									layer.msg("修改成功")
-									setTimeout(function() {
-										window.location.href = "../staffInfo/staffInfo.html";
-									}, 1000);
-							},
-							error: function(data) {
-									
-							}
-					});
+						var params = JSON.parse(data)
+						$("#img").attr("src", params);
+						layer.close(index);
+						layer.msg("修改成功")
+						setTimeout(function() {
+							window.location.href =
+								"../staffInfo/staffInfo.html";
+						}, 1000);
+					},
+					error: function(data) {
+
+					}
+				});
 				// }
 			},
 			btn2: function() {
-				// layer.msg('bbb');
+
 			}
 		});
 	});
 }
-	// 修改密码
-	function change() {
-		layui.use('layer', function() {
-			var $ = layui.jquery;
-			var element = layui.element;
-			var layer = layui.layer;
-			var form = layui.form;
-			layer.open({
-				type: 1,
-				title: '修改密码',
-				area: ['350px', '250px'],
-				shade: 0.4,
-				content: $("#test1"),
-				btn: ['提交', '取消'],
-				scrollbar: false,
-				yes: function(index) {
-					// var studentId = $("#studentId").val();
-					var password = $("#password").val();
-					var newPassword = $("#newPassword").val();
-					var data = {
-						// "studentId": studentId,
-						"password": password,
-						"newPassword": newPassword,
-					};
-					var authorization = localStorage.getItem("authorization");
-					console.log(data)
-					console.log(authorization)
-					$.ajax({
-						type: 'post',
-						url: 'http://123.56.29.67/hengzhi-official/user/updatePassword',
-						dataType: 'json',
-						contentType: 'application/json;charset=utf-8',
-						headers: {
-							'Authorization': authorization
-						},
-						data: JSON.stringify(data),
-						success: function(data) {
-							if (data.status == "success") {
-								layer.close(index);
-								layer.msg("修改成功");
-								localStorage.setItem("authorization", "");
-								setTimeout(function() {
-									window.location.href = "../../login/login.html";
-								}, 2000);
-							} else {
-								layer.msg("修改失败")
-							}
-						},
-						error: function() {}
-					});
-				},
-				btn2: function() {
-					// layer.msg('bbb');
-				}
-			});
+// 修改密码
+function change() {
+	layui.use('layer', function() {
+		var $ = layui.jquery;
+		var element = layui.element;
+		var layer = layui.layer;
+		var form = layui.form;
+		layer.open({
+			type: 1,
+			title: '修改密码',
+			area: ['350px', '250px'],
+			shade: 0.4,
+			content: $("#test1"),
+			btn: ['提交', '取消'],
+			scrollbar: false,
+			yes: function(index) {
+				// var studentId = $("#studentId").val();
+				var password = $("#password").val();
+				var newPassword = $("#newPassword").val();
+				var data = {
+					// "studentId": studentId,
+					"password": password,
+					"newPassword": newPassword,
+				};
+				var authorization = localStorage.getItem("authorization");
+				console.log(data)
+				console.log(authorization)
+				$.ajax({
+					type: 'post',
+					url: 'http://123.56.29.67/hengzhi-official/user/updatePassword',
+					dataType: 'json',
+					contentType: 'application/json;charset=utf-8',
+					headers: {
+						'Authorization': authorization
+					},
+					data: JSON.stringify(data),
+					success: function(data) {
+						if (data.status == "success") {
+							layer.close(index);
+							layer.msg("修改成功");
+							localStorage.setItem("authorization", "");
+							setTimeout(function() {
+								window.location.href =
+									"../../login/login.html";
+							}, 2000);
+						} else {
+							layer.msg("修改失败")
+						}
+					},
+					error: function() {}
+				});
+			},
+			btn2: function() {
+
+			}
 		});
-	}
-	
-	// 退出登录
-	function logout() {
-		localStorage.setItem("authorization", "");
-		setTimeout(function() {
-			window.location.href = "../../login/login.html";
-		}, 2000);
-	}
+	});
+}
+
+// 退出登录
+function logout() {
+	localStorage.setItem("authorization", "");
+	window.location.href = "../../../login/login.html";
+}
 // 自动组卷
 // 查找tag
 function findTag() {
@@ -269,11 +306,24 @@ function test1() {
 
 					} else {
 						for (var j = 0; j < data.questions_multiple.length; j++) {
+							var content = data.questions_multiple[j].content
+							var arr = content.slice(1, content.length - 1).split(",");
+							var options = arr.length
+
 							quesl +=
 								`
 						<div class="qtype1">
 							<div class="layui-form-item">
-								<div class="ques" data-type="${data.questions_multiple[j].qType}">${data.questions_multiple[j].content}</div>
+								<div class="ques" data-type="${data.questions_multiple[j].qType}">${arr[0]}
+						`
+							for (var k = 1; k < options; k++) {
+								var dax = String.fromCharCode(64 + k)
+								quesl += `
+										            <div>${dax}.${arr[k]}</div>
+										          `
+							}
+							quesl += `
+						</div>
 							</div>
 						</div>
 						`
@@ -312,12 +362,26 @@ function test1() {
 					} else if (data.questions_single == null) {
 
 					} else {
+
 						for (var j = 0; j < data.questions_single.length; j++) {
+							var content = data.questions_single[j].content
+							var arr = content.slice(1, content.length - 1).split(",");
+							var options = arr.length
+
 							quesl +=
 								`
 						<div class="qtype1">
 							<div class="layui-form-item">
-								<div class="ques" data-type="${data.questions_single[j].qType}">${data.questions_single[j].content}</div>
+								<div class="ques" data-type="${data.questions_single[j].qType}">${arr[0]}
+						`
+							for (var k = 1; k < options; k++) {
+								var dax = String.fromCharCode(64 + k)
+								quesl += `
+										            <div>${dax}.${arr[k]}</div>
+										          `
+							}
+							quesl += `
+						</div>
 							</div>
 						</div>
 						`
@@ -350,7 +414,6 @@ function test1() {
 								btn: ['下一步'],
 								scrollbar: false,
 								yes: function(res) {
-
 									layui.use('layer', function() {
 										var $ = layui.jquery;
 										var element = layui.element;
@@ -362,17 +425,18 @@ function test1() {
 											area: ['450px', '300px'],
 											shade: 0.4,
 											content: $("#testxx"),
+											offset: '0px',
 											btn: ['确认组卷', '取消'],
 											scrollbar: false,
 											yes: function(index) {
-
 												var ok = true
 												for (var i = 0; i <
-													4; i++) {
+													2; i++) {
 													var xx =
 														document
 														.getElementsByClassName(
-															"xx")[i]
+															"xx")[
+															i]
 														.value
 													if (xx.match(
 															/^\s*$/
@@ -386,7 +450,8 @@ function test1() {
 
 												}
 												if (ok == true) {
-													layer.close(res)
+													layer.close(
+														res)
 													var code = ""
 													code = `
 													${data.code}
@@ -417,7 +482,7 @@ function test1() {
 															.getElementsByClassName(
 																"xx"
 															)[
-																3
+																2
 															]
 															.value,
 														beginTime: document
@@ -426,14 +491,21 @@ function test1() {
 															)[
 																1
 															]
-															.value,
+															.value
+															.slice(
+																0,
+																19
+															),
 														deadline: document
 															.getElementsByClassName(
 																"xx"
 															)[
-																2
+																1
 															]
-															.value,
+															.value
+															.slice(
+																21
+															),
 													}
 													$.ajax({
 														type: 'post',
@@ -450,6 +522,15 @@ function test1() {
 														success: function(
 															data
 														) {
+															$("input")
+																.each(
+																	function() {
+																		$(this)
+																			.val(
+																				""
+																			)
+																	}
+																)
 															layer
 																.close(
 																	index
@@ -501,12 +582,13 @@ function test1() {
 												}
 											},
 											btn2: function() {
-												layer.msg('bbb');
+
 											}
 										});
 									});
 								},
 							});
+
 						}
 					}, 300);
 
@@ -646,75 +728,93 @@ function searchQ() {
 			} else {
 				for (var i = 0; i < data.list.length; i++) {
 					if (data.list[i].qtype == 1) {
+						var content = data.list[i].content
+						var arr = content.slice(1, content.length - 1).split(",");
+						var options = arr.length
 						var qtype = "单选"
 						box += `
-						<div class="queList">
-							<div class="top">
-								<div>
-									<span>题号：${data.list[i].questionId}</span>
-									<span>题型：${qtype}</span>
-								</div>
-								<div>
-									<span>出题人：${data.list[i].userName}</span>
-									<span>正确率：${data.list[i].crate}</span>
-								</div>
-							</div>
-							<div class="mid">
-								<form class="layui-form" action="">
-									<div class="layui-form-item">
-										${data.list[i].content}
-									</div>
-								</form>
-								<div class="answer">
-									<div class="ansA">
-										<span class="anss">正确答案：</span><span class="qans">${data.list[i].answer}</span>
-									</div>
-									<div class="ansB">
-										<span class="anss">答案解析：</span><span class="des">${data.list[i].description}</span>
-									</div>
-								</div>
-							</div>
-							<div class="botm">
-								<span>标签：</span>${data.list[i].kind}
-								<div><Button class="add lauui-btn" onclick="addTo(this)" data-type="${data.list[i].qtype}" data-id="${data.list[i].questionId}">加入试卷</Button></div>
-							</div>
-						</div>
-						`
+				    <div class="queList">
+				      <div class="top">
+				        <div>
+				          <span>题号：${data.list[i].questionId}</span>
+				          <span>题型：${qtype}</span>
+				        </div>
+				        <div>
+				          <span>出题人：${data.list[i].userName}</span>
+				          <span>正确率：${data.list[i].crate}</span>
+				        </div>
+				      </div>
+				      <div class="mid">
+				        <div class="ques">
+				          <div>${arr[0]}</div>
+				        `
+						for (var j = 1; j < options; j++) {
+							var dax = String.fromCharCode(64 + j)
+							box += `
+				            <div>${dax}.${arr[j]}</div>
+				          `
+						}
+						box += `
+				    </div>
+				      <div class="answer">
+				        <div class="ansA">
+				          <span class="anss">正确答案：</span><span class="qans">${data.list[i].answer}</span>
+				        </div>
+				        <div class="ansB">
+				          <span class="anss">答案解析：</span><span class="des">${data.list[i].description}</span>
+				        </div>
+				      </div>
+				    </div>
+				    <div class="botm">
+				      <span>标签：</span>${data.list[i].kind}
+					  <div><Button class="add lauui-btn" onclick="addTo(this)" data-type="${data.list[i].qtype}" data-id="${data.list[i].questionId}">加入试卷</Button></div>
+				    </div>
+				  </div>
+				  `
 					} else if (data.list[i].qtype == 2) {
 						var qtype = "多选"
+						var content = data.list[i].content
+						var arr = content.slice(1, content.length - 1).split(",");
+						var options = arr.length
 						box += `
-						<div class="queList">
-							<div class="top">
-								<div>
-									<span>题号：${data.list[i].questionId}</span>
-									<span>题型：${qtype}</span>
-								</div>
-								<div>
-									<span>出题人：${data.list[i].userName}</span>
-									<span>正确率：${data.list[i].crate}</span>
-								</div>
-							</div>
-							<div class="mid">
-								<form class="layui-form" action="">
-									<div class="layui-form-item">
-										${data.list[i].content}
-									</div>
-								</form>
-								<div class="answer">
-									<div class="ansA">
-										<span class="anss">正确答案：</span><span class="qans">${data.list[i].answer}</span>
-									</div>
-									<div class="ansB">
-										<span class="anss">答案解析：</span><span class="des">${data.list[i].description}</span>
-									</div>
-								</div>
-							</div>
-							<div class="botm">
-								<span>标签：</span>${data.list[i].kind}
-								<div><Button class="add lauui-btn" onclick="addTo(this)"  data-type="${data.list[i].qtype}" data-id="${data.list[i].questionId}">加入试卷</Button></div>
-							</div>
-						</div>
-						`
+				         <div class="queList">
+				           <div class="top">
+				             <div>
+				               <span>题号：${data.list[i].questionId}</span>
+				               <span>题型：${qtype}</span>
+				             </div>
+				             <div>
+				               <span>出题人：${data.list[i].userName}</span>
+				               <span>正确率：${data.list[i].crate}</span>
+				             </div>
+				           </div>
+				           <div class="mid">
+				             <div class="ques">
+				               <div>${arr[0]}</div>
+				       `
+						for (var j = 1; j < options; j++) {
+							var dax = String.fromCharCode(64 + j)
+							box += `
+				           <div>${dax}.${arr[j]}</div>
+				         `
+						}
+						box += `
+				         </div>
+				           <div class="answer">
+				             <div class="ansA">
+				               <span class="anss">正确答案：</span><span class="qans">${data.list[i].answer}</span>
+				             </div>
+				             <div class="ansB">
+				               <span class="anss">答案解析：</span><span class="des">${data.list[i].description}</span>
+				             </div>
+				           </div>
+				         </div>
+				         <div class="botm">
+				           <span>标签：</span>${data.list[i].kind}
+						   <div><Button class="add lauui-btn" onclick="addTo(this)" data-type="${data.list[i].qtype}" data-id="${data.list[i].questionId}">加入试卷</Button></div>
+				         </div>
+				       </div>
+				       `
 					} else {
 						if (data.list[i].qtype == 0) {
 							var qtype = "填空"
@@ -723,38 +823,38 @@ function searchQ() {
 							var qtype = "主观"
 						}
 						box += `
-						<div class="queList">
-							<div class="top">
-								<div>
-									<span>题号：${data.list[i].questionId}</span>
-									<span>题型：${qtype}</span>
-								</div>
-								<div>
-									<span>出题人：${data.list[i].userName}</span>
-									<span>正确率：${data.list[i].crate}</span>
-								</div>
-							</div>
-							<div class="mid">
-								<form class="layui-form" action="">
-									<div class="layui-form-item">
-										<div class="ques">${data.list[i].content}</div>
-									</div>
-								</form>
-								<div class="answer">
-									<div class="ansA">
-										<span class="anss">正确答案：</span><span class="qans">${data.list[i].answer}</span>
-									</div>
-									<div class="ansB">
-										<span class="anss">答案解析：</span><span class="des">${data.list[i].description}</span>
-									</div>
-								</div>
-							</div>
-							<div class="botm">
-								<span>标签：</span>${data.list[i].kind}
-								<div><Button class="add lauui-btn" onclick="addTo(this)" data-type="${data.list[i].qtype}"  data-id="${data.list[i].questionId}">加入试卷</Button></div>
-							</div>
-						</div>
-						`
+				          <div class="queList">
+				            <div class="top">
+				              <div>
+				                <span>题号：${data.list[i].questionId}</span>
+				                <span>题型：${qtype}</span>
+				              </div>
+				              <div>
+				                <span>出题人：${data.list[i].userName}</span>
+				                <span>正确率：${data.list[i].crate}</span>
+				              </div>
+				            </div>
+				            <div class="mid">
+				              <form class="layui-form" action="">
+				                <div class="layui-form-item">
+				                  <div class="ques">${data.list[i].content}</div>
+				                </div>
+				              </form>
+				              <div class="answer">
+				                <div class="ansA">
+				                  <span class="anss">正确答案：</span><span class="qans">${data.list[i].answer}</span>
+				                </div>
+				                <div class="ansB">
+				                  <span class="anss">答案解析：</span><span class="des">${data.list[i].description}</span>
+				                </div>
+				              </div>
+				            </div>
+				            <div class="botm">
+				              <span>标签：</span>${data.list[i].kind}
+							  <div><Button class="add lauui-btn" onclick="addTo(this)" data-type="${data.list[i].qtype}" data-id="${data.list[i].questionId}">加入试卷</Button></div>
+				            </div>
+				          </div>
+				          `
 					}
 				}
 				var str = `
@@ -848,75 +948,93 @@ function firstPage() {
 			} else {
 				for (var i = 0; i < data.list.length; i++) {
 					if (data.list[i].qtype == 1) {
+						var content = data.list[i].content
+						var arr = content.slice(1, content.length - 1).split(",");
+						var options = arr.length
 						var qtype = "单选"
 						box += `
-						<div class="queList">
-							<div class="top">
-								<div>
-									<span>题号：${data.list[i].questionId}</span>
-									<span>题型：${qtype}</span>
-								</div>
-								<div>
-									<span>出题人：${data.list[i].userName}</span>
-									<span>正确率：${data.list[i].crate}</span>
-								</div>
-							</div>
-							<div class="mid">
-								<form class="layui-form" action="">
-									<div class="layui-form-item">
-										${data.list[i].content}
-									</div>
-								</form>
-								<div class="answer">
-									<div class="ansA">
-										<span class="anss">正确答案：</span><span class="qans">${data.list[i].answer}</span>
-									</div>
-									<div class="ansB">
-										<span class="anss">答案解析：</span><span class="des">${data.list[i].description}</span>
-									</div>
-								</div>
-							</div>
-							<div class="botm">
-								<span>标签：</span>${data.list[i].kind}
-								<div><Button class="add lauui-btn" onclick="addTo(this)" data-type="${data.list[i].qtype}"  data-id="${data.list[i].questionId}">加入试卷</Button></div>
-							</div>
-						</div>
-						`
+				    <div class="queList">
+				      <div class="top">
+				        <div>
+				          <span>题号：${data.list[i].questionId}</span>
+				          <span>题型：${qtype}</span>
+				        </div>
+				        <div>
+				          <span>出题人：${data.list[i].userName}</span>
+				          <span>正确率：${data.list[i].crate}</span>
+				        </div>
+				      </div>
+				      <div class="mid">
+				        <div class="ques">
+				          <div>${arr[0]}</div>
+				        `
+						for (var j = 1; j < options; j++) {
+							var dax = String.fromCharCode(64 + j)
+							box += `
+				            <div>${dax}.${arr[j]}</div>
+				          `
+						}
+						box += `
+				    </div>
+				      <div class="answer">
+				        <div class="ansA">
+				          <span class="anss">正确答案：</span><span class="qans">${data.list[i].answer}</span>
+				        </div>
+				        <div class="ansB">
+				          <span class="anss">答案解析：</span><span class="des">${data.list[i].description}</span>
+				        </div>
+				      </div>
+				    </div>
+				    <div class="botm">
+				      <span>标签：</span>${data.list[i].kind}
+					  <div><Button class="add lauui-btn" onclick="addTo(this)" data-type="${data.list[i].qtype}" data-id="${data.list[i].questionId}">加入试卷</Button></div>
+				    </div>
+				  </div>
+				  `
 					} else if (data.list[i].qtype == 2) {
 						var qtype = "多选"
+						var content = data.list[i].content
+						var arr = content.slice(1, content.length - 1).split(",");
+						var options = arr.length
 						box += `
-						<div class="queList">
-							<div class="top">
-								<div>
-									<span>题号：${data.list[i].questionId}</span>
-									<span>题型：${qtype}</span>
-								</div>
-								<div>
-									<span>出题人：${data.list[i].userName}</span>
-									<span>正确率：${data.list[i].crate}</span>
-								</div>
-							</div>
-							<div class="mid">
-								<form class="layui-form" action="">
-									<div class="layui-form-item">
-										${data.list[i].content}
-									</div>
-								</form>
-								<div class="answer">
-									<div class="ansA">
-										<span class="anss">正确答案：</span><span class="qans">${data.list[i].answer}</span>
-									</div>
-									<div class="ansB">
-										<span class="anss">答案解析：</span><span class="des">${data.list[i].description}</span>
-									</div>
-								</div>
-							</div>
-							<div class="botm">
-								<span>标签：</span>${data.list[i].kind}
-								<div><Button class="add lauui-btn" onclick="addTo(this)" data-type="${data.list[i].qtype}"  data-id="${data.list[i].questionId}">加入试卷</Button></div>
-							</div>
-						</div>
-						`
+				         <div class="queList">
+				           <div class="top">
+				             <div>
+				               <span>题号：${data.list[i].questionId}</span>
+				               <span>题型：${qtype}</span>
+				             </div>
+				             <div>
+				               <span>出题人：${data.list[i].userName}</span>
+				               <span>正确率：${data.list[i].crate}</span>
+				             </div>
+				           </div>
+				           <div class="mid">
+				             <div class="ques">
+				               <div>${arr[0]}</div>
+				       `
+						for (var j = 1; j < options; j++) {
+							var dax = String.fromCharCode(64 + j)
+							box += `
+				           <div>${dax}.${arr[j]}</div>
+				         `
+						}
+						box += `
+				         </div>
+				           <div class="answer">
+				             <div class="ansA">
+				               <span class="anss">正确答案：</span><span class="qans">${data.list[i].answer}</span>
+				             </div>
+				             <div class="ansB">
+				               <span class="anss">答案解析：</span><span class="des">${data.list[i].description}</span>
+				             </div>
+				           </div>
+				         </div>
+				         <div class="botm">
+				           <span>标签：</span>${data.list[i].kind}
+						   <div><Button class="add lauui-btn" onclick="addTo(this)" data-type="${data.list[i].qtype}" data-id="${data.list[i].questionId}">加入试卷</Button></div>
+				         </div>
+				       </div>
+				       `
 					} else {
 						if (data.list[i].qtype == 0) {
 							var qtype = "填空"
@@ -925,38 +1043,38 @@ function firstPage() {
 							var qtype = "主观"
 						}
 						box += `
-						<div class="queList">
-							<div class="top">
-								<div>
-									<span>题号：${data.list[i].questionId}</span>
-									<span>题型：${qtype}</span>
-								</div>
-								<div>
-									<span>出题人：${data.list[i].userName}</span>
-									<span>正确率：${data.list[i].crate}</span>
-								</div>
-							</div>
-							<div class="mid">
-								<form class="layui-form" action="">
-									<div class="layui-form-item">
-										<div class="ques">${data.list[i].content}</div>
-									</div>
-								</form>
-								<div class="answer">
-									<div class="ansA">
-										<span class="anss">正确答案：</span><span class="qans">${data.list[i].answer}</span>
-									</div>
-									<div class="ansB">
-										<span class="anss">答案解析：</span><span class="des">${data.list[i].description}</span>
-									</div>
-								</div>
-							</div>
-							<div class="botm">
-								<span>标签：</span>${data.list[i].kind}
-								<div><Button class="add lauui-btn" onclick="addTo(this)" data-type="${data.list[i].qtype}"  data-id="${data.list[i].questionId}">加入试卷</Button></div>
-							</div>
-						</div>
-						`
+				          <div class="queList">
+				            <div class="top">
+				              <div>
+				                <span>题号：${data.list[i].questionId}</span>
+				                <span>题型：${qtype}</span>
+				              </div>
+				              <div>
+				                <span>出题人：${data.list[i].userName}</span>
+				                <span>正确率：${data.list[i].crate}</span>
+				              </div>
+				            </div>
+				            <div class="mid">
+				              <form class="layui-form" action="">
+				                <div class="layui-form-item">
+				                  <div class="ques">${data.list[i].content}</div>
+				                </div>
+				              </form>
+				              <div class="answer">
+				                <div class="ansA">
+				                  <span class="anss">正确答案：</span><span class="qans">${data.list[i].answer}</span>
+				                </div>
+				                <div class="ansB">
+				                  <span class="anss">答案解析：</span><span class="des">${data.list[i].description}</span>
+				                </div>
+				              </div>
+				            </div>
+				            <div class="botm">
+				              <span>标签：</span>${data.list[i].kind}
+							  <div><Button class="add lauui-btn" onclick="addTo(this)" data-type="${data.list[i].qtype}" data-id="${data.list[i].questionId}">加入试卷</Button></div>
+				            </div>
+				          </div>
+				          `
 					}
 				}
 				var str = `
@@ -1058,75 +1176,93 @@ function prePage() {
 				} else {
 					for (var i = 0; i < data.list.length; i++) {
 						if (data.list[i].qtype == 1) {
+							var content = data.list[i].content
+							var arr = content.slice(1, content.length - 1).split(",");
+							var options = arr.length
 							var qtype = "单选"
 							box += `
-						<div class="queList">
-							<div class="top">
-								<div>
-									<span>题号：${data.list[i].questionId}</span>
-									<span>题型：${qtype}</span>
-								</div>
-								<div>
-									<span>出题人：${data.list[i].userName}</span>
-									<span>正确率：${data.list[i].crate}</span>
-								</div>
-							</div>
-							<div class="mid">
-								<form class="layui-form" action="">
-									<div class="layui-form-item">
-										${data.list[i].content}
-									</div>
-								</form>
-								<div class="answer">
-									<div class="ansA">
-										<span class="anss">正确答案：</span><span class="qans">${data.list[i].answer}</span>
-									</div>
-									<div class="ansB">
-										<span class="anss">答案解析：</span><span class="des">${data.list[i].description}</span>
-									</div>
-								</div>
-							</div>
-							<div class="botm">
-								<span>标签：</span>${data.list[i].kind}
-								<div><Button class="add lauui-btn" onclick="addTo(this)" data-type="${data.list[i].qtype}"  data-id="${data.list[i].questionId}">加入试卷</Button></div>
-							</div>
-						</div>
-						`
+					    <div class="queList">
+					      <div class="top">
+					        <div>
+					          <span>题号：${data.list[i].questionId}</span>
+					          <span>题型：${qtype}</span>
+					        </div>
+					        <div>
+					          <span>出题人：${data.list[i].userName}</span>
+					          <span>正确率：${data.list[i].crate}</span>
+					        </div>
+					      </div>
+					      <div class="mid">
+					        <div class="ques">
+					          <div>${arr[0]}</div>
+					        `
+							for (var j = 1; j < options; j++) {
+								var dax = String.fromCharCode(64 + j)
+								box += `
+					            <div>${dax}.${arr[j]}</div>
+					          `
+							}
+							box += `
+					    </div>
+					      <div class="answer">
+					        <div class="ansA">
+					          <span class="anss">正确答案：</span><span class="qans">${data.list[i].answer}</span>
+					        </div>
+					        <div class="ansB">
+					          <span class="anss">答案解析：</span><span class="des">${data.list[i].description}</span>
+					        </div>
+					      </div>
+					    </div>
+					    <div class="botm">
+					      <span>标签：</span>${data.list[i].kind}
+						  <div><Button class="add lauui-btn" onclick="addTo(this)" data-type="${data.list[i].qtype}" data-id="${data.list[i].questionId}">加入试卷</Button></div>
+					    </div>
+					  </div>
+					  `
 						} else if (data.list[i].qtype == 2) {
 							var qtype = "多选"
+							var content = data.list[i].content
+							var arr = content.slice(1, content.length - 1).split(",");
+							var options = arr.length
 							box += `
-						<div class="queList">
-							<div class="top">
-								<div>
-									<span>题号：${data.list[i].questionId}</span>
-									<span>题型：${qtype}</span>
-								</div>
-								<div>
-									<span>出题人：${data.list[i].userName}</span>
-									<span>正确率：${data.list[i].crate}</span>
-								</div>
-							</div>
-							<div class="mid">
-								<form class="layui-form" action="">
-									<div class="layui-form-item">
-										${data.list[i].content}
-									</div>
-								</form>
-								<div class="answer">
-									<div class="ansA">
-										<span class="anss">正确答案：</span><span class="qans">${data.list[i].answer}</span>
-									</div>
-									<div class="ansB">
-										<span class="anss">答案解析：</span><span class="des">${data.list[i].description}</span>
-									</div>
-								</div>
-							</div>
-							<div class="botm">
-								<span>标签：</span>${data.list[i].kind}
-								<div><Button class="add lauui-btn" onclick="addTo(this)" data-type="${data.list[i].qtype}"  data-id="${data.list[i].questionId}">加入试卷</Button></div>
-							</div>
-						</div>
-						`
+					         <div class="queList">
+					           <div class="top">
+					             <div>
+					               <span>题号：${data.list[i].questionId}</span>
+					               <span>题型：${qtype}</span>
+					             </div>
+					             <div>
+					               <span>出题人：${data.list[i].userName}</span>
+					               <span>正确率：${data.list[i].crate}</span>
+					             </div>
+					           </div>
+					           <div class="mid">
+					             <div class="ques">
+					               <div>${arr[0]}</div>
+					       `
+							for (var j = 1; j < options; j++) {
+								var dax = String.fromCharCode(64 + j)
+								box += `
+					           <div>${dax}.${arr[j]}</div>
+					         `
+							}
+							box += `
+					         </div>
+					           <div class="answer">
+					             <div class="ansA">
+					               <span class="anss">正确答案：</span><span class="qans">${data.list[i].answer}</span>
+					             </div>
+					             <div class="ansB">
+					               <span class="anss">答案解析：</span><span class="des">${data.list[i].description}</span>
+					             </div>
+					           </div>
+					         </div>
+					         <div class="botm">
+					           <span>标签：</span>${data.list[i].kind}
+							   <div><Button class="add lauui-btn" onclick="addTo(this)" data-type="${data.list[i].qtype}" data-id="${data.list[i].questionId}">加入试卷</Button></div>
+					         </div>
+					       </div>
+					       `
 						} else {
 							if (data.list[i].qtype == 0) {
 								var qtype = "填空"
@@ -1135,38 +1271,38 @@ function prePage() {
 								var qtype = "主观"
 							}
 							box += `
-						<div class="queList">
-							<div class="top">
-								<div>
-									<span>题号：${data.list[i].questionId}</span>
-									<span>题型：${qtype}</span>
-								</div>
-								<div>
-									<span>出题人：${data.list[i].userName}</span>
-									<span>正确率：${data.list[i].crate}</span>
-								</div>
-							</div>
-							<div class="mid">
-								<form class="layui-form" action="">
-									<div class="layui-form-item">
-										<div class="ques">${data.list[i].content}</div>
-									</div>
-								</form>
-								<div class="answer">
-									<div class="ansA">
-										<span class="anss">正确答案：</span><span class="qans">${data.list[i].answer}</span>
-									</div>
-									<div class="ansB">
-										<span class="anss">答案解析：</span><span class="des">${data.list[i].description}</span>
-									</div>
-								</div>
-							</div>
-							<div class="botm">
-								<span>标签：</span>${data.list[i].kind}
-								<div><Button class="add lauui-btn" onclick="addTo(this)" data-type="${data.list[i].qtype}"  data-id="${data.list[i].questionId}">加入试卷</Button></div>
-							</div>
-						</div>
-						`
+					          <div class="queList">
+					            <div class="top">
+					              <div>
+					                <span>题号：${data.list[i].questionId}</span>
+					                <span>题型：${qtype}</span>
+					              </div>
+					              <div>
+					                <span>出题人：${data.list[i].userName}</span>
+					                <span>正确率：${data.list[i].crate}</span>
+					              </div>
+					            </div>
+					            <div class="mid">
+					              <form class="layui-form" action="">
+					                <div class="layui-form-item">
+					                  <div class="ques">${data.list[i].content}</div>
+					                </div>
+					              </form>
+					              <div class="answer">
+					                <div class="ansA">
+					                  <span class="anss">正确答案：</span><span class="qans">${data.list[i].answer}</span>
+					                </div>
+					                <div class="ansB">
+					                  <span class="anss">答案解析：</span><span class="des">${data.list[i].description}</span>
+					                </div>
+					              </div>
+					            </div>
+					            <div class="botm">
+					              <span>标签：</span>${data.list[i].kind}
+								  <div><Button class="add lauui-btn" onclick="addTo(this)" data-type="${data.list[i].qtype}" data-id="${data.list[i].questionId}">加入试卷</Button></div>
+					            </div>
+					          </div>
+					          `
 						}
 					}
 					var str = `
@@ -1270,75 +1406,93 @@ function nextPage() {
 				} else {
 					for (var i = 0; i < data.list.length; i++) {
 						if (data.list[i].qtype == 1) {
+							var content = data.list[i].content
+							var arr = content.slice(1, content.length - 1).split(",");
+							var options = arr.length
 							var qtype = "单选"
 							box += `
-						<div class="queList">
-							<div class="top">
-								<div>
-									<span>题号：${data.list[i].questionId}</span>
-									<span>题型：${qtype}</span>
-								</div>
-								<div>
-									<span>出题人：${data.list[i].userName}</span>
-									<span>正确率：${data.list[i].crate}</span>
-								</div>
-							</div>
-							<div class="mid">
-								<form class="layui-form" action="">
-									<div class="layui-form-item">
-										${data.list[i].content}
-									</div>
-								</form>
-								<div class="answer">
-									<div class="ansA">
-										<span class="anss">正确答案：</span><span class="qans">${data.list[i].answer}</span>
-									</div>
-									<div class="ansB">
-										<span class="anss">答案解析：</span><span class="des">${data.list[i].description}</span>
-									</div>
-								</div>
-							</div>
-							<div class="botm">
-								<span>标签：</span>${data.list[i].kind}
-								<div><Button class="add lauui-btn" onclick="addTo(this)" data-type="${data.list[i].qtype}"  data-id="${data.list[i].questionId}">加入试卷</Button></div>
-							</div>
-						</div>
-						`
+					    <div class="queList">
+					      <div class="top">
+					        <div>
+					          <span>题号：${data.list[i].questionId}</span>
+					          <span>题型：${qtype}</span>
+					        </div>
+					        <div>
+					          <span>出题人：${data.list[i].userName}</span>
+					          <span>正确率：${data.list[i].crate}</span>
+					        </div>
+					      </div>
+					      <div class="mid">
+					        <div class="ques">
+					          <div>${arr[0]}</div>
+					        `
+							for (var j = 1; j < options; j++) {
+								var dax = String.fromCharCode(64 + j)
+								box += `
+					            <div>${dax}.${arr[j]}</div>
+					          `
+							}
+							box += `
+					    </div>
+					      <div class="answer">
+					        <div class="ansA">
+					          <span class="anss">正确答案：</span><span class="qans">${data.list[i].answer}</span>
+					        </div>
+					        <div class="ansB">
+					          <span class="anss">答案解析：</span><span class="des">${data.list[i].description}</span>
+					        </div>
+					      </div>
+					    </div>
+					    <div class="botm">
+					      <span>标签：</span>${data.list[i].kind}
+						  <div><Button class="add lauui-btn" onclick="addTo(this)" data-type="${data.list[i].qtype}" data-id="${data.list[i].questionId}">加入试卷</Button></div>
+					    </div>
+					  </div>
+					  `
 						} else if (data.list[i].qtype == 2) {
 							var qtype = "多选"
+							var content = data.list[i].content
+							var arr = content.slice(1, content.length - 1).split(",");
+							var options = arr.length
 							box += `
-						<div class="queList">
-							<div class="top">
-								<div>
-									<span>题号：${data.list[i].questionId}</span>
-									<span>题型：${qtype}</span>
-								</div>
-								<div>
-									<span>出题人：${data.list[i].userName}</span>
-									<span>正确率：${data.list[i].crate}</span>
-								</div>
-							</div>
-							<div class="mid">
-								<form class="layui-form" action="">
-									<div class="layui-form-item">
-										${data.list[i].content}
-									</div>
-								</form>
-								<div class="answer">
-									<div class="ansA">
-										<span class="anss">正确答案：</span><span class="qans">${data.list[i].answer}</span>
-									</div>
-									<div class="ansB">
-										<span class="anss">答案解析：</span><span class="des">${data.list[i].description}</span>
-									</div>
-								</div>
-							</div>
-							<div class="botm">
-								<span>标签：</span>${data.list[i].kind}
-								<div><Button class="add lauui-btn" onclick="addTo(this)" data-type="${data.list[i].qtype}"  data-id="${data.list[i].questionId}">加入试卷</Button></div>
-							</div>
-						</div>
-						`
+					         <div class="queList">
+					           <div class="top">
+					             <div>
+					               <span>题号：${data.list[i].questionId}</span>
+					               <span>题型：${qtype}</span>
+					             </div>
+					             <div>
+					               <span>出题人：${data.list[i].userName}</span>
+					               <span>正确率：${data.list[i].crate}</span>
+					             </div>
+					           </div>
+					           <div class="mid">
+					             <div class="ques">
+					               <div>${arr[0]}</div>
+					       `
+							for (var j = 1; j < options; j++) {
+								var dax = String.fromCharCode(64 + j)
+								box += `
+					           <div>${dax}.${arr[j]}</div>
+					         `
+							}
+							box += `
+					         </div>
+					           <div class="answer">
+					             <div class="ansA">
+					               <span class="anss">正确答案：</span><span class="qans">${data.list[i].answer}</span>
+					             </div>
+					             <div class="ansB">
+					               <span class="anss">答案解析：</span><span class="des">${data.list[i].description}</span>
+					             </div>
+					           </div>
+					         </div>
+					         <div class="botm">
+					           <span>标签：</span>${data.list[i].kind}
+							   <div><Button class="add lauui-btn" onclick="addTo(this)" data-type="${data.list[i].qtype}" data-id="${data.list[i].questionId}">加入试卷</Button></div>
+					         </div>
+					       </div>
+					       `
 						} else {
 							if (data.list[i].qtype == 0) {
 								var qtype = "填空"
@@ -1347,38 +1501,38 @@ function nextPage() {
 								var qtype = "主观"
 							}
 							box += `
-						<div class="queList">
-							<div class="top">
-								<div>
-									<span>题号：${data.list[i].questionId}</span>
-									<span>题型：${qtype}</span>
-								</div>
-								<div>
-									<span>出题人：${data.list[i].userName}</span>
-									<span>正确率：${data.list[i].crate}</span>
-								</div>
-							</div>
-							<div class="mid">
-								<form class="layui-form" action="">
-									<div class="layui-form-item">
-										<div class="ques">${data.list[i].content}</div>
-									</div>
-								</form>
-								<div class="answer">
-									<div class="ansA">
-										<span class="anss">正确答案：</span><span class="qans">${data.list[i].answer}</span>
-									</div>
-									<div class="ansB">
-										<span class="anss">答案解析：</span><span class="des">${data.list[i].description}</span>
-									</div>
-								</div>
-							</div>
-							<div class="botm">
-								<span>标签：</span>${data.list[i].kind}
-								<div><Button class="add lauui-btn" onclick="addTo(this)" data-type="${data.list[i].qtype}"  data-id="${data.list[i].questionId}">加入试卷</Button></div>
-							</div>
-						</div>
-						`
+					          <div class="queList">
+					            <div class="top">
+					              <div>
+					                <span>题号：${data.list[i].questionId}</span>
+					                <span>题型：${qtype}</span>
+					              </div>
+					              <div>
+					                <span>出题人：${data.list[i].userName}</span>
+					                <span>正确率：${data.list[i].crate}</span>
+					              </div>
+					            </div>
+					            <div class="mid">
+					              <form class="layui-form" action="">
+					                <div class="layui-form-item">
+					                  <div class="ques">${data.list[i].content}</div>
+					                </div>
+					              </form>
+					              <div class="answer">
+					                <div class="ansA">
+					                  <span class="anss">正确答案：</span><span class="qans">${data.list[i].answer}</span>
+					                </div>
+					                <div class="ansB">
+					                  <span class="anss">答案解析：</span><span class="des">${data.list[i].description}</span>
+					                </div>
+					              </div>
+					            </div>
+					            <div class="botm">
+					              <span>标签：</span>${data.list[i].kind}
+								  <div><Button class="add lauui-btn" onclick="addTo(this)" data-type="${data.list[i].qtype}" data-id="${data.list[i].questionId}">加入试卷</Button></div>
+					            </div>
+					          </div>
+					          `
 						}
 					}
 					var str = `
@@ -1480,75 +1634,93 @@ function lastPage() {
 			} else {
 				for (var i = 0; i < data.list.length; i++) {
 					if (data.list[i].qtype == 1) {
+						var content = data.list[i].content
+						var arr = content.slice(1, content.length - 1).split(",");
+						var options = arr.length
 						var qtype = "单选"
 						box += `
-						<div class="queList">
-							<div class="top">
-								<div>
-									<span>题号：${data.list[i].questionId}</span>
-									<span>题型：${qtype}</span>
-								</div>
-								<div>
-									<span>出题人：${data.list[i].userName}</span>
-									<span>正确率：${data.list[i].crate}</span>
-								</div>
-							</div>
-							<div class="mid">
-								<form class="layui-form" action="">
-									<div class="layui-form-item">
-										${data.list[i].content}
-									</div>
-								</form>
-								<div class="answer">
-									<div class="ansA">
-										<span class="anss">正确答案：</span><span class="qans">${data.list[i].answer}</span>
-									</div>
-									<div class="ansB">
-										<span class="anss">答案解析：</span><span class="des">${data.list[i].description}</span>
-									</div>
-								</div>
-							</div>
-							<div class="botm">
-								<span>标签：</span>${data.list[i].kind}
-								<div><Button class="add lauui-btn" onclick="addTo(this)" data-type="${data.list[i].qtype}"  data-id="${data.list[i].questionId}">加入试卷</Button></div>
-							</div>
-						</div>
-						`
+				    <div class="queList">
+				      <div class="top">
+				        <div>
+				          <span>题号：${data.list[i].questionId}</span>
+				          <span>题型：${qtype}</span>
+				        </div>
+				        <div>
+				          <span>出题人：${data.list[i].userName}</span>
+				          <span>正确率：${data.list[i].crate}</span>
+				        </div>
+				      </div>
+				      <div class="mid">
+				        <div class="ques">
+				          <div>${arr[0]}</div>
+				        `
+						for (var j = 1; j < options; j++) {
+							var dax = String.fromCharCode(64 + j)
+							box += `
+				            <div>${dax}.${arr[j]}</div>
+				          `
+						}
+						box += `
+				    </div>
+				      <div class="answer">
+				        <div class="ansA">
+				          <span class="anss">正确答案：</span><span class="qans">${data.list[i].answer}</span>
+				        </div>
+				        <div class="ansB">
+				          <span class="anss">答案解析：</span><span class="des">${data.list[i].description}</span>
+				        </div>
+				      </div>
+				    </div>
+				    <div class="botm">
+				      <span>标签：</span>${data.list[i].kind}
+					  <div><Button class="add lauui-btn" onclick="addTo(this)" data-type="${data.list[i].qtype}" data-id="${data.list[i].questionId}">加入试卷</Button></div>
+				    </div>
+				  </div>
+				  `
 					} else if (data.list[i].qtype == 2) {
 						var qtype = "多选"
+						var content = data.list[i].content
+						var arr = content.slice(1, content.length - 1).split(",");
+						var options = arr.length
 						box += `
-						<div class="queList">
-							<div class="top">
-								<div>
-									<span>题号：${data.list[i].questionId}</span>
-									<span>题型：${qtype}</span>
-								</div>
-								<div>
-									<span>出题人：${data.list[i].userName}</span>
-									<span>正确率：${data.list[i].crate}</span>
-								</div>
-							</div>
-							<div class="mid">
-								<form class="layui-form" action="">
-									<div class="layui-form-item">
-										${data.list[i].content}
-									</div>
-								</form>
-								<div class="answer">
-									<div class="ansA">
-										<span class="anss">正确答案：</span><span class="qans">${data.list[i].answer}</span>
-									</div>
-									<div class="ansB">
-										<span class="anss">答案解析：</span><span class="des">${data.list[i].description}</span>
-									</div>
-								</div>
-							</div>
-							<div class="botm">
-								<span>标签：</span>${data.list[i].kind}
-								<div><Button class="add lauui-btn" onclick="addTo(this)" data-type="${data.list[i].qtype}"  data-id="${data.list[i].questionId}">加入试卷</Button></div>
-							</div>
-						</div>
-						`
+				         <div class="queList">
+				           <div class="top">
+				             <div>
+				               <span>题号：${data.list[i].questionId}</span>
+				               <span>题型：${qtype}</span>
+				             </div>
+				             <div>
+				               <span>出题人：${data.list[i].userName}</span>
+				               <span>正确率：${data.list[i].crate}</span>
+				             </div>
+				           </div>
+				           <div class="mid">
+				             <div class="ques">
+				               <div>${arr[0]}</div>
+				       `
+						for (var j = 1; j < options; j++) {
+							var dax = String.fromCharCode(64 + j)
+							box += `
+				           <div>${dax}.${arr[j]}</div>
+				         `
+						}
+						box += `
+				         </div>
+				           <div class="answer">
+				             <div class="ansA">
+				               <span class="anss">正确答案：</span><span class="qans">${data.list[i].answer}</span>
+				             </div>
+				             <div class="ansB">
+				               <span class="anss">答案解析：</span><span class="des">${data.list[i].description}</span>
+				             </div>
+				           </div>
+				         </div>
+				         <div class="botm">
+				           <span>标签：</span>${data.list[i].kind}
+						   <div><Button class="add lauui-btn" onclick="addTo(this)" data-type="${data.list[i].qtype}" data-id="${data.list[i].questionId}">加入试卷</Button></div>
+				         </div>
+				       </div>
+				       `
 					} else {
 						if (data.list[i].qtype == 0) {
 							var qtype = "填空"
@@ -1557,38 +1729,38 @@ function lastPage() {
 							var qtype = "主观"
 						}
 						box += `
-						<div class="queList">
-							<div class="top">
-								<div>
-									<span>题号：${data.list[i].questionId}</span>
-									<span>题型：${qtype}</span>
-								</div>
-								<div>
-									<span>出题人：${data.list[i].userName}</span>
-									<span>正确率：${data.list[i].crate}</span>
-								</div>
-							</div>
-							<div class="mid">
-								<form class="layui-form" action="">
-									<div class="layui-form-item">
-										<div class="ques">${data.list[i].content}</div>
-									</div>
-								</form>
-								<div class="answer">
-									<div class="ansA">
-										<span class="anss">正确答案：</span><span class="qans">${data.list[i].answer}</span>
-									</div>
-									<div class="ansB">
-										<span class="anss">答案解析：</span><span class="des">${data.list[i].description}</span>
-									</div>
-								</div>
-							</div>
-							<div class="botm">
-								<span>标签：</span>${data.list[i].kind}
-								<div><Button class="add lauui-btn" onclick="addTo(this)" data-type="${data.list[i].qtype}"  data-id="${data.list[i].questionId}">加入试卷</Button></div>
-							</div>
-						</div>
-						`
+				          <div class="queList">
+				            <div class="top">
+				              <div>
+				                <span>题号：${data.list[i].questionId}</span>
+				                <span>题型：${qtype}</span>
+				              </div>
+				              <div>
+				                <span>出题人：${data.list[i].userName}</span>
+				                <span>正确率：${data.list[i].crate}</span>
+				              </div>
+				            </div>
+				            <div class="mid">
+				              <form class="layui-form" action="">
+				                <div class="layui-form-item">
+				                  <div class="ques">${data.list[i].content}</div>
+				                </div>
+				              </form>
+				              <div class="answer">
+				                <div class="ansA">
+				                  <span class="anss">正确答案：</span><span class="qans">${data.list[i].answer}</span>
+				                </div>
+				                <div class="ansB">
+				                  <span class="anss">答案解析：</span><span class="des">${data.list[i].description}</span>
+				                </div>
+				              </div>
+				            </div>
+				            <div class="botm">
+				              <span>标签：</span>${data.list[i].kind}
+							  <div><Button class="add lauui-btn" onclick="addTo(this)" data-type="${data.list[i].qtype}" data-id="${data.list[i].questionId}">加入试卷</Button></div>
+				            </div>
+				          </div>
+				          `
 					}
 				}
 				var str = `
@@ -1687,75 +1859,93 @@ function jump() {
 				} else {
 					for (var i = 0; i < data.list.length; i++) {
 						if (data.list[i].qtype == 1) {
+							var content = data.list[i].content
+							var arr = content.slice(1, content.length - 1).split(",");
+							var options = arr.length
 							var qtype = "单选"
 							box += `
-						<div class="queList">
-							<div class="top">
-								<div>
-									<span>题号：${data.list[i].questionId}</span>
-									<span>题型：${qtype}</span>
-								</div>
-								<div>
-									<span>出题人：${data.list[i].userName}</span>
-									<span>正确率：${data.list[i].crate}</span>
-								</div>
-							</div>
-							<div class="mid">
-								<form class="layui-form" action="">
-									<div class="layui-form-item">
-										${data.list[i].content}
-									</div>
-								</form>
-								<div class="answer">
-									<div class="ansA">
-										<span class="anss">正确答案：</span><span class="qans">${data.list[i].answer}</span>
-									</div>
-									<div class="ansB">
-										<span class="anss">答案解析：</span><span class="des">${data.list[i].description}</span>
-									</div>
-								</div>
-							</div>
-							<div class="botm">
-								<span>标签：</span>${data.list[i].kind}
-								<div><Button class="add lauui-btn" onclick="addTo(this)" data-type="${data.list[i].qtype}"  data-id="${data.list[i].questionId}">加入试卷</Button></div>
-							</div>
-						</div>
-						`
+					    <div class="queList">
+					      <div class="top">
+					        <div>
+					          <span>题号：${data.list[i].questionId}</span>
+					          <span>题型：${qtype}</span>
+					        </div>
+					        <div>
+					          <span>出题人：${data.list[i].userName}</span>
+					          <span>正确率：${data.list[i].crate}</span>
+					        </div>
+					      </div>
+					      <div class="mid">
+					        <div class="ques">
+					          <div>${arr[0]}</div>
+					        `
+							for (var j = 1; j < options; j++) {
+								var dax = String.fromCharCode(64 + j)
+								box += `
+					            <div>${dax}.${arr[j]}</div>
+					          `
+							}
+							box += `
+					    </div>
+					      <div class="answer">
+					        <div class="ansA">
+					          <span class="anss">正确答案：</span><span class="qans">${data.list[i].answer}</span>
+					        </div>
+					        <div class="ansB">
+					          <span class="anss">答案解析：</span><span class="des">${data.list[i].description}</span>
+					        </div>
+					      </div>
+					    </div>
+					    <div class="botm">
+					      <span>标签：</span>${data.list[i].kind}
+						  <div><Button class="add lauui-btn" onclick="addTo(this)" data-type="${data.list[i].qtype}" data-id="${data.list[i].questionId}">加入试卷</Button></div>
+					    </div>
+					  </div>
+					  `
 						} else if (data.list[i].qtype == 2) {
 							var qtype = "多选"
+							var content = data.list[i].content
+							var arr = content.slice(1, content.length - 1).split(",");
+							var options = arr.length
 							box += `
-						<div class="queList">
-							<div class="top">
-								<div>
-									<span>题号：${data.list[i].questionId}</span>
-									<span>题型：${qtype}</span>
-								</div>
-								<div>
-									<span>出题人：${data.list[i].userName}</span>
-									<span>正确率：${data.list[i].crate}</span>
-								</div>
-							</div>
-							<div class="mid">
-								<form class="layui-form" action="">
-									<div class="layui-form-item">
-										${data.list[i].content}
-									</div>
-								</form>
-								<div class="answer">
-									<div class="ansA">
-										<span class="anss">正确答案：</span><span class="qans">${data.list[i].answer}</span>
-									</div>
-									<div class="ansB">
-										<span class="anss">答案解析：</span><span class="des">${data.list[i].description}</span>
-									</div>
-								</div>
-							</div>
-							<div class="botm">
-								<span>标签：</span>${data.list[i].kind}
-								<div><Button class="add lauui-btn" onclick="addTo(this)" data-type="${data.list[i].qtype}"  data-id="${data.list[i].questionId}">加入试卷</Button></div>
-							</div>
-						</div>
-						`
+					         <div class="queList">
+					           <div class="top">
+					             <div>
+					               <span>题号：${data.list[i].questionId}</span>
+					               <span>题型：${qtype}</span>
+					             </div>
+					             <div>
+					               <span>出题人：${data.list[i].userName}</span>
+					               <span>正确率：${data.list[i].crate}</span>
+					             </div>
+					           </div>
+					           <div class="mid">
+					             <div class="ques">
+					               <div>${arr[0]}</div>
+					       `
+							for (var j = 1; j < options; j++) {
+								var dax = String.fromCharCode(64 + j)
+								box += `
+					           <div>${dax}.${arr[j]}</div>
+					         `
+							}
+							box += `
+					         </div>
+					           <div class="answer">
+					             <div class="ansA">
+					               <span class="anss">正确答案：</span><span class="qans">${data.list[i].answer}</span>
+					             </div>
+					             <div class="ansB">
+					               <span class="anss">答案解析：</span><span class="des">${data.list[i].description}</span>
+					             </div>
+					           </div>
+					         </div>
+					         <div class="botm">
+					           <span>标签：</span>${data.list[i].kind}
+							   <div><Button class="add lauui-btn" onclick="addTo(this)" data-type="${data.list[i].qtype}" data-id="${data.list[i].questionId}">加入试卷</Button></div>
+					         </div>
+					       </div>
+					       `
 						} else {
 							if (data.list[i].qtype == 0) {
 								var qtype = "填空"
@@ -1764,38 +1954,38 @@ function jump() {
 								var qtype = "主观"
 							}
 							box += `
-						<div class="queList">
-							<div class="top">
-								<div>
-									<span>题号：${data.list[i].questionId}</span>
-									<span>题型：${qtype}</span>
-								</div>
-								<div>
-									<span>出题人：${data.list[i].userName}</span>
-									<span>正确率：${data.list[i].crate}</span>
-								</div>
-							</div>
-							<div class="mid">
-								<form class="layui-form" action="">
-									<div class="layui-form-item">
-										<div class="ques">${data.list[i].content}</div>
-									</div>
-								</form>
-								<div class="answer">
-									<div class="ansA">
-										<span class="anss">正确答案：</span><span class="qans">${data.list[i].answer}</span>
-									</div>
-									<div class="ansB">
-										<span class="anss">答案解析：</span><span class="des">${data.list[i].description}</span>
-									</div>
-								</div>
-							</div>
-							<div class="botm">
-								<span>标签：</span>${data.list[i].kind}
-								<div><Button class="add lauui-btn" onclick="addTo(this)" data-type="${data.list[i].qtype}"  data-id="${data.list[i].questionId}">加入试卷</Button></div>
-							</div>
-						</div>
-						`
+					          <div class="queList">
+					            <div class="top">
+					              <div>
+					                <span>题号：${data.list[i].questionId}</span>
+					                <span>题型：${qtype}</span>
+					              </div>
+					              <div>
+					                <span>出题人：${data.list[i].userName}</span>
+					                <span>正确率：${data.list[i].crate}</span>
+					              </div>
+					            </div>
+					            <div class="mid">
+					              <form class="layui-form" action="">
+					                <div class="layui-form-item">
+					                  <div class="ques">${data.list[i].content}</div>
+					                </div>
+					              </form>
+					              <div class="answer">
+					                <div class="ansA">
+					                  <span class="anss">正确答案：</span><span class="qans">${data.list[i].answer}</span>
+					                </div>
+					                <div class="ansB">
+					                  <span class="anss">答案解析：</span><span class="des">${data.list[i].description}</span>
+					                </div>
+					              </div>
+					            </div>
+					            <div class="botm">
+					              <span>标签：</span>${data.list[i].kind}
+								  <div><Button class="add lauui-btn" onclick="addTo(this)" data-type="${data.list[i].qtype}" data-id="${data.list[i].questionId}">加入试卷</Button></div>
+					            </div>
+					          </div>
+					          `
 						}
 					}
 					var str = `
@@ -1872,30 +2062,58 @@ function addTo(e) {
 			console.log(data)
 			if (data.qtype == 0) {
 				qtype = 3
+				type = "填空"
 			}
 			if (data.qtype == 1) {
 				qtype = 1
+				type = "单选"
 			}
 			if (data.qtype == 2) {
 				qtype = 2
+				type = "多选"
 			}
 			if (data.qtype == 3) {
 				qtype = 4
+				type = "主观"
 			}
 			var showlista = {
 				qType: qtype,
 				qType1: data.qtype,
+				type: type,
 				content: data.content
 			}
 			showlist.push(showlista)
 			for (var i = 0; i < showlist.length; i++) {
-				str += `
+				if (showlist[i].qType == 1 || showlist[i].qType == 2) {
+					var content = showlist[i].content
+					var arr = content.slice(1, content.length - 1).split(",");
+					var options = arr.length
+					str += `
+					<div class="qtype${showlist[i].qType}">
+						<div class="layui-form-item">
+							<div class="ques" data-type="${showlist[i].qType1}"><span>${i + 1}.(${showlist[i].type})</span>${arr[0]}
+					`
+					for (var j = 1; j < options; j++) {
+						var dax = String.fromCharCode(64 + j)
+						str += `
+						 <div>${dax}.${arr[j]}</div>
+						`
+					}
+					str += `		
+								</div>
+							</div>
+						</div>
+						`
+				} else {
+					str += `
 			<div class="qtype${showlist[i].qType}">
 				<div class="layui-form-item">
-					<div class="ques" data-type="${showlist[i].qType1}"><span>${i + 1}.</span>${showlist[i].content}</div>
+					<div class="ques" data-type="${showlist[i].qType1}"><span>${i + 1}.(${showlist[i].type})</span>${showlist[i].content}</div>
 				</div>
 			</div>
 			`
+				}
+
 			}
 
 			var yulan = document.getElementById("yulan")
@@ -1912,71 +2130,148 @@ function next() {
 		var element = layui.element;
 		var layer = layui.layer;
 		var form = layui.form;
-		layer.open({
-			type: 1,
-			title: '补充试卷信息',
-			area: ['450px', '300px'],
-			shade: 0.4,
-			content: $("#testxx"),
-			btn: ['确认组卷', '取消'],
-			scrollbar: false,
-			yes: function(index) {
-				var ok = true
-				for (var i = 0; i < 4; i++) {
-					var xx = document.getElementsByClassName("xx")[i].value
-					if (xx.match(/^\s*$/)) {
-						layer.msg("请将信息补充完全")
-						ok = false
-						break
-					}
-				}
-				if (ok == true) {
-					var authorization = localStorage.getItem("authorization");
-					data = {
-						list: addList,
-						paperName: document.getElementsByClassName("xx")[0].value,
-						description: document.getElementsByClassName("xx")[3].value,
-						beginTime: document.getElementsByClassName("xx")[1].value,
-						deadline: document.getElementsByClassName("xx")[2].value,
-					}
-					$.ajax({
-						type: 'post',
-						url: 'http://123.56.29.67/hengzhi-official/makePaper/makePaperSuccess',
-						dataType: 'json',
-						contentType: 'application/json;charset=utf-8',
-						headers: {
-							'Authorization': authorization
-						},
-						data: JSON.stringify(data),
-						success: function(data) {
-							var code = ""
-							code += `${data.code}`
-							var codea = document.getElementById("testcode")
-							codea.innerHTML = code
-							console.log(code)
-							layer.open({
-								type: 1,
-								title: '邀请码',
-								area: ['150px', '200px'],
-								shade: 0.4,
-								content: $("#testcode"),
-								btn: ['收到'],
-								scrollbar: false,
-								yes: function(res) {
-									layer.close(res)
-								},
-							});
+					layer.open({
+						type: 1,
+						title: '补充试卷信息',
+						area: ['450px', '300px'],
+						shade: 0.4,
+						content: $("#testxx"),
+						offset: '0px',
+						btn: ['确认组卷', '取消'],
+						scrollbar: false,
+						yes: function(index) {
+							var ok = true
+							for (var i = 0; i <
+								2; i++) {
+								var xx =
+									document
+									.getElementsByClassName(
+										"xx")[
+										i]
+									.value
+								if (xx.match(
+										/^\s*$/
+									)) {
+									layer.msg(
+										"请将信息补充完全"
+									)
+									ok = false
+									break
+								}
 
+							}
+							if (ok == true) {
+								var code = ""
+								code = `
+													${data.code}
+													`
+								var codea =
+									document
+									.getElementById(
+										"testcode"
+									)
+								codea
+									.innerHTML =
+									code
+								var authorization =
+									localStorage
+									.getItem(
+										"authorization"
+									);
+								data = {
+									list: enough,
+									paperName: document
+										.getElementsByClassName(
+											"xx"
+										)[
+											0
+										]
+										.value,
+									description: document
+										.getElementsByClassName(
+											"xx"
+										)[
+											2
+										]
+										.value,
+									beginTime: document
+										.getElementsByClassName(
+											"xx"
+										)[
+											1
+										]
+										.value
+										.slice(
+											0,
+											19
+										),
+									deadline: document
+										.getElementsByClassName(
+											"xx"
+										)[
+											1
+										]
+										.value
+										.slice(
+											21
+										),
+								}
+								$.ajax({
+									type: 'post',
+									url: 'http://123.56.29.67/hengzhi-official/makePaper/makePaperSuccess',
+									dataType: 'json',
+									contentType: 'application/json;charset=utf-8',
+									headers: {
+										'Authorization': authorization
+									},
+									data: JSON
+										.stringify(
+											data
+										),
+									success: function(
+										data
+									) {
+										$("input")
+											.each(
+												function() {
+													$(this)
+														.val(
+															""
+														)
+												}
+											)
+										layer.close(index)
+										var code =""
+										code +=`${data.code}`
+										var codea =document.getElementById("testcode")
+										codea.innerHTML =code
+										console
+											.log(code)
+										layer
+											.open({
+												type: 1,
+												title: '邀请码',
+												area: ['150px','200px'],
+												shade: 0.4,
+												content: $("#testcode"),
+												btn: ['收到'],
+												scrollbar: false,
+												yes: function(res) {
+													layer.close(res)
+												},
+											});
+
+									},
+									error: function() {}
+								});
+							}
 						},
-						error: function() {}
+						btn2: function() {
+
+						}
 					});
-				}
-			},
-			btn2: function() {
+				
 
-				layer.close(index)
-			}
-		});
 	});
 	// }
 	// else{

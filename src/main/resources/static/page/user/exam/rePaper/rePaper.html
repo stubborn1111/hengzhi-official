@@ -151,6 +151,14 @@
 				margin: 8px;
 				margin-bottom: 45px;
 			}
+			.headImgg {
+				width: 40px;
+				height: 40px;
+				border-radius: 50%;
+				border: 2px solid white;
+				margin-bottom: 13px;
+				margin-right: 0px;
+			}
 		</style>
 
 	</head>
@@ -184,9 +192,9 @@
 		</div>
 		<!-- 水平导航-->
 		<ul class="layui-nav level" lay-filter="">
-			<li class="layui-nav-item"><a href="">首页</a></li>
+			<li class="layui-nav-item"><a href="../../index/index.html">首页</a></li>
 			<li class="layui-nav-item layui-this">
-				<a href="javascript:;">个人中心</a>
+				<a href="javascript:;" id="head"></a>
 				<dl class="layui-nav-child">
 					<!-- 二级菜单 -->
 					<dd onclick="change1()">修改头像</dd>

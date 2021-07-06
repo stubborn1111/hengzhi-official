@@ -1,20 +1,22 @@
 /* 选中的tags */
 /* 待选择和已选择的标签列表 */
-.tiaozhuan input{
+.tiaozhuan input {
 	width: 90px;
 	margin-right: 5px;
 }
-.add:hover{
-	border:1px solid #CF4E50!important
+
+.add:hover {
+	border: 1px solid #CF4E50 !important
 }
-.add{
+
+.add {
 	position: absolute;
 	top: 3px;
 	right: 15px;
 	padding: 9px 15px;
 	font-weight: 400;
 	line-height: 20px;
-	border:1px solid #f48a8f;
+	border: 1px solid #f48a8f;
 	background: 0 0;
 	color: #666;
 	height: 38px;
@@ -27,9 +29,11 @@
 	cursor: pointer;
 	outline: 0;
 }
-.fenye{
+
+.fenye {
 	margin-top: 10px;
 }
+
 .hand .tags,
 .hand .tagList {
 	padding: 10px;
@@ -38,14 +42,17 @@
 	border: 1px solid #8F8F9D;
 	border-radius: 3px;
 }
-.quskind{
+
+.quskind {
 	margin-bottom: 10px;
 }
-.quskind span{
+
+.quskind span {
 	font-size: 15px;
 	font-family: 宋体;
 	font-weight: 500;
 }
+
 .auto .tags,
 .auto .tagList {
 	padding: 10px;
@@ -54,9 +61,11 @@
 	border: 1px solid #8F8F9D;
 	border-radius: 3px;
 }
-.surtags{
+
+.surtags {
 	margin-bottom: 10px;
 }
+
 .tagCheck,
 .title {
 	font-size: 15px;
@@ -68,6 +77,7 @@
 .title1 {
 	margin: 0px 0px 10px 0px;
 }
+
 .surtags input {
 	width: 40%;
 	padding-left: 10px;
@@ -83,12 +93,15 @@
 	-webkit-transition: all .3s;
 	box-sizing: border-box;
 }
-#handsur{
+
+#handsur {
 	width: 70%;
 }
-.tagsLimit{
+
+.tagsLimit {
 	width: 100%;
 }
+
 .search {
 	padding: 9px 15px;
 	width: 80px;
@@ -107,13 +120,16 @@
 	cursor: pointer;
 	outline: 0;
 }
-.search:hover{
-	border:1px solid #d2d2d2!important
+
+.search:hover {
+	border: 1px solid #d2d2d2 !important
 }
-.tag:hover{
-	border:1px solid #CF4E50!important
+
+.tag:hover {
+	border: 1px solid #CF4E50 !important
 }
-.tag{
+
+.tag {
 	padding: 9px 15px;
 	font-weight: 400;
 	line-height: 20px;
@@ -131,9 +147,12 @@
 	outline: 0;
 	margin-bottom: 5px;
 }
-.quesLimit input{
-	color:#666666;padding: 5px;
+
+.quesLimit input {
+	color: #666666;
+	padding: 5px;
 }
+
 /* 手动组卷题库 */
 .mid {
 	background-color: white;
@@ -157,46 +176,56 @@
 	border-radius: 3px 0 0 3px;
 	color: #292c2f;
 }
+
 /* 题库列表 */
-.queList{
+.queList {
 	box-sizing: border-box;
 	width: calc(100% - 30px);
-	margin:20px 0px 30px 10px;
+	margin: 20px 0px 30px 10px;
 	border: 1px solid #3F3F3F;
 	box-shadow: rgba(0, 0, 0, 0.08) 0px 0px 8px;
 }
-.sqes{
-	margin-top:10px;
+
+.sqes {
+	margin-top: 10px;
 }
-.top{
+
+.top {
 	padding: 10px;
 	line-height: 24px;
 	font-size: 13px;
 	color: #292c2f;
 	background-color: rgba(227, 227, 227, 0.9);
 }
-.top span{
+
+.top span {
 	margin-right: 20px;
 }
-.mid{
+
+.mid {
 	padding: 10px;
 	background-color: white;
 }
-.botm{
+
+.botm {
 	padding: 10px;
 	line-height: 24px;
 	font-size: 13px;
 	color: #292c2f;
 }
+
 .ques {
 	font-size: 15px;
 	letter-spacing: 0.05rem;
 	line-height: 35px;
 	color: #292c2f;
 }
-.layui-form-radio, .layui-form-radio *{
+
+.layui-form-radio,
+.layui-form-radio * {
 	color: #292c2f !important;
 }
+
 .layui-form-label {
 	font-size: 1rem !important;
 	letter-spacing: 0.05rem !important;
@@ -208,9 +237,11 @@
 	margin-right: 10px;
 	font-size: 17px;
 }
-.layui-input-block{
+
+.layui-input-block {
 	margin-left: 0px;
 }
+
 /* 正确答案 */
 .answer {
 	font-size: 0.8rem;
@@ -221,11 +252,128 @@
 
 .qans {
 	margin-right: 10px;
-	color:#666
+	color: #666
 }
-.anss{
+
+.anss {
 	color: #CF4E50;
 }
-.des{
-	color:#666
+
+.des {
+	color: #666
+}
+
+/* ------------------ */
+/* 布局 */
+.hand .left {
+	box-sizing: border-box;
+	width: 49%;
+	border: 1px solid #000000;
+	float: left;
+	padding: 10px;
+}
+
+.hand #right {
+	box-sizing: border-box;
+	width: 49%;
+	float: left;
+	margin-left: 10px;
+}
+
+.hand .surf {
+	width: 100%;
+
+}
+
+/* 左边的滚动栏界面 */
+.container {
+	position: absolute;
+	top: 100px;
+	left: 400px;
+}
+
+#demo {
+	border: 1px solid #3F3F3F;
+	width: 100%;
+	height: 250px;
+	overflow: hidden;
+	margin-top: 10px;
+}
+
+#demo .box {
+	width: 100%;
+}
+
+.zUIpanelScrollBox,
+.zUIpanelScrollBar {
+	width: 10px;
+	top: 4px;
+	right: 2px;
+	border-radius: 5px;
+}
+
+.zUIpanelScrollBox {
+	background: black;
+	opacity: 0.1;
+	filter: alpha(opacity=10);
+}
+
+.zUIpanelScrollBar {
+	background: rgba(207, 78, 89, 0.75);
+	opacity: 0.8;
+	filter: alpha(opacity=80);
+}
+
+/* 右侧滚动栏 */
+#right .box {
+	width: 100%;
+	height: 550px;
+	overflow: hidden;
+	padding: 10px;
+}
+
+.layui-tab {
+	position: absolute;
+	top: 90px;
+	left: 230px;
+	width: calc(100% - 260px);
+}
+
+.layui-tab-content {
+	background-color: white;
+	padding: 15px;
+	margin-bottom: 30px;
+}
+
+.layui-tab-title .layui-this::after {
+	position: relative;
+	height: 0px;
+}
+
+.layui-tab-title li {
+	background-color: white;
+	border-radius: 4px 4px 0px 0px;
+	margin-right: 10px;
+}
+
+.layui-form-checkbox {
+	margin: auto;
+}
+
+.layui-form-checkbox:hover span {
+	color: rgb(255, 255, 255);
+}
+
+.right1 {
+	border: 1px solid #000000;
+}
+
+/* 修改头像 */
+#test2 {
+	margin: 20px 30px;
+}
+
+.img1 {
+	margin: 8px;
+	margin-bottom: 45px;
 }

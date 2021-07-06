@@ -1,9 +1,9 @@
 .container {
 	width: calc(100% - 460px);
-	height: calc(100% - 180px);
+	height: calc(100% - 230px);
 	background-color: #fffcf9;
 	position: absolute;
-	top: 60px;
+	top: 110px;
 	left: 350px;
 	margin: 30px;
 	background-color: seashell;
@@ -64,7 +64,7 @@
 	width: 50px;
 	padding: 20px 10px;
 	position: absolute;
-	top: 90px;
+	top: 140px;
 	left: 330px;
 	background-color: seashell;
 	text-align: center;
@@ -72,41 +72,50 @@
 	border-radius: 3px 0 0 3px;
 	color: #292c2f;
 }
+
 /* 题库列表 */
-.queList{
+.queList {
 	width: 100%;
-	margin:20px 0px 30px 0px;
+	margin: 20px 0px 30px 0px;
 	box-shadow: rgba(0, 0, 0, 0.08) 0px 0px 8px;
 }
-.top{
+
+.top {
 	padding: 10px;
 	line-height: 24px;
 	font-size: 13px;
 	color: #292c2f;
 	background-color: rgba(227, 227, 227, 0.9);
 }
-.top span{
+
+.top span {
 	margin-right: 20px;
 }
-.mid{
+
+.mid {
 	padding: 10px;
 	background-color: white;
 }
-.botm{
+
+.botm {
 	padding: 10px;
 	line-height: 24px;
 	font-size: 13px;
 	color: #292c2f;
 }
+
 .ques {
 	font-size: 15px;
 	letter-spacing: 0.05rem;
 	line-height: 35px;
 	color: #292c2f;
 }
-.layui-form-radio, .layui-form-radio *{
+
+.layui-form-radio,
+.layui-form-radio * {
 	color: #292c2f !important;
 }
+
 .layui-form-label {
 	font-size: 1rem !important;
 	letter-spacing: 0.05rem !important;
@@ -118,9 +127,11 @@
 	margin-right: 10px;
 	font-size: 17px;
 }
-.layui-input-block{
+
+.layui-input-block {
 	margin-left: 0px;
 }
+
 /* 正确答案 */
 .answer {
 	font-size: 0.8rem;
@@ -131,35 +142,43 @@
 
 .qans {
 	margin-right: 10px;
-	color:#666
+	color: #666
 }
-.anss{
+
+.anss {
 	color: #CF4E50;
 }
-.des{
-	color:#666
+
+.des {
+	color: #666
 }
-.fenye{
+
+.fenye {
 	position: absolute;
 	top: calc(100% - 60px);
 	left: 460px;
 }
-.addQues{
+
+.addQues {
 	position: absolute;
 	top: calc(100% - 65px);
 	right: 130px;
 }
+
 /* 添加题目 */
-#testtm{
+#testtm {
 	padding: 10px;
 }
-.tagList,#tags{
+
+.tagList,
+#tags {
 	padding: 10px;
 	width: 80%;
 	min-height: 40px;
 	border: 1px solid #8F8F9D;
 	border-radius: 3px;
 }
+
 .tagCheck,
 .title {
 	font-size: 15px;
@@ -167,9 +186,11 @@
 	font-weight: 500;
 	margin: 20px 0px 10px 0px;
 }
-.surtags{
+
+.surtags {
 	margin-bottom: 10px;
 }
+
 .surtags input {
 	width: 40%;
 	padding-left: 10px;
@@ -185,6 +206,7 @@
 	-webkit-transition: all .3s;
 	box-sizing: border-box;
 }
+
 .search {
 	padding: 9px 15px;
 	width: 80px;
@@ -203,13 +225,16 @@
 	cursor: pointer;
 	outline: 0;
 }
-.search:hover{
-	border:1px solid #d2d2d2!important
+
+.search:hover {
+	border: 1px solid #d2d2d2 !important
 }
-.tag:hover{
-	border:1px solid #CF4E50!important
+
+.tag:hover {
+	border: 1px solid #CF4E50 !important
 }
-.tag{
+
+.tag {
 	padding: 9px 15px;
 	font-weight: 400;
 	line-height: 20px;
@@ -226,4 +251,17 @@
 	cursor: pointer;
 	outline: 0;
 	margin-bottom: 5px;
+}
+
+#searchByword {
+	position: absolute;
+	top: 85px;
+	left: 440px;
+	width: calc(100% - 800px);
+}
+
+#searchBy {
+	position: absolute;
+	top: 85px;
+	left: calc(100% - 340px);
 }

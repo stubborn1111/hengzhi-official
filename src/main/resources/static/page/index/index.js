@@ -454,6 +454,9 @@ function message() {
 			success: function(data) {
 				if (data.msg == "success") {
 					layer.msg("留言已提交审核")
+					$("textarea").each(function () {
+					  $(this).val("")
+					})
 				} else {
 					layer.msg("留言发表失败")
 				}

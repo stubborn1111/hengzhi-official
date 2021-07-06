@@ -1,4 +1,27 @@
-	// 修改头像
+$(document).ready(function() {
+	var authorization = localStorage.getItem("authorization");
+	// 个人信息
+	$.ajax({
+		type: 'post',
+		url: 'http://123.56.29.67/hengzhi-official/user/getUserInfo',
+		dataType: 'json',
+		contentType: 'application/json;charset=utf-8',
+		headers: {
+			'Authorization': authorization
+		},
+		// data: JSON.stringify(data),
+		success: function(data) {
+			var msg1 = document.getElementById("head")
+			var str1 = ""
+			str1 = `
+				<img class="headImgg" data-id="${data.userId}" src="http://123.56.29.67/hengzhi-official/headImage/${data.headImg}">
+			`
+			msg1.innerHTML = str1;
+		},
+		error: function() {}
+	});
+})
+// 修改头像
 function change1() {
 	layui.use('layer', function() {
 		var $ = layui.jquery;

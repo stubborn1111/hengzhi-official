@@ -12,8 +12,6 @@
 		<style>
 			/* 试卷列表 */
 			.paperContainer {
-/* 				background-color: rgba(18, 18, 18, 0.92); */
-/* 				width: calc(100% - 260px); */
 				height: 470px;
 				margin: 30px;
 				place-items: center center;
@@ -77,6 +75,14 @@
 				margin: 8px;
 				margin-bottom: 45px;
 			}
+			.headImgg {
+				width: 40px;
+				height: 40px;
+				border-radius: 50%;
+				border: 2px solid white;
+				margin-bottom: 13px;
+				margin-right: 0px;
+			}
 		</style>
 
 	</head>
@@ -110,10 +116,10 @@
 		</div>
 		<!-- 水平导航-->
 		<ul class="layui-nav level" lay-filter="">
-			<li class="layui-nav-item"><a href="">首页</a></li>
+			<li class="layui-nav-item"><a href="../../index/index.html">首页</a></li>
 			<li class="layui-nav-item layui-this">
-				<a href="javascript:;" style="z-index: 111111111111111111;">个人中心</a>
-				<dl class="layui-nav-child" style="z-index: 111111111111111111;">
+				<a href="javascript:;" id="head"></a>
+				<dl class="layui-nav-child" style="z-index: 1000000;">
 					<!-- 二级菜单 -->
 					<dd onclick="change1()">修改头像</dd>
 					<dd onclick="change()">修改密码</dd>

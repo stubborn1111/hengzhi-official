@@ -1,3 +1,27 @@
+$(document).ready(function() {
+	var authorization = localStorage.getItem("authorization");
+	// 个人信息
+	$.ajax({
+		type: 'post',
+		url: 'http://123.56.29.67/hengzhi-official/user/getUserInfo',
+		dataType: 'json',
+		contentType: 'application/json;charset=utf-8',
+		headers: {
+			'Authorization': authorization
+		},
+		// data: JSON.stringify(data),
+		success: function(data) {
+			var msg1 = document.getElementById("head")
+			var str1 = ""
+			str1 = `
+			<img class="headImgg" data-id="${data.userId}" src="http://123.56.29.67/hengzhi-official/headImage/${data.headImg}">
+			`
+			msg1.innerHTML = str1;
+		},
+		error: function() {}
+	});
+})
+
 // 修改头像
 function change1() {
 	layui.use('layer', function() {
@@ -15,35 +39,36 @@ function change1() {
 			scrollbar: false,
 			yes: function(index) {
 				// function postData() {
-					var authorization = localStorage.getItem("authorization");
-					console.log(authorization);
-					var formData = new FormData();
-					formData.append("headImage", $("#uploadImage")[0].files[0]);
-					$.ajax({
-							url: "http://123.56.29.67/hengzhi-official/user/updateHeadImg",
-							type: "post",
-							data: formData,
-							headers: {
-								'Authorization': authorization
-							},
-							processData: false, // 告诉jQuery不要去处理发送的数据
-							contentType: false, // 告诉jQuery不要去设置Content-Type请求头
-							dataType: 'text',
-							success: function(data) {
-								console.log(data)
+				var authorization = localStorage.getItem("authorization");
+				console.log(authorization);
+				var formData = new FormData();
+				formData.append("headImage", $("#uploadImage")[0].files[0]);
+				$.ajax({
+					url: "http://123.56.29.67/hengzhi-official/user/updateHeadImg",
+					type: "post",
+					data: formData,
+					headers: {
+						'Authorization': authorization
+					},
+					processData: false, // 告诉jQuery不要去处理发送的数据
+					contentType: false, // 告诉jQuery不要去设置Content-Type请求头
+					dataType: 'text',
+					success: function(data) {
+						console.log(data)
 
-									var params = JSON.parse(data)
-									$("#img").attr("src", params);
-									layer.close(index);
-									layer.msg("修改成功")
-									setTimeout(function() {
-										window.location.href = "../staffInfo/staffInfo.html";
-									}, 1000);
-							},
-							error: function(data) {
-									
-							}
-					});
+						var params = JSON.parse(data)
+						$("#img").attr("src", params);
+						layer.close(index);
+						layer.msg("修改成功")
+						setTimeout(function() {
+							window.location.href =
+							"../staffInfo/staffInfo.html";
+						}, 1000);
+					},
+					error: function(data) {
+
+					}
+				});
 				// }
 			},
 			btn2: function() {
@@ -114,7 +139,7 @@ function change() {
 function logout() {
 	localStorage.setItem("authorization", "");
 	setTimeout(function() {
-		window.location.href = "../../login/login.html";
+		window.location.href = "../../../login/login.html";
 	}, 2000);
 }
 
@@ -146,7 +171,7 @@ $(document).ready(function() {
 				var time5 = time4.slice(11, 16)
 				console.log(time1)
 				box += `
-				<div class="paperBox" data-id="${data.list[i].paperId}">
+				<div class="paperBox" data-id="${data.list[i].paperId}" onclick="turn(this)">
 					<div>${data.list[i].paperName}</div>
 					<div>${time1}.${time2}</div>
 					<div>${time3}-${time5}</div>
@@ -222,7 +247,7 @@ function firstPage() {
 				var time5 = time4.slice(11, 16)
 				console.log(time1)
 				box += `
-				<div class="paperBox" data-id="${data.list[i].paperId}">
+				<div class="paperBox" data-id="${data.list[i].paperId}" onclick="turn(this)">
 					<div>${data.list[i].paperName}</div>
 					<div>${time1}.${time2}</div>
 					<div>${time3}-${time5}</div>
@@ -302,7 +327,7 @@ function prePage() {
 					var time5 = time4.slice(11, 16)
 					console.log(time1)
 					box += `
-					<div class="paperBox" data-id="${data.list[i].paperId}">
+					<div class="paperBox" data-id="${data.list[i].paperId}" onclick="turn(this)">
 						<div>${data.list[i].paperName}</div>
 						<div>${time1}.${time2}</div>
 						<div>${time3}-${time5}</div>
@@ -384,7 +409,7 @@ function nextPage() {
 					var time5 = time4.slice(11, 16)
 					console.log(time1)
 					box += `
-				<div class="paperBox" data-id="${data.list[i].paperId}">
+				<div class="paperBox" data-id="${data.list[i].paperId}" onclick="turn(this)">
 					<div>${data.list[i].paperName}</div>
 					<div>${time1}.${time2}</div>
 					<div>${time3}-${time5}</div>
@@ -465,7 +490,7 @@ function lastPage() {
 				var time5 = time4.slice(11, 16)
 				console.log(time1)
 				box += `
-				<div class="paperBox" data-id="${data.list[i].paperId}">
+				<div class="paperBox" data-id="${data.list[i].paperId}" onclick="turn(this)">
 					<div>${data.list[i].paperName}</div>
 					<div>${time1}.${time2}</div>
 					<div>${time3}-${time5}</div>
@@ -548,7 +573,7 @@ function jump() {
 					var time5 = time4.slice(11, 16)
 					console.log(time1)
 					box += `
-				<div class="paperBox" data-id="${data.list[i].paperId}">
+				<div class="paperBox" data-id="${data.list[i].paperId}" onclick="turn(this)">
 					<div>${data.list[i].paperName}</div>
 					<div>${time1}.${time2}</div>
 					<div>${time3}-${time5}</div>
@@ -599,4 +624,10 @@ function jump() {
 	} else {
 		layer.msg("请输入合法数字")
 	}
+}
+
+function turn(e) {
+	var userId = document.getElementsByClassName("headImgg")[0]
+	var userId1 = userId.dataset.id
+	window.location.href = "../rePaper/rePaper.html?id=" + userId1 + "&paperId=" + e.dataset.id
 }

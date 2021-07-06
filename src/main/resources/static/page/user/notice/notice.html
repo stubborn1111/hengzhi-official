@@ -23,10 +23,11 @@
 		</script>
 		<style>
 			/* 修改头像 */
-			#test2{
+			#test2 {
 				margin: 20px 30px;
 			}
-			.img1{
+
+			.img1 {
 				margin: 8px;
 				margin-bottom: 45px;
 			}
@@ -40,7 +41,7 @@
 				<img src=" " alt="" id="img" />
 				<input type="file" name="file" id="uploadImage">
 			</div>
-		</div>	
+		</div>
 		<!-- 重设密码 -->
 		<div id="test1" style="display: none;">
 			<form class="layui-form layui-form-pane" action="">
@@ -62,9 +63,9 @@
 		</div>
 		<!-- 水平导航-->
 		<ul class="layui-nav level" lay-filter="" style="text-align: right;">
-			<li class="layui-nav-item"><a href="">首页</a></li>
+			<li class="layui-nav-item"><a href="../../index/index.html">首页</a></li>
 			<li class="layui-nav-item layui-this">
-				<a href="javascript:;" id="head"><img class="headImgg" data-id="" src="../../../images/headImg.jpg"></a>
+				<a href="javascript:;" id="head"></a>
 				<dl class="layui-nav-child">
 					<!-- 二级菜单 -->
 					<dd onclick="change1()">修改头像</dd>
@@ -91,6 +92,7 @@
 			</div>
 			<div class="title2">
 				资料栏
+				<!-- 文件数应当超过十条，才会显示滚动栏 -->
 			</div>
 			<div id="demo">
 				<div class="demoo">
@@ -127,18 +129,11 @@
 								<col>
 							</colgroup>
 							<tbody id="filebox">
-								<!-- <tr>
-									<td><i class="layui-icon layui-icon-file-b"></i>浅谈layui的妙用</td>
-									<td>2021-06-13</td>
-									<td>陈陈</td>
-									<td><i class="layui-icon layui-icon-download-circle"></i></td>
-								</tr> -->
-							
 							</tbody>
 						</table>
 					</div>
 				</div>
-				
+
 			</div>
 		</div>
 		<!-- 水平导航栏 -->

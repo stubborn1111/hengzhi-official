@@ -13,119 +13,7 @@
 		<script src="../../../common/zUI.js"></script>
 		<script src="../../../common/my_scrollbar.js"></script>
 		<script src="generPaper.js" type="text/javascript" charset="utf-8"></script>
-		<style>
-			/* 布局 */
-			.hand .left {
-				box-sizing: border-box;
-				width: 49%;
-				border: 1px solid #000000;
-				float: left;
-				padding: 10px;
-			}
 
-			.hand #right {
-				box-sizing: border-box;
-				width: 49%;
-				float: left;
-				margin-left: 10px;
-			}
-
-			.hand .surf {
-				width: 100%;
-
-			}
-
-			/* 左边的滚动栏界面 */
-			.container {
-				position: absolute;
-				top: 100px;
-				left: 400px;
-			}
-
-			#demo {
-				border: 1px solid #3F3F3F;
-				width: 100%;
-				height: 250px;
-				overflow: hidden;
-				margin-top: 10px;
-			}
-
-			#demo .box {
-				width: 100%;
-			}
-
-			.zUIpanelScrollBox,
-			.zUIpanelScrollBar {
-				width: 10px;
-				top: 4px;
-				right: 2px;
-				border-radius: 5px;
-			}
-
-			.zUIpanelScrollBox {
-				background: black;
-				opacity: 0.1;
-				filter: alpha(opacity=10);
-			}
-
-			.zUIpanelScrollBar {
-				background: rgba(207, 78, 89, 0.75);
-				opacity: 0.8;
-				filter: alpha(opacity=80);
-			}
-
-			/* 右侧滚动栏 */
-			#right .box {
-				width: 100%;
-				height: 550px;
-				overflow: hidden;
-				padding: 10px;
-			}
-
-			.layui-tab {
-				position: absolute;
-				top: 90px;
-				left: 230px;
-				width: calc(100% - 260px);
-			}
-
-			.layui-tab-content {
-				background-color: white;
-				padding: 15px;
-				margin-bottom: 30px;
-			}
-
-			.layui-tab-title .layui-this::after {
-				position: relative;
-				height: 0px;
-			}
-
-			.layui-tab-title li {
-				background-color: white;
-				border-radius: 4px 4px 0px 0px;
-				margin-right: 10px;
-			}
-
-			.layui-form-checkbox {
-				margin: auto;
-			}
-
-			.layui-form-checkbox:hover span {
-				color: rgb(255, 255, 255);
-			}
-
-			.right1 {
-				border: 1px solid #000000;
-			}
-			/* 修改头像 */
-			#test2{
-				margin: 20px 30px;
-			}
-			.img1{
-				margin: 8px;
-				margin-bottom: 45px;
-			}
-		</style>
 
 	</head>
 	<body>
@@ -136,7 +24,7 @@
 				<img src=" " alt="" id="img" />
 				<input type="file" name="file" id="uploadImage">
 			</div>
-		</div>	
+		</div>
 		<!-- 重设密码 -->
 		<div id="test1" style="display: none;">
 			<form class="layui-form layui-form-pane" action="">
@@ -160,7 +48,7 @@
 		<ul class="layui-nav level" lay-filter="">
 			<li class="layui-nav-item"><a href="">首页</a></li>
 			<li class="layui-nav-item layui-this">
-				<a href="javascript:;">个人中心</a>
+				<a href="javascript:;" id="head"></a>
 				<dl class="layui-nav-child">
 					<!-- 二级菜单 -->
 					<dd onclick="change1()">修改头像</dd>
@@ -173,7 +61,7 @@
 		<ul class="layui-nav layui-nav-tree vertical" lay-filter="test">
 			<li class="layui-nav-item"><a href="../../staffInfo/staffInfo.html">人员信息</a></li>
 			<li class="layui-nav-item"><a href="../../auditMsg/auditMsg.html">留言审核</a></li>
-			<li class="layui-nav-item"><a href="../../filesUpload/filesUpload.html">资料上传</a></li>
+			<li class="layui-nav-item"><a href="../../filesUpload/filesUpload.html">公告与资料上传</a></li>
 			<li class="layui-nav-item layui-nav-itemed">
 				<a href="javascript:;">考试管理</a>
 				<dl class="layui-nav-child">
@@ -340,7 +228,7 @@
 										<form class="layui-form" action="" id="yulan">
 											<div class="qtype2">
 												<div class="layui-form-item">
-													<div class="ques"><span>2.</span>大二下学期的专业课有哪些？</div>
+													
 												</div>
 											</div>
 										</form>
@@ -372,18 +260,10 @@
 							autocomplete="off" class="xx layui-input">
 					</div>
 				</div>
-				<div class="layui-form-item" pane style="width: 90%; margin: 20px auto;">
-					<label class="layui-form-label">开始时间</label>
+				<div class="layui-form-item" style="width: 90%; margin: 20px auto;">
+					<label class="layui-form-label">考试时间</label>
 					<div class="layui-input-block">
-						<input type="text" name="password" required lay-verify="required"
-							placeholder="xxxx-xx-xx xx:xx:xx" autocomplete="off" class="xx layui-input">
-					</div>
-				</div>
-				<div class="layui-form-item" pane style="width: 90%; margin: 20px auto;">
-					<label class="layui-form-label">截止时间</label>
-					<div class="layui-input-block">
-						<input type="text" name="password" required lay-verify="required"
-							placeholder="xxxx-xx-xx xx:xx:xx" autocomplete="off" class="xx layui-input">
+						<input type="text" class="xx layui-input" id="test16" placeholder="开始 到 结束">
 					</div>
 				</div>
 				<div class="layui-form-item" pane style="width: 90%; margin: 20px auto;">
@@ -396,7 +276,7 @@
 			</form>
 		</div>
 		<div id="testyl" style="display: none; padding: 15px;">
-			
+
 		</div>
 		<div id="testcode" style="text-align: center; line-height: 40px; display: none;">
 		</div>
@@ -422,14 +302,32 @@
 				});
 			}
 		</script>
-
-
 		<script>
+			var dateTime = new Date();
+			dateTime = dateTime.setDate(dateTime.getDate());
+			dateTime = new Date(dateTime);
+			var y = dateTime.getFullYear();
+			var m = dateTime.getMonth() + 1;
+			m = m < 10 ? '0' + m : m;
+			var d = dateTime.getDate();
+			d = d < 10 ? ("0" + d) : d;
+			var tadayTime = y + "-" + m + "-" + d;
+
 			//注意：导航 依赖 element 模块，否则无法进行功能性操作
 			layui.use('element', function() {
 				var element = layui.element;
 
 			});
+			layui.use('laydate', function() {
+				var laydate = layui.laydate;
+				laydate.render({
+					elem: '#test16',
+					type: 'datetime',
+					range: '到',
+					format: 'yyyy-MM-dd HH:mm:ss',
+					min: tadayTime,
+				});
+			})
 		</script>
 
 	</body>

@@ -1,3 +1,27 @@
+$(document).ready(function() {
+	var authorization = localStorage.getItem("authorization");
+	// 个人信息
+	$.ajax({
+		type: 'post',
+		url: 'http://123.56.29.67/hengzhi-official/user/getUserInfo',
+		dataType: 'json',
+		contentType: 'application/json;charset=utf-8',
+		headers: {
+			'Authorization': authorization
+		},
+		// data: JSON.stringify(data),
+		success: function(data) {
+			var msg1 = document.getElementById("head")
+			var str1 = ""
+			str1 = `
+				<img class="headImgg" data-id="${data.userId}" src="http://123.56.29.67/hengzhi-official/headImage/${data.headImg}">
+			`
+			msg1.innerHTML = str1;
+		},
+		error: function() {}
+	});
+})
+
 // 修改头像
 function change1() {
 	layui.use('layer', function() {
@@ -115,7 +139,7 @@ function change() {
 function logout() {
 	localStorage.setItem("authorization", "");
 	setTimeout(function() {
-		window.location.href = "../../login/login.html";
+		window.location.href = "../../../login/login.html";
 	}, 2000);
 }
 
@@ -737,7 +761,8 @@ function check(e) {
 	console.log(thisTime1)
 	console.log(beginTime1)
 	if (thisTime1 >= beginTime1) {
-		window.location.href = "../examing/examing.html?id=" + e.dataset.id
+		var userId = document.getElementsByClassName("headImgg")[0]
+		var userId1 = userId.dataset.id
+		window.location.href = "../examing/examing.html?id=" + userId1 +"&paperId="+e.dataset.id
 	}
-
 }
